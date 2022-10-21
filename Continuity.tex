@@ -1,0 +1,970 @@
+
+\chapter{函数极限与连续性}
+
+\section{函数的极限}
+
+\subsection{函数极限定义}
+
+\begin{definition}[函数极限]
+  $x_0 \in \mathbb{R}$，$f$在$x_0$邻域有定义($x_0$处可以没有)，$\forall \epsilon, \exists \delta, ~s.t.~ \forall x \in [x_0 - \delta, x_0 + \delta] - \{x_0\}$有$|f(x) - A| < \epsilon$，
+  则称$A$为$f(x)$在$x_0$处极限。
+\end{definition}
+
+~
+
+\begin{exercise}[Riemann函数]
+  Riemann函数定义如下，证明对$\forall x_0 \in [0,1]$，有$\lim \limits _{x \rightarrow x_0}R(x) = 0$
+  \begin{equation*}
+    R(x) =
+    \begin{cases}
+      \frac{1}{q}, & x = \frac{p}{q}(\frac{p}{q}\text{是既约真分数})\\
+      0, & x\text{是(0,1)中的无理数或者0,1本身}
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  $\forall \epsilon$，满足$\frac{1}{q} \geq \epsilon$的正整数$q$只有有限个，
+  从而$\frac{p}{q}$有限，令这些数为$x_1,\cdots,x_k$，
+  取
+  \begin{equation*}
+    \delta = \min\{|x_i - x_0|: i = 1,2,\cdots,k\}
+  \end{equation*}
+  当$x$属于$x_0$的$\delta$邻域时，显然$R(x) < \epsilon$，因此$\lim \limits _{x \rightarrow x_0}R(x) = 0$
+\end{proof}
+
+\begin{note}
+  上述练习说明Riemann函数在每个点极限为$0$，
+  在$(0,1)$的无理点和$0,1$连续，
+  在$(0,1)$有理点间断。
+  这说明Riemann函数是几乎处处连续的，根据实变可知其Riemann可积。
+\end{note}
+
+
+\begin{theorem}[极限的唯一性]
+  若函数的极限存在，则它是唯一的。
+\end{theorem}
+
+\begin{proof}
+  反设有两个极限，取$\epsilon$为差距的一半，根据定义可证。
+\end{proof}
+
+
+\subsection{函数极限的性质}
+
+
+\begin{theorem}[函数极限四则运算]
+  若$f(x), g(x)$在$x_0$处极限存在，
+  $f+g, f-g, f \times g, \frac{f}{g}$极限存在且极限为对应极限的运算(除法要求分母极限非0)。
+\end{theorem}
+
+\begin{exercise}[函数绝对值的极限]
+  设$\lim \limits _{x \rightarrow x_0}f(x) = A$，则$\lim \limits _{x \rightarrow x_0}|f(x)| = |A|$，
+  反之不一定成立。
+\end{exercise}
+
+\begin{proof}
+  由于$\lim \limits _{x \rightarrow x_0}f(x) = A$，
+  $\forall \epsilon, \exists \delta, \forall x \in U(x_0,\delta)$有$|f(x) - A| < \epsilon$，
+  而$\left| |f(x)| - |A| \right| \leq |f(x) - A|$，因此极限存在。
+  反之有反例$f(x) = \text{sgn}(x)$
+\end{proof}
+
+\begin{theorem}[归结原则] \label{thm:数列极限与函数极限}
+  $\lim \limits _{x \rightarrow x_0} f(x) = A$当且仅当任意收敛到$x_0$的数列$x_n$，有$\lim \limits _{n \rightarrow \infty} f(x_n) = A$。
+\end{theorem}
+
+\begin{proof}
+  (1)左推右：$\forall \epsilon, \exists \delta, |x - x_0| < \delta$时$|f(x) - A| < \epsilon$，
+  对于$x_n$，由于$\lim \limits _{n \rightarrow \infty} x_n = x_0$，
+  $\exists N, \forall n > N, |x_n - x_0| < \delta$，
+  因此$|f(x_n) - A|< \epsilon$
+
+  (2)右推左：反设$\lim \limits _{x \rightarrow x_0}f(x) \neq A$，则$\exists \epsilon_0, \forall \delta,\exists x \in U(x_0,\delta)$满足
+  $|f(x) - A| > \epsilon_0$，
+  每次取$\delta^{\prime} = \delta,\frac{\delta}{2},\cdots,\frac{\delta}{n}$，
+  每个$\delta^{\prime}$邻域对应一个$x_n$，但是总有$|f(x_n) - A| > \epsilon_0$，
+  这与$\lim \limits _{n \rightarrow \infty} f(x_n) = A$矛盾。
+\end{proof}
+
+~
+
+\begin{exercise}[用归结原则证明不收敛]
+  证明：$\lim \limits _{x \rightarrow 0} \sin \frac{1}{x}$不存在。
+\end{exercise}
+
+\begin{proof}
+  令$x_n = \frac{1}{(2n + \frac{1}{2}) \pi}, x_n^{\prime} = \frac{1}{2n \pi}$，
+  两者均收敛至$0$，但是$f(x_n) \rightarrow 1$，$f(x_n^{\prime}) \rightarrow 0$，
+  从而无极限。
+\end{proof}
+
+
+
+
+\subsection{无穷大与无穷小}
+
+\begin{definition}[O与o]
+  $f,g$在$x_0$附近有定义，$g(x) \neq 0$，
+  若$\lim \limits _{x \rightarrow x_0} \frac{|f(x)|}{|g(x)|} \leq M$，则记$f(x) = O(g(x))$；
+  若$\lim \limits _{x \rightarrow x_0} \frac{|f(x)|}{|g(x)|} = 0$，
+  则记$f(x) = o(g(x))$
+\end{definition}
+
+\begin{definition}[$\Omega$]
+  $f,g$是两个算法，若$\exists C \in \mathbb{R}^+$使得$n > n_0$时$0 \leq Cg(n) \leq f(n)$，则记$f(n) = \Omega(g(n))$
+\end{definition}
+
+\begin{definition}[$\Theta$]
+  若$f(n)$是$\Omega(g(n))$且$O(g(n))$的，
+  则记$f(n) = \Theta(g(n))$
+\end{definition}
+
+\begin{note}
+  记忆方法：全以多项式为例，$O$表示阶数(次数)大于等于，$o$表示阶数大于，$\Omega$表示阶数小于等于，$\Theta$表示阶数等于。
+\end{note}
+
+
+\subsection{使用定义直接计算}
+
+\begin{exercise}[几个经典函数极限]
+  (1)计算$\lim \limits _{n \rightarrow \infty} \sin^2(\pi \sqrt{n^2 + n})$
+
+  (2)$\lim \limits _{x \rightarrow +\infty}\frac{[xf(x)]}{x}$，其中$\lim \limits _{x \rightarrow +\infty}f(x) = a$
+\end{exercise}
+
+\begin{solution}
+  (1)$\sin^2(\pi \sqrt{n^2 + n}) = \sin^2 (\pi \sqrt{n^2 + n} - \pi n) = \sin^2 (\frac{n\pi}{\sqrt{n^2 + n} + n})$，
+  极限为$\sin^2(\frac{\pi}{2}) = 1$
+
+  (2)由于$xf(x) - 1 < [xf(x)] \leq xf(x)$，
+  因此$f(x) - \frac{1}{x} < \frac{[xf(x)]}{x} \leq f(x)$，
+  显然$\lim \limits _{x \rightarrow +\infty} \left( f(x) - \frac{1}{x} \right) = \lim \limits _{x \rightarrow +\infty}f(x) = a$，
+  因此由夹逼准则，极限为$a$
+\end{solution}
+
+~
+
+\begin{exercise}[几个经典递推问题]
+  (1)$f(x)$在$(0,+\infty)$单调增，$\lim \limits _{x \rightarrow +\infty}\frac{f(2x)}{f(x)} = 1$，
+  证明$\forall a > 0$有$\lim \limits _{x \rightarrow +\infty}\frac{f(ax)}{f(x)} = 1$
+\end{exercise}
+
+\begin{proof}
+  
+\end{proof}
+
+
+
+\section{函数极限的计算}
+
+\subsection{等价无穷小公式}
+
+\begin{equation*}
+  \begin{array}{llll}
+    \text{三角：}&\sin x \sim x&1 - \cos x \sim \frac{1}{2}x^2&\tan x \sim x\\
+    \text{反三角：}& \arcsin x \sim x& \arctan x \sim x&\\
+    \text{指数、对数：}&\ln(1 + x)\sim x& e^x - 1 \sim x& a^x - 1 \sim x \ln a\\
+    \text{其他：}&(1 + x)^{\alpha} - 1 \sim \alpha x&&
+  \end{array}
+\end{equation*}
+
+
+\subsection{Taylor展开公式}
+
+\begin{equation*}
+  \begin{array}{lll}
+    \text{指数、对数：}& e^x = \sum\limits_{n = 0 }^{\infty}\frac{x^n}{n!}& \ln(1 + x) = \sum\limits_{n = 1}^{\infty}(-1)^{n-1}\frac{x^n}{n} \\
+                       \text{三角：}&\sin x = \sum\limits_{n = 0}^{\infty}(-1)^n \frac{x^{2n+1}}{(2n+1)!}& \cos x = \sum\limits_{n = 0}^{\infty}(-1)^n \frac{x^{2n}}{(2n)!} \\
+    \text{反三角：}&\arcsin x =\sum\limits_{n = 0}^{\infty}\left( \frac{(2n)!}{2^{2n}(n!)^2} \right)\frac{x^{2n+1}}{2n+1} =  x + \frac{1}{6}x^3 + o(x^3) &\arctan x = \sum\limits_{n = 0}^{\infty} \frac{(-1)^nx^{2n+1}}{2n+1} = x - \frac{1}{3}x^3 + o(x^3) \\
+                       \text{分式：}&\frac{1}{1+x} = \sum\limits_{n = 0}^{\infty}(-1)^n x^n&\frac{1}{1 - x} = \sum\limits_{n = 0}^{\infty}x^n \\
+                       \text{其他：}&(1+x)^{\alpha} = 1 + \alpha x + \frac{\alpha(\alpha - 1)}{2}x^2 + o(x^2)&(1 + x)^{\alpha} = \sum\limits_{n = 0}^{\infty}{\alpha \choose n} x^n
+  \end{array}
+\end{equation*}
+
+
+
+
+
+\section{函数的连续性}
+
+\subsection{函数连续的定义}
+
+\begin{definition}[单点连续]
+  $f: [a,b] \rightarrow \mathbb{R}$，$x_0 \in [a,b]$若$\lim \limits _{x \rightarrow x_0} f(x) = f(x_0)$，则称$f(x)$在$x_0$处连续。
+\end{definition}
+
+\begin{note}
+  有时也可以展开用$\forall \epsilon, \exists \delta$使得$\forall x \in (x_0 - \delta, x_0 + \delta)$满足$|f(x) - f(x_0)| < \epsilon$证明。
+  例如证明 Riemann 函数在无理点连续。
+\end{note}
+
+\begin{definition}[单点左右连续]
+  若$f(x_0^+) = f(x_0)$则称$f(x)$右连续。左连续同理。
+\end{definition}
+
+\begin{note}
+  注意右连续是指右极限等于当前点的函数值，
+  而非左侧极限靠过来等于当前点的函数值！
+\end{note}
+
+~
+
+\begin{exercise}[Dirichlet函数的连续性]
+  判断下面Dirichlet函数的连续性、单调性、周期性
+  \begin{equation*}
+    D(x) =
+    \begin{cases}
+      1, &x \text{为有理数}\\
+      0， &x \text{为无理数}
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  (1)周期：任意有理数(显然)
+
+  (2)连续性：处处不连续，因为根据有理数和无理数的稠密性，
+  总能在小邻域中找到相差$1$的点，因此不连续。
+\end{solution}
+
+~
+
+\begin{exercise}[Riemann函数的连续性]
+  证明Riemann函数在无理点连续，在有理点间断。
+  \begin{equation*}
+    R(x) =
+    \begin{cases}
+      \frac{1}{q}, & x = \frac{p}{q}\text{为既约分数}\\
+      0, & x\text{为无理数}
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (1)有理点：设$x_0 = \frac{p}{q}$为有理点，
+  $R(x_0) = \frac{1}{q}$，无理点列趋于$x_0$时，极限为$0$，与函数值不同。
+
+  (2)无理点：
+  $x_0$是无理点，
+  $\forall \epsilon, \frac{1}{q} > \epsilon$的个数有限，
+  设这些点为$x_1,\cdots,x_n$，
+  取$\delta < \min\{|x_0 - x_i|: i = 1\sim n\}$，
+  $x \in (x_0 - \delta, x_0 + \delta) - \{x_0\}$时
+  $|f(x_0) - f(x)| < \epsilon$
+\end{proof}
+
+~
+
+\begin{exercise}[初等函数的连续性]
+  $f,g,h$连续，证明：$\max \{f(x),g(x)\}, \min \{f(x),g(x)\}, |f(x)|$连续
+\end{exercise}
+
+\begin{proof}
+  (1)最大、最小：根据$\max \{f(x),g(x)\} = \frac{1}{2}[f(x) + g(x) + |f(x) - g(x)|]$
+
+  (2)绝对值：$|f(x)| = \sqrt{|f(x)|^2}$连续
+\end{proof}
+
+\subsection{间断点的概念}
+
+\begin{definition}[第一类间断点]
+  跳跃点与可去间断点统称为$f(x)$的第一类间断点
+  \begin{itemize}
+  \item 跳跃点： 若$f(x)$在$x_0$处左右极限$f(x_0^-), f(x_0^+)$存在但不相等，
+  \item 可去间断点：若$f(x)$在$x_0$处左右极限存在且相等，即$f(x_0^-) = f(x_0^+)$
+  \end{itemize}
+\end{definition}
+
+~
+
+\begin{exercise}[第一类间断点的性质]
+  (1)若$f(x)$在$[a,b]$至多有第一类间断点，证明：$f(x)$在$[a,b]$有界
+\end{exercise}
+
+\begin{proof}
+  (1)若没有间断点，则连续，显然有界。
+  否则反设无界，则对$M = 1$，存在$x_1 \in [a,b]$使得$|f(x_1)| > 1$，
+  $M = 2$存在$x_2 \in [a,b]$使得$|f(x_2)| > 2$，
+  以此类推构造$x_n$。
+  由于$x_n \in [a,b]$，
+  根据致密性定理，存在收敛子列$x_{n_k}$，
+  而由于$f(x)$只有第一类间断点，因此$\lim \limits _{k \rightarrow +\infty}f(x_{n_k})$存在，
+  但其趋于无穷，矛盾。
+\end{proof}
+
+~
+
+\begin{definition}[第二类间断点]
+  若$f(x_0^+)$和$f(x_0^-)$至少一个不存在或者不是有限的数，
+  则称$x_0$是$f(x)$的第二类间断点。
+\end{definition}
+
+~
+
+\begin{exercise}[判断间断点类型]
+  (1)已知$f(x) = \text{sgn}(x),g(x )= x - [x]$，讨论$f(g(x))$和$g(f(x))$的间断点类型
+\end{exercise}
+
+\begin{solution}
+  (1)$f(g(x))$在$x$为整数时等于$0$，在$x$非整数时大于$0$，因此在整数处取可去间断点。
+  $g(f(x)) = 0$，因此连续
+\end{solution}
+
+~
+
+\begin{exercise}[单调函数的间断点]
+  $f(x)$在$x_0$邻域单增，$f(x_0^-),f(x_0^+)$均存在，证明如下性质，即单调函数的间断点都是跳跃间断点
+  \begin{equation*}
+    f(x_0^-) = \sup \limits _{x \in U_-^o(x_0)}f(x), f(x_0^+) = \inf \limits _{x \in U_+^o(x_0)}f(x)
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  取$x_1 \in U_+^o(x_0)$，则$\forall x \in U_-^o(x_0)$有$f(x) \leq f(x_1)$，
+  从而根据确界原理有上确界$A$，
+  从而$f(x) \leq A$且$\forall \epsilon, \exists x^{\prime}$满足$f(x^{\prime}) > A - \epsilon$，
+  从而$\forall x \in (x_0 - \delta, x_0)$有$|f(x) - A| < \epsilon$
+\end{proof}
+
+\begin{note}
+  单调函数左右极限均存在是一个会在考题中使用的结论。
+\end{note}
+
+
+~
+
+\begin{exercise}[单调函数右连续]
+  $f(x)$是$\mathbb{R}$上单调函数，
+  定义$g(x) = f(x + 0)$，
+  证明$g(x)$在$\mathbb{R}$每一点右连续
+\end{exercise}
+
+\begin{proof}
+  只需要证明$\forall \epsilon, \exists \delta$，当$|x - x_0| < \delta$时，满足
+  \begin{equation*}
+    |g(x) - g(x_0)| < \epsilon
+  \end{equation*}
+  根据$g(x_0) = \lim \limits _{y \rightarrow x_0^+}f(y)$得到$y \in (x_0,x_0 + \delta)$时
+  有$|f(y) - g(x_0)| < \epsilon$，
+  令$y \rightarrow x^+$即可得到
+  \begin{equation*}
+    |g(x) - g(x_0)| < \epsilon
+  \end{equation*}
+\end{proof}
+
+
+~
+
+\begin{exercise}[极限的连续性]
+  $f(x)$只有可去间断点，$g(x) = \lim \limits _{y \rightarrow x}f(y)$，证明$g(x)$是连续函数
+\end{exercise}
+
+\begin{proof}
+  可去间断点说明极限存在，
+  $g(x_0) = \lim \limits _{y \rightarrow x_0}f(y)$，
+  即对$\forall \epsilon, \exists \delta, y \in U^o(x_0,\delta)$时：
+  \begin{equation*}
+    g(x_0) - \epsilon < f(y) < g(x_0) + \epsilon
+  \end{equation*}
+  根据$g(x) = \lim \limits _{y \rightarrow x}f(y)$和保不等式性得到
+  \begin{equation*}
+    g(x_0) - \epsilon \leq g(x) \leq g(x_0) + \epsilon
+  \end{equation*}
+  因此$g(x)$在$x_0$连续，由$x_0$任意性可知结论成立。
+\end{proof}
+
+~
+
+\begin{exercise}[第一类间断点的经典题目]
+  $f(x)$在$(a,b)$至多只有第一类间断点，且对$\forall x,y \in (a,b)$有$f \left( \frac{x + y}{2} \right) \leq \frac{f(x) + f(y)}{2}$，证明：$f(x)$在$(a,b)$连续
+\end{exercise}
+
+\begin{proof}
+  $\forall x_0 \in (a,b), \forall h$满足$x_0 \pm h \in (a,b)$时，
+  根据条件可知：
+  \begin{equation*}
+    f(x_0) \leq \frac{f(x_0 + h) + f(x_0 - h)}{2} \quad f(x_0 + \frac{h}{2}) \leq \frac{f(x_0) + f(x_0 + h)}{2}
+  \end{equation*}
+  前者取$h \rightarrow 0^+$，后者分别取$h \rightarrow 0^+, h \rightarrow 0^-$则
+  \begin{equation*}
+    \begin{cases}
+      f(x_0) \leq \frac{f(x_0 + 0) + f(x_0 - 0)}{2}\\
+      f(x_0 + 0) \leq \frac{f(x_0) + f(x_0 + 0)}{2}\\
+      f(x_0 - 0) \leq \frac{f(x_0) + f(x_0 - 0)}{2}
+    \end{cases}
+  \end{equation*}
+  综合得到$f(x_0 - 0) = f(x_0 + 0) = f(x_0)$，因此在任意点连续。
+\end{proof}
+
+\subsection{介值性定理}
+
+\begin{theorem}[零点存在定理]
+  $f(x)$是$[a,b]$上连续函数，$f(a)f(b) < 0$，则$\exists \xi \in (a,b)$使得$f(\xi) = 0$
+\end{theorem}
+
+\begin{proof}
+  (1)使用闭区间套定理进行证明：取$a_1 = a, b_1 = b, c_1 = \frac{a_1 + b_1}{2}$，
+  根据$f(c_1)$正负性选取$a_2,b_2$，以此类推，由于$\lim \limits _{n \rightarrow \infty} |a_n - b_n| = 0$，
+  $f(a_n)f(b_n) < 0$，根据闭区间套$\exists \xi$使得$f^2(\xi) \leq 0$，因此得出$f(\xi) = 0$
+
+  (2)使用有限覆盖定理证明：根据连续函数局部保号性，$\forall x \in [a,b], \exists \delta_x$使得$f(x)$在$(x-\delta_x ,x + \delta_x) \cap [a,b]$中保号，
+  取遍$[a,b]$显然是一族开覆盖，根据有限覆盖定理可找到有限覆盖，
+  不妨设这有限覆盖相互有重叠，则全部等号，
+  这与$f(a)f(b) < 0$矛盾。
+\end{proof}
+
+\begin{theorem}[介值性定理]
+  $f(x)$是$[a,b]$中的连续函数，$a \leq x_1 < x_2 \leq b$，$f(x_1) \neq f(x_2)$，
+  则$f(x)$在$[a,b]$可取遍$f(x_1),f(x_2)$间任意值。
+\end{theorem}
+
+~
+
+\begin{exercise}[构造辅助函数]
+  (1)$f(x),g(x)$是$[0,1]$上的连续函数，且在$[0,1]$有相同最大值，证明$\exists \xi \in [a,b]$使得$f(\xi) = g(\xi)$
+
+  (2)重点：$f(x)$是$[0,2a]$连续函数，且$f(0) = f(2a)$，证明$\exists \xi \in [0,a]$使得$f(\xi) = f(\xi + a)$
+
+  (3)重点：$f(x)$是$[0,1]$上连续函数，$f(0) = f(1) = 0$，证明$\forall n \in \mathbb{N}^+, \exists \xi \in [0,1]$使得
+  $f(\xi + \frac{1}{n} ) = f(\xi)$
+
+  (4)重点：$f(x)$是$[0,1]$上非负连续函数，$f(0) = f(1) = 0$，证明：对$\forall a \in (0,1), \exists \xi \in [0,1]$，使得$f(\xi) = f(\xi + a)$
+\end{exercise}
+
+\begin{proof}
+  (1)问题在于最大值取值点不一定一样：若最大值对应$f(x_1),g(x_2)$，
+  若$x_1 = x_2$，则显然成立。
+  若$x_1 \neq x_2$，则取$F(x) = f(x) - g(x)$，$F(x_1) \geq 0, F(x_2) \leq 0$，从而由零点存在定理成立。
+
+  (2)取$F(x) = f(x) - f(x + a)$，$F(0) = f(0) - f(a), F(a) = f(a) - f(2a) = f(a) - f(0)$，
+  因此$F(0) = - F(a)$，显然成立。
+
+  (3)取$F(x) = f(x + \frac{1}{n}) - f(x)$，
+  $F(0) = f(\frac{1}{n}) - f(0), F(\frac{1}{n}) = f(\frac{2}{n}) - f(\frac{1}{n}),\cdots, F(\frac{n-1}{n}) = f(1) - f(\frac{n-1}{n})$，
+  得到$F(0) + F(\frac{1}{n}) + \cdots + F(\frac{n-1}{n}) = f(1) - f(0) = 0$，
+  要么这些全部为零，要么有正有负，根据定理可知。
+
+  (4)取$F(x) = f(x) - f(x+a)$，$F(0) = f(0) - f(a) = -f(a), F(1-a) = f(1-a) - f(1) = f(1-a)$，
+  由于$f$非负，因此$F(0)F(1-a) \leq 0$。
+\end{proof}
+
+~
+
+\begin{theorem}[连续函数平均值定理]
+  $f(x)$在$[a,b]$连续，$x_1,\cdots,x_n \in [a,b]$，
+  证明：$\exists \xi \in [a,b]$，使得
+  \begin{equation*}
+    f(\xi) = \frac{1}{n} [f(x_1) + \cdots + f(x_n)]
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  不妨设$f(x_1),\cdots,f(x_n)$中最大值为$f(x_n)$，最小值为$f(x_1)$，则
+  \begin{equation*}
+    f(x_1) \leq \frac{1}{n} [f(x_1) + \cdots + f(x_n)] \leq f(x_n)
+  \end{equation*}
+  若$f(x_1) = \frac{1}{n} \sum\limits_{i = 1}^n f(x_i)$或$f(x_n) = \frac{1}{n} \sum\limits_{i = 1}^n f(x_i)$，
+  则取$\xi = x_1, x_n$。
+  否则由连续函数介值性定理可证。
+\end{proof}
+
+\subsection{介值性定理的无连续推广}
+
+有时没有连续的条件却能推出介值性定理的结论，常见的条件如单调。
+
+~
+
+\begin{exercise}[单调介值定理]
+  核心：$f(x)$在$[0,1]$上单增，$f(0) > 0, f(1) < 1$，$k \in \mathbb{N}^+$，
+  证明$\exists x_0 \in (0,1)$使得$f(x_0) = x_0^k$
+\end{exercise}
+
+\begin{proof}
+  取$F(x) = f(x ) - x^k$，显然$F(0) = f(0) > 0, F(1) = f(1) - 1 < 0$，
+  不停地二分取闭区间套，有$\lim \limits _{n \rightarrow \infty} |a_n - b_n| = 0$，
+  $\lim \limits _{n \rightarrow \infty} a_n = \lim \limits _{n \rightarrow \infty} b_n = x_0$，
+  $F(a_n) < 0, F(b_n) > 0 \Rightarrow f(a_n) > a_n^k, f(b_n) < b_n^k$，
+  由于$f(x)$单增，$a_n^k < f(a_n) \leq f(x_0) \leq f(b_n) < b_n^k$，
+  因此取极限可知$x_0^k \leq f(x_0) \leq x_0^k$得证。
+\end{proof}
+
+\begin{note}
+  单调介值性定理不能将极限取进函数，但是用了两侧夹逼的方式。
+\end{note}
+
+~
+
+\begin{exercise}
+  证明：闭区间连续函数一定有界
+\end{exercise}
+
+\begin{proof}
+  根据局部有界性以及有限开覆盖可证。
+\end{proof}
+
+
+\section{连续性的应用}
+
+
+\begin{exercise}[几道经典题目]
+  (1)$f(x)$在$x = 0$连续，$f(2x) = f(x)$，证明$f(x)$是常值函数
+
+  (2)$f(x)$在$x = 0,1$连续，$f(x^2) = f(x)$，证明$f(x)$是常值函数
+
+  (3)$f(x),g(x)$在$\mathbb{R}$上连续，且在每个有理点有$f(x) = g(x)$，证明$f(x)$恒等于$g(x)$
+
+  (4)容易被吓到：$f(x) \in C[a,b]$，且对$\forall x \in [a,b]$都有$y \in [a,b]$使得$|f(y)| \leq \frac{1}{2}|f(x)|$，
+  证明$f(x)$在$[a,b]$存在零点
+\end{exercise}
+
+\begin{proof}
+  (1)$f(x) = f(\frac{x}{2}) = \cdots = f(\frac{x}{2^n}) = f(0)$，因此为常值
+
+  (2)$x$为正直接$f(x) = f(x^{\frac{1}{2}}) = \cdots = f(x^{\frac{1}{2^n}}) = f(1)$，
+  $x$为负平方一下转换为正，
+  $x = 0$根据连续性可知等于附近，
+  因此整体常数
+
+  (3)根据有理点稠密性+连续性
+
+  (4)假设无零点，根据闭区间连续函数有最小值，
+  这与$|f(y)| \leq \frac{1}{2}|f(x)|$矛盾
+\end{proof}
+
+
+\begin{exercise}[几道经典最值问题]
+  (1)重点：设$f(x)$在$(a,b)$连续，且$\lim \limits _{x \rightarrow a^+} f(x) = \lim \limits _{x \rightarrow b^-}f(x) = A$，
+  这里$A$可以有限，也可以为$\pm \infty$，
+  证明$f(x)$在$(a,b)$上有最大或最小值
+
+  (2)重点：$f(x)$在$\mathbb{R}$上连续，$\lim \limits _{x \rightarrow +\infty}f(x) = \lim \limits _{x \rightarrow -\infty}f(x) = A$，
+  这里$A$可以有限，也可以为$\pm \infty$，
+  证明$f(x)$在$\mathbb{R}$上有最大或最小值
+
+  (3)重点：$f(x)$在$[a,+\infty)$连续，$\lim \limits _{x \rightarrow +\infty}f(x) = A$，这里$A$为有限数，
+  证明$f(x)$在$[a,+\infty)$存在最大值或最小值
+\end{exercise}
+
+\begin{proof}
+  (1)对$A$进行分类讨论：
+
+  (a)先考虑$A$为有限值。如果$f(x) \equiv A$，则显然。
+  若$\exists x_0, f(x_0) > A$， 则$\exists \delta, \forall x \in (a, a+\delta) \cup (b-\delta,b)$满足$f(x) < f(x_0)$，
+  由于$f(x)$在$[a+\delta,b-\delta]$上连续，
+  因此$\exists \xi$使得$f(\xi)$在$[a+\delta,b-\delta]$最大，
+  而$\forall x \in (a, a+\delta] \cup [b-\delta,b)$，自然也有$f(\xi) \geq f(x_0) \geq f(x)$，
+  因此$f(\xi)$在$(a,b)$最大。
+  若$f(x_0) < A$也同理有最小值。
+
+  (b)若$A = +\infty$，则对$\forall x_0 \in (a,b)$，$f(x_0)$为有限数，
+  $\exists \delta, \forall x \in (a, a+ \delta) \cup (b-\delta, b)$有$f(x) > f(x_0)$，
+  由于$f(x)$在$[a+\delta,b-\delta]$连续，因此有最小值，且最小值比$f(x_0)$还小，因此在$(a,b)$上取最小值。
+
+  (2)和(1)同理，只是把$\exists \delta$换成$\exists N$
+
+  (3)若$f(x) \equiv A$，则显然。
+  若$\exists x_0, f(x_0) > A$，则$\exists M, \forall x > M$有$f(x_0) \geq f(x)$，
+  由于在$[a,M]$连续，有最大值$f(\xi)$，
+  且$\forall x >M, f(\xi) > f(x_0) > f(x)$，因此有最大值。
+  最小值同理
+\end{proof}
+
+
+
+\section{一致连续}
+
+\subsection{一致连续的概念}
+
+\begin{definition}[一致连续]
+  $I$是任意区间(任意开闭，有界无界)，
+  $f: I \rightarrow \mathbb{R}$，
+  $\forall \epsilon , \exists \delta$对$\forall x_1,x_2 \in I$满足$|x_1 - x_2| < \delta$时有$|f(x_1) - f(x_2)| < \epsilon$，则称$f$在$I$一致连续
+\end{definition}
+
+\begin{theorem}[常用充要条件]
+  $f(x)$在区间$I$上有定义，
+  则$f(x)$在$I$一致连续当且仅当任意数列$x_n^{\prime},x_n^{\prime\prime}$，
+  若$\lim \limits _{n \rightarrow \infty} x_n^{\prime} - x_n^{\prime\prime} = 0$，
+  则$\lim \limits _{n \rightarrow \infty} [f(x_n^{\prime}) - f(x_n^{\prime\prime})] = 0$
+\end{theorem}
+
+\begin{proof}
+  (1)左推右：显然
+
+  (2)右推左：反设不一致连续，$\exists \epsilon_0, \forall \delta, \exists x^{\prime}, x^{\prime\prime}$，
+  虽然$|x^{\prime} - x^{\prime\prime}| < \delta$，但是
+  $|f(x^{\prime}) - f(x^{\prime\prime})| \geq \epsilon_0$。
+  取$\delta = 1,\frac{1}{2},\cdots,\frac{1}{n},\cdots$，
+  $\exists x_n^{\prime},x_n^{\prime\prime}$，$|x_n^{\prime} - x_n^{\prime\prime}| < \frac{1}{n}, |f(x_n^{\prime}) - f(x_n^{\prime\prime})| \geq \epsilon_0$，
+  这与条件矛盾。
+\end{proof}
+
+\begin{note}
+  证明不一致连续绝大多数情况都用上述定理。
+\end{note}
+
+~
+
+\begin{exercise}
+  连续但不一致连续的例子：
+  (1)$x^2, (0,+\infty)$
+  (2)$\sin x^2, [0,+\infty)$
+  (3)$\frac{x+2}{x+1}\sin \frac{1}{x}, (0,1)$
+  (4)$\frac{1}{x}, x \in (0,1)$
+\end{exercise}
+
+\begin{proof}
+  (1)$x_n = \sqrt{n}, y_n = \sqrt{n+1}, \lim \limits _{n \rightarrow \infty} (x_n - y_n) = 0, \lim \limits _{n \rightarrow \infty} [f(x_n) - f(y_n)]  = -1$
+
+  (2)取$x_n = \sqrt{2n\pi}, y_n = \sqrt{2n\pi + \frac{\pi}{2}}$
+
+  (3)取$x_n = \frac{1}{2n\pi}, y_n = \frac{1}{2n\pi + \frac{\pi}{2}}$
+
+  (4)取$x_n = \frac{1}{n}, y_n = \frac{1}{n+1}$
+\end{proof}
+
+~
+
+\begin{exercise}[一致连续的证明]
+  (1)证明$f(x) = \cos \sqrt{x}$在$[0,+\infty)$一致连续
+
+  (2)证明$f(x) = \sqrt{x}$在$[0,+\infty)$一致连续
+
+  (3)证明$f(x) = \sin x$在$[0,+\infty)$一致连续
+\end{exercise}
+
+\begin{proof}
+  (1)方法1：不妨设$x_1 > x_2$，则
+  \begin{align*}
+    |f(x_1) - f(x_2)| &= |\cos \sqrt{x_1} - \cos \sqrt{x_2}| = 2 \left| \sin \frac{\sqrt{x_1} + \sqrt{x_2}}{2} \sin \frac{\sqrt{x_1} - \sqrt{x_2}}{2} \right|\\
+   & \leq 2 \left| \sin \frac{\sqrt{x_1} - \sqrt{x_2}}{2} \right| \leq |\sqrt{x_1} - \sqrt{x_2}| = \frac{|x_1 - x_2|}{\sqrt{x_1} + \sqrt{x_2}}\\
+    & = \frac{x_1 - x_2}{\sqrt{(x_1 - x_2) + x_2} + \sqrt{x_2}} \leq \frac{x_1 - x_2}{\sqrt{x_1 - x_2}} = \sqrt{x_1 - x_2}
+  \end{align*}
+  当$\delta = \epsilon^2$时，$|x_1 - x_2| < \delta$有$|f(x_1) - f(x_2)| < \epsilon$，
+  因此一致连续
+
+  方法2：$(\cos \sqrt{x})^{\prime} = \sin \sqrt{x} \frac{1}{2 \sqrt{x}}$在$[1,+\infty)$有界，
+  而$[0,1]$用Cantor定理，
+  因此Lip连续推出一致连续
+
+  (2)分段+Lip连续
+\end{proof}
+
+
+\subsection{Cantor定理及其推广}
+
+\begin{theorem}[Cantor定理]
+  若$f(x)$在闭区间$[a,b]$连续，则其在$[a,b]$上一致连续。
+\end{theorem}
+
+\begin{proof}
+  反设在$[a,b]$不一致连续，
+  根据一致连续充要条件，
+  $\exists \epsilon_0, \exists x_n,y_n$满足
+  $\lim \limits _{n \rightarrow \infty} (x_n - y_n) = 0$，
+  但$|f(x_n) - f(y_n)| \geq \epsilon_0$。
+  由于$x_n$有界，根据致密性定理可知$x_n$有收敛子列，
+  设$\lim \limits _{k \rightarrow \infty}x_{n_k} = x_0$，
+  从而$\lim \limits _{k \rightarrow \infty}y_{n_k} = \lim \limits _{k \rightarrow \infty}[(y_{n_k} - x_{n_k}) + x_{n_k}] = x_0$，
+  因此推出$\epsilon_0 \leq \lim \limits _{k \rightarrow \infty}|f(x_{n_k}) - f(y_{n_k})| = |f(x_0) -f(x_0)| = 0$(这一步用了连续条件)，
+  矛盾。
+\end{proof}
+
+\begin{note}
+  Cantor定理的其他证明方式：
+  \begin{itemize}
+  \item 有限覆盖定理：$\forall \epsilon, \exists \delta_{x_0}, \forall x \in B(x_0,\delta_{x_0})$，有$|f(x) - f(x_0)| < \epsilon$，取遍闭区间，有有限覆盖，
+    上述$\epsilon$不变，当取$\delta = \min \{\delta_x\}$时，即有$\forall a,b $满足$|a-b| < \delta$都有$|f(a) - f(b)| < \epsilon$
+  \item 闭区间套：$f(x)$在$[a,b]$不一致连续，则一定在$[a,\frac{a+b}{2}],[\frac{a+b}{2},b]$中有一个区间中不一致连续，
+    不断取区间套，最后套住$\xi$，由于$f$在$\xi$连续，$\forall \epsilon, \exists \delta, \forall x, |x - \xi| < \delta$有$|f(\xi) - f(x)| < \frac{\epsilon}{2}$，
+    同理取$y$，得到$|f(x )- f(y)| < \epsilon$，
+    而存在$a_n,b_n$满足$[a_n,b_n] \subseteq [\xi - \delta, \xi + \delta]$，
+    这与不一致连续矛盾
+  \item 单调有界定理：和闭区间套一种构造方式
+  \end{itemize}
+\end{note}
+
+
+
+\begin{theorem}[开区间一致连续充要条件]
+  $f(x)$在$(a,b)$连续，则$f(x)$在$(a,b)$一致连续的充要条件是$\lim \limits _{x \rightarrow a^+} f(x), \lim \limits _{x \rightarrow b^-}f(x)$存在(有限)
+\end{theorem}
+
+\begin{proof}
+  (1)左推右：根据$f(x)$在$(a,b)$一致连续，
+  $\forall \epsilon, \exists \delta, \forall x^{\prime},x^{\prime\prime}, |x^{\prime} - x^{\prime\prime}| < \delta$，有$|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$。
+  取$x^{\prime},x^{\prime\prime} \in (a,a + \delta)$，显然$|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$，
+  即右极限的Cauchy准则，另一侧同理。
+
+  (2)右推左：补充定义两个端点，根据Cantor定理可知。
+\end{proof}
+
+~
+
+\begin{exercise}[开区间一致连续应用]
+  (1)(东北师大)设$f(x)$在$(a,b)$上一致连续，
+  证明$f(x)$在$(a,b)$上有界
+\end{exercise}
+
+\begin{proof}
+  (1)由于一致连续，因此$f(x)$在$a,b$的分别存在右、左极限，
+  补充定义为$F(x)$，
+  $F(x)$在$[a,b]$上连续有界，
+  且$f(x)$和$F(x)$在$(a,b)$相等，
+  因此$f(x)$在$(a,b)$有界。
+\end{proof}
+
+~
+
+\begin{theorem}[无穷区间一致连续]
+  $f(x)$在$[a,+\infty)$连续，
+  $\lim \limits _{x \rightarrow +\infty}f(x) = A$(有限)，
+  则$f(x)$在$[a,+\infty)$一致连续
+\end{theorem}
+
+\begin{proof}
+  由于$\lim \limits _{x \rightarrow +\infty}f(x) = A$，根据Cauchy收敛准则，
+  $\forall \epsilon, \exists M, \forall x^{\prime},x^{\prime\prime} > M$有$|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$。
+  根据Cantor定理，$f(x)$在$[a,M+1]$一致连续，
+  对$\forall \epsilon, \exists \delta \in (0,1)$，只要$|x^{\prime} - x^{\prime\prime}| < \delta$时，
+  两点要么同时落在$[a,M+1]$，要么同时落在$[M,+\infty)$，根据上面的命题可知一致连续。
+\end{proof}
+
+\begin{note}
+  $[a,+\infty)$一致连续并不代表无穷处$f(x)$极限一定存在，只是一个充分条件，例如$f(x) = x$极限不存在，但一致连续。
+\end{note}
+
+~
+
+\begin{exercise}[开区间一致连续]
+  证明：(1)$x\sin \frac{1}{x}$在$(0,1)$一致连续(2)$\sin \frac{1}{x}$在$(0,1)$不一致连续
+\end{exercise}
+
+\begin{proof}
+  (1)因为$\lim \limits _{x \rightarrow 0}x \sin \frac{1}{x} = 1$，因此一致连续
+
+  (2)因为$\lim \limits _{x \rightarrow 0}\sin \frac{1}{x}$不存在，故不一致连续。
+\end{proof}
+
+~
+
+
+\subsection{Lip连续与一致连续}
+
+\begin{theorem}[Lip连续与一致连续]
+  $f(x)$在区间$I$上满足Lip条件，
+  则$f(x)$在$I$上一致连续
+\end{theorem}
+
+\begin{proof}
+  Lip条件即$\forall x^{\prime},x^{\prime\prime}$有$|f(x^{\prime}) - f(x^{\prime\prime})| \leq L |x^{\prime}  - x^{\prime\prime}|$，
+  取$\forall \epsilon, \delta = \frac{\epsilon}{L}$即可。
+\end{proof}
+
+\begin{corollary}[导数有界一定一致连续]
+  若$f^{\prime}(x)$在$I$上有界，则根据Lagrange中值定理可知Lip连续，从而一致连续
+\end{corollary}
+
+\begin{corollary}[导数在无穷处趋于无穷则不一致连续]
+  若$\lim \limits _{x \rightarrow +\infty}f^{\prime}(x) = \infty$，
+  则$f(x)$在$[a,+\infty)$不一致连续
+\end{corollary}
+
+\begin{proof}
+  根据$\lim \limits _{x \rightarrow +\infty}|f^{\prime}(x)| = \infty$可知$|x^{\prime} - x^{\prime\prime}|$控制不住导数的增长。
+\end{proof}
+
+\begin{note}
+  注意上述两个推论都是充分条件。
+  前者例如$\sqrt{x}$在$[0,1]$一致连续，其导数$\frac{1}{2 \sqrt{x}}$却不有界。
+  后者例如$x^2$在无穷处导数趋于无穷，则一定不一致连续。
+\end{note}
+
+~
+
+\begin{exercise}[基础练习]
+  判断一致连续性：
+  (1)$\sin x, x \in \mathbb{R}$
+  (2)$x^k, x \in (1,+\infty)$
+  (3)$\cos \sqrt{x}, x \in (1, +\infty)$
+  (4)$x\ln x, x \in (0,+\infty)$
+\end{exercise}
+
+\begin{solution}
+  (1)一致连续，因为导数有界
+
+  (2)若$k \leq 0$，则$\lim \limits _{x \rightarrow \infty}f(x)$存在，补充定义$x = 1$，根据Cantor定理的无穷推广可知一致连续。
+  若$0 < k \leq 1$，则导数有界，因此一致连续。
+  若$k > 1$，因为导数在无穷处趋于无穷，则不一致连续
+
+  (3)导数有界，一致连续
+
+  (4)导数在无穷处趋于无穷，则不一致连续。
+\end{solution}
+
+\subsection{区间合并问题}
+
+\begin{theorem}[一致连续区间合并定理]
+  设区间$I_1$右端点为$c \in I_1$(闭)，$I_2$左端点为$c \in I_2$(闭)，
+  $f(x)$在$I_1,I_2$均一致连续，则其在$I_1 \cup I_2$也一致连续
+\end{theorem}
+
+\begin{proof}
+  由于$f(x)$在$I_1,I_2$，对$\forall \epsilon$，存在公共$\delta_1$，
+  当$x^{\prime},x^{\prime\prime}$同时落于$I_1$或$I_2$时，
+  若$|x^{\prime} - x^{\prime\prime}| < \delta_1$，则$|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$。
+  若$x^{\prime},x^{\prime\prime}$分别落于$I_1,I_2$中，
+  则$\exists \delta_2, |x^{\prime} - c| < \delta_2$时，
+  $|f(x^{\prime}) - f(c)| < \frac{\epsilon}{2}$且$|x^{\prime\prime} - c| < \delta_2$时$|f(x^{\prime\prime}) - f(c)| < \frac{\epsilon}{2}$，
+  取$\delta = \min \{\delta_1,\delta_2\}$，
+  得出$\forall x^{\prime},x^{\prime\prime} \in I_1 \cup I_2$，当$|x^{\prime} - x^{\prime\prime}| < \delta$时
+  $|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$
+\end{proof}
+
+\begin{note}
+  如果边界点为开区间点，则可以补上定义。
+\end{note}
+
+~
+
+\begin{exercise}[区间合并练习]
+  (1)考虑$f(x) = \frac{|\sin x|}{x}$在$(-1,0) \cup (0,1)$上是否一致连续
+\end{exercise}
+
+\begin{proof}
+  (1)由于$\lim \limits _{x \rightarrow 0^+}f(x) = 1, \lim \limits _{x \rightarrow 0^-}f(x) = -1$，
+  $\lim \limits _{x \rightarrow 1^-}f(x), \lim \limits _{x \rightarrow -1^+}f(x)$显然存在，
+  因此$f(x)$在$(-1,0),(0,1)$显然一致连续。
+  但是由于$0$处左右极限不相同，
+  取$x_n$单减趋于$0$，$y_n$单增趋于$0$，则$|x_n - y_n| \rightarrow 0$，而$|f(x_n) - f(y_n)| \rightarrow 2$，
+  因此不一致连续。
+\end{proof}
+
+\subsection{四则运算、复合的一致连续性}
+
+\begin{theorem}[四则运算的一致连续性]
+  设$f(x),g(x)$在区间$I$上一致连续，则
+  \begin{itemize}
+  \item 数乘、加减：$\forall k \in \mathbb{R}$，$kf(x), f(x) \pm g(x)$在$I$一致连续 
+  \item 乘法：$I$为有限区间时，$f(x)g(x)$在$I$一致连续。$I$为无穷区间时，$f(x)g(x)$在$I$不一定一致连续
+  \item 除法：$f(x) \neq 0$，$\frac{1}{f(x)}, \frac{g(x)}{f(x)}$不一定一致连续
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)直接三角不等式放缩
+
+  (2)$|f(x^{\prime})g(x^{\prime}) - f(x^{\prime\prime})g(x^{\prime\prime})| \leq |f(x^{\prime})g^{\prime}(x) - f(x^{\prime}) g(x^{\prime\prime})| + |f(x^{\prime})g(x^{\prime\prime}) - f(x^{\prime\prime})g(x^{\prime\prime})| \leq |f(x^{\prime})||g(x^{\prime}) - g(x^{\prime\prime})| + |g(x^{\prime\prime})||f(x^{\prime}) - f(x^{\prime\prime})| < 2M\epsilon$，
+  因此若$M$有限显然成立，$M$不有限时不一定。
+\end{proof}
+
+~
+
+\begin{example}[四则运算反例]
+  (1)乘法：$x$在$(1,+\infty)$一致连续，但是$x^2$在$(1,+\infty)$不一致连续
+  (2)倒数：$x$在$(0,1)$一致连续，但是$\frac{1}{x}$在$(0,1)$不一致连续
+\end{example}
+
+~
+
+\begin{exercise}[四则运算练习]
+  $f(x)$在$[a,+\infty)$连续，
+  $g(x)$在$[a,+\infty)$一致连续，
+  $\lim \limits _{x \rightarrow \infty}[f(x) - g(x)] = 0$，
+  证明:$f(x)$在$[a,+\infty)$上一致连续
+\end{exercise}
+
+\begin{proof}
+  由于$f(x) - g(x)$在无穷远处极限存在，其一致连续。
+  $g(x)$一致连续，
+  根据四则运算可知$f(x) = [f(x) - g(x)] + g(x)$一致连续。
+\end{proof}
+
+\begin{note}
+  上述练习本身也是一个重要的结论。
+\end{note}
+
+~
+
+\begin{theorem}[复合的一致连续性]
+  $f(x)$在$I_1$一致连续，$g(x)$在$I_2$一致连续，
+  $f(x)$值域在$I_2$中，则$g(f(x))$在$I_1$一致连续
+\end{theorem}
+
+\begin{proof}
+  根据定义套即可。
+  外层取$\epsilon, \delta$，内层取$\delta, \delta^{\prime}$。
+\end{proof}
+
+~
+
+\begin{exercise}[复合一致连续性]
+  设$f(x)$在$[0,+\infty)$满足Lip条件，
+  $\alpha \in (0,1)$，证明：$f(x^{\alpha})$在$[0,+\infty)$一致连续
+\end{exercise}
+
+\begin{proof}
+  $\alpha \in (0,1)$时，$x^{\alpha}$在$[0,+\infty)$一致连续，
+  而$f$满足Lip条件也一致连续，
+  根据复合一致连续即可。
+\end{proof}
+
+% \subsection{周期函数的一致连续性}
+
+% \begin{theorem}[周期函数的一致连续性]
+%   $f(x)$时$\mathbb{R}$上以$T$为周期的连续函数，
+%   则$f(x)$在$\mathbb{R}$上一致连续。
+% \end{theorem}
+
+% \begin{proof}
+%   由于在$[0,2T]$一致连续，对$\forall \epsilon, \exists \delta \in (0,T), x^{\prime},x^{\prime\prime} \in [0,2T]$满足$|x^{\prime} - x^{\prime\prime}| < \delta$时，
+%   $|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$。
+%   对$\forall x^{\prime} , x^{\prime\prime} \in \mathbb{R}$，
+%   有$x^{\prime} - nT \in [0,T], x^{\prime\prime} - nT \in [0,2T]$，
+%   因此转换为$[0,2T]$的问题。
+% \end{proof}
+
+
+
+\section{一致连续的经典问题}
+
+
+\begin{exercise}
+  设$f(x)$在$\mathbb{R}$上一致连续，
+  证明$\exists a,b > 0$使得$|f(x)| \leq a|x| + b$
+\end{exercise}
+
+\begin{proof}
+  由于$f(x)$一致连续，对$\epsilon = 1, \exists \delta$，当$|x^{\prime} - x^{\prime\prime}| < \delta$时
+  $|f(x^{\prime}) - f(x^{\prime\prime})| \leq 1$，
+  不妨设
+  \begin{equation*}
+    |f(x)| \leq M, x \in [-\delta, \delta]
+  \end{equation*}
+  对$\forall x > \delta, \exists n_x$使得$x - n_x\delta = x_0  \in [0,\delta)$，
+  此时$n_x = \frac{x - x_0}{\delta} \leq \frac{|x|}{\delta}$，
+  因此
+  \begin{equation*}
+    |f(x)| \leq \sum\limits_{k = 0}^{n-1}|f(x-k\delta) - f(x - (k+1)\delta)| + |f(x - n_x\delta)| \leq n_x + M \leq \frac{|x|}{\delta} + M
+  \end{equation*}
+  同理$\forall x < - \delta$也有$|f(x)| < \frac{|x|}{\delta} + M$，
+  综上，取$a = \frac{1}{\delta}, b = M$即可。
+\end{proof}
+
+% ~
+
+% \begin{exercise}[$\frac{f(x)}{x}$的性质]
+%   (1)设$f(x)$在$[a,+\infty)$上一致连续，$a > 0$，证明$\frac{f(x)}{x}$在$[a,+\infty)$有界
+
+%   (2)设$f(x)$在$[a,+\infty)$上Lip连续，其中$a > 0$，证明$\frac{f(x)}{x}$在$[a,+\infty)$一致连续
+% \end{exercise}
+
+
+
+
+
+
+
+
+

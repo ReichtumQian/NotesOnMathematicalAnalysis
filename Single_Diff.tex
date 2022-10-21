@@ -1,0 +1,1242 @@
+
+
+
+
+\chapter{一元微分学}
+
+
+\section{导数与微分}
+
+\subsection{导数概念与可导性}
+
+\begin{definition}[导数、左右导数]
+  导数定义为$\lim \limits _{x \rightarrow x_0}\frac{f(x) - f(x_0)}{x - x_0}$，
+  左右导数定义为$\lim \limits _{x \rightarrow x_0^-}\frac{f(x) - f(x_0)}{x - x_0}, \lim \limits _{x \rightarrow x_0^+} \frac{f(x) - f(x_0)}{x - x_0}$
+\end{definition}
+
+\begin{note}
+  $f(x)$在$x_0$处可导当且仅当其在$x_0$处左右导数存在且相等。
+\end{note}
+
+
+~
+
+\begin{exercise}[用定义求导函数]
+  设$g(0) = g^{\prime}(0) = 0$，$f(x)$定义如下，求$f^{\prime}(0)$
+  \begin{equation*}
+    f(x) =
+    \begin{cases}
+      g(x)\sin \frac{1}{x}, & x \neq 0\\
+      0,& x = 0
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  根据定义可知$f^{\prime}(0) = \lim \limits _{\Delta x \rightarrow 0}\frac{f(\Delta x )- f(0)}{\Delta x} = \lim \limits _{\Delta x \rightarrow 0}\frac{g(\Delta x ) \sin \frac{1}{\Delta x}}{\Delta x} = \lim \limits _{\Delta x \rightarrow 0}\frac{g(\Delta x )- g(0)}{\Delta x - 0} \sin \frac{1}{\Delta x }= 0$
+\end{solution}
+
+~
+
+\begin{exercise}[可导概念推广]
+  (1)重点：$f(x)$在$x = 0$连续，$\lim \limits _{x \rightarrow 0}\frac{f(2x) - f(x)}{x} = A$，
+  证明$f^{\prime}(0)$存在且$f^{\prime}(0) = A$
+
+  (2)重点：若$\lim \limits _{\Delta x \rightarrow 0}\frac{f(x_0 + \Delta x) - f(x_0 - \Delta x)}{\Delta x}$，并不能推出$x_0$处导数存在，例如$|x|$。但反命题成立
+\end{exercise}
+
+\begin{proof}
+  (1)根据极限存在可知$\forall \epsilon, \exists \delta, |x| < \delta$时$A - \frac{\epsilon}{2} < \frac{f(2x) - f(x)}{x} < A + \frac{\epsilon}{2}$，
+  同理可以得到：
+  \begin{equation*}
+    A - \frac{\epsilon}{2} < \frac{f(\frac{x}{2^{k-1}}) - f(\frac{x}{2^k})}{x/2^k} < A + \frac{\epsilon}{2} \Rightarrow \frac{1}{2^k}(A - \frac{\epsilon}{2}) < \frac{f(\frac{x}{2^{k-1}}) - f(\frac{x}{2^k})}{x} < \frac{1}{2^k} (A + \frac{\epsilon}{2})
+  \end{equation*}
+  取$x_k = \frac{x}{2^k}$，
+  将$k = 1,2,\cdots,n$
+  全部相加得到$(1 - \frac{1}{2^n})(A - \frac{\epsilon}{2}) < \frac{f(x) - f(x_n)}{x} < (1 - \frac{1}{2^n})(A + \frac{\epsilon}{2})$，
+  令$n \rightarrow \infty$得到$A - \frac{\epsilon}{2} < \frac{f(x) - f(0)}{x} < A + \frac{\epsilon}{2}$，
+  因此$f^{\prime}(0)$存在且等于$A$。
+\end{proof}
+
+~
+
+\begin{exercise}[Dirichlet函数的可微性]
+  $D(x)$为Dirichlet函数，判断
+
+  (1)$f(x) = x^2D(x)$
+
+  (2)$f(x) = xD(x)$的可导性：
+  \begin{equation*}
+    D(x) =
+    \begin{cases}
+      0, & x\text{为无理数}\\
+      1, & x\text{为有理数}
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  (1)先考察连续性：根据有理、无理数的稠密性，只有$x = 0$处连续。
+  考察可导性时根据定义不管沿着无理数或有理数逼近，极限都为$0$，因此可导
+
+  (2)在$x = 0$连续，但不可导，因为沿着无理数逼近和沿着有理数逼近极限不一样。
+\end{solution}
+
+\begin{note}
+  不存在仅在一点可导且二阶可导的函数，原因在于二阶可导要求导数在一个小区间内存在。
+\end{note}
+
+~
+
+\begin{exercise}[Riemann函数的不可微性]
+  重点：证明Riemann函数$R(x)$在$[0,1]$处处不可微。
+  \begin{equation*}
+    R(x) =
+    \begin{cases}
+      \frac{1}{q}, & x = \frac{p}{q}(\text{既约真分数})\\
+      0, & x\text{为无理数或0,1}
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (1)有理点：甚至不连续，因此一定不可微(具体见函数连续一节)
+
+  (2)无理数：设$x_0 = 0.a_1a_2\cdots$为无理数，若无理序列逼近，$\frac{f(x_n) - f(x_0)}{x_n - x_0} = 0$极限存在。
+  有理序列逼近，取$y_n = 0.a_1a_2\cdots a_{n-1}a_n$，
+  $R(y_n) = \frac{1}{q} \geq \frac{1}{10^n}$，
+  $|y_n - x_0| \leq \frac{1}{10^n}$，
+  从而$|\frac{R(y_n) - R(x_0)}{y_n - x_0}| \geq 1$，这说明$\lim \limits _{n \rightarrow \infty} \frac{R(y_n)}{y_n - x_0} \neq 0$
+\end{proof}
+
+\begin{note}
+  Riemann函数性质总结：
+  \begin{itemize}
+  \item 在$(0,1)$每个点极限为$0$(见函数极限)
+  \item 在无理点连续，有理点间断
+  \item 在$[0,1]$黎曼可积(因为几乎处处连续)
+  \item 在$[0,1]$处处不可微(见上面例子)
+  \end{itemize}
+\end{note}
+
+\begin{exercise}[利用导数概念]
+  $f(x)$对$\forall x_1,x_2 \in \mathbb{R}$有$f(x_1 + x_2) = f(x_1)f(x_2)$，
+  若$f^{\prime}(0) = 1$，
+  证明：$\forall x \in \mathbb{R}$有$f^{\prime}(x) = f(x)$
+\end{exercise}
+
+\begin{proof}
+  $f(x) = f(x) \cdot f(0)$，
+  因此$f(x)[1 - f(0)] = 0$，要么$f(0) = 1$，要么$f(x) \equiv 0$，
+  后者显然和$f^{\prime}(0) = 1$矛盾，
+  因此$f(0) = 1$。因此
+  \begin{equation*}
+    f^{\prime}(x) = \lim \limits _{\Delta x \rightarrow 0} \frac{f(x)[f(\Delta x )- 1]}{\Delta x} = f(x) \lim \limits _{\Delta x \rightarrow 0}\frac{f(\Delta x) - f(0)}{\Delta x} = f(x) \cdot f^{\prime}(0) = f(x)
+  \end{equation*}
+\end{proof}
+
+
+\subsection{微分的概念}
+
+\begin{definition}[可微]
+  $f(x)$在$x_0$邻域$U(x_0)$中有定义，
+  且增量可写为$f(x_0 + \Delta x) - f(x_0) = A \Delta x + o(\Delta x)$，
+  此时称$f(x)$在$x_0$可微，
+  记
+  \begin{equation*}
+    \mathrm{d} x := \Delta x,\quad \mathrm{d} y := A \Delta x = f^{\prime}(x_0) \mathrm{d} x
+  \end{equation*}
+\end{definition}
+
+~
+
+\begin{exercise}[可导性与可微性]
+  证明：$f(x)$在$x_0$可导当且仅当$f(x)$在$x_0$邻域可写为$f(x) = f(x_0) + \varphi(x) (x - x_0)$，
+  其中$\varphi(x)$在$x_0$处连续
+\end{exercise}
+
+\begin{proof}
+  (1)右推左：根据$\lim \limits _{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0} = \lim \limits _{x \rightarrow x_0} \varphi (x) = \varphi(x_0)$即可
+
+  (2)左推右：构造$\varphi(x) =
+  \begin{cases}
+    \frac{f(x) - f(x_0)}{x - x_0}, & x \neq x_0\\
+    f(x_0)
+  \end{cases}
+  $
+\end{proof}
+
+
+\subsection{常用的导数公式}
+
+\begin{equation*}
+  \begin{array}{lllll}
+  \text{三角} &  (\tan x)^{\prime} = \sec^2 x & (\cot x)^{\prime} = - \csc^2 x & & \\
+                                  & (\sec x)^{\prime} = \sec x \tan x&  (\csc x)^{\prime} = - \csc x \cot x & & \\ 
+              &(\sin x)^{(n)} = \sin \left( x + \frac{n\pi}{2} \right)&(\cos x)^{(n)} = \cos \left( x + \frac{n\pi}{2} \right)&&\\
+   \text{反三角} & 
+                     (\arcsin x)^{\prime} = \frac{1}{\sqrt{1 - x^2}}&
+                     (\arccos x)^{\prime} = - \frac{1}{\sqrt{1 - x^2}}& & \\
+                    & (\arctan x)^{\prime} = \frac{1}{1 + x^2}&
+                                                                (\text{arccot} x)^{\prime} = - \frac{1}{1+x^2} & & \\
+   \text{对数三角}&
+(\ln |\cos x|)^{\prime} = -\tan x&
+                      (\ln |\sin x|)^{\prime} = \cot x& & \\
+&                      (\ln |\sec x + \tan x|)^{\prime}  = \sec x&
+                                                                  (\ln |\csc x - \cot x|)^{\prime} = \csc x & & \\
+    \text{对数根式} &
+(\ln (x + \sqrt{x^2 + a^2}))^{\prime} = \frac{1}{\sqrt{x^2 + a^2}}&
+    (\ln ( x- \sqrt{x^2 + a^2}))^{\prime} = - \frac{1}{\sqrt{x^2 + a^2}}& & \\
+&    (\ln (x + \sqrt{x^2 - a^2}))^{\prime} = \frac{1}{\sqrt{x^2 - a^2}}& 
+    (\ln (x - \sqrt{x^2 - a^2}))^{\prime} = - \frac{1}{\sqrt{x^2 - a^2}} & & 
+  \end{array}
+\end{equation*}
+
+
+
+\subsection{隐函数、反函数求导}
+
+\begin{theorem}[隐函数求导]
+  等式两侧同时对同一个自变量求导。
+\end{theorem}
+
+\begin{theorem}[反函数求导]
+  $y = y(x)$的反函数为$x = x(y(x))$，则
+  \begin{equation*}
+    y^{\prime}(x) = \frac{1}{x^{\prime}(y)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  若$x = g(y)$，对$x$求导得到$1 = \frac{\mathrm{d} g}{\mathrm{d} y} \cdot \frac{\mathrm{d} y}{\mathrm{d} x}$，
+  因此得到$\frac{\mathrm{d} y}{\mathrm{d} x} = \frac{1}{g^{\prime}(y)}$
+\end{proof}
+
+\begin{note}
+  一般都不是直接用结论，而是取$x = g(y)$后两侧对$x$求导进行计算的。
+\end{note}
+
+~
+
+\begin{exercise}[具体反函数求导练习]
+  求(1)$\arcsin x$(2)$\arccos x$(3)$\arctan x$的导数
+\end{exercise}
+
+\begin{solution}
+  (1)$y = \arcsin x$，因此$x = \sin y$，两侧求导$1 = \cos y \cdot y^{\prime}$，
+  因此$y^{\prime} = \frac{1}{\cos y} = \frac{1}{\sqrt{1 - x^2}}$，
+  这里$\cos y$是通过画直角三角形，
+  三条边分别为$x,\sqrt{1 -x^2},1$得到的。
+\end{solution}
+
+~
+
+\begin{exercise}[反函数高阶求导]
+  $y = f(x)$有三阶导数，$y^{\prime} = f^{\prime}(x) \neq 0$，
+  若$f(x)$有反函数$x = f^{-1}(y)$，
+  证明：
+  \begin{equation*}
+    (f^{-1})^{\prime}(y) = \frac{1}{y^{\prime}},\quad (f^{-1})^{\prime\prime}(y) = - \frac{y^{\prime\prime}}{(y^{\prime})^3},\quad (f^{-1})^{\prime\prime\prime}(y) = \frac{3(y^{\prime\prime})^2 - y^{\prime}y^{\prime\prime\prime}}{(y^{\prime})^5}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  建议采用隐函数求导。
+  根据$y = f(x)$，两侧对$y$求导得到$1 = f^{\prime}(x)x^{\prime}$，因此得到$x^{\prime} = \frac{1}{f^{\prime}(x)} = \frac{1}{y^{\prime}}$。
+  $0 = f^{\prime\prime}(x) (x^{\prime})^2 + f^{\prime}(x) x^{\prime\prime}$，因此推出$x^{\prime\prime} = - \frac{y^{\prime\prime}}{(y^{\prime})^3}$
+\end{proof}
+
+\begin{note}
+  这种题目一定要搞清楚导数的一撇代表的意思。
+  例如$y^{\prime} = \frac{\mathrm{d} y}{\mathrm{d} x}$，
+  而$x^{\prime} = \frac{\mathrm{d} x}{\mathrm{d} y}$，
+  两者的求导对象不同。
+\end{note}
+
+~
+
+\begin{theorem}[指数求导]
+  对于$y = u(x)^{v(x)}$，取对数得到$\ln y = v(x) \ln u(x)$，
+  两侧求导可以得到
+  \begin{equation*}
+    \frac{y^{\prime}}{y} = v^{\prime}(x)\ln u(x) + v(x) \frac{u^{\prime}(x)}{u(x)} \Rightarrow y^{\prime} = u(x)^{v(x)}[v(x) \ln u(x) + v(x) \frac{u^{\prime}(x)}{u(x)}]
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{exercise}[指数求导练习]
+  求导：(1)$x^{\frac{1}{x}}$(2)$x^x$(3)$x^{x^{x}}$
+\end{exercise}
+
+\begin{solution}
+  (1)$\ln f(x) = \frac{\ln x}{x}$，因此$\frac{f^{\prime}(x)}{f(x)} = \frac{1 - \ln x}{x^2}$，
+  得出$f^{\prime}(x) = x^{\frac{1}{x}} \frac{1 - \ln x}{x^2}$
+\end{solution}
+
+~
+
+\begin{exercise}[多项式连乘求导]
+  $p(x) = (x - x_1)^{k_1}\cdots (x - x_s)^{k_s}$，$k_1 + \cdots + k_s = n$，
+  证明：
+
+  (1)$x \neq x_i$时，$p^{\prime}(x) = p(x) \sum\limits_{i = 1}^s \frac{k_i}{x - x_i}$
+  (2)$\forall x \in \mathbb{R}$，$[p^{\prime}(x)]^2 \geq p(x)p^{\prime\prime}(x)$
+\end{exercise}
+
+\begin{solution}
+  注意多项式连乘形式上两侧取对数后求导可以得到正确的结果，但是如果多项式为负，则取对数没有意义！因此一般不能两侧求导
+
+  (1)$p^{\prime}(x) = p(x)(\frac{k_1}{x - x_1} + \cdots + \frac{k_2}{x - x_s}) = p(x) \sum\limits_{i = 1}^s \frac{k_i}{x - x_i}$
+
+  (2)根据$p^{\prime\prime}(x)$表达式，两侧同乘$p(x)$可得
+\end{solution}
+
+\subsection{高阶导数}
+
+\begin{equation*}
+  \begin{array}{lll}
+    (\sin x)^{(n)} = \sin (x + \frac{n\pi}{2})& (\cos x)^{(n)} = \cos (x + \frac{n\pi}{2})& \\
+                                              \left[(1 + x)^{\alpha}\right]^{(n)} = \alpha(\alpha - 1)\cdots (\alpha - n + 1)(1 + x)^{\alpha - n}&&\\
+    (\ln x)^{(n)} = \frac{(-1)^{n-1}(n-1)!}{x^n}&[\ln(1 + x)]^{(n)} = \frac{(-1)^{n-1}(n-1)!}{(1 + x)^n}&[\ln (1 - x)]^{(n)} = \frac{(n-1)!}{(1 - x)^n}\\
+    (\frac{1}{x})^{(n)} = \frac{(-1)^nn!}{x^{n+1}}&(\frac{1}{1+x})^{(n)} = \frac{(-1)^n n!}{(1 + x)^{n+1}}& (\frac{1}{1 - x})^{(n)} = \frac{n!}{(1 - x)^{n+1}}
+  \end{array}
+\end{equation*}
+
+~
+
+\begin{exercise}[三角函数与高阶导数]
+  求$n$阶导数：
+
+  (1)$y = \sin^6 x + \cos ^6 x$
+
+  (2)$y = \sin ax \cos bx$
+\end{exercise}
+
+\begin{solution}
+  (1)这种形式在高阶导数、不定积分等中很常见！
+  先用立方和公式：
+  \begin{align*}
+    \sin^6 x + \cos ^6 x &= \sin ^4 x  - \sin^2 x \cos^2 x + \cos ^4 x = (\sin^2 x + \cos ^2 x)^2 - 3 \sin^2 x \cos ^2 x \\
+    &= 1 - \frac{3}{4}\sin^2 2x = 1 - \frac{3}{4} \left( \frac{1 - \cos 4x}{2} \right) = \frac{5}{8} + \frac{3}{8} \cos 4x
+  \end{align*}
+  因此$y^{(n)} = \frac{3 \cdot 4^n}{8} \cos(4x + \frac{n\pi}{2})$
+
+  (2)积化和差即可
+\end{solution}
+
+~
+
+\begin{exercise}[反三角函数高阶导数]
+  (1)重点：$f(x) = \arctan x$，求$f^{(n)}(0)$
+
+  (2)重点：$g(x) = \arcsin x$，求$g^{(n)}(0)$
+\end{exercise}
+
+\begin{proof}
+  (1)$f^{\prime}(x) = \frac{1}{1 + x^2}$，
+  根据Taylor展开可知
+  \begin{equation*}
+    f^{\prime}(x) = \frac{1}{1+x^2} = 1 - x^2 + x^4 - \cdots + (-1)^mx^{2m} + \cdots
+  \end{equation*}
+  因此$f(x) = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots +  \frac{(-1)^m}{2m+1} x^{2m+1} + \cdots$，
+  根据系数可知$f^{(2m)}(x) = 0, f^{(2m+1)} = (-1)^m(2m)!$
+
+  (2)$g^{\prime}(x) = \frac{1}{\sqrt{1 - x^2}}$，
+  根据Taylor展开得到($(1 - x)^{\alpha}$的展开式)：
+  \begin{equation*}
+    g^{\prime}(x) = (1 - x^2)^{- \frac{1}{2}} = 1 + \sum\limits_{m = 1}^{\infty} \frac{(-\frac{1}{2})(-\frac{3}{2})\cdots (- \frac{1}{2} - m + 1)}{m!}(-x^2)^m = 1 + \sum\limits_{m = 1}^{\infty}\frac{(2m - 1)!!}{(2m)!!}x^{2m}
+  \end{equation*}
+  得到$g(x) = x + \sum\limits_{m = 1}^{\infty}\frac{(2m-1)!!}{(2m)!!(2m+1)}x^{2m+1}$，
+  因此得到$g^{(2m)}(0) = 0, g^{(2m+1)} = \frac{(2m-1)!!}{(2m)!!}(2m+1)!$
+\end{proof}
+
+~
+
+\begin{theorem}[Leibniz公式]
+  $f(x),g(x)$为$n$阶可导函数，
+  则$f(x)g(x)$也$n$阶可导，
+  且$[f(x)g(x)]^{(n)} = \sum\limits_{k = 0}^n \tbinom{n}{k}f^{(n-k)}(x)g^{(k)}(x)$
+\end{theorem}
+
+~
+
+\begin{exercise}[Leibniz公式练习]
+  求$n$阶导数：
+  (1)$y = \frac{2x}{1 - x^2}$
+  (2)$y = x^n \ln x$
+  (3)$y = e^{ax}\sin x$
+\end{exercise}
+
+
+\subsection{使用导数证明恒等式}
+
+\begin{exercise}[使用导数构造]
+  求(1)$I_1 = 1 + 2x + 3x^2 + \cdots + nx^{n-1}$
+
+  (2)$I_2 = 1^2 + 2^2x + 3^2 x^2 + \cdots + n^2x^{n-1}$
+
+  (3)推论：$1^2 + 2^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$
+\end{exercise}
+
+\begin{solution}
+  (1)由于$x + x^2 + \cdots + x^n = \frac{x - x^{n+1}}{1 - x}$，
+  两边求导$I_1 = \frac{nx^{n+1} - (n+1)x^n + 1}{(x - 1)^2}$
+
+  (2)根据(1)可知$1 + 2x + 3x^2 + \cdots + nx^{n-1} = \frac{nx^{n+1} - (n+1)x^n + 1}{(x-1)^2}$，
+  同时乘$x$再求导即可得到结果
+  $\frac{n^2x^{n+2} - (2n^2 + 2n - 1)x^{n+1} + (n+1)^2 x^n - x - 1}{(x - 1)^3}$
+
+  (3)为(2)的推论
+\end{solution}
+
+
+
+\section{微分中值定理}
+
+\subsection{三大中值定理}
+
+\begin{theorem}[费马定理]
+  若$x_0$为$f(x)$极值点，且$f^{\prime}(x_0)$存在，则$f^{\prime}(x_0) = 0$
+\end{theorem}
+
+\begin{proof}
+  不妨设$x_0$为极小值点，
+  先看右导数$f^{\prime}(x_0) = f^{\prime}_+(x_0) = \lim \limits _{x \rightarrow x_0^+}\frac{f(x) - f(x_0)}{x - x_0} \geq 0$，
+  同理看左导数$f^{\prime}(x_0) = f^{\prime}_-(x_0) = \lim \limits _{x \rightarrow x_0^-} \frac{f(x) - f(x_0)}{x - x_0} \leq 0$，
+  由于导数存在，则左右导数相等，故导数$f^{\prime}(x_0)$只能为$0$
+\end{proof}
+
+\begin{theorem}[Rolle中值定理]
+  若$f(x)$在$[a,b]$连续，在$(a,b)$可导，
+  $f(a) = f(b)$，则$\exists \xi \in (a,b)$使得：
+  \begin{equation*}
+    f^{\prime}(\xi)  = 0
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  设$M,m$是$f(x)$在$[a,b]$最大、最小值。
+  若$M = m$，则$f(x) = c$。
+  若$m < M$，则$f(x)$在$(a,b)$至少有个最值点(最大or最小)，
+  则内部的最值点是极值点，因此由费马定理可知结论成立。
+\end{proof}
+
+\begin{note}
+  广义的Rolle中值定理：开区间或无穷区间$(a,b)$，若$f(x)$在$x \rightarrow a^+,b^-$存在且相等，
+  则Rolle中值定理结论成立。
+\end{note}
+
+\begin{corollary}[研究导函数零点情况]
+  $f(x)$在区间$I$上$k$阶可导，若$f(x)$在$I$上有$n+1$个互异的实根，
+  则$f^{(k)}(x)$有$n - k$个互异实根。
+\end{corollary}
+
+~
+
+\begin{exercise}[广义Rolle的应用]
+  $f(x)$可微，且有$0 \leq f(x) \leq \ln (\frac{2x+1}{x + \sqrt{1 + x^2}})$，
+  证明：$\exists \xi \in (0,+\infty)$使得$f^{\prime}(\xi) = \frac{2}{2\xi + 1} - \frac{1}{\sqrt{1 + \xi^2}}$
+\end{exercise}
+
+\begin{proof}
+  取$F(x) = f(x) - \ln \frac{2x + 1}{x + \sqrt{1 + x^2}}$，
+  根据$F(0) = F(+\infty) = 0$和广义Rolle可知结论成立。
+\end{proof}
+
+\begin{theorem}[Lagrange中值定理]
+  $f(x)$在$[a,b]$连续，$(a,b)$可导，则$\exists \xi \in (a,b)$使得
+  \begin{equation*}
+    f^{\prime}(\xi) = \frac{f(b) - f(a)}{b - a}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  通过积分法构造$F(x) = f(x) - \frac{f(b) - f(a)}{b - a}x$，
+  则$F(b) - F(a) = [f(b) - f(a)] - \frac{f(b) - f(a)}{b - a}(b - a) = 0$，
+  因此$F(b) = F(a)$，
+  根据Rolle中值定理可知结论成立。
+\end{proof}
+
+~
+
+\begin{exercise}[Lagrange中值定理基本应用]
+  (1)设$f(x)$在$[a,b]$连续，$(a,b)$可导，
+  证明：$\exists \xi \in (a,b)$使得$\frac{bf(b) - af(a)}{b - a} = f(\xi) + \xi f^{\prime}(\xi)$
+
+  (2)设$f(x)$在$[a,b]$连续，$(a,b)$可导，$f(b) \neq f(a)$，证明：若$f(x)$非线性函数，
+  则$\exists \xi, \eta \in (a,b)$使得$f^{\prime}(\xi) < \frac{f(b) - f(a)}{b - a} < f^{\prime}(\eta)$
+\end{exercise}
+
+\begin{proof}
+  (1)取$F(x) = xf(x)$即可，用Lagrange中值定理
+
+  (2)只说明左侧：
+  要证明$f^{\prime}(\xi) < \frac{f(b) - f(a)}{b - a}$，
+  反设不成立，即$\forall x$有$f^{\prime}(x) \geq \frac{f(b) - f(a)}{b - a}$，
+  可构造$F(x) = f(x) - \frac{f(b) - f(a)}{b - a}x$，且$F^{\prime}(x) \geq 0$，
+  而$F(a) = F(b) = 0$这说明$F^{\prime}(x) = c$，这与$f(x)$非线性矛盾。
+\end{proof}
+
+~
+
+\begin{theorem}[Cauchy中值定理]
+  $f,g$满足$[a,b]$连续，$(a,b)$可导，
+  $f^{\prime}(x),g^{\prime}(x)$不同时为$0$，$g(a) \neq g(b)$，
+  则$\exists \xi \in (a,b)$使得
+  \begin{equation*}
+    \frac{f^{\prime}(\xi)}{g^{\prime}(\xi)} = \frac{f(b) - f(a)}{g(b) - g(a)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  考虑$\frac{f(b) - f(a)}{g(b) - g(a)}g^{\prime}(\xi) = f^{\prime}(\xi)$，
+  采用积分法构造辅助函数，$F(x) = f(x) - \frac{f(b) - f(a)}{g(b) - g(a)}g(x)$，
+  $F(b) - F(a) = [f(b) - f(a)] - \frac{f(b) - f(a)}{g(b) - g(a)}[g(b) - g(a)] = 0$，
+  因此$F(a) = F(b)$，根据Rolle中值定理可知结论成立。
+\end{proof}
+
+\begin{note}
+  一般而言条件都是$g^{\prime}(x) \neq 0$，
+  $g^{\prime}(x)$与$f^{\prime}(x)$不同时为零相对更广泛一点，
+  避开了特殊的情况。
+\end{note}
+
+~
+
+\begin{exercise}[Cauchy中值定理基本应用]
+  (1)重点：设$f(x)$在$[a,b]$连续，$(a,b)$可导，$ab > 0$，证明$\exists \xi \in (a,b)$使得
+  $\frac{af(b) - bf(a)}{a - b} = f(\xi) - \xi f^{\prime}(\xi)$
+
+  (2)实例：$0 < a < b < \infty$，证明$\exists \theta \in (a,b)$使得$ae^b - be^a = (1 - \theta) e^{\theta}(a - b)$
+\end{exercise}
+
+\begin{proof}
+  (1)由于左侧有交叉项，考虑分子分母同除以$ab$，凑Cauchy中值定理形式即$\frac{(\frac{f(x)}{x})^{\prime}}{(\frac{1}{x})^{\prime}}$在$\xi$处取值，
+  因此即证明：
+  \begin{equation*}
+    \frac{\frac{f(b)}{b} - \frac{f(a)}{a}}{\frac{1}{b} - \frac{1}{a}} = \frac{(\frac{f(x)}{x})^{\prime}}{(\frac{1}{x})^{\prime}}
+  \end{equation*}
+  根据Cauchy中值定理即可证明。
+
+  (2)等价于$\frac{\frac{e^b}{b} - \frac{e^a}{a}}{\frac{1}{b} - \frac{1}{a}} = e^{\theta} - \theta e^{\theta}$
+\end{proof}
+
+
+
+
+\subsection{中值问题：构造辅助函数}
+
+\begin{theorem}[直接积分法]
+  要构造$f^{\prime}(\xi) = g(\xi)$，则构造$F(x) = f(x) - \int_0^x g(t)\mathrm{d} t$即可
+\end{theorem}
+
+\begin{theorem}[常用中值定理辅助函数]
+  看到$f^{\prime}(\xi) + f(\xi)g(\xi)$，需要构造$f(x)e^{\int g(x)dx}$，
+  因为$[f(x)e^{\int g(x)dx}]^{\prime} = [f^{\prime}(x) + f(x)g(x)]e^{\int g(x)dx}$，
+  具体有下面这些技巧：
+  \begin{itemize}
+  \item $mf(\xi) + n f^{\prime}(\xi)$：$f(x) e^{\frac{m}{n}x}$
+  \item $mf(\xi) + n \xi f^{\prime}(\xi)$：$x^mf^n(x)$(注意不是$x^{\frac{m}{n}}f(x)$！)
+  \item $mf(\xi) - n \xi f^{\prime}(\xi)$：$\frac{f^n(x)}{x^m}$或者$\frac{x^m}{f^n(x)}$，但此时一般要配上$g(x) = \frac{1}{x^m}$，用Cauchy中值定理消去分母
+    \begin{equation*}
+      \left[ \frac{f^n(x)}{x^m} \right] = \frac{f^{n-1}(x)}{x^{m+1}}[nx f^{\prime}(x) - mf(x)], \quad \left[ \frac{x^m}{f^n(x)} \right]^{\prime} = \frac{x^{m-1}}{f^{n+1}(x)}[mf(x) - nxf^{\prime}(x)]
+    \end{equation*}
+  \item $nf^{\prime}(\xi)f(1 - \xi) - mf(\xi)f^{\prime}(1 - \xi)$：$f^n(x)f^m(1 - x)$
+  \item $m f^{\prime}(x) g(x) + n f(x) g^{\prime}(x)$：$f^m(x)g^n(x)$
+  \item $mf^{\prime}(x)g(x) - n f(x)g^{\prime}(x)$：$\frac{f^m(x)}{g^n(x)}$
+    \begin{equation*}
+      \left[ \frac{f^m(x)}{g^n(x)} \right]^{\prime} = \frac{f^{m-1}(x)}{g^{n+1}(x)} [mf^{\prime}(x)g(x) - nf(x)g^{\prime}(x)]
+    \end{equation*}
+  \item $f(\xi)g^{\prime\prime}(\xi) - g(\xi) f^{\prime\prime}(\xi)$：$f^{\prime}(x)g(x) - f(x)g^{\prime}(x)$
+  \end{itemize}
+\end{theorem}
+
+\begin{note}
+  主要看高阶导数项的系数是啥，
+  是常数的话肯定是$e^{ax}f(x)$，
+  是$\xi$的话是$x^af(x)$，是$- \xi$的话是$\frac{f(x)}{x^a}$，
+  是$(1 - \xi)$的话是$(1 - x)^af(x)$
+\end{note}
+
+~
+
+\begin{exercise}[行列式求导]
+  $f(x),g(x),h(x)$在$[a,b]$连续，
+  $(a,b)$可导，证明：$\exists \xi \in (a,b)$下面等式成立。
+  若$h(x) = 1$则为Cauchy中值定理，
+  若$h(x) = 1, g(x) = x$则为Lagrange中值定理。
+  \begin{equation*}
+    \left|
+      \begin{array}{ccc}
+        f(a)&g(a)&h(a) \\
+            f(b)&g(b)&h(b)\\ 
+            f^{\prime}(\xi)&g^{\prime}(\xi)&h^{\prime}(\xi)
+      \end{array}
+    \right| = 0
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  构造下面的$F(x)$，注意到$F(a) = F(b) = 0$以及行列式求导即对一行求导即可。
+  \begin{equation*}
+  F(x) =   \left|
+      \begin{array}{ccc}
+        f(a)&g(a)&h(a) \\
+        f(b)&g(b)&h(b)\\ 
+        f(x)&g(x)&h(x)
+      \end{array}
+    \right|
+  \end{equation*}
+\end{proof}
+
+~
+
+\begin{exercise}[直接积分法]
+  (1)重点：$f(x)$在$[1,2]$连续，$(1,2)$可微，证明$\exists \xi \in (1,2)$使得$f(2) - f(1) = \frac{1}{2}\xi^2 f^{\prime}(\xi)$
+
+  (2)重点：$f(x)$在$[a,b]$连续，$(a,b)$可导，$\exists \xi \in (a,b)$使得$2\xi [f(b) - f(a)] = (b^2 - a^2)f^{\prime}(\xi)$
+\end{exercise}
+
+\begin{proof}
+  (1)由于只有单项，只需要直接用积分法：
+  所求等价于$f^{\prime}(\xi) = \frac{2}{\xi^2}[f(2) - f(1)]$，
+  构造$F(x) = f(x) + \frac{2}{x} [f(2) - f(1)]$，
+  此时$F(1) = F(2) = 2f(2) - f(1)$，
+  因此根据Rolle中值定理可知$\exists \xi \in (1,2), F^{\prime}(\xi) = 0$
+
+  (2)直接用积分法：$F(x) = (b^2 - a^2)f(x) - x^2 [f(b) - f(a)]$，
+  根据$F(b) = F(a)$以及Rolle中值定理可知。
+\end{proof}
+
+~
+
+\begin{exercise}[简单的辅助函数法]
+  (1)$f(x)$在$[a,b]$连续，$(a,b)$可导，$f(a) < 0, f(b) < 0$，$\exists c \in (a,b)$使得$f(c) > 0$，
+  证明：$\xi \in (a,b)$使得$f(\xi) + f^{\prime}(\xi) = 0$
+
+  (2)重点：$f(x)$在$[a,b]$上$n$阶连续可微，在$(a,b)$上存在$n+1$阶导数，$f^{(k)}(a) = f^{(k)}(b), k = 0,1,\cdots,n$，
+  证明：$\exists \xi \in (a,b)$使得$f(\xi) = f^{(n+1)}(\xi)$
+
+  (3)重点：$f(x)$在$[0,1]$连续，$(0,1)$可导，$f(0) = f(1) = 0, f(\frac{1}{2}) = 1$，
+  证明：$\forall \lambda > 0, \exists \xi \in (0,1)$使得$f^{\prime}(\xi) - \lambda [f(\xi) - \xi] = 1$
+
+  (4)重点：$f(x)$在$[0,1]$可微，$f(0) = 0$，对$\forall x \in (0,1), f(x) \neq 0$，
+  证明：$\forall n, \exists \xi \in (0,1)$使得$n \frac{f^{\prime}(\xi)}{f(\xi)} = \frac{f^{\prime}(1 - \xi)}{f(1 - \xi)}$
+\end{exercise}
+
+\begin{proof}
+  (1)构造$F(x) = e^x f(x)$，则$F(a) < 0, F(b) < 0, F(c) > 0$，
+  根据连续函数零点存在定理可知有两个零点，
+  再根据Rolle中值定理可知。
+
+  (2)构造$F(x) = [f(x) + f^{\prime}(x) + \cdots + f^{(n)}(x)]e^{-x}$，
+  $F(a) = F(b) = 0$，
+  根据$F^{\prime}(\xi) = 0$可以得到结论
+
+  (3)考虑配为$[f^{\prime}(\xi) - 1] - \lambda [f(\xi) - \xi] = 0$，
+  故构造$F(x) = [f(x) - x]e^{-\lambda x}$，
+  此时$F(0) = 0, F(\frac{1}{2}) > 0, F(1) < 0$，
+  在$[\frac{1}{2},1]$中$F(x)$有一个零点，
+  根据Rolle可知。
+
+  (4)即$nf^{\prime}(\xi)f(1 - \xi) - f(\xi) f^{\prime}(1 - \xi) = 0$，
+  因此构造$F(x) = f^n(x)f(1 - x)$
+\end{proof}
+
+~
+
+\begin{exercise}[进阶难度的辅助函数法]
+  (1)(上交2021)$f(x)$在$[a,c]$可导，$f^{\prime}_-(c) = 0$，证明：$\exists \xi \in (a,c)$使得$f^{\prime}(\xi) = 2(f(\xi) - f(a))$
+
+  (2)$f(x)$在$[0,1]$二阶可导，$f(0) = f(1)$，证明：$\exists \xi \in (0,1)$，使得$f^{\prime\prime}(\xi) = \frac{3f^{\prime}(\xi)}{1 - \xi}$
+\end{exercise}
+
+\begin{proof}
+  (1)首先显然最终等式可写为$[f(x) - f(a)]^{\prime} - 2(f(x) - f(a)) = 0$，
+  因此构造$F(x) = (f(x) - f(a))e^{-2x}$，
+  $F^{\prime}(x) = [f^{\prime}(x) - 2(f(x) - f(a))]e^{-2x}$，
+  显然$F(a) = 0$，但另一侧信息不足。
+  根据条件可知$F_-^{\prime}(c) = -2 [f(c) - f(a)]e^{-2c}$，下面对$F(c)$情况进行讨论。
+  (a)若$F(c) = 0$则显然成立
+  (b)若$F(c) \neq 0$，不妨设$F(c) > 0$，
+  根据$F(c) = -2F^{\prime}_-(c)$(根据表达式)可看出$F_-^{\prime}(c) < 0$，
+  根据Lagrange中值定理：
+  \begin{equation*}
+    0 < F(c) = F(c) - F(a) = F^{\prime}(\eta)(c - a) \Rightarrow F^{\prime}(\eta) > 0
+  \end{equation*}
+  根据导数介值性定理可知结论成立。
+
+  (2)等价于$(1 - \xi)f^{\prime\prime}(\xi) - 3f^{\prime}(\xi) = 0$，
+  因此构造$F(x) = (1 - x)^3f^{\prime}(x)$，
+  根据$f(0) = f(1) = 0$，根据Rolle可知$\exists \eta$使得$f^{\prime}(\eta ) = 0$，
+  因此$F(\eta) = 0$，再根据$F(1) = 0$可知$\exists \xi$使得$F^{\prime}(\xi) = 0$
+\end{proof}
+
+\subsection{带积分的微分中值问题}
+
+由于变限积分$\int_a^xf(t)\mathrm{d}t$的导数为$f(x)$，该性质常常会应用于微分中值定理。
+
+\begin{exercise}[基础问题]
+  (1)重点：$f(x)$在$[0,1]$连续，$(0,1)$可导，
+  $\int_0^1 xf(x) \mathrm{d}x = f(1)$，证明：$\exists \xi \in (0,1)$使得$f^{\prime}(\xi) = - \frac{f(\xi)}{\xi}$
+
+  (2)ZJU2021：$f(x)$在$\mathbb{R}$连续，$g(x) = f(x) \int_0^x f(t)\mathrm{d}t$单减，
+  证明$f(x)$恒为$0$
+
+  (3)重点：$f(x)$是$(0,1)$上连续函数，证明：$\exists c \in (0,1)$使得$\int_0^c f(x)\mathrm{d}x = (1 - c)f(c)$
+\end{exercise}
+
+\begin{proof}
+  (1)所证形式即$\xi f^{\prime}(\xi) +  f(\xi) = 0$，因此$F(x) = xf(x)$，
+  根据积分第一中值定理可知
+  \begin{equation*}
+    \int_0^1 xf(x)dx = \eta f(\eta) \cdot 1 = F(\eta) = f(1)
+  \end{equation*}
+  而$F(1) = f(1)$，
+  因此根据Rolle中值定理可知。
+
+  (2)$F(x) = \frac{1}{2}(\int_0^x f(t)\mathrm{d}t)^2$，
+  根据条件$F^{\prime}(x)$单减，
+  $F^{\prime}(0) = 0$，
+  根据$F(0) = 0$得出$F(x) \leq 0$，
+  但$F(x) \geq 0$，因此$F(x)$恒为$0$，推出$f(x)$恒为$0$。
+
+  (3)所求即$\int _0^c f(x)\mathrm{d}x - (1 - c)f(c) = 0$，
+  构造$F(x) = (1 - x)\int_0^x f(t)\mathrm{d}t$，
+  显然$F(0) = F(1) = 0$，根据Rolle可知。
+\end{proof}
+
+~
+
+\begin{exercise}[进阶问题]
+  $f(x)$在$[0,2]$可导，$(0,2)$上三阶可导，
+  $f(0) = f^{\prime}(0) = 0, \int_0^2f(x)\mathrm{d}x = 8 \int_0^1f(x)\mathrm{d}x$，
+  证明：$\exists \xi \in (0,2)$使得$f^{\prime\prime\prime}(\xi) = 0$
+\end{exercise}
+
+\begin{proof}
+  构造$F(x) = \int_0^{2x}f(t)dt - 8\int_0^x f(t)dt$，得到$F(0) = F(1) = 0$，故$\exists \xi_1, F^{\prime}(\xi_1) = 0$，
+  根据$F^{\prime}(x) = 2f(2x) - 8f(x)$，因此$F^{\prime}(0) = 0$，得到$\exists \xi_2$使得$F^{\prime\prime}(\xi_2) = 0$。
+  再根据$F^{\prime\prime}(x) = 4f^{\prime}(2x) - 8f^{\prime}(x)$，$F^{\prime\prime}(0) = 0$，
+  得到$\exists \xi_3$使得$F^{\prime\prime\prime}(\xi_3) = 0$.
+  而$F^{\prime\prime\prime}(x) = 8f^{\prime\prime}(2x) - 8f^{\prime\prime}(x)$，代入$\xi_3$得到$f^{\prime\prime}(2 \xi_3) = f^{\prime\prime}(\xi_3)$，
+  因此$\exists \xi$使得$f^{\prime\prime\prime}(\xi) = 0$
+\end{proof}
+
+\subsection{多个中值点的中值问题}
+
+
+
+\begin{exercise}[经典两个中值点的问题]
+  设$f(x)$在$[0,1]$连续，$(0,1)$可导，$f(0) = 0, f(1) = 1$，证明：
+
+  (1)$\exists \xi \in (0,1)$使得$f(\xi) = 1 - \xi$
+
+  (2)存在互异的$\eta_1,\eta_2 \in (0,1)$使得$f^{\prime}(\eta_1)f^{\prime}(\eta_2) = 1$
+
+  (3)存在互异的$\eta_1,\eta_2  \in (0,1)$使得$f^{\prime}(\eta_1)(f^{\prime}(\eta_2) + 1) = 2$
+\end{exercise}
+
+\begin{proof}
+  (1)构造$F(x) = f(x) - 1 + x$，则$F(0) = -1, F(1) = 1$，根据连续零点存在定理可得
+
+  (2)对(1)中的$\xi$，
+  在$[0,\xi],[\xi,1]$上用Lagrange中值定理，
+  得到$\eta_1,\eta_2$满足
+  \begin{equation*}
+    f^{\prime}(\eta_1) = \frac{f(\xi) - 0}{\xi} = \frac{1 - \xi}{\xi}, \quad f^{\prime}(\eta_2) = \frac{f(1) - f(\xi)}{1 - \xi} = \frac{\xi}{1 - \xi}
+  \end{equation*}
+  因此$f^{\prime}(\eta_1)f^{\prime}(\eta_2) = 1$
+
+  (3)提示：先找$\xi$满足$f(\xi) = 2(1 - \xi)$，
+  再用两次Lagrange中值定理。
+\end{proof}
+
+
+% \subsection{中值点的极限}
+
+
+
+
+
+\subsection{中值等式问题}
+
+中值等式问题本质很像多项式插值中Cauchy常数的构造方法，
+根据目标等式的形式，将某个常数换成$x$，以此得出辅助函数在某些位置相等或等于$0$。
+
+~
+
+\begin{exercise}[利用等式构造辅助函数]
+  (1)重点：$f(x)$在$[a,b]$二阶可导，$f(a) = f(b) = 0$，
+  证明对$\forall x \in (a,b)$，都存在$\xi \in (a,b)$，使得$f(x) = \frac{f^{\prime\prime}(\xi)}{2}(x-a)(x-b)$
+
+  (2)变形：$f(x)$在$[a,b]$二阶可导，$a < c < b$，证明$\exists \xi \in (a,b)$使得
+  \begin{equation*}
+    \frac{f(b) - f(a)}{b - a} - \frac{f(c) - f(a)}{c - a} = \frac{1}{2}f^{\prime\prime}(\xi)(b - c)
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (1)固定$x$，记常数$k = \frac{2f(x)}{(x - a)(x - b)}$，
+  构造$F(t) = f(t )- \frac{k}{2}(t - a)(t - b)$，
+  满足$F(x) = F(a) = F(b) = 0$，
+  $\exists \xi_1 \in (a,x), \xi_2 \in (x,b)$使得$F^{\prime}(\xi_1) = F^{\prime}(\xi_2) = 0$，
+  根据Rolle定理可知$\exists \xi \in (\xi_1,\xi_2)$满足$F^{\prime\prime}(\xi) = 0$，
+  因此$f^{\prime\prime}(\xi) = k$，结论成立。
+
+  (2)构造常数$k = \frac{(c - a)[f(b) - f(a)] - (b - a)[f(c) - f(a)]}{\frac{1}{2}(b - c)(b - a)(c - a)}$，
+  辅助函数将$c$用$x$代替
+  \begin{equation*}
+    F(x) = (x - a)[f(b) - f(a)] - (b - a)[f(x) - f(a)] - \frac{k}{2}(b - x)(b - a)(x - a)
+  \end{equation*}
+  得到$F(a) = F(b) = F(c) = 0$，
+  因此根据两次Rolle得到$F^{\prime\prime}(\xi) = 0$，从而得到结论。
+\end{proof}
+
+~
+
+\begin{exercise}[另外几道经典题]
+  (1)$f(x)$在$[a,b]$三阶可导，证明$\exists \xi \in (a,b)$使得
+  \begin{equation*}
+    f(b) = f(a) + \frac{1}{2}(b - a)[f^{\prime}(a) + f^{\prime}(b)] - \frac{1}{12}(b - a)^3 f^{\prime\prime\prime}(\xi)
+  \end{equation*}
+
+  (2)配合拉格朗日插值或拉格朗日余项的Taylor展开：$f(x)$在$[a,b]$二阶可导，证明$\exists \xi \in (a,b)$使得
+  \begin{equation*}
+    f(b) - 2f(\frac{a+b}{2}) + f(a) = \frac{1}{4}(b - a)^2 f^{\prime\prime}(\xi)
+  \end{equation*}
+
+  (3)需配合Taylor展开：$f(x)$在$[a,b]$上二阶可导，证明$\exists \xi \in (a,b)$，使得
+  \begin{equation*}
+    \int_a^b f(x)\mathrm{d} x = (b - a)f \left( \frac{a+b}{2} \right) + \frac{1}{24}(b - a)^3f^{\prime\prime}(\xi)
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (3)设$k = \frac{\int_a^b f(x)\mathrm{d} x - (b - a) f \left( \frac{a+b}{2} \right)}{\frac{1}{24}(b - a)^3}$，
+  构造
+  \begin{equation*}
+    F(x) = \int_a^x f(t)\mathrm{d} t - (x - a)f \left( \frac{x + a}{2} \right) + \frac{1}{24}(x - a)^3k
+  \end{equation*}
+  $F(a) = F(b) = 0$，根据Rolle得到$\exists \eta \in (a,b)$使得$F^{\prime}(\eta) = 0$，即
+  \begin{equation*}
+    f(\eta) - f \left( \frac{a + \eta}{2} \right) - f^{\prime} \left( \frac{a + \eta}{2} \right) \frac{\eta - a}{2} - \frac{k}{8}(\eta - a)^2 = 0
+  \end{equation*}
+  而根据$\eta$在$\frac{a + \eta}{2}$的Taylor展开，$\exists \xi \in \left( \frac{a + \eta}{2}, \eta \right)$
+  \begin{equation*}
+    f(\eta) = f \left( \frac{a + \eta}{2} \right) + f^{\prime} \left( \frac{a + \eta}{2} \right) \frac{\eta - a}{2} + \frac{f^{\prime\prime}(\xi)}{2} \left( \frac{\eta - a}{2} \right)^2
+  \end{equation*}
+  因此对比得到$k = f^{\prime\prime}(\xi)$
+\end{proof}
+
+\subsection{中值不等式}
+
+\begin{exercise}[基于Taylor展开]
+  (1)$f(x)$在$[a,b]$二阶可导，$|f(x)| \leq A, |f^{\prime\prime}(x)| \leq B$，
+  证明$|f^{\prime}(x)| \leq \frac{2A}{b - a} + \frac{B}{2}(b - a)$
+
+  (3)特例1：区间$[0,2]$，$|f(x)| \leq 1, |f^{\prime\prime}(x)| \leq 2$证明$|f^{\prime}(x)| \leq 3$
+
+  (4)特例2：区间$[0,1]$，$|f(x)| \leq A, |f^{\prime\prime}(x)| \leq B$，证明$|f^{\prime}(x)| \leq 2A + \frac{1}{2}B$
+
+  (5)推论：将$|f(x)| \leq A$的条件改为$f(a) = f(b)$，则得到$|f^{\prime}(x)| \leq \frac{B}{2}(b - a)$
+  
+  (6)推论特例1：$f(x)$在$[0,1]$二阶可导，$f(0) = f(1) = f(\frac{1}{2}) = 0$，
+  $|f^{\prime\prime}(x)| \leq M$，
+  证明$|f^{\prime}(x)| \leq \frac{M}{2}$
+\end{exercise}
+
+\begin{proof}
+  注意这里是已知点在$x$处展开，并使用Lagrange余项！
+  不要写成$x$在$a,b$展开，或用Peano余项。
+  
+  (1)
+  根据Taylor展开得到$\exists \xi \in (a,x), \eta \in (x,b)$使得
+  \begin{equation*}
+    \begin{cases}
+      f(a) = f(x) + f^{\prime}(x) (a - x) + \frac{f^{\prime\prime}(\xi)}{2}(a - x)^2\\
+      f(b) = f(x) + f^{\prime}(x)(b - x) + \frac{f^{\prime\prime}(\eta)}{2}(b - x)^2
+    \end{cases}
+  \end{equation*}
+  两式相减得到$f(b) - f(a) = f^{\prime}(x)(b - a) + \frac{f^{\prime\prime}(\eta)}{2}(b - x)^2 - \frac{f^{\prime\prime}(\xi)}{2}(a - x)^2$，
+  结合$A,B$得到
+  \begin{equation*}
+    |f^{\prime}(x)| \leq \frac{2A}{b - a} + \frac{B}{2(b - a)}[(a - x)^2 + (b - x)^2]
+  \end{equation*}
+  而$(a - x)^2 + (b - x)^2 < (b - a)^2$(用二次函数最值)，
+  因此得到$|f^{\prime}(x)| < \frac{2A}{b - a} + \frac{B}{2}(b - a)$
+
+  (5)由于$f(b) - f(a) = f^{\prime}(x)(b - a) + \frac{f^{\prime\prime}(\eta)}{2}(b - x)^2 - \frac{f^{\prime\prime}(\xi)}{2}(a - x)^2 = 0$，
+  因此$f(x)$项被消除，后面同理。
+\end{proof}
+
+~
+
+\begin{exercise}[几道经典配凑放缩]
+  (1)$f(x)$在$[a,b]$连续，$(a,b)$可导，
+  $f(a) = f(b), |f^{\prime}(x)| \leq 1$，证明：$\forall x_1,x_2$满足$|f(x_1) - f(x_2)| \leq \frac{b-a}{2}$
+\end{exercise}
+
+\begin{proof}
+  (1)首先根据Lagrange中值定理得到$|f(x_1) - f(x_2)| \leq x_2 - x_1$，
+  再根据
+  \begin{equation*}
+    |f(x_1) - f(x_2)| = |f(x_1) - f(a) + f(b) - f(x_2)| \leq (x_1 - a) + (b - x_2)
+  \end{equation*}
+  因此相加得到$|f(x_1) - f(x_2)| \leq \frac{b - a}{2}$
+\end{proof}
+
+\subsection{导数极限定理与导数介值定理}
+
+\begin{theorem}[导数介值定理：达布定理]
+  $f(x)$在$[a,b]$可导，$f_+^{\prime}(a) \neq f_-^{\prime}(b)$，$k$介于$f_+^{\prime}(a), f_-^{\prime}(b)$之间，
+  则$\exists \xi \in (a,b)$使得$f^{\prime}(\xi) = k$
+\end{theorem}
+
+\begin{proof}
+  构造$F(x) = f(x) - kx$，则$F^{\prime}(x) = f^{\prime}(x) - k$，
+  由于$k$介于$f_+^{\prime}(a), f_-^{\prime}(b)$之间，
+  因此$F^{\prime}_+(a)F^{\prime}_-(b) < 0$，不妨设$F_+^{\prime}(a) > 0, F_-^{\prime}(b) < 0$，
+  则
+  \begin{equation*}
+    \lim \limits _{x \rightarrow a^+} \frac{F(x) - F(a)}{x - a} > 0, \lim \limits _{x \rightarrow a^-} \frac{F(x) - F(b)}{x - b} < 0
+  \end{equation*}
+  根据极限保号性得到$\exists x_1,x_2 \in (a,b), x_1 < x_2$使得$\frac{F(x_1) - F(a)}{x_1 - a} > 0, \frac{F(x_2) - F(b)}{x_2 - b} < 0$，
+  即$F(x_1) > F(a), F(x_2) > F(b)$，
+  由于$F(x)$连续，存在$\xi \in [a,b]$使得$F(\xi)$最大值，
+  根据费马定理得到$F^{\prime}(\xi) = 0$，即$f^{\prime}(\xi) = k$
+\end{proof}
+
+\begin{note}
+  导数介值定理在ZJU2020中出现过
+\end{note}
+
+\section{洛必达法则与Taylor公式}
+
+\subsection{洛必达法则}
+
+\begin{theorem}[洛必达法则]
+  $f,g$满足(1)$\lim \limits _{x \rightarrow x_0} f(x) = \lim \limits _{x \rightarrow x_0}g(x) = 0$或者$\lim \limits _{x \rightarrow x_0}g(x) = \infty$
+  (2)$x_0$空心邻域中$f^{\prime}(x),g^{\prime}(x)$有定义(非常重要的条件！)
+  则
+  \begin{equation*}
+    \lim \limits _{x \rightarrow x_0}\frac{f(x)}{g(x)} = \lim \limits _{x \rightarrow x_0} \frac{f^{\prime}(x)}{g^{\prime}(x)}
+  \end{equation*}
+\end{theorem}
+
+\begin{note}
+  $x_0$空心邻域中$f(x),g(x)$有定义且可导条件非常重要！
+\end{note}
+
+~
+
+\begin{exercise}[空心邻域中没定义则只能用定义]
+  已知$g(0) = g^{\prime}(0) = 0, g^{\prime\prime}(0) = 3$，求$f^{\prime}(0)$
+  \begin{equation*}
+    f(x) =
+    \begin{cases}
+      \frac{g(x)}{x}, & x\neq 0\\
+      0, & x = 0
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  可以直接用Peano余项的Taylor展开。但这里展现其证明过程，先代入并用一次洛必达，
+  \begin{equation*}
+    \lim \limits _{x \rightarrow 0}\frac{f(x) - f(0)}{x - 0} = \lim \limits _{x \rightarrow 0}\frac{g(x)}{x^2}
+    = \lim \limits _{x \rightarrow 0}\frac{g^{\prime}(x)}{2x}
+  \end{equation*}
+  注意后面不能继续用洛必达了，原因在于$g^{\prime}(x)$在$x_0$空心邻域中不一定有定义，极限$\lim \limits _{x \rightarrow 0}g^{\prime\prime}(x)$没有意义。
+  因此需要用导数定义：$\lim \limits _{x \rightarrow 0}\frac{g^{\prime}(x) - g^{\prime}(0)}{2x} = \frac{1}{2}\lim \limits _{x \rightarrow 0} g^{\prime\prime}(x) = \frac{3}{2}$
+\end{proof}
+
+\begin{note}
+  该证明过程是Peano余项的Taylor公式的证明思路，极度重要，保证最后一次不能用洛必达法则。
+\end{note}
+
+\subsection{Taylor公式}
+
+\begin{theorem}[Peano余项Taylor公式]
+  若$f$在$x_0$存在直至$n$阶导数(只需要单点导数，比Lagrange要求低很多)，则
+  \begin{equation*}
+    f(x) = f(x_0) + f^{\prime}(x_0)(x - x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n  + o((x - x_0)^n)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  设$T_n(x) = f(x_0) + f^{\prime}(x_0)(x - x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$，
+  $R_n(x) = f(x) - T_n(x)$，$Q_n(x) = (x - x_0)^n$，
+  先做$n-1$次洛必达，再用一次导数定义可以得到：
+  \begin{equation*}
+    \lim \limits _{x \rightarrow x_0}\frac{R_n(x)}{Q_n(x)} = \lim \limits _{x \rightarrow x_0}\frac{R_n^{(n-1)}(x)}{Q_n^{(n-1)}(x)} = \frac{1}{n!} \lim \limits _{x \rightarrow x_0} \left[ \frac{f^{(n-1)}(x) - f^{(n-1)}(x_0)}{x - x_0} - f^{(n)}(x_0) \right] = 0
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Lagrange余项Taylor公式]
+  若$f$在$[a,b]$存在直至$n+1$阶导数，且在$(a,b)$满足$n$阶连续可导(条件比Peano强得多)，则
+  \begin{equation*}
+    f(x) = f(x_0) + f^{\prime}(x_0)(x - x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n  + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - x_0)^{n+1}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  设$T_n(x) = f(x_0) + f^{\prime}(x_0)(x - x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$，
+  构造$F(t) = f(t) - T_n(t), G(t) = (x - t)^{n+1}$，
+  即证明$\frac{F(x_0)}{G(x_0)} = \frac{f^{(n+1)}(\xi)}{(n+1)!}$，
+  因为$F(x) = G(x) = 0$，
+  $F^{\prime}(t) = - \frac{f^{(n+1)}(t)}{n!}(x - t)^n, G^{\prime}(t) = -(n+1)(x - t)^n$，
+  因此根据Cauchy中值定理可知
+  \begin{equation*}
+    \frac{F(x_0)}{G(x_0)} = \frac{F(x_0) - F(x)}{G(x_0) - G(x)} = \frac{F^{\prime}(\xi)}{G^{\prime}(\xi)} = \frac{f^{(n+1)}(\xi)}{(n+1)!}
+  \end{equation*}
+\end{proof}
+
+
+
+
+
+\section{凸函数}
+
+\subsection{函数的凹凸性}
+
+\begin{definition}[凸函数]
+  $f$是区间$I$上的函数，若对$\forall x_1,x_2 \in I$和$\forall \lambda \in (0,1)$满足以下条件，则称$f(x)$为凸函数
+  \begin{equation*}
+    f(\lambda x_1 + (1 - \lambda)x_2) \leq \lambda f(x_1) + (1 - \lambda)f(x_2)
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}[定比分点公式]
+  对于一点$x \in [x_1,x_2]$，
+  则$x$可由其与$x_1,x_2$的距离唯一表出：
+  \begin{equation*}
+    x = \frac{x_2 - x}{x_2 - x_1}x_1 + \frac{x - x_1}{x_2 - x_1}x_2
+  \end{equation*}
+  记忆方式：首先保证分子都是正的，而且$x_1$对应的权重是$x$到$x_2$的距离
+\end{lemma}
+
+\begin{theorem}[凸函数的等价条件]
+  $f$是$I$上的凸函数与下面条件等价：
+  \begin{itemize}
+  \item 一阶可导最常用：$\forall x_0 \in I$，有$f(x) \geq f(x_0) + f^{\prime}(x_0)(x - x_0)$。
+  \item 若不可导，上述命题等价于：$f(x) \geq f(x_0) + k (x - x_0)$
+  \item 若$f(x)$可导，则等价于$f^{\prime}(x)$单增
+  \item 二阶可导：若$f(x)$二阶可导，则等价于$f^{\prime\prime}(x) \geq 0$
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}[不二阶可导凸性质的应用]
+  (1)重点：函数$f(x)$满足$f(0) = 0$，$f^{\prime}(x)$单增，
+  证明：$F(x) = \frac{f(x)}{x}$在$(0,+\infty)$单增
+\end{exercise}
+
+\begin{proof}
+  (1)$f^{\prime}(x)$单增等价于可导，
+  而没说二阶可导，因此取$y > x > 0$，
+  只能用$f(y) \geq f(x) + f^{\prime}(x)(y - x)$。
+  此时
+  \begin{align*}
+    F(y) - F(x) &= \frac{xf(y) - yf(x)}{xy} \geq \frac{xf(x) + xf^{\prime}(x)(y-x) - (y-x)f(x) - xf(x)}{xy}\\
+                &= \frac{(y-x)(xf^{\prime}(x) - f(x))}{xy} = \frac{(y-x)(f^{\prime}(x) - \frac{f(x) - f(0)}{x - 0})}{y}\\
+    &= \frac{(y-x)(f^{\prime}(x) - f^{\prime}(\xi))}{y} \geq 0
+  \end{align*}
+\end{proof}
+
+~
+
+\begin{exercise}[凸函数等价条件应用]
+  (1)$f(x)$在$\mathbb{R}$二阶连续可导，
+  证明$f^{\prime\prime}(x) \geq 0$当且仅当$\forall x \in \mathbb{R}, \forall h, f(x+h) + f(x-h) - 2f(x) \geq 0$
+
+  (2)$f(x)$为$I$上凸函数当且仅当$\forall x_1,x_2 \in I$满足$\varphi(\lambda) = f(\lambda x_1 + (1-\lambda)x_2)$为$[0,1]$上的凸函数
+\end{exercise}
+
+\begin{proof}
+  (1)$f^{\prime\prime}(x) \geq 0$等价于凸函数，
+  等价于$\frac{f(x+h) - f(x)}{h} \geq \frac{f(x)-f(x-h)}{h}$，
+  即得到结论。
+
+  (2.1)右推左：要证$f(\lambda x_1 + (1 - \lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$，
+  等价于$\varphi(\lambda) \leq \lambda \varphi(1) + (1 - \lambda)\varphi(0)$，
+  而$\varphi(\lambda) = \varphi(\lambda \cdot 1 + (1 - \lambda)\cdot 0)$，
+  根据$\varphi$的凸性可直接得出。
+
+  (2.2)左推右：要证$\varphi(\alpha t_1 + (1 - \alpha)t_2) \leq \alpha \varphi(t_1) + (1 - \alpha)\varphi(t_2)$，
+  等价于
+  \begin{equation*}
+    f \left( (\alpha t_1 + (1 - \alpha)t_2)x_1 + (1 - \alpha t_1 - (1 - \alpha)t_2)x_2 \right) \leq \alpha f(t_1x_1 + (1 - t_1)x_2) + (1 - \alpha)f(t_2 x_1 + (1 - t_2)x_2)
+  \end{equation*}
+  根据$f(x)$的凸性，
+  右侧大于等于左侧(可能有点麻烦)。
+\end{proof}
+
+~
+
+\begin{theorem}[凸性质的保持]
+  考虑凸函数的四则运算、复合、最值：
+  \begin{itemize}
+  \item 凸函数的数乘和加法保持凸性质，差、积、商不一定
+  \item 复合：若$f(x)$为凸函数，$g(x)$为凸增函数，则$g(f(x))$为凸函数，去掉增性质则不一定
+  \item 最值：若$f(x),g(x)$均为$I$上凸函数，则$\max\{f(x),g(x)\}$为凸函数
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (3)最值：$F(\lambda x_1 + (1 - \lambda)x_2) = \max \{f(\lambda x_1 + (1 - \lambda)x_2), g(\lambda x_1 + (1 - \lambda)x_2)\} \leq \max \{\lambda f(x_1) + (1 - \lambda)f(x_2), \lambda g(x_1) + (1 - \lambda)g(x_2)\}$，
+  进行放缩$F \geq f,g$得到
+  \begin{equation*}
+    F(\lambda x_1 + (1 - \lambda)x_2) \leq \lambda F(x_1) + (1 - \lambda)F(x_2)
+  \end{equation*}
+\end{proof}
+
+~
+
+\begin{definition}[拐点]
+  $y = f(x)$在$x_0$两侧分别为严格凸和严格凹的，则称$x_0$为$f(x)$的拐点。
+  若$f$在$x_0$二阶可导，则$x_0$是拐点的必要条件为$f^{\prime\prime}(x_0) = 0$
+\end{definition}
+
+\subsection{凸函数的基本性质}
+
+\begin{theorem}[凸函数基本性质]
+  设$f(x)$在区间$I$上为凸函数，则
+  \begin{itemize}
+  \item $f(x)$在$I$中任意一点有左右导函数
+  \item $f(x)$在$I$区间内部连续，端点未知，若是开区间，则在整个区间连续
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)只证右导数：
+  $F(h) = \frac{f(x_0 + h) - f(x_0)}{h}$为增函数，
+  根据有界的单调函数有左右极限可知左右导数存在。
+
+  (2)根据左右导数的存在性可知左右连续(否则导数定义中分母趋于$0$，分子不趋于$0$，显然无极限)，因此在内部点连续，端点单边连续。
+\end{proof}
+
+~
+
+\begin{theorem}[凸函数的最值]
+  设$f(x)$是$[a,b]$上的凸函数，则$f(x) \leq \max \{f(a),f(b)\}$，
+  即凸函数的最值只在端点取到。
+\end{theorem}
+
+\begin{proof}
+  $\forall x \in [a,b]$，设$x = \lambda a + (1 - \lambda)b$，
+  根据$f(x)$为凸函数可知：
+  \begin{equation*}
+    f(x) \leq \lambda f(a) + (1 - \lambda)f(b) \leq \max \{f(a),f(b)\}
+  \end{equation*}
+\end{proof}
+
+~
+
+\begin{theorem}[Jensen不等式]
+  $f(x)$是$[a,b]$上的凸函数，则对$\forall x_i \in [a,b], \lambda_i > 0$，
+  $\sum\limits_{i = 1}^n \lambda_i = 1$，
+  有
+  \begin{equation*}
+    f \left( \sum\limits_{i = 1}^n \lambda_ix_i \right) \leq \sum\limits_{i = 1}^n \lambda_i f(x_i)
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{exercise}[Jensen不等式经典题]
+  正数$p_1,\cdots,p_n$满足$\sum\limits_{i = 1}^n p_i = 1$，对$\forall x_1,\cdots,x_n \in \mathbb{R}$，证明：
+  \begin{equation*}
+    \sum\limits_{i = 1}^n p_i(x_i - \ln p_i) \leq \ln \left( \sum\limits_{i = 1}^n e^{x_i} \right)
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  即证明$\sum\limits_{i =1}^n p_i \ln \frac{e^{x_i}}{p_i} \leq \ln \left( \sum\limits_{i = 1}^n e^{x_i} \right)$，
+  视$e^{x_i} = t_i$，根据$\ln t$的凹性即可得到结论。
+\end{proof}
+
+\subsection{利用凹凸性证明不等式}
+
+\begin{exercise}[对中点位置的估计]
+  (1)经典：设$\varphi(x)$是$[0,1]$上连续凸函数，证明$\varphi \left( \frac{1}{2} \right) \leq \int_0^1 \varphi(x) \mathrm{d} x \leq \frac{\varphi(0) + \varphi(1)}{2}$
+
+  (2)太经典：$f(x)$是$[a,b]$上连续凸函数，
+  证明$f \left( \frac{a+b}{2} \right) \leq \frac{1}{b-a}\int_a^b f(x)\mathrm{d} x \leq \frac{f(a) + f(b)}{2}$
+\end{exercise}
+
+\begin{proof}
+  (1)由于$x = x\cdot 1 + (1 - x)\cdot 0$，
+  因此
+  \begin{equation*}
+    \int_0^1 \varphi(x) \mathrm{d} x \leq
+    \int_0^1 \left[ (1-x)\varphi(0) + x \varphi(1) \right]
+    = \frac{\varphi(0) + \varphi(1)}{2}
+  \end{equation*}
+  另一方面做变量替换$x = 1 - t$，
+  则$\int_0^1 \varphi(x) \mathrm{d} x = \int_0^1 \varphi(1 - x)\mathrm{d} x$(区间再现)，
+  得到
+  \begin{equation*}
+    \int_0^1 \varphi(x) \mathrm{d} x = \int_0^1 \frac{1}{2}\varphi(x) + \frac{1}{2}\varphi(1 - x) \mathrm{d} x \geq \int_0^1 \varphi \left( \frac{x}{2} + \frac{1 - x}{2} \right) \mathrm{d} x = \varphi \left( \frac{1}{2} \right)
+  \end{equation*}
+
+  (2)作替换$x = \lambda a + (1 - \lambda)b = b - (b - a)\lambda$，
+  则$\frac{1}{b-a}\int_a^b f(x)\mathrm{d} x = \int_0^1 \varphi(\lambda)\mathrm{d} \lambda$，
+  转换为(1)
+\end{proof}
+
+\section{一元极值与导数零点问题}
+
+\subsection{一元极值的概念与判定}
+
+\begin{theorem}[一元极值三大充分条件]
+  $f(x)$可导，且满足必要条件$f^{\prime}(x_0) = 0$，
+  则有三大充分条件：
+  \begin{enumerate}
+  \item $f(x)$在$x_0$连续，$U^o(x_0,\delta)$可导，若左邻域$f^{\prime}(x) \leq 0$，右邻域$f^{\prime}(x) \geq 0$，则为极小值。反之为极大值
+  \item 若在$U(x_0,\delta)$二阶可导$f^{\prime\prime}(x_0) \neq 0$，则$f^{\prime\prime}(x_0) < 0$时取极大值，$f^{\prime\prime}(x_0) > 0$时取极小值
+  \item 若在$U(x_0,\delta)$存在$n$阶导数，且$f^{\prime}(x_0),\cdots,f^{(n-1)}(x_0) = 0, f^{(n)}(x_0) \neq 0$。
+    则$n$为偶时，$x_0$为极值点，$f^{(n)}(x_0) < 0$极大，$f^{(n)}(x_0) > 0$时极小，
+    $n$为奇时不取极值。
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  只证明第三充分条件。
+  用Peano余项的Taylor展开，
+  根据前面导数为$0$得到$f(x) - f(x_0) = \left[ \frac{f^{(n)}(x_0)}{n!} + o(1) \right] (x - x_0)^n$。
+  若$n$为偶且导数大于$0$，则显然为极小值，极大值同理。
+  若$n$为奇数，则$(x - x_0)^n$符号不定，因此无法确定。
+\end{proof}
+
+
+
+
+\subsection{导数零点问题}
+
+要善于取出区间中的极值点或最值点，利用$f^{\prime}(x_0) = 0$的性质加上中值定理或Taylor展开研究更高阶的导数。
+
+~
+
+\begin{exercise}[几道经典导数零点问题]
+  (1)经典：$f(x)$在$[a,b]$连续，在$(a,b)$二阶可导，$f(a) = f(b) = 0$，$\exists c \in (a,b)$满足$f(c) > 0$，
+  证明$\exists \xi \in (a,b)$使得$f^{\prime\prime}(\xi) < 0$
+\end{exercise}
+
+\begin{proof}
+  由于$f(a) = f(b) = 0$，
+  $f(c) > 0$，由于$f(x)$连续，总能找到最大值$f(x_0)$，
+  由于是最值点，$f^{\prime}(x_0) = 0$，
+  考虑$f(a)$在$x_0$处Lagrange余项的Taylor展开：
+  \begin{equation*}
+    f(a) = f(x_0) + \frac{1}{2}f^{\prime\prime}(\xi) (a - x_0)^2
+  \end{equation*}
+  由于$f(a) = 0$，得到$f^{\prime\prime}(\xi) < 0$
+\end{proof}
+
+
+
+
+

@@ -1,0 +1,87 @@
+
+\chapter{傅里叶级数}
+
+\section{以$2\pi$为周期的傅里叶级数}
+
+\begin{definition}[$2\pi$周期傅里叶展开]
+  对于$2\pi$周期函数$f(x)$，定义其傅里叶展开为$f(x) \sim \frac{a_0}{2} + \sum\limits_{n = 1}^{\infty}(a_n \cos nx + b_n \sin nx)$，
+  其中
+  \begin{equation*}
+    \begin{cases}
+      a_n = \frac{1}{\pi} \int_{-\pi}^{\pi}f(x) \cos nx \mathrm{d}x & n = 0,1,2,\cdots\\
+      b_n = \frac{1}{\pi} \int_{-\pi}^{\pi}f(x) \sin nx \mathrm{d}x & n = 1,2,\cdots
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+\begin{note}
+  计算时一定要注意第一项是$\frac{a_0}{2}$！
+\end{note}
+
+\begin{theorem}[收敛定理]
+  若以$2\pi$为周期的函数$f$在$[-\pi, \pi]$上按段光滑，
+  则对$\forall x \in [-\pi,\pi]$，傅里叶级数收敛于$f$在$x$左右极限的算术平均值。
+\end{theorem}
+
+\begin{corollary}[连续特殊情况]
+  若$f$是以$2\pi$为周期的连续函数，
+  且在$[-\pi,\pi]$上按段光滑，则$f$的傅里叶级数在$(-\infty,+\infty)$上收敛于$f$
+\end{corollary}
+
+~
+
+\begin{exercise}[几个经典展开]
+  (1)求$f(x) = x^2$在$(-\pi, \pi)$上的傅里叶级数，
+  并求$\sum\limits_{n = 1}^{\infty} \frac{1}{n^2}$
+\end{exercise}
+
+\begin{solution}
+  (1)计算得到$a_0 = \frac{2}{3}\pi^2$，
+  $a_n = \frac{1}{\pi} \int_{-\pi}^{\pi}x^2 \cos nx \mathrm{d} x = (-1)^n \frac{4}{n^2}$，
+  因此得到
+  \begin{equation*}
+    x^2 = \frac{1}{3}\pi^2 + \sum\limits_{n = 1}^{\infty} (-1)^n \frac{4}{n^2}
+  \end{equation*}
+  令$x = \pi$得到
+  \begin{equation*}
+    \pi^2 = \frac{1}{3}\pi^2 + \sum\limits_{n = 1}^{\infty} \frac{4}{n^2} \Rightarrow \sum\limits_{n = 1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  注意$\cos n\pi = (-1)^n$。
+\end{note}
+
+
+
+
+~
+
+
+
+\section{以$2l$为周期的傅里叶级数}
+
+\begin{definition}[$2l$周期的傅里叶级数]
+  $f(x)$以$2l$为周期，则其傅里叶级数为$f(x) \sim \frac{a_0}{2} + \sum\limits_{n = 1}^{\infty}(a_n \cos \frac{n\pi x}{l} + b_n \sin \frac{n \pi x}{l})$，其中
+  \begin{equation*}
+    \begin{cases}
+      a_n = \frac{1}{l}\int _{-l}^l f(x) \cos \frac{n \pi x}{l}\mathrm{d}x, & n = 0,1,2,\cdots\\
+      b_n = \frac{1}{l}\int_{-l}^l f(x) \sin \frac{n \pi x}{l} \mathrm{d}x, & n = 1,2,\cdots
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+
+\section{Parseval等式}
+
+\begin{theorem}[Parseval等式]
+  $\frac{1}{\pi} \int_{-\pi}^{\pi} [f(x)]^2 \mathrm{d} x = \frac{a_0^2}{2} + \sum\limits_{n = 1}^{\infty} (a_n^2 + b_n^2)$
+\end{theorem}
+
+\begin{exercise}[计算数项级数]
+  (1)对$f(x) = x^2$展开，并证明$\sum\limits_{n = 1}^{\infty} \frac{1}{n^4} = \frac{\pi^4}{90}$
+\end{exercise}
+
+
+
+

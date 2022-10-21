@@ -1,0 +1,993 @@
+
+\chapter{定积分}
+
+\section{定积分理论}
+
+\subsection{可积性}
+
+\begin{definition}[Riemann积分]
+  $f(x)$是$[a,b]$上的函数，将$[a,b]$划分为$n$等份$T$，
+  若$\lim \limits _{||T|| \rightarrow 0} \sum\limits_{i=1}^n f(\xi_i) \Delta x_i = J$，
+  这里$J$为常数，则称$f(x)$在$[a,b]$可积，
+  且记$\int_a^bf(x)\mathrm{d}x = J$
+\end{definition}
+
+\begin{definition}[Darboux上下和]
+  在每个区间上取$M_i = \sup \limits _{x \in \Delta _i} f(x), m_i = \inf \limits_{x \in \Delta _i}f(x)$，
+  记振幅$\omega_i = M_i - m_i$，
+  定义Darboux上下和为
+  \begin{equation*}
+    S(T) = \sum\limits_{i = 1}^n M_i\Delta x_i, s(T) = \sum\limits_{i = 1}^n m_i\Delta x_i
+  \end{equation*}
+  定义$f(x)$在$[a,b]$的上下积分为：
+  \begin{equation*}
+    S = \inf \limits_T S(T), s = \sup \limits_T s(T)
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[可积函数的性质]
+  若$f(x)$在$[a,b]$上可积，则：
+  \begin{itemize}
+  \item 有界性：$f(x)$在$[a,b]$上有界(反之不正确，有界不一定可积，例如Dirichlet函数)
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  反设$f$无界，则存在某个小区间$\Delta_k$，使得$\Delta_k$上$f$无界，
+  假设其他区间都有界，
+  此时Riemann和
+  \begin{equation*}
+    |\sum\limits_{i = 1}^n f(\xi_i) \Delta x_i| \geq |f(\xi_k) \Delta x_k| - |\sum\limits_{i \neq k} f(\xi_i)\Delta x_i|
+  \end{equation*}
+  对$\forall M > 0$，无论如何分割，Riemann和都能大于$M$，
+  因此无界不可积。
+\end{proof}
+
+\begin{theorem}[可积性充要条件]
+  $f(x)$在$[a,b]$可积当且仅当
+  \begin{itemize}
+  \item 上下积分角度：$f(x)$在$[a,b]$的上积分$s$等于下积分$S$
+  \item 上下和角度(最常用！)：$\forall \epsilon$，存在分割$T$使得$S(T) - s(T) = \sum\limits_T \omega_i \Delta x_i< \epsilon$
+  \item 振幅角度：对$\forall \epsilon, \eta$，总存在分割$T$，使得振幅$\omega_{k^{\prime}} \geq \epsilon$的那些小区间总长$\sum\limits \omega_{k^{\prime}} < \eta$
+  \item 实变角度：$f(x)$在$[a,b]$几乎处处连续
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}[Dirichlet函数的不可积性]
+  证明Dirichlet函数在$[a,b]$不可积
+\end{exercise}
+
+\begin{proof}
+  由于任意分割$T$，振幅$\omega = 1$，因此$S(T) - s(T) = \sum\limits_{i = 1}^n \Delta x_i = b - a$，因此不可积。
+\end{proof}
+
+~
+
+\begin{theorem}[Riemann可积函数类]
+  $f(x)$定义于$[a,b]$，
+  常见的有三个Riemann可积函数类：
+  \begin{itemize}
+  \item $[a,b]$连续函数
+  \item 在$[a,b]$只有有限个间断点的有界函数
+  \item $[a,b]$上单调函数
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)根据一致连续性，每个$\omega_i$都可以足够小，因此$\sum \omega_i \Delta x_i$足够小
+
+  (2)将间断点处的$\Delta x_i$设置得足够小，控制住间断点差距
+
+  (3)$\omega_i = f(x_i) - f(x_{i-1})$，只需要$\omega_i$取得足够小
+\end{proof}
+
+~
+
+\begin{exercise}[可积性判断]
+  (1)证明Riemann函数$R(x)$在$[0,1]$可积，且$\int_0^1 R(x)\mathrm{d}x = 0$
+
+  (2)证明下面的$f(x)$在$[0,1]$上可积：
+  \begin{equation*}
+    f(x) =
+    \begin{cases}
+      0, & x = 0\\
+      \frac{1}{x} - \left[ \frac{1}{x} \right], & x \in (0,1]
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (1)只需证$\sum \omega_i \Delta x_i < \epsilon$，
+  给定$\forall \epsilon$，满足$\frac{1}{q} > \frac{\epsilon}{2}$的只有有限个，
+  且它们的函数值均小于等于$\frac{1}{2}$。
+  把这有限个全部列出$x_1, \cdots, x_k$，
+  这些点每个最多落入两个小区间中，
+  取$||T|| < \frac{\epsilon}{2k}$即可，则该部分$\sum \omega_i \Delta x_i < \frac{\epsilon}{2}$。
+  另一侧直接$\sum \omega_i \Delta x_i < \frac{\epsilon}{2} \sum \Delta x_i \leq \frac{\epsilon}{2}$就行。
+
+  (2)$f(x)$振幅小于等于$1$，不连续点为$0,\frac{1}{2},\frac{1}{3},\cdots,\frac{1}{n},\cdots$。
+  对$\forall \epsilon$，$\exists \delta_1$，当$|\Delta x_i| < \delta_1$时，
+  $(\epsilon, 1)$分割满足$\sum \omega_i \Delta x_i < \epsilon$。
+  而$(0,\epsilon)$的任意分割也满足$\sum \omega_i \Delta x_i < \epsilon$，
+  因此取$\delta = \min \{\delta_1,\epsilon\}$时，整体的分割满足：
+  \begin{equation*}
+    \sum \omega_i \Delta x_i < \epsilon
+  \end{equation*}
+\end{proof}
+
+\begin{exercise}[可积性相关证明]
+  (1)$f(x)$在$[a,b]$有定义，$\forall \epsilon$，存在$[a,b]$上可积函数$g(x)$，使得$\forall x \in [a,b], |f(x) - g(x)| < \epsilon$，证明$f(x)$在$[a,b]$可积
+\end{exercise}
+
+\begin{proof}
+  (1)由于$g(x)$可以，存在分割$T$使得$\sum\limits_T \omega_i^g \Delta x_i < \epsilon$，
+  而$\omega_i^f \leq \omega_i^{f-g} + \omega_i^g$，
+  以及$\omega_i^{f-g} \leq 2\epsilon$(因为$g$本身可能$\epsilon$震荡，$|f(x)-g(x)|$又可能$\epsilon$震荡)，
+  得到
+  \begin{equation*}
+    \sum\limits_T \omega_i^f \Delta x_i \leq \sum\limits_T \omega_i^{f-g} \Delta x_i + \sum\limits_T \omega_i^g \Delta x_i < 2 \epsilon(b - a) + \epsilon
+  \end{equation*}
+\end{proof}
+
+\subsection{Newton-Leibniz公式}
+
+\begin{theorem}[Newton-Leibniz公式]
+  $f(x)$在$[a,b]$可积，$F(x)$在$[a,b]$上连续，
+  且除有限个点外，$F^{\prime}(x) = f(x)$，
+  则
+  \begin{equation*}
+    \int_a^b f(x)\mathrm{d} x = F(b) - F(a)
+  \end{equation*}
+\end{theorem}
+
+\begin{note}
+  Newton-Leibniz公式的意义在于将定积分的计算转换为了原函数的计算，
+  不过可积与存在原函数也没有直接关系，具体见下面题目。
+\end{note}
+
+~
+
+\begin{exercise}[可积与原函数]
+  举例说明可积未必有原函数，有原函数未必可积
+\end{exercise}
+
+\begin{solution}
+  (1)例如$[-1,1]$上的$\text{sgn}(x)$，
+  其可积但无原函数
+
+  (2)例如原函数如下，其在$[0,1]$可导，但是$F^{\prime}(x)$无界
+  \begin{equation*}
+    F(x) = 
+    \begin{cases}
+      0, & x = 0\\
+      x^{\frac{3}{2}} \sin \frac{1}{x}, & x \in (0,1]
+    \end{cases}
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{exercise}[使用Nowton-Leibniz公式]
+  (1)已知$f(x) =
+  \begin{cases}
+    2022, &  x = 0\\
+    2x \sin \frac{1}{x} - \cos \frac{1}{x}, & x \in (0,1]
+  \end{cases}
+  $，证明$f(x)$在$[0,1]$可积，求$\int_0^1 f(x)\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)$f(x)$在$0$处为跳跃间断点，只有一处，而$[0,1]$上$f(x)$有界，故可积。
+  构造$F(x)$：
+  \begin{equation*}
+    F(x) =
+    \begin{cases}
+      0, & x = 0\\
+      x^2 \sin \frac{1}{x}, & x \in (0,1]
+    \end{cases}
+  \end{equation*}
+  $F(x)$除了$0$处外满足$F^{\prime}(x) = f(x)$，因此$\int_0^1 f(x)\mathrm{d} x = F(1) - F(0) = \sin 1$
+\end{solution}
+
+~
+
+\begin{theorem}[微积分基本定理]
+  $f(x)$为$[a,b]$可积函数，定义$F(x) = \int_a^x f(t)\mathrm{d} t, x \in [a,b]$，则
+  \begin{itemize}
+  \item $F(x)$是$[a,b]$上的连续函数
+  \item 若$x_0 \in [a,b]$为$f(x)$连续点，则$F(x)$在$x_0$可导，且$F^{\prime}(x_0) = f(x_0)$
+  \item 若$f(x)$为$[a,b]$上连续函数，则$F(x)$为$[a,b]$上连续可微函数，且$F^{\prime}(x) = f(x)$
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}[使用微积分基本定理]
+  (1)重点：$f(x)$在$[A,B]$上可积，$a,b \in (A,B)$是$f(x)$的两个连续点，证明
+  \begin{equation*}
+    \lim \limits _{h \rightarrow 0} \int_a^b \frac{f(x+h) - f(x)}{h} \mathrm{d} x = f(b) - f(a)
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  (1)对左侧做如下化简：
+  \begin{align*}
+    \int_a^b \frac{f(x+h) - f(x)}{h}\mathrm{d} x &= \frac{1}{h} \left( \int_a^b f(x+h)\mathrm{d} x - \int_a^b f(x)\mathrm{d}x \right)\\
+    &= \frac{1}{h} \left( \int_{a+h}^{b+h} f(x)\mathrm{d} x - \int_a^b f(x)\mathrm{d} x \right)\\
+    &= \frac{1}{h} \left( \int _b^{b+h} f(x)\mathrm{d} x - \int_a^{a+h} f(x)\mathrm{d} x \right)
+  \end{align*}
+  令$F(x) = \int _A^x f(t)\mathrm{d} t$，
+  则显然$F^{\prime}(b) = \lim \limits _{h \rightarrow 0^+} \frac{F(b+h) - F(b)}{h} = f(b)$，
+  $F^{\prime}(a) = f(a)$同理。
+\end{proof}
+
+\subsection{四则运算与复合}
+
+\begin{theorem}[四则运算的可积性]
+  若$f(x),g(x)$在$[a,b]$可积，
+  则$kf(x), f(x) \pm g(x), f(x)g(x)$在$[a,b]$可积，
+  但$g(x) \neq 0$时$\frac{f(x)}{g(x)}$也不一定可积
+\end{theorem}
+
+\begin{proof}
+  (1)数乘、加减显然
+
+  (2)乘法：根据可积可知有界，设$|f(x)| \leq M, |g(x)| \leq N$，
+  $\sum\limits_T \omega_i^{fg} \Delta x_i < M\sum\limits_T \omega_i^g \Delta x_i + N \sum\limits_T \omega_i^f \Delta x_i$即可
+
+  (3)除法：例如$f(x) = 1,g(x) =
+  \begin{cases}
+    x, & x \in (0,1]\\
+    1, & x = 0
+  \end{cases}
+  $，$\frac{1}{g(x)}$因为无界而不可积
+\end{proof}
+
+~
+
+\begin{exercise}[除法增加条件可积]
+  设$f(x)$在$[a,b]$上函数，证明
+
+  (1)若$f(x)$可积，且$|f(x)| \geq m > 0$，则$\frac{1}{f(x)}$在$[a,b]$可积
+
+  (2)若$f(x)$在$[a,b]$连续且恒不为零，则$\frac{1}{f(x)}$在$[a,b]$可积
+\end{exercise}
+
+\begin{proof}
+  (1)考虑振幅放缩：
+  \begin{equation*}
+    \left| \frac{1}{f(x^{\prime}) } - \frac{1}{f(x^{\prime\prime})} \right| = \left| \frac{f(x^{\prime\prime}) - f(x^{\prime})}{f(x^{\prime})f(x^{\prime\prime})} \right| \leq \frac{1}{m^2}\omega_i^f
+  \end{equation*}
+
+  (2)由于连续，能找到最小值，可转换为(1)
+\end{proof}
+
+~
+
+\begin{theorem}[复合(较难，重点！)]
+  $f(x)$在$[a,b]$连续，$\varphi(t)$在$[\alpha,\beta]$可积，
+  且$a \leq \varphi(t) \leq b, t \in [\alpha, \beta]$，
+  则$f(\varphi(t))$在$[\alpha,\beta]$可积
+\end{theorem}
+
+\begin{proof}
+  $f(x)$在$[a,b]$连续，因此有界且一致连续。
+  设$M = \max \limits _{x \in [a,b]}f(x)$，
+  $\forall \epsilon, \exists \delta, \forall x^{\prime},x^{\prime\prime} \in [a,b]$，
+  若$|x^{\prime} - x^{\prime\prime}| < \delta$就有$|f(x^{\prime} ) - f(x^{\prime\prime})| < \epsilon$。
+  由于$\varphi$可积，存在分割$T$，使得$\sum\limits_{\omega_i^{\varphi} \geq \delta} \Delta t_i < \epsilon$，
+  因此
+  \begin{align*}
+    \sum\limits_T \omega_i^{f \circ \varphi} \Delta t_i &= \sum\limits_{\omega_i^{\varphi} \geq \delta} \omega_i^{f \circ \varphi} \Delta t_i + \sum\limits_{\omega_i^{\varphi} < \delta} \omega_i^{f \circ \varphi} \Delta t_i\\
+    &\leq 2M \sum\limits_{\omega_i^{\varphi} \geq \delta} \Delta t_i + \epsilon \sum\limits_{\omega_i^{\varphi} < \delta} \Delta t_i\\
+    &< 2M \epsilon + (\beta - \alpha)\epsilon = \epsilon^{\prime}
+  \end{align*}
+\end{proof}
+
+\subsection{定积分的保号性}
+
+\begin{theorem}[定积分保号性]
+  $f(x)$在$[a,b]$连续，
+  $f(x) \geq 0$，则$\int_a^b f(x)\mathrm{d} x \geq 0$，
+  且$\int_a^b f(x)\mathrm{d} x = 0$当且仅当$f(x) \equiv 0$
+\end{theorem}
+
+~
+
+\begin{exercise}[等于0的推广]
+  (1)重点：$f(x)$在$[a,b]$连续，且对任意满足$\int_a^b g(x)\mathrm{d} x = 0$的连续函数$g(x)$有
+  $\int_a^b f(x)g(x)\mathrm{d} x = 0$，证明：$f(x)$为常值函数
+
+  (2)重点(ZJU2020)：
+  $f(x)$在$[a,b]$可导，$f(a) = 0$，
+  对$\forall x \in [a,b]$有$|f(x)| \geq |f^{\prime}(x)|$，证明：$f(x) \equiv 0$
+\end{exercise}
+
+\begin{proof}
+  (1)取$g(x) = f(x) - \frac{1}{b-a}\int_a^b f(t)\mathrm{d} t$，
+  显然$\int_a^b g(x)\mathrm{d} x = 0$满足条件，
+  此时
+  \begin{equation*}
+    \int_a^b g^2(x)\mathrm{d}x = \int _a^b g(x) \left( f(x) - \frac{1}{b-a} \int_a^b f(x)\mathrm{d} x \right) = 0
+  \end{equation*}
+
+  (2)可证明$\int_a^x f(t)\mathrm{d} t = 0, \forall x \in [a,b]$，则考虑$g(x) = \int_a^x |f(t)|\mathrm{d} t$，有
+  \begin{equation*}
+    g(x) \geq \int_a^x|f^{\prime}(t)|\mathrm{d} t \geq \left| \int_a^x f^{\prime}(t)\mathrm{d} t \right| = |f(x) | = g^{\prime}(x)
+  \end{equation*}
+  因此得到$(e^{-x}g(x))^{\prime} = e^{-x}(g^{\prime}(x) - g(x)) \leq 0$，即$e^{-x}g(x)$单调减，
+  而$e^{-a}g(a) = 0$，且$e^{-x}g(x) \geq 0$，综上得到$g(x) \equiv 0$
+\end{proof}
+
+~
+
+\begin{exercise}[零点问题]
+  (1)$f(x)$为$[0,\pi]$上连续函数，且$\int_0^{\pi} f(x) \sin x\mathrm{d} x = \int_0^{\pi} f(x) \cos x \mathrm{d} x = 0$，
+  证明$f(x)$在$(0,\pi)$上至少有两个零点。
+
+  (2)$f(x)$为$[a,b]$上连续函数，
+  $\int_a^b f(x)\mathrm{d} x = \int_a^b xf(x)\mathrm{d} x = \cdots = \int_a^b x^n f(x)\mathrm{d}x = 0$，
+  证明$f(x)$在$(a,b)$上至少有$n+1$个零点
+\end{exercise}
+
+\begin{proof}
+  (1)反设无零点，则$f(x)$在$(0,\pi)$不变号，而$\sin x$也不变号，因此与$\int_0^{\pi} f(x) \sin x\mathrm{d} x = 0$矛盾，因此至少有一个零点。
+  若$f(x)$只有一个零点$\xi$，则$f(x)$在$(0,\xi), (\xi,\pi)$内不变号，
+  由于$\int_0^{\pi} f(x) \sin x \mathrm{d} x= 0$，因此在上述两个区间符号相反，
+  而$\sin(x - \xi)$也仅在$\xi$为$0$，$(0,\xi),(\xi,\pi)$符号相反，
+  因此
+  \begin{equation*}
+    \int_0^{\pi} f(x) \sin(x - \xi)\mathrm{d} x = \cos \xi \int_0^{\pi}f(x) \sin x \mathrm{d} x - \sin \xi \int _0^{\pi} f(x) \cos x \mathrm{d} x = 0
+  \end{equation*}
+  这与$f(x)\sin(x - \xi)$非零矛盾，
+  因此$f(x)$至少有两个零点
+
+  (2)反设$f(x)$在$(a,b)$上至多$n$个零点，则其最多改变$n$次符号。
+  由于$\int_a^b f(x)\mathrm{d}x = 0$，得到$f(x)$在$(a,b)$至少改变一次符号，
+  一定有能从$n$个零点中找出$k$个零点$x_1,x_2,\cdots,x_k$满足$f(x)$在$(a,x_1),(x_1,x_2),\cdots,(x_k,b)$上不变号，
+  且在相邻区间变号，
+  而$g(x) = (x-x_1)(x-x_2)\cdots(x-x_k)$有同样的性质，
+  于是$f(x)g(x)$不变号，
+  但$\int _a^b f(x)g(x) \mathrm{d} x = 0$，
+  这显然矛盾。
+\end{proof}
+
+
+\subsection{积分中值定理}
+
+\begin{theorem}[积分第一中值定理]
+  $f(x),g(x)$在$[a,b]$连续，$g(x)$在$[a,b]$不变号，
+  则$\exists \xi \in (a,b)$使得$\int_a^b f(x)g(x)\mathrm{d}x = f(\xi) \int_a^b g(x)\mathrm{d}x$
+\end{theorem}
+
+\begin{proof}
+  不妨设$g(x) \geq 0$，由于$f(x)$在$[a,b]$连续，设$M,m$分别是最大值和最小值，
+  则$mg(x) \leq f(x) g(x) \leq M g(x)$，
+  因此得到$m \int_a^b g(x)\mathrm{d}x \leq \int_a^b f(x)g(x) \mathrm{d}x \leq M \int_a^b g(x)\mathrm{d}x$，
+  根据介值性可知(具体讨论略去)。
+\end{proof}
+
+\begin{corollary}[第一中值定理的推广]
+  若$f(x),g(x)$在$[a,b]$可积(有上下确界但不一定连续)，$g(x)$在$[a,b]$不变号，
+  $M,m$为$f(x)$在$[a,b]$的上下确界，
+  则$\exists \eta \in [m,M]$(不一定能为函数值$f(\xi)$)使得$\int_a^b f(x)g(x) \mathrm{d}x = \eta \int_a^b g(x)\mathrm{d}x$
+\end{corollary}
+
+~
+
+\begin{exercise}[第一中值定理(技巧较强)]
+  $f(x)$是$[0,1]$连续函数，$\int_0^1f(x)\mathrm{d}x = \int_0^1 xf(x)\mathrm{d}x$，
+  证明：$\exists \xi \in (0,1)$使得$\int_0^{\xi}f(x)\mathrm{d}x = 0$
+\end{exercise}
+
+\begin{proof}
+  考虑$F(x) = \int_0^x f(t)\mathrm{d}t$，
+  想使用积分第一中值定理可证$\int_0^1 F(x)\mathrm{d}x = 0$，则可推出$F(\xi) = 0$。
+  考虑$\int_0^1 F(x)\mathrm{d}x = \int_0^1 \mathrm{d}x \int_0^x f(t)\mathrm{d}t$，
+  交换积分顺序得到$\int_0^1 \mathrm{d}t \int_t ^1 f(t) \mathrm{d}x = \int_0^1 (1 - t)f(t)\mathrm{d}t = 0$
+\end{proof}
+
+
+~
+
+\begin{theorem}[积分第二中值定理]
+  设$f(x)$在$[a,b]$可积，$g(x)$在$[a,b]$单调，则：(记忆方式：非负情况取最大)
+  \begin{itemize}
+  \item 若$g(x)$单增非负：$\exists \xi \in [a,b]$使得$\int_a^b f(x)g(x)\mathrm{d}x = g(b) \int_{\xi}^b f(x)\mathrm{d}x$
+  \item 若$g(x)$单减非负：$\exists \xi \in [a,b]$使得$\int_a^b f(x)g(x)\mathrm{d}x = g(a) \int_a^{\xi} f(x)\mathrm{d}x$
+  \item 若$g(x)$单调：$\exists \xi \in [a,b]$使得$\int_a^b f(x)g(x)\mathrm{d}x = g(a)\int_a^{\xi} f(x)\mathrm{d}x + g(b) \int_{\xi}^bf(x)\mathrm{d}x$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  只证明(3)的特殊情况：设$f(x)$连续，$g(x)$连续可微且单调
+  \begin{align*}
+    \int_a^b f(x) g(x) \mathrm{d}x &= \int _a^b g(x) \mathrm{d}(F(x)) = g(x) F(x) |_a^b - \int_a^b F(x) g^{\prime}(x)\mathrm{d}x\\
+                          & = g(b)F(b) - g(a) F(a) - F(\xi) \int_a^b g^{\prime}(x)\mathrm{d}x\\
+                          & = g(a)[F(\xi) - F(a)] + g(b)[F(b) - F(\xi)]\\
+    & = g(a) \int_a^{\xi}f(x)\mathrm{d}x + g(b) \int_{\xi}^b f(x)\mathrm{d}x
+  \end{align*}
+\end{proof}
+
+\begin{note}
+  第二中值定理证明过于繁琐，这里不给出全部，只给出最后一种特殊情况的证明。其最大的应用是证明反常积分的Abel和Dirichlet判别法。
+\end{note}
+
+\section{三角函数定积分计算}
+
+
+\subsection{$[0,\frac{\pi}{2}]$上三角函数积分公式}
+
+\begin{theorem}[$[0,\frac{\pi}{2}]$三角函数积分]
+  设$f(x)$是连续函数，则$\int_0^{\frac{\pi}{2}}f(\sin x, \cos x)\mathrm{d}x = \int_0^{\frac{\pi}{2}}f(\cos x, \sin x)\mathrm{d}x$
+\end{theorem}
+
+\begin{proof}
+  令$x = \frac{\pi}{2} - t$，
+  则左侧为$\int_{\frac{\pi}{2}}^0 f(\cos t, \sin t)(-\mathrm{d}t) = \int_0^{\frac{\pi}{2}}f(\cos t, \sin t)\mathrm{d}t$
+\end{proof}
+
+~
+
+\begin{exercise}[重要练习结论]
+  (1)证明：$\forall k$，$\int_0^{\frac{\pi}{2}} \frac{\sin ^k x}{\sin^k x + \cos ^kx}\mathrm{d}x = \int_0^{\frac{\pi}{2}} \frac{\cos^k x}{\sin^k x + \cos ^k x}\mathrm{d}x = \int^{\frac{\pi}{2}}_0 \frac{x}{1 + \tan^k x} = \frac{\pi}{4}$
+
+  (2)计算$\int_0^{\frac{\pi}{2}} \ln \tan x\mathrm{d}x$
+
+  (3)计算$\int_0^{+\infty}\frac{\mathrm{d}x}{(1 + x^2)(1 + x^{2022})}$
+
+  (4)计算$\int_0^{+\infty}\frac{\ln x}{4 + x^2}\mathrm{d}x$
+\end{exercise}
+
+\begin{proof}
+  (1)根据对称性可知$2S = \int_0^{\frac{\pi}{2}} \mathrm{d}x = \frac{\pi}{2}$，因此$S = \frac{\pi}{4}$
+
+  (2)$\int_0^{\frac{\pi}{2}} \ln \sin x \mathrm{d}x - \int _0^{\frac{\pi}{2}} \ln \cos x \mathrm{d}x = 0$
+
+  (3)设$x = \tan t$，得到$\int_0^{\frac{\pi}{2}} \frac{1}{1 + \tan ^{2022}x}\mathrm{d}t$，用(1)结论可知为$\frac{\pi}{4}$
+
+  (4)令$x = 2 \tan t$，得到$I = \int_0^{\frac{\pi}{2}} \frac{\ln (2 \tan t)}{4 \sec^2 t}2 \sec^2 t\mathrm{d}t = \frac{\pi}{4} \ln 2 + \frac{1}{2}\int_0^{\frac{\pi}{2}} \ln (\tan t)\mathrm{d}t = \frac{\pi}{4} \ln 2$
+\end{proof}
+
+~
+
+\begin{theorem}[Wallis推广]
+  $I(m,n) = \int_0^{\frac{\pi}{2}} \cos ^m x \sin ^n x \mathrm{d}x$，则$I(m,n) = I(n,m)$，且
+  \begin{equation*}
+    I(m,n) = \frac{m-1}{m+n} I(m-2,n) = \frac{n-1}{m+n} I(m,n-2) =
+    \begin{cases}
+      \frac{(m-1)!!(n-1)!!}{(m+n)!!}, &m,n\text{不全为偶数}\\
+      \frac{(m-1)!!(n-1)!!}{(m+n)!!}\frac{\pi}{2},& m,n\text{均为偶数}
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{exercise}[基础练习]
+  (1)$\int_0^{\frac{\pi}{2}} \cos ^3 x \sin^2 x\mathrm{d}x$
+
+  (2)$\int_0^{\frac{\pi}{2}} \cos ^4 x \sin^3 x \mathrm{d}x$
+
+  (3)$\int_0^{\frac{\pi}{2}} \sin^3 \cos^5 x\mathrm{d}x$
+
+  (4)$\int_0^{\frac{\pi}{2}}\sin^2 x \cos^4 x\mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)$I(3,2) = \frac{2!!\cdot 1!!}{5!!} = \frac{2 \cdot 1}{5\cdot 3 \cdot 1} = \frac{2}{15}$
+
+  (2)$I(4,3) = \frac{3 \cdot 2}{7\cdot 5 \cdot 3} = \frac{2}{35}$
+
+  (3)$I(3,5) = \frac{2 \cdot 4 \cdot 2}{8\cdot 6\cdot 4\cdot 2} = \frac{1}{24}$
+
+  (4)$I(2,4) = \frac{1 \cdot 3 \cdot 1}{6 \cdot 4 \cdot 2}\frac{\pi}{2} = \frac{\pi}{32}$
+\end{solution}
+
+\subsection{$[0,\pi],[0,2\pi]$上三角函数积分}
+
+\begin{theorem}[对称性的积分]
+  若$f(x)$关于$(x_0,0)$中心对称，则$\int_{x_0 - a}^{x_0 + a} f(x)\mathrm{d}x = 0$。
+  若$f(x)$关于$x  = x_0$轴对称，则$\int_{x_0 - a}^{x_0 + a}f(x)\mathrm{d}x = 2 \int_{x_0 - a}^{x_0} f(x)\mathrm{d}x = 2 \int_{x_0}^{x_0 + a} f(x)\mathrm{d}x$
+\end{theorem}
+
+\begin{note}
+  若$f(x),g(x)$都关于$x = x_0$轴对称，则$f(x)g(x)$也关于$x = x_0$轴对称。
+  $f(x)$轴对称，$g(x)$中心对称，则$f(x)g(x)$中心对称。
+  $f(x),g(x)$都中心对称，则$f(x)g(x)$轴对称。
+\end{note}
+
+\begin{theorem}[$[0,\pi]$上Wallis公式推广]
+  对任意非负整数$m,n$，有
+  \begin{equation*}
+    J(m,n) = \int_0^{\pi} \sin^m x \cos ^n x\mathrm{d}x =
+    \begin{cases}
+      0, & n \text{为奇数}\\
+      2I(m,n),&n \text{为偶数}
+    \end{cases}
+  \end{equation*}
+  注意这里$J(m,n) \neq J(n,m)$
+\end{theorem}
+
+\begin{proof}
+  根据$\sin^m x \cos^n x$在$n$为偶关于$\frac{\pi}{2}$轴对称，
+  $n$为奇时中心对称。
+\end{proof}
+
+\begin{theorem}[$[0,2\pi]$上Wallis公式推广]
+  对任意非负$m,n$，有
+  \begin{equation*}
+    K(m,n) = \int_0^{2\pi} \sin^m x \cos ^n x \mathrm{d}x =
+    \begin{cases}
+      0, & m,n\text{不全为偶数}\\
+      4I(m,n), & m,n \text{均为偶数}
+    \end{cases}
+  \end{equation*}
+  这里$K(m,n) = K(n,m)$
+\end{theorem}
+
+~
+
+\begin{exercise}[$(0 \sim \pi)$上的计算]
+  (1)$\int_0^{\pi} \cos^3 x \sin^2 x \mathrm{d}x$
+  (2)$\int _0^{\pi} \cos^4 x \sin^3 x \mathrm{d}x$
+  (3)$\int_0^{\pi} \sin^3x \cos^5 x \mathrm{d}x$
+  (4)$\int_0^{\pi} \sin^2 x \cos^4 x \mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)$\cos x$是奇数幂，因此为$0$
+
+  (2)偶数幂，因此$2I(4,3) = 2 \frac{3 \cdot 2}{7 \cdot 5 \cdot 3} = \frac{4}{35}$
+
+  (3)奇数，为$0$
+
+  (4)偶数幂，但$m,n$均为偶数，因此结果为$\frac{\pi}{16}$
+\end{solution}
+
+~
+
+\begin{exercise}[$(0 \sim 2\pi)$上的计算]
+  (1)$\int_0^{2\pi} \cos^3 x \sin^2 x \mathrm{d}x$
+  (2)$\int_0^{2\pi} \cos^2 x \sin^3 x\mathrm{d}x$
+  (3)$\int_0^{2\pi}\sin^2 x \cos^4 x \mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)不全为偶，因此为$0$
+  (2)$0$
+  (3)均为偶数，结果为$\frac{\pi}{8}$
+\end{solution}
+
+~
+
+\begin{note}
+  周期函数的积分区域可以转换至任意周期区间，因此其他区间也可计算。
+\end{note}
+
+\begin{exercise}[非标准区间]
+  (1)$\int_{-\pi}^{\pi} \cos^4 x \sin^4 x \mathrm{d}x$
+  (2)$\int_{-\pi}^{3\pi} \sin^5 x \cos^6 x \mathrm{d}x$
+  (3)$\int_{-\pi}^0 \cos^3 x \sin^2 x \mathrm{d}x$
+  (4)$\int_{-\pi}^0 \cos^4 x \sin^3 x \mathrm{d}x$
+  (5)$\int_{\pi}^{2\pi}\sin^2 x \cos^4 x \mathrm{d}x$
+  (6)$\int_0^{\pi} |\cos^5 x| \mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)$2J(4,4) = 4I(4,4) = \frac{3}{64}\pi$
+
+  (2)先转换到$[0,4\pi]$，再变成$2$倍的$[0,2\pi]$，
+  非全为偶，因此结果为$0$
+
+  (3)偶函数，转换为$\int_0^{\pi} \cos^3 x \sin^2 x \mathrm{d}x = 0$
+
+  (4)奇函数，转换为$- \int_0^{\pi}\cos^4 x \sin^2 x dx = -2 I(4,3) = - \frac{4}{35}$
+
+  (5)要看$\sin$在$x = \pi$的对称性，其是中心对称，
+  因此等价于$\int_0^{\pi} \sin^2 x \cos^4 x dx = \frac{\pi}{16}$
+
+  (6)绝对值肯定轴对称，因此$2 I(5,0) = \frac{16}{15}$
+\end{solution}
+
+~
+
+\begin{exercise}[其他题目]
+  证明：$\int_0^{2\pi}f(a \sin x + b \cos x)\mathrm{d}x = 2 \int_0^{\pi} f(\sqrt{a^2 + b^2}\cos x )\mathrm{d}x$
+\end{exercise}
+
+\begin{proof}
+  根据$a \sin x + b \cos x = \sqrt{a^2 + b^2}\cos(x + \varphi)$，
+  这里$\cos \varphi = \frac{b}{\sqrt{a^2 + b^2}}$。
+  因此
+  \begin{equation*}
+    \int_0^{2\pi}f(\sqrt{a^2 + b^2} \cos(x + y))\mathrm{d}x = \int_y^{2\pi + y}f(\sqrt{a^2 + b^2}\cos t)\mathrm{d}t = \int_0^{2\pi}f(\sqrt{a^2 + b^2} \cos x)\mathrm{d}x = 2 \int_0^{\pi}f(\sqrt{a^2 + b^2} \cos x)\mathrm{d}x
+  \end{equation*}
+\end{proof}
+
+~
+
+
+\subsection{区间再现公式}
+
+\begin{theorem}[区间再现]
+  $f(x)$为连续函数，$\int_0^{\pi} x f(\sin x)\mathrm{d}x = \frac{\pi}{2} \int_0^{\pi} f(\sin x)\mathrm{d}x = \pi \int^{\frac{\pi}{2}}_0 f(\sin x)\mathrm{d}x$
+\end{theorem}
+
+\begin{proof}
+  令$x = \pi - t$，得到$I = \int_{\pi}^0 (\pi - t)f(\sin t)(-\mathrm{d}t) = \pi \int_0^{\pi} f(\sin t)\mathrm{d}t - \int_0^{\pi}t f(\sin t)\mathrm{d}t$，
+  因此得到$I = \frac{\pi}{2} \int_0^{\pi} f(\sin t)\mathrm{d}t$
+\end{proof}
+
+~
+
+\begin{exercise}[区间再现公式的应用]
+  (1)$\int_0^{\pi} x \ln \sin x \mathrm{d}x$
+  (2)$\int_0^{\pi} \frac{x \sin x}{1 + \cos^2 x}\mathrm{d}x$
+  (3)$\int_0^{\pi}\frac{x}{1 + \cos^2x}\mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)变为$I = \frac{\pi}{2} \int_0^{\pi} \ln \sin x dx = - \frac{\pi^2}{2} \ln 2$
+
+  (2)$I = \frac{\pi}{2} \int_0^{\pi} \frac{\sin x}{1 + \cos^2 x}dx = - \frac{\pi}{2} \arctan \cos x |^{\pi}_0 = \frac{\pi^2}{4}$
+
+  (3)$I = \int_0^{\pi} \frac{x}{1 + \cos^2 x}dx = \frac{\pi}{2} \int_0^{\pi} \frac{1}{1 + \cos^2 x}dx = \pi \int_0^{\frac{\pi}{2}} \frac{\sec^2 x}{\sec^2 x + 1}dx = \pi \int_0^{\frac{\pi}{2}} \frac{d(\tan x)}{\tan^2 x + 2} = \frac{\pi^2}{2 \sqrt{2}}$
+
+  (4)本题区间比较麻烦，不能用区间再现。
+  可尝试用三角变换：$I = \int_0^{\frac{\pi}{4}} \frac{x}{2 \cos^2 x}dx = \frac{1}{2} \int_0^{\frac{\pi}{4}}x d(\tan x)$，
+  用分部积分得到
+  \begin{equation*}
+    \frac{1}{2} x \tan x \bigg| _0^{\frac{\pi}{4}} + \frac{1}{2} \ln \cos x \bigg|_0^{\frac{\pi}{4}} = \frac{\pi}{8} + \frac{1}{2} \ln \frac{\sqrt{2}}{2}
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  上面几个虽然并非严格的$xf(\sin x)$形式，但是也可以使用区间再现。
+\end{note}
+
+
+\subsection{Euler积分}
+
+\begin{exercise}[Euler积分]
+  (1)Euler积分：$I = \int_0^{\frac{\pi}{2}} \ln \sin x \mathrm{d}x = - \frac{\pi}{2} \ln 2$
+  (2)推论：$\int_0^{\frac{\pi}{2}} \ln \cos x \mathrm{d}x = - \frac{\pi}{2} \ln 2, \int_0^{\frac{\pi}{2}} \ln \tan x \mathrm{d}x = 0, \int_0^{\pi} \ln \sin x \mathrm{d}x = -\pi \ln 2$
+\end{exercise}
+
+\begin{solution}
+  (1)该积分是瑕积分，$I = \int_0^{\frac{\pi}{2}} \ln \sin x \mathrm{d}x = \int_0^{\frac{\pi}{2}} \ln \cos x \mathrm{d}x = \frac{1}{2} \int_0^{\frac{\pi}{2}} \ln \sin x + \ln \cos x \mathrm{d}x = \frac{1}{2} \int_0^{\frac{\pi}{2}} \ln \sin x \cos x \mathrm{d}x$，
+  根据倍角公式得到
+  \begin{equation*}
+    I = \frac{1}{2} \int_0^{\frac{\pi}{2}} \ln \frac{1}{2} \sin 2x \mathrm{d}x = \frac{1}{2} \int_0^{\frac{\pi}{2}} \ln \sin 2x \mathrm{d}x - \frac{\pi}{4} \ln 2= \frac{1}{4} \int_0^{\pi} \ln \sin t\mathrm{d}t - \frac{\pi}{4} \ln 2 = \frac{1}{2}I - \frac{\pi}{4} \ln 2
+  \end{equation*}
+  因此得到$I = - \frac{\pi}{2} \ln 2$
+\end{solution}
+
+\begin{note}
+  要证明Euler积分收敛，只需证明$\lim \limits _{x \rightarrow 0^+} x \ln \sin x = 0$
+\end{note}
+
+~
+
+\begin{exercise}[Euler积分的应用]
+  (1)$\int_0^{\frac{\pi}{2}} x \cot x \mathrm{d}x$
+  (2)$\int_0^1 \frac{\ln x}{\sqrt{1 - x^2}}\mathrm{d}x$
+  (3)$\int_0^1 \frac{\arcsin x }{x}\mathrm{d}x$
+  (4)$\int_0^{\pi} \frac{x \sin x}{1 - \cos x}\mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)$I = \int_0^{\frac{\pi}{2}} x \mathrm{d}(\ln \sin x) = x \ln \sin x |_0^{\frac{\pi}{2}} - \int _0^{\frac{\pi}{2}} \ln \sin x \mathrm{d}x = \frac{\pi}{2} \ln 2$
+
+  (2)令$x = \sin t$，得到$I = \int_0^{\frac{\pi}{2}} \frac{\ln \sin t}{\cos t} \cos t \mathrm{d}t = - \frac{\pi}{2} \ln 2$
+
+  (3)令$x = \sin t$，得到$\int_0^{\frac{\pi}{2}} \frac{t}{\sin t}\cos t \mathrm{d}t = \int_0^{\frac{\pi}{2}} t \cot t \mathrm{d}t$，即(1)
+
+  (4)注意$\cot \frac{x}{2} = \frac{\sin x }{ 1 - \cos x}$(或者可以当场对$1 - \cos x$展开)，
+  因此$I = \int_0^{\pi}x \cot \frac{x}{2}\mathrm{d}x = 4 \int_0^{\frac{\pi}{2}} t \cot(t)\mathrm{d}t$，变为(1)
+\end{solution}
+
+~
+
+
+
+\subsection{Dirichlet积分}
+
+\begin{theorem}[Dirichlet积分]
+  Dirichlet积分$\int_0^{\pi} \frac{\sin \frac{2n + 1}{2}x}{2 \sin \frac{x}{2}} = \frac{\pi}{2}\mathrm{d}x$。\\
+  推论：$\int_0^{\pi} \frac{\sin \frac{2n+1}{2}x}{\sin \frac{x}{2}} \mathrm{d}x = \pi, \int_0^{\frac{\pi}{2}} \frac{\sin(2n + 1)x}{\sin x}\mathrm{d} x = \frac{\pi}{2}, \int_0^{\frac{\pi}{2}} \frac{\sin(2n)x}{\sin x}\mathrm{d}x = 0, \int_0^{\pi}\frac{\sin(2n+1)x}{\sin x}\mathrm{d} x = \pi$
+\end{theorem}
+
+\begin{proof}
+  (1)Dirichlet：关键在于$\cos x + \cos 2x + \cdots + \cos nx = \frac{\sin(n+\frac{1}{2})x - \sin \frac{x}{2}}{2 \sin \frac{x}{2}} = \frac{\sin \frac{2n + 1}{2}x}{2 \sin \frac{x}{2}} - \frac{1}{2}$，
+  从而得到：
+  \begin{equation*}
+    \int_0^{\pi} \frac{\sin \frac{2n+1}{2}x}{2 \sin \frac{x}{2}} \mathrm{d}x = \sum\limits_{k = 1}^n \int_0^{\pi} \cos kx \mathrm{d}x + \frac{\pi}{2} = \sum\limits_{k = 1}^n \frac{1}{k} \sin kx \bigg|_0^{\pi} + \frac{\pi}{2} = \frac{\pi}{2}
+  \end{equation*}
+
+  (2)推论：第一个就是把分母$2$拿走，第二个(分子奇数情况)取$t = 2x$，
+  第四个用对称性
+
+  (3)
+  第三个设$I_n = \int_0^{\pi} \frac{\sin 2n x}{ \sin x}\mathrm{d} x$，
+  \begin{align*}
+    I_n - I_{n-1} &= \int_0^{\pi}\frac{\sin 2nx - \sin (2n - 2)x}{\sin x}dx = \int_0^{\pi} \frac{2}{\sin x}(\cos \frac{4n - 2}{2}x \cdot \sin \frac{2n-(2n-2)}{2}x)\mathrm{d} x\\
+   & = 2 \int_0^{\pi} \cos (2n - 1)x \mathrm{d} x = \frac{2}{2n - 1}\sin (2n - 1)x \bigg|^{\pi}_0 = 0 
+  \end{align*}
+  而$I_1 = 0$，因此$I_n = 0$
+\end{proof}
+
+
+\subsection{其他几个常见三角积分}
+
+\begin{exercise}[几个常见三角分数积分]
+  (1)$\int_0^{\pi} \frac{dx}{1 + \sin^2 x}dx $
+  (2)$\int_0^{2\pi} \frac{dx}{1 + a \cos x}, (-1 < a < 1)$
+\end{exercise}
+
+\begin{solution}
+  (1)上下同乘$\sec^2 x$，得到$\int \frac{\sec^2 x}{\sec^2 x + \tan ^2 x}dx = \int \frac{d(\tan x)}{2 \tan^2 x + 1} = \frac{1}{\sqrt{2}} \arctan (\sqrt{2} \tan x) + c$，
+  注意$\tan x$在$\frac{\pi}{2}$是间断的！
+  根据对称性转换为$I = 2 \int_0^{\frac{\pi}{2}} \frac{dx}{1 + \sin^2 x} = \sqrt{2} \arctan (\sqrt{2} \tan x)|^{\frac{\pi}{2}}_0 = \sqrt{2}(\frac{\pi}{2} - 0) =  2\frac{\pi}{\sqrt{2}}$
+
+  (2)具体的不定积分计算见不定积分一节，是非常经典的积分。
+  $I = 2 \int_0^{\pi} \frac{dx}{1 + a \cos x} = \frac{4}{\sqrt{1 - a^2}} \arctan \sqrt{\frac{1 - a}{1 + a}}\tan \frac{x}{2}|_0^{\pi}$，
+  显然$x = \pi$为间断点，使用对称性非常正确！
+  因此结果为$\frac{2\pi}{\sqrt{1 - a^2}}$
+\end{solution}
+
+\begin{note}
+  一定要注意函数的连续性，用对称性转换。因此能用对称性的一定要优先用对称性。
+  上面两个题目也是重要的结论。
+\end{note}
+
+~
+
+
+
+\section{积分(不)等式}
+
+\subsection{整体放缩}
+
+\begin{exercise}[几个简单积分放缩]
+  证明(1)$1 < \int_0^{\frac{\pi}{2}} \frac{\sin x}{x} \mathrm{d} x < \frac{\pi}{2}$
+  (2)$\frac{2}{9}\pi^2 < \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \frac{2x}{ \sin x}\mathrm{d} x < \frac{1}{3}\pi^2$
+  (3)$3 \sqrt{e} < \int_e^{4e} \frac{\ln x}{\sqrt{x}} < 6$
+\end{exercise}
+
+\begin{proof}
+  (1)根据$f^{\prime}(x) = \frac{x - \tan x}{x^2 \sec x }$可知函数单减，
+  因此
+  \begin{equation*}
+    f \left( \frac{\pi}{2} \right) = \frac{2}{\pi} \leq \frac{\sin x}{x} < f(0) = 1
+  \end{equation*}
+
+  (2)根据导数可知单调增，因此
+  \begin{equation*}
+    f \left( \frac{\pi}{6} \right) = \frac{2}{3}\pi \leq \frac{2x}{\sin x} \leq f \left( \frac{\pi}{2} \right) = \pi
+  \end{equation*}
+
+  (3)$f^{\prime}(x) = \frac{2 - \ln x}{2x \sqrt{x}}$，
+  因此$\frac{1}{\sqrt{e}} = f(e) \leq f(x) \leq f(e^2) = \frac{2}{e}$
+\end{proof}
+
+
+\subsection{同区域单调性放缩}
+
+\begin{exercise}[几道经典同区域相减]
+  (1)$f(x)$在$[a,b]$上严格增的连续函数，
+  证明：$\int_a^b x f(x)\mathrm{d} x > \frac{a+b}{2} \int_a^b f(x)\mathrm{d} x$
+
+  (2)证明$\int_0^{\frac{\pi}{2}} \frac{\cos x}{1 + x^2}\mathrm{d} x > \int_0^{\frac{\pi}{2}} \frac{\sin x}{1 + x^2}\mathrm{d} x$
+  (3)证明$\int_0^{\sqrt{2\pi}} \sin x^2 \mathrm{d} x > 0$
+\end{exercise}
+
+\begin{proof}
+  (1)等价于证明$\int_a^b \left( x - \frac{a+b}{2} \right)f(x) \mathrm{d} x > 0$，
+  进行有目的性的换元，分为两段，用$t$表示$x$与$\frac{a+b}{2}$之间的距离：
+  \begin{align*}
+    \int_a^b \left( x - \frac{a+b}{2} \right)f(x)\mathrm{d} x &=  \int_a^{\frac{a+b}{2}} \left( x - \frac{a+b}{2} \right) f(x)\mathrm{d} x + \int_{\frac{a+b}{2}}^b \left( x - \frac{a+b}{2} \right) f(x)\mathrm{d} x\\
+                                                              &= \int_{\frac{b-a}{2}}^0 (-t) f(\frac{a+b}{2} - t)(-\mathrm{d} t) + \int_0^{\frac{b-a}{2}} tf(t + \frac{a+b}{2})\mathrm{d} t\\
+    &= \int _0^{\frac{b-a}{2}} t \left[ f(t + \frac{a+b}{2}) - f(\frac{a+b}{2} - t) \right]\mathrm{d} t > 0
+  \end{align*}
+
+  (2)等价于$\int_0^{\frac{\pi}{2}} \frac{\sin x - \cos x}{1 + x^2}\mathrm{d} x < 0$，
+  而$\sin x- \cos x = \sqrt{2} \sin (x - \frac{\pi}{4})$关于$\left( \frac{\pi}{4},0 \right)$中心对称，
+  且$\frac{1}{1+x^2}$单减。
+  因此令$u = x - \frac{\pi}{4}$：
+  \begin{align*}
+   \int_0^{\frac{\pi}{2}} \frac{\sin x - \cos x }{1 + x^2}\mathrm{d} x & = \int _0^{\frac{\pi}{2}} \frac{\sqrt{2} \sin (x - \frac{\pi}{4})}{1 + x^2}\mathrm{d} x = \sqrt{2} \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \frac{\sin u}{1 + (\frac{\pi}{4} + u)^2}\mathrm{d} u\\
+    &= \sqrt{2} \left( \int_0^{\frac{\pi}{4}} \frac{\sin x}{1 + (\frac{\pi}{4} + x)^2} \mathrm{d} x - \int _0^{\frac{\pi}{4}} \frac{\sin x}{1 + (\frac{\pi}{4} - x)^2}\mathrm{d} x \right)\\
+                                                                       &= \sqrt{2} \int_0^{\frac{\pi}{4}} \left( \frac{1}{(\frac{\pi}{4} + x)^2} - \frac{1}{(\frac{\pi}{4} - x)^2} \right)\sin x \mathrm{d} x< 0
+  \end{align*}
+\end{proof}
+
+~
+
+\begin{exercise}[一道特殊题]
+  (1)证明$\int_0^1 \frac{\cos x}{\sqrt{1 - x^2}}\mathrm{d} x > \int_0^1 \frac{\sin x}{\sqrt{1 - x^2}}\mathrm{d} x$
+\end{exercise}
+
+
+\subsection{利用Newton-Leibniz公式}
+
+\begin{theorem}[Newton-Leibniz放缩]
+  若$f(x)$为$[a,b]$上连续可微函数，则对$\forall x_1,x_2 \in [a,b]$有$f(x_2) = f(x_1) + \int_{x_1}^{x_2}f^{\prime}(x)\mathrm{d} x$，因此
+  \begin{equation*}
+    |f(x_2)| \leq |f(x_1)| + \int_a^b |f^{\prime}(x)|\mathrm{d} x
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{exercise}[几道经典题]
+  下面均假设$f(x)$在区间上连续可微
+
+  (1)证明$|f(0)| \leq \frac{1}{a} \int_0^a |f(x)|\mathrm{d} x + \int_0^a |f^{\prime}(x)| \mathrm{d} x$
+
+  (2)经典：证明$|f(x)| \leq \left| \frac{1}{b-a}\int_a^b f(x)\mathrm{d}x \right| + \int_a^b |f^{\prime}(x)| \mathrm{d} x$
+
+  (3)证明$|f(x)| \leq \int_0^1 (|f(x)| + |f^{\prime}(x)|)\mathrm{d} x$
+
+  (4)重点：证明$\left| f \left( \frac{1}{2} \right) \right| \leq \int_0^1|f(x)| \mathrm{d} x + \frac{1}{2} \int_0^1 |f^{\prime}(x)| \mathrm{d} x$
+\end{exercise}
+
+\begin{proof}
+  (1)用积分第一中值定理可知$\frac{1}{a}\int_0^a |f(x)|\mathrm{d} x = |f(\xi)|$，因此得证
+
+  (2)(3)同理
+
+  (4)设$|f(x_0)| = \min \limits_{x \in [0,\frac{1}{2}]} |f(x)|$，
+  则$|f(x_0)| = 2 \int_0^{\frac{1}{2}}|f(x_0)|\mathrm{d} x \leq 2 \int_0^{\frac{1}{2}} |f(x)|\mathrm{d} x$，
+  因此
+  \begin{equation*}
+      \left| f \left( \frac{1}{2} \right) \right| = \left| f(x_0) + \int_{x_0}^{\frac{1}{2}}f^{\prime}(x)\mathrm{d} x \right| \leq 2 \int_0^{\frac{1}{2}} |f(x)|\mathrm{d} x + \int_0^{\frac{1}{2}} |f^{\prime}(x)|\mathrm{d} x\\
+  \end{equation*}
+  同理取$[\frac{1}{2},1]$的部分可得到
+  \begin{equation*}
+    \left| f \left( \frac{1}{2} \right) \right| \leq 2 \int_{\frac{1}{2}}^1 |f(x)|\mathrm{d} x + \int_{\frac{1}{2}}^1 |f^{\prime}(x)|\mathrm{d} x
+  \end{equation*}
+  因此两式相加除以$2$即得到结果。
+\end{proof}
+
+\subsection{利用Cauchy-Schwarz不等式}
+
+\begin{theorem}[Cauchy-Schwarz不等式]
+  设$f(x),g(x)$在$[a,b]$上可积，则
+  \begin{equation*}
+    \left( \int_a^b f(x)g(x)\mathrm{d} x \right)^2 \leq \int_a^b f^2(x)\mathrm{d} x \int_a^b g^2(x)\mathrm{d} x
+  \end{equation*}
+\end{theorem}
+
+\begin{corollary}
+  若$f(x),g(x)$非负可积，则
+  \begin{equation*}
+    \int_a^b f(x)\mathrm{d} x \int_a^b g(x)\mathrm{d} x \geq \left( \int_a^b \sqrt{f(x)g(x)}\mathrm{d} x \right)^2
+  \end{equation*}
+\end{corollary}
+
+~
+
+\begin{exercise}[一些经典题目]
+  (1)$f(x)$在$[0,1]$连续可微，
+  $f(1) = f(0) = 1$，证明$\int_0^1 [f^{\prime}(x)]^2 \mathrm{d} x \geq 1$
+\end{exercise}
+
+\begin{proof}
+  (1)直接根据Cauchy-Schwarz不等式得到$\int_0^1 [f^{\prime}(x)]^2 \mathrm{d} x \geq \left[ \int_0^1 f^{\prime}(x)\mathrm{d} x \right]^2 \geq \frac{1}{4}$
+\end{proof}
+
+\subsection{利用微分中值定理}
+
+\begin{exercise}[几道具体分段题]
+  (1)一阶导：$f(x)$在$[0,2]$上可导，
+  $f(0) = f(2) = 1$，$|f^{\prime}(x)| \leq 1$，
+  证明$1 < \int_0^2 f(x)\mathrm{d} x < 3$
+
+  (2)二阶导：
+\end{exercise}
+
+\begin{proof}
+  (1)左侧：进行分段处理，对于$[0,1],[1,2]$分别有
+  \begin{equation*}
+    \begin{cases}
+      f(x) = f(0) + f^{\prime}(\xi) x \geq 1 - x , & x \in [0,1]\\
+      f(x) = f(2) + f^{\prime}(\eta)(x-2) \geq x - 1, & x \in [1,2]
+    \end{cases}
+  \end{equation*}
+  因此$\int_0^2 f(x)\mathrm{d} x \geq \int_0^1 (1 - x)\mathrm{d} x + \int_1^2 (x - 1)\mathrm{d} x = 1$，
+  且等号取到时在$1$处不可导，故严格。
+  同理可证明$f(x) \geq h(x)$，其中$h(x)$为
+  \begin{equation*}
+    h(x) =
+    \begin{cases}
+      1 + x, & x \in [0,1]\\
+      3 - x, & x \in [1,2]
+    \end{cases}
+  \end{equation*}
+  因此$\int_0^2 f(x)\mathrm{d} x \leq 3$
+\end{proof}
+
+~
+
+\begin{exercise}[利用一阶导数研究积分]
+  $f(x)$在$[a,b]$连续可微，$M = \max \limits_{x \in [a,b]}|f^{\prime}(x)|$，证明
+  
+  (1)若$f(a) = 0$或$f(b) = 0$，则$\left| \int_a^b f(x)\mathrm{d} x \right| \leq \int_a^b |f(x)| \mathrm{d} x \leq \frac{M}{2}(b-a)^2$
+
+  (2)若$f(a) = f(b) = 0$，则$\left| \int_a^b f(x)\mathrm{d} x \right| \leq \int_a^b |f(x)|\mathrm{d} x \leq \frac{M}{4}(b-a)^2$
+
+  (3)若$f \left( \frac{a+b}{2} \right) = 0$
+\end{exercise}
+
+\begin{proof}
+  (1)设$f(a) = 0$，则$f(x) = f^{\prime}(\xi)(x-a)$，
+  因此$\int_a^b |f(x)|\mathrm{d} x \leq M \int_a^b (x - a)\mathrm{d} x = \frac{M}{2}(b-a)^2$
+
+  (2)若$f(a) = f(b) = 0$，则分两段在$a,b$展开
+  \begin{equation*}
+    \begin{cases}
+      \int_a^{\frac{a+b}{2}}|f(x)|\mathrm{d} x \leq \frac{M}{2} \cdot \frac{(b-a)^2}{4}\\
+      \int_{\frac{a+b}{2}}^b |f(x)|\mathrm{d} x \leq \frac{M}{2} \cdot \frac{(b-a)^2}{4}
+    \end{cases}
+  \end{equation*}
+
+  (3)若$f \left( \frac{a+b}{2} \right) = 0$，则分两段在$f \left( \frac{a+b}{2} \right)$展开，和(2)类似可得到结果
+\end{proof}
+
+~
+
+\begin{exercise}[利用二阶导数研究积分]
+  $f(x)$在$[a,b]$二阶可微，$|f^{\prime\prime}(x)| \leq M$，证明
+
+  (1)若$f \left( \frac{a+b}{2} \right) = 0$，则$\left| \int_a^b f(x)\mathrm{d} x \right| \leq \frac{M}{24}(b-a)^3$
+
+  (2)若$f(a) = f(b) = 0$，则$\left| \int_a^b f(x)\mathrm{d} x \right| \leq \frac{M}{12}(b-a)^3$
+\end{exercise}
+
+\begin{proof}
+  (1)在$\frac{a+b}{2}$处展开：
+  \begin{equation*}
+    f(x) = f \left( \frac{a+b}{2} \right) + f^{\prime}\left( \frac{a+b}{2} \right) \left( x - \frac{a+b}{2} \right) + \frac{f^{\prime\prime}(\xi)}{2} \left( x - \frac{a+b}{2} \right)^2
+  \end{equation*}
+  显然一阶导数项中心对称，故消去，二阶导数项用积分第一中值定理可以得到：
+  $\int _a^b f(x)\mathrm{d} x = (b - a)f \left( \frac{a+b}{2} \right) + \frac{f^{\prime\prime}(\eta)}{24}(b-a)^3$，经过放缩即结论。
+\end{proof}
+
+
+% \subsection{使用凹凸性}
+
+
+% \section{积分学的应用}
+
+% \subsection{计算平面图形面积}
+
+% \begin{theorem}[一般形式平面图形面积]
+%   介于$x=a,x=b$以及$y_1 = f(x),y_2 = g(x)$之间的图形面积为
+%   \begin{equation*}
+%     S = \int _a^b (f(x) - g(x))dx
+%   \end{equation*}
+% \end{theorem}
+
+% \begin{theorem}[极坐标平面图形面积]
+%   曲线$\Gamma: r = r(\theta)$与射线$\theta = \alpha, \theta = \beta$夹成的
+%   图形面积为：
+%   \begin{equation*}
+%     S = \frac{1}{2}\int _{\alpha}^{\beta}r^2(\theta)d\theta
+%   \end{equation*}
+% \end{theorem}
+
+% \begin{example}
+%   计算双纽线$r^2 = a^2 \cos 2\theta$围成的面积
+% \end{example}
+
+% \begin{solution}
+%   首先计算$\theta$的范围，由于$a^2 \cos 2\theta \geq 0$，
+%   因此$\theta \in [-\frac{\pi}{4},\frac{\pi}{4}] \cup [\frac{3\pi}{4}, \frac{5\pi}{4}]$，
+%   再根据对称性等价于
+%   \begin{equation*}
+%     \int^{\frac{\pi}{4}}_{-\frac{\pi}{4}} r^2d\theta = \frac{a^2}{2}\int ^{\frac{\pi}{2}}_{-\frac{\pi}{2}}\cos \theta d\theta = a^2
+%   \end{equation*}
+% \end{solution}

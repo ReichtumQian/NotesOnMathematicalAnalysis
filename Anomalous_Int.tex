@@ -1,0 +1,633 @@
+
+\chapter{反常积分}
+
+一般的定积分都定义于闭区间中，
+但很多实际问题中的积分可能区间无穷或者某点不连续，
+这就需要引出无穷积分和瑕积分的概念。
+
+\section{反常积分理论}
+
+\subsection{无穷积分与瑕积分概念}
+
+\begin{definition}[无穷积分与瑕积分]
+  \begin{itemize}
+  \item 无穷积分：
+    设$f$在$[a,+\infty)$有定义，若极限$\lim \limits _{b \rightarrow +\infty}\int^b_af(x)\mathrm{d}x$存在，
+    则记其为$\int^{+\infty}_a f(x)\mathrm{d}x$。
+  \item 瑕积分：
+    $f$在$(a,b]$有定义，且$\lim \limits _{x \rightarrow a^+}f(x) = \infty$，
+    若$\lim \limits _{\epsilon \rightarrow 0^+}\int_{a + \epsilon}^b f(x)\mathrm{d}x $收敛，
+    则记其为$\int_a^b f(x) \mathrm{d}x$，
+  \end{itemize}
+\end{definition}
+
+\begin{note}
+  如果$\lim \limits _{x \rightarrow a^+}f(x) \neq \infty$，则不能称$a$为$f(x)$的瑕点，
+  比如$\int_0^1\frac{x}{1 - e^x}\mathrm{d}x$，$0$不是其瑕点，其就是个定积分。
+\end{note}
+
+\begin{theorem}[反常积分Leibniz公式]
+  \begin{itemize}
+  \item 无穷积分：
+    设$\int^{+\infty}_af(x)\mathrm{d}x$存在，
+    且$f$有原函数$F$，
+    则$\int^{+\infty}_af(x)\mathrm{d}x = F(+\infty) - F(a)$
+  \item 瑕积分：
+    若$F$是$f$在$(a,b]$的一个原函数，
+    $a$是瑕点，
+    则$\int _a^bf(x)\mathrm{d}x = F(b) - F(a + 0)$
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}[定义判敛]
+  \begin{itemize}
+  \item 无穷积分：$\int_a^{+\infty}f(x)\mathrm{d}x$收敛当且仅当$\forall \epsilon, \exists A, \forall u \geq A$，
+    $|\int_u^{+\infty}f(x)\mathrm{d}x| < \epsilon$
+  \item 瑕积分：$\int_a^bf(x)\mathrm{d}x$收敛当且仅当$\forall \epsilon, \exists \delta, \forall u \in (a,a + \delta)$有
+    $|\int_a^u f(x)\mathrm{d}x| < \epsilon$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  根据收敛的定义可知。
+\end{proof}
+
+\begin{theorem}[$\frac{1}{x^p}$的反常积分]
+  $\int_0^1 \frac{\mathrm{d} x}{x^p}$在$p < 1$时收敛，$p \geq 1$时发散。
+  $\int_1^{+\infty} \frac{\mathrm{d} x}{x^p}$在$p > 1$时收敛，$p \leq 1$时发散
+\end{theorem}
+
+\begin{proof}
+  只讨论$[1,+\infty)$上的，直接积分：
+  \begin{equation*}
+    \int_1^u \frac{\mathrm{d} x}{x^p} =
+    \begin{cases}
+      \frac{1}{1-p} (u^{1-p}-1), & p \neq 1\\
+      \ln u, & p = 1
+    \end{cases} \Rightarrow \lim \limits _{u \rightarrow +\infty}\int_1^u \frac{\mathrm{d} x}{x^p} =
+    \begin{cases}
+      \frac{1}{p-1}, & p > 1\\
+      +\infty , & p \leq 1
+    \end{cases}
+  \end{equation*}
+\end{proof}
+
+\subsection{反常积分比较判别法}
+
+\begin{theorem}[Cauchy收敛准则]
+  \begin{itemize}
+  \item 无穷积分：
+    $\int^{\infty}_a f(x)\mathrm{d}x$收敛当且仅当$\forall \epsilon, \exists G \geq a, \forall u_1,u_2 > G$，满足
+    \begin{equation*}
+       |\int_{u_1}^{u_2}f(x)\mathrm{d}x| < \epsilon
+    \end{equation*}
+  \item 瑕积分：
+    $\int_a^bf(x)\mathrm{d}x$的瑕点为$a$，则其收敛当且仅当$\forall \epsilon, \exists \delta, \forall u_1,u_2 \in (a,a+\delta)$满足
+    \begin{equation*}
+      |\int_{u_1}^{u_2}f(x)\mathrm{d}x| < \epsilon
+    \end{equation*}
+  \end{itemize}
+\end{theorem}
+
+\begin{definition}[绝对收敛与条件收敛]
+  若$\int_a^b|f(x)|\mathrm{d}x$收敛($b$可以为$\infty$)，则称$\int_a^bf(x)\mathrm{d}x$绝对收敛；
+  若$\int_a^bf(x)\mathrm{d}x$收敛但不绝对收敛，则称其条件收敛。
+\end{definition}
+
+\begin{theorem}[绝对收敛]
+  \begin{itemize}
+  \item 无穷积分：
+    若$\int_a^{+\infty}|f(x)|\mathrm{d}x$收敛，则$\int^{+\infty}_af(x)\mathrm{d}x$也收敛，
+    且有下述等式
+    \begin{equation*}
+      |\int_a^{+\infty}f(x)\mathrm{d}x| \leq \int^{+\infty}_a |f(x)|\mathrm{d}x
+    \end{equation*}
+  \item 瑕积分：
+    设$f$瑕点为$a$，$f$在$(a,b]$任一内闭区间上可积，
+    则当$\int_a^b|f(x)|\mathrm{d}x$收敛时，$\int_a^bf(x)\mathrm{d}x$也收敛，
+    且
+    \begin{equation*}
+      |\int_a^b f(x)\mathrm{d}x| \leq \int_a^b |f(x)|\mathrm{d}x
+    \end{equation*}
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  用Cauchy收敛准则转换至有限区间，再根据积分绝对值放缩可得到结论。
+\end{proof}
+
+\begin{theorem}[比较判别法]
+  下面考虑$f(x)$ \textbf{非负}，则有
+  \begin{itemize}
+  \item 无穷积分：
+    $f,g$在任意有限区间可积，且$0 \leq f(x) \leq g(x)$，
+    当$\int_a^{+\infty}g(x)\mathrm{d}x$收敛时，$\int^{+\infty}_af(x)\mathrm{d}x$必收敛
+  \item 瑕积分：
+    $f,g$在内包有限闭区间可积，且$0 \leq f(x) \leq g(x)$，
+    当$\int_a^bg(x)\mathrm{d}x$收敛时，$\int^b_af(x)\mathrm{d}x$必收敛
+  \end{itemize}
+\end{theorem}
+
+\begin{corollary}[等价无穷小判别]
+  \begin{itemize}
+  \item 无穷积分：
+    $f$在任意有限闭区间可积，且$x \rightarrow \infty$时$f(x) \sim \frac{\lambda}{x^p}$，
+    若$p > 1$则收敛，$p \leq 1$则发散
+  \item 瑕积分：
+    $f$在任意闭区间可积，$x \rightarrow a$时$f(x) \sim \frac{\lambda}{(x - a)^p}$，
+    若$p < 1$则收敛，$p \geq 1$则发散
+  \end{itemize}
+\end{corollary}
+
+\begin{exercise}[基础训练]
+  判断(1)$\int_0^{+\infty}\frac{x \arctan x}{1 + x^p}\mathrm{d}x$
+  (2)$\int_0^{+\infty}\frac{1}{x^p + x^q}\mathrm{d} x$
+  (3)$\int_0^{+\infty}\frac{x^p}{1 + x^q}\mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)
+  $0$不是瑕点，只需考虑$\infty$。
+  若$p > 0$，$\frac{x \arctan x}{1 + x^p} \sim \frac{\pi}{2}\frac{1}{x^{p-1}}$，因此要求$p > 2$，此时$x$不是瑕点。
+  若$p = 0$，显然发散。
+  若$p < 0$，$\infty$显然发散。
+
+  (2)$0,+\infty$均有可能是瑕点。
+  先考虑$p = q$，此时$\frac{1}{x^p+x^q} = \frac{1}{2x^p}$，
+  $\infty$处要求$p > 1$，但是$0$处要求$p < 1$，因此不可能成立。
+  若$p < q$，则$x \rightarrow 0$时$\frac{1}{x^p + x^q} \sim \frac{1}{x^p}$，要求$p < 1$，
+  同理$x \rightarrow \infty$时要求$q > 1$
+
+  (3)$\frac{x^p}{1 + x^q} = \frac{1}{x^{-p} + x^{q - p}}$，
+  当$-p < 1 < q - p$或者$q-p < 1 < -p$时收敛，其余情况发散。
+\end{solution}
+
+\begin{corollary}[对数、指数比较判别法]
+  对$\forall \alpha > 0$，$\lim \limits _{x \rightarrow 0^+}x^{\alpha}\ln x= 0, \lim \limits _{x \rightarrow \infty} \frac{\ln x}{x^{\alpha}} = 0, \lim \limits _{x \rightarrow +\infty}x^{\alpha}e^{-x} = 0$：
+  \begin{itemize}
+  \item $x \rightarrow \infty$时，等价视为$\ln x \sim x^{\epsilon}, e^x \sim x^{+\infty}$
+  \item $x \rightarrow 0$时，$\ln (1+x) \sim x, e^x - 1 \sim x, \ln x \sim \frac{1}{x^{\epsilon}}, e^x \sim 1$
+  \end{itemize}
+\end{corollary}
+
+~
+
+\begin{exercise}[对数、指数比较判别训练]
+  判断收敛性：(1)$\int_0^{+\infty}\frac{x}{1 - e^x}\mathrm{d}x$
+  (2)$\int_0^{+\infty}\frac{\ln(1 + x)}{x^p}\mathrm{d}x$
+  (3)$\int_0^{+\infty}\frac{\ln x}{e^x}\mathrm{d}x$(重点！)
+\end{exercise}
+
+\begin{solution}
+  (1)由于$0$处极限为$1$，不是瑕点。$\infty$处$e^x \sim x^{\infty}$，因此$\lim \limits _{x \rightarrow \infty}x^2 \frac{x}{1 - e^x} = 0$，根据比较判别法可知收敛
+
+  (2)$0$处等价于$\frac{1}{x^{p-1}}$，要求$p < 2$，
+  $+\infty$处等价于$\frac{1}{x^p}$，要求$p > 1$，
+  因此$1 < p < 2$时收敛
+
+  (3)$\lim \limits _{x \rightarrow 0}\frac{\ln x \cdot x^{1/2}}{e^x} = 0$，因此$0$处收敛。
+  $\infty$处$\lim \limits _{x \rightarrow \infty}x^2 \frac{\ln x}{e^x} = 0$，因此$\infty$处也收敛。
+\end{solution}
+
+\begin{exercise}[对数比较判别进阶]
+  判断$\int_3^{+\infty}\frac{\mathrm{d}x}{x^p (\ln x)^q (\ln \ln x)^r}$的敛散性
+\end{exercise}
+
+\begin{solution}
+  $p > 1$肯定收敛，$p < 1$肯定发散。
+  若$p = 1$，则积分变为$\int_3^{+\infty} \frac{\mathrm{d}(\ln x)}{(\ln x)^q (\ln \ln x)^r}$，要求$q > 1$。
+  若$p = q = 1$，则同理要求$r > 1$。
+\end{solution}
+
+\begin{exercise}[变号情况：绝对收敛+比较判别法]
+  判断敛散性：(1)$\int_1^{+\infty}\frac{\cos x \sin \frac{1}{x}}{x}\mathrm{d}x$
+\end{exercise}
+
+\begin{solution}
+  (1)$|\frac{\cos x \sin \frac{1}{x}}{x}| \sim \frac{1}{x^2}$，因此绝对收敛
+\end{solution}
+
+\begin{exercise}[三角双瑕点训练]
+  重点：$|q| < 1$，判断$\int _0^{\pi}\frac{\sin^{p-1}x}{|1 + q \cos x|^p}\mathrm{d}x$的敛散性
+\end{exercise}
+
+\begin{solution}
+  $0$处$\frac{\sin^{p-1}x}{|1 + q \cos x|^p} \sim \frac{x^{p-1}}{|1 + q|^p}$，要求$p - 1<1$。
+  $\pi$处$\frac{\sin^{p-1}x}{|1 + q \cos x|^p} = \frac{\sin^{p-1}(\pi - x)}{|1 + q\cos x|^p} \sim \frac{(\pi - x)^{p-1}}{|1 + q|^p}$，
+  要求$p - 1 < 1$
+\end{solution}
+
+\subsection{Dirichlet与Abel判别法}
+
+\begin{theorem}[Dirichlet与Abel判别法]
+  \begin{itemize}
+  \item Dirichlet判别法：若(1)$F(x) = \int_a^x f(t)\mathrm{d}t$在$[a,+\infty)$有界(2)$g(x)$在$[a,+\infty)$上当$x \rightarrow \infty$时单调趋于$0$，则$\int_a^{+\infty}f(x)g(x)\mathrm{d}x$收敛。
+  \item Abel判别法：若(1)$\int_a^{+\infty}f(x)\mathrm{d}x$收敛(2)$g(x)$单调有界，则$\int_a^{+\infty}f(x)g(x)\mathrm{d}x$收敛
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}[在$\sin x$反常积分判敛的应用]
+  判断以下带三角函数的反常积分的绝对收敛性与条件收敛性：
+  \begin{enumerate}
+  \item $\int _1^{+\infty} \frac{\sin x}{x^p}\mathrm{d}x, \int_1^{+\infty}\frac{\cos x}{x^p}\mathrm{d}x$：$p>0$就收敛，$p >1$绝对收敛，$0 < p \leq  1$条件收敛
+  \item $\int_0^{+\infty}\frac{\sin x}{x^p}\mathrm{d} x$：$1 < p < 2$时绝对收敛，$0 < p \leq 1$时条件收敛，其余发散
+  \item $ \int_0^{+\infty}\frac{\cos x}{x^p}\mathrm{d} x$：$1 < p < 2$时绝对收敛，$0 < p \leq 1$时条件收敛，其余发散
+  \item 换元：$\int _0^{+\infty} \sin x^2 \mathrm{d}x, \int_0^{+\infty}\cos x^2 \mathrm{d}x, \int_0^{+\infty}x \sin x^4 \mathrm{d}x, \int_0^1 \frac{1}{x^p} \sin \frac{1}{x} \mathrm{d} x$
+  \item $\int_0^{+\infty} x^p \sin x^q \mathrm{d} x$
+  \item $\int_0^{+\infty} \frac{\sin x}{x^p + x^q}\mathrm{d} x$
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  (1)$p > 1$时$|\frac{\sin x}{x^p}| \leq \frac{1}{x^p}$因此绝对收敛。
+  $0 < p \leq 1$时根据Dirichlet判别法可知收敛，
+  下证不绝对收敛，根据$|\sin x| \geq \sin^2 x$，
+  得到
+  \begin{equation*}
+    \left| \frac{\sin x}{x^p} \right| \geq \frac{\sin^2x}{x^p} = \frac{1}{2} \left( \frac{1}{x^p} - \frac{\cos 2x}{x^p} \right)
+  \end{equation*}
+  而$\int_1^{+\infty}\frac{1}{x^p}\mathrm{d}x$不收敛，故$\int_1^{+\infty} \left| \frac{\sin x}{x^p} \right|$在$0 < p \leq 1$时不收敛。
+  $p \leq 0$时，取$u_1 = 2k\pi, u_2 = 2k\pi + \frac{\pi}{2}$，
+  则
+  \begin{equation*}
+    \left| \int_{u_1}^{u_2} \frac{\sin x}{x^p}\mathrm{d} x \right| \geq \int_{u_1}^{u_2} \sin x\mathrm{d}x = 1
+  \end{equation*}
+  显然发散。
+
+  (2)分两段，这里考虑$\int_0^1 \frac{\sin x}{x^p}\mathrm{d} x$，
+  当$x \rightarrow 0$时$\frac{\sin x}{x^p} \sim \frac{1}{x^{p-1}}$，
+  因此$p < 2$时收敛且绝对收敛，
+  $p \geq 2$时发散。
+  结合(1)得到$1 < p < 2$时绝对收敛，$0 < p \leq 1$时条件收敛，其余发散
+
+  (3)$\frac{\cos x}{x^p} \sim \frac{1}{x^p}$，
+  结合(1)得到$0 < p < 1$时条件收敛，其余发散。
+
+  (4)前三个做$t = x^2$换元，
+  第一个变成$\frac{1}{2}\int_0^{+\infty} \frac{\sin t}{\sqrt{t}}  \mathrm{d} t$，因此条件收敛。
+  第二个$\int_0^{+\infty} \cos x^2 \mathrm{d} x$同理条件收敛。
+  第三个换元得到$\frac{1}{2}\int _1^{+\infty}\sin t^2 \mathrm{d}t$，变成第一个，故条件收敛。
+  第四个做$t = \frac{1}{x}$换元得到$\int_{+\infty}^1 -t^{p-2} \sin t \mathrm{d} t = \int_1^{+\infty} \frac{\sin t}{t^{2-p}}\mathrm{d} t$，
+  $2-p > 1$时绝对收敛，$0 < 2-p \leq 1$条件收敛。
+
+  (5)$q = 0$时显然无法保证$0,+\infty$同时收敛，原因在于$0$要求$p < 1$，$\infty$要求$p > 1$。
+  $q > 0$时，令$t = x^q$，得到
+  \begin{equation*}
+    \int_0^{+\infty}x^p \sin x^q \mathrm{d} x = \frac{1}{q} \int_0^{+\infty} \frac{\sin t}{t^{1- \frac{p+1}{q}}}\mathrm{d} t
+  \end{equation*}
+  转换为前面的问题。
+\end{proof}
+
+\begin{note}
+  $\int_0^{+\infty}\frac{\sin x}{x^p}\mathrm{d} x, \int_0^{+\infty} \frac{\cos x}{x^p}\mathrm{d} x$的收敛情况要当作结论背下来。
+\end{note}
+
+~
+
+\begin{exercise}[三角有理式敛散性判别]
+  判断如下几道三角函数有理式的敛散性(难度较高)：
+
+  (1)判断$\int_0^{+\infty} \frac{\sin x}{2x + 3 \sin x} \mathrm{d} x$的敛散性
+
+  (2)判断$\int_a^{+\infty} \frac{\sin x}{x^p + \sin x}\mathrm{d} x$的敛散性
+
+  (3)证明$\int_0^{+\infty} \frac{\mathrm{d} x}{1 + x^2 \sin x^2}\mathrm{d} x$发散
+\end{exercise}
+
+\begin{solution}
+  (1)该积分没有瑕点，只需要考虑$\infty$，其敛散性等价于$\int_2^{\infty} \frac{\sin x}{2x + 3 \sin x}\mathrm{d} x$。
+  这里必须拆项(不能直接放缩原因在于分母阶数不够)
+  \begin{equation*}
+    \frac{\sin x}{2x + 3 \sin x} =\frac{2x \sin x}{2x(2x + 3\sin x)} = \frac{(2x + 3 \sin x)\sin x - 3\sin^2x}{2x(2x + 3\sin x) } =  \frac{\sin x}{2x} - \frac{3\sin^2 x}{2x(2x + 3\sin x)}
+  \end{equation*}
+  考虑前者，显然$\frac{1}{2x}$单调递减趋于$0$，而
+  \begin{equation*}
+    \left| \int_2^u \sin \mathrm{d} x  \right| = \left| \cos 2 - \cos u \right| \leq 2
+  \end{equation*}
+  根据Dirichlet判别法知前者收敛。后者先进行放缩
+  \begin{equation*}
+    0 \leq \frac{3 \sin^2 x}{2x(2x + 3 \sin x)} \leq \frac{3}{2x(2x - 3)}
+  \end{equation*}
+  在无穷处等价于$\frac{1}{x^2}$，根据比较原则得到收敛。综上收敛
+\end{solution}
+
+
+\subsection{函数在无穷远处的性质}
+
+\noindent 一、若极限存在，则必为$0$
+
+~
+
+\begin{exercise}
+  $f(x)$在$[a,u]$可积，$\int_a^{+\infty}f(x)\mathrm{d}x$收敛，
+  若$\lim \limits _{x \rightarrow +\infty}f(x) = A$，则$A = 0$
+\end{exercise}
+
+\begin{proof}
+  若$A \neq 0$，不妨设$A > 0$，则$\exists M \geq a, \forall x \geq M, f(x) \geq \frac{A}{2}$，
+  而$\int_a^{+\infty}\frac{A}{2}\mathrm{d}x$发散，根据比较判别法可知$\int_a^{+\infty}f(x)\mathrm{d}x$发散
+\end{proof}
+
+~
+
+\begin{exercise}
+  $f(x)$在$[a,+\infty)$上连续可微，
+  且$\int_a^{+\infty}f(x)\mathrm{d}x,\int_a^{+\infty}f^{\prime}(x)\mathrm{d}x$收敛，则$\lim \limits _{x \rightarrow +\infty}f(x) = 0$
+\end{exercise}
+
+\begin{proof}
+  由于$\int_a^{+\infty}f^{\prime}(x)\mathrm{d}x$收敛，因此$\lim \limits _{u \rightarrow +\infty}\int_a^uf^{\prime}(x)\mathrm{d}x = \lim \limits _{u \rightarrow +\infty}f(u) - f(a)$存在，
+  根据极限存在可知极限为$0$(前一题结论)。
+\end{proof}
+
+~
+
+\begin{exercise}
+  $f(x)$在$[a,+\infty)$上连续，$\int_a^{+\infty}f(x)\mathrm{d}x$收敛，则存在递增趋于$+\infty$的数列$x_n$，
+  使得$\lim \limits _{n \rightarrow \infty} f(x_n) = 0$
+\end{exercise}
+
+\begin{proof}
+  根据Cauchy收敛准则，取$\epsilon_1 = 1, \exists A_1^{\prime}, A_1^{\prime\prime} = A_1^{\prime} + 1$，
+  使得$|\int_{A_{1}^{\prime}}^{A_1^{\prime\prime}}f(x)\mathrm{d}x| < \epsilon_1 = 1$。
+  同理对$\epsilon_2 = \frac{1}{2}, \exists A_2^{\prime} \geq A_1^{\prime\prime}, A_2^{\prime\prime} = A_2^{\prime} + 1$，使得$|\int_{A_2^{\prime}}^{A_2^{\prime\prime}}f(x)\mathrm{d}x| < \epsilon_2 = \frac{1}{2}$。
+  以此类推，
+  根据积分第一中值定理
+  $\exists x_i \in [A_i^{\prime},A_i^{\prime\prime}]$使得$|f(x_n)| = |\int_{A_n^{\prime}}^{A_n^{\prime\prime}}f(x)\mathrm{d}x|$，
+  显然$x_n$单增，$|f(x_n)| < \frac{1}{n} \rightarrow 0$。
+\end{proof}
+
+~
+
+\noindent 二、极限不一定存在：光满足非负、连续、可导等并不能说明极限存在，甚至不一定有界
+
+~
+
+\begin{exercise}
+  举例说明$f(x)$在任意有限区间$[a,u]$非负可积，
+  $\int_a^{+\infty}f(x)\mathrm{d}x$收敛，则$f(x)$不一定有界。
+\end{exercise}
+
+\begin{solution}
+  $f(x) =
+  \begin{cases}
+    x, &x\text{为整数}\\
+    0,&x\text{不为整数}
+  \end{cases}
+  $，
+  如果要求恒正则取$g(x) = f(x) + e^{-x}$
+\end{solution}
+
+~
+
+\begin{exercise}
+  举例说明$f(x)$为$[a,+\infty)$上连续函数，
+  $\int_a^{+\infty}f(x)\mathrm{d}x$收敛，不一定有$\lim \limits _{x \rightarrow +\infty}f(x) = 0$
+\end{exercise}
+
+\begin{solution}
+  例如$ \int_1^{+\infty}\sin x^2 \mathrm{d}x$，令$t = x^2$以及Dirichlet判别法可知收敛，
+  但是极限不为$0$。
+\end{solution}
+
+~
+
+\begin{exercise}
+  举例说明$[a,+\infty)$恒正的连续可微函数，$\int_a^{+\infty}f(x)\mathrm{d}x$收敛，则$f(x)$不一定有界
+\end{exercise}
+
+\begin{solution}
+  $\int_1^{+\infty}\frac{x}{1 + x^6\sin^2 x}\mathrm{d}x$
+\end{solution}
+
+~
+
+\noindent 三、获得极限存在：虽然非负、连续、可导不能推出$\lim \limits _{x \rightarrow +\infty}f(x) = 0$，
+但一致连续和单调可以推出该性质。
+
+~
+
+\begin{exercise}[经典老题：一致连续]
+  $f(x)$在$[a,+\infty)$上一致连续，$\int_a^{+\infty}f(x)\mathrm{d}x$收敛，则$\lim \limits _{x \rightarrow +\infty}f(x) = 0$
+\end{exercise}
+
+\begin{proof}
+  反设$\lim \limits _{x \rightarrow +\infty}f(x) \neq 0$，则$\exists \epsilon_0$以及趋于无穷的$x_n$使得
+  $|f(x_n)| \geq \epsilon_0$，
+  对上述$\epsilon_0$，根据一致连续$\exists \delta,\forall x^{\prime},x^{\prime\prime} \in [a,+\infty)$只要
+  $|x^{\prime} - x^{\prime\prime}| \leq \delta$，就有$|f(x^{\prime}) - f(x^{\prime\prime})| < \frac{\epsilon_0}{2}$。
+  对每个$x_n$，当$x \in [x_n,x_n+\delta]$时，$|f(x) - f(x_n)| < \frac{\epsilon_0}{2}$，
+  从而$f(x)$在$[x_n,x_n+\delta]$不变号，且
+  \begin{equation*}
+    |f(x)| \geq |f(x_n)| - |f(x) - f(x_n)| > \frac{\epsilon_0}{2}
+  \end{equation*}
+  对$\forall M > a, \exists N, x_N > M$满足$|\int_{x_N}^{x_N + \delta} f(x)\mathrm{d}x| = \int_{x_N}^{x_N + \delta}|f(x)|\mathrm{d}x \geq \int_{x_N}^{x_N + \delta}\frac{\epsilon_0}{2}\mathrm{d}x = \frac{\epsilon_0\delta}{2}$不趋于$0$，
+  根据Cauchy收敛准则逆否命题可知$\int_a^{+\infty}f(x)\mathrm{d}x$发散，矛盾。
+\end{proof}
+
+~
+
+\begin{exercise}[单调]
+  $f(x)$在$[a,+\infty)$单调，且$\int_a^{+\infty}f(x)\mathrm{d} x$收敛，则$\lim \limits _{x \rightarrow +\infty}f(x) = 0 $，
+  且$\lim \limits _{x \rightarrow +\infty}xf(x) = 0$。
+\end{exercise}
+
+\begin{note}
+  反之不一定，即使有$\lim \limits _{x \rightarrow +\infty}xf(x) = 0$，也不一定有$\int_a^{+\infty}f(x)\mathrm{d} x$收敛，
+  例如$f(x) = \frac{1}{x \ln x}$
+\end{note}
+
+~
+
+\section{反常积分的计算}
+
+\subsection{两个常用的基础反常积分}
+
+
+\begin{exercise}
+  计算$\int_0^{+\infty} e^{-ax}\cos bx \mathrm{d} x, \int_0^{+\infty} e^{-ax} \sin bx \mathrm{d} x$，其中$a > 0$
+\end{exercise}
+
+\begin{solution}
+  直接写不定积分即可(具体计算见配对积分法一节)，
+  $I_1 = \frac{e^{-ax}}{a^2 + b^2} (a \cos bx + b \sin bx) \bigg|_0^{+\infty} = \frac{a}{a^2+b^2}$，
+  同理得到$I_2 = \frac{b}{a^2 + b^2}$
+\end{solution}
+
+~
+
+\begin{exercise}[对数配对积分]
+  (1)计算$I_n = \int_0^1 (\ln x)^n \mathrm{d} x$
+  (2)计算$I(m,n) = \int_0^1 x^m (\ln x)^n \mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)做一次分部积分得到$I_n = x (\ln x)^n \bigg|_0^1 - \int_0^1 n (\ln x)^{n-1}\mathrm{d}x = -n I_{n-1}$，
+  而$I_1 = \int_0^1 \ln x \mathrm{d} x = x \ln x \bigg|_0^1 - x \bigg|_0^1 = -1$，
+  综上得到$I_n = (-1)^nn!$
+
+  (2)$I(m,n) = - \frac{n}{m+1}I(m,n-1)$，
+  结合$I(m,0) = \frac{1}{m+1}$可得$I(m,n) = \frac{(-1)^nn!}{(m+1)^{n+1}}$
+\end{solution}
+
+\subsection{富如兰尼积分}
+
+\begin{theorem}[两侧极限存在则无穷积分收敛]
+  重点：$f(x)$在任意有限区间可积，
+  $\lim \limits _{x \rightarrow +\infty}f(x) = A, \lim \limits _{x \rightarrow -\infty}f(x) = B$，
+  给定$a \in \mathbb{R}$，则下面积分收敛，且值为$a(A - B)$
+  \begin{equation*}
+    \int_{-\infty}^{+\infty}[f(a+x) - f(x)]\mathrm{d} x
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  根据定义，$\int_{-\infty}^{+\infty}f(x)\mathrm{d} x = \lim \limits _{M \rightarrow +\infty}\lim \limits _{m \rightarrow -\infty} \int _m^M [f(a+x) - f(x)]\mathrm{d} x$，
+  对有限区域积分做如下变换：
+  \begin{equation*}
+    I = \int_m^M [f(a+x) - f(x)]\mathrm{d} x = \int_{m+a}^{M+a}f(x)\mathrm{d}x - \int_m^M f(x)\mathrm{d} x = \int_M^{M+a}f(x)\mathrm{d} x - \int_m^{m+a}f(x)\mathrm{d}x
+  \end{equation*}
+  代入$A,B$，得到$I = \int_M^{M+a}[f(x) - A]\mathrm{d}x - \int _m^{m+a}[f(x) - B]\mathrm{d} x + a(A-B)$，
+  根据极限$\lim \limits _{M \rightarrow +\infty} [f(x) - A]\mathrm{d} x = 0$，
+  同理$\lim \limits _{N \rightarrow +\infty}[f(x) - B]\mathrm{d} x = 0$，
+  因此取极限得到收敛，且值为$a(A - B)$
+\end{proof}
+
+~
+
+\begin{theorem}[富如兰尼积分]
+  $f(x)$为$[0,+\infty)$连续函数，$a,b>0$，则
+  \begin{enumerate}
+  \item 若$\lim \limits _{x \rightarrow +\infty}f(x)$存在，则
+    \begin{equation*}
+      \int_0^{+\infty} \frac{f(ax) - f(bx)}{x} \mathrm{d} x = [f(0) - f(+\infty)] \ln \frac{b}{a}
+    \end{equation*}
+  \item 若$\exists A > 0$，使得$\int_A^{+\infty} \frac{f(x)}{x}\mathrm{d} x$收敛，则
+    \begin{equation*}
+      \int_0^{+\infty} \frac{f(ax) - f(bx)}{x}\mathrm{d} x = f(0) \ln \frac{b}{a}
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  下面对$I = \int_m^M \frac{f(ax) - f(bx)}{x}\mathrm{d} x$进行化简：
+  \begin{equation*}
+    I = \int_m^M \frac{f(ax)}{x}\mathrm{d} x - \int _m^M \frac{f(bx)}{x}\mathrm{d} x = \int_{am}^{aM}\frac{f(x)}{x}\mathrm{d} x - \int_{bm}^{bM} \frac{f(x)}{x}\mathrm{d} x = \int _{am}^{bm} \frac{f(x)}{x}\mathrm{d} x - \int_{aM}^{bM}\frac{f(x)}{x}\mathrm{d} x
+  \end{equation*}
+
+  (1)根据积分第一中值定理得到
+  \begin{equation*}
+    \begin{cases}
+      \int_{am}^{bm} \frac{f(x)}{x} \mathrm{d} x = f(\xi) \int_{am}^{bm} \frac{1}{x}\mathrm{d} x = f(\xi) \ln \frac{b}{a}\\
+      \int_{aM}^{bM} \frac{f(x)}{x}\mathrm{d} x = f(\eta) \int_{aM}^{bM} \frac{1}{x}\mathrm{d} x = f(\eta) \ln \frac{b}{a}
+    \end{cases}
+  \end{equation*}
+  当$m \rightarrow 0^+, M \rightarrow +\infty$时可代入极限，
+  因此结果为$[f(0) - f(+\infty)] \ln \frac{b}{a}$
+
+  (2)由于$\int_A^{+\infty}f(x)\mathrm{d} x$收敛，
+  因此第二项$\lim \limits _{M \rightarrow +\infty} \frac{f(x)}{x}\mathrm{d} x = 0$，
+  同时第一项用积分中值定理取极限得到$f(0) \ln \frac{b}{a}$
+\end{proof}
+
+~
+
+\begin{exercise}[富如兰尼积分的应用]
+  计算以下反常积分
+
+  (1)$\int_0^{+\infty} \frac{\arctan ax - \arctan bx}{x}\mathrm{d} x$
+  (2)$\int_0^{+\infty} \frac{e^{-ax} - e^{-bx}}{x}\mathrm{d} x$
+  (3)$\int_0^{+\infty} \frac{\cos ax - \cos bx}{x}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)$\arctan 0 = 0, \arctan (+\infty) = \frac{\pi}{2}$，
+  因此积分为$- \frac{\pi}{2} \ln \frac{b}{a}$
+
+  (2)$e^0 = 1, e^{- \infty} = 0$，
+  因此积分为$\ln \frac{b}{a}$
+
+  (3)$\cos 0 = 1, \int _A^{+\infty} \frac{\cos x}{x}\mathrm{d} x$收敛，
+  因此积分为$\ln \frac{b}{a}$
+\end{solution}
+
+
+~
+
+
+\subsection{Dirichlet积分}
+
+\begin{lemma}
+  设$p > 0$，则含参积分$\int_0^{+\infty} e^{-px} \frac{\sin bx - \sin ax}{x} \mathrm{d} x = \arctan \frac{b}{p} - \arctan \frac{a}{p}$
+\end{lemma}
+
+\begin{proof}
+  首先$\frac{\sin bx - \sin ax}{x} = \int_a^b \cos xy \mathrm{d} y$，
+  因此
+  \begin{equation*}
+    I = \int_0^{+\infty} \mathrm{d} x \int _a^b e^{-px}\cos xy \mathrm{d} y
+  \end{equation*}
+  由于$|e^{-px}\cos xy| \leq e^{-px}$，显然$\int_0^{+\infty} e^{-px}\mathrm{d} x$绝对收敛，
+  因此$\int_0^{+\infty}e^{-px}\cos xy\mathrm{d}x, y \in [a,b]$一致收敛，交换积分顺序得到
+  \begin{align*}
+    I = \int_a^b \mathrm{d} y \int_0^{+\infty} e^{-px} \cos xy \mathrm{d} x
+  \end{align*}
+  根据表格法得到：
+  \begin{equation*}
+    \int_0^{+\infty} e^{-px}\cos xy \mathrm{d} x = - \frac{1}{p} e^{-px}\cos xy   \bigg|^{+\infty}_0 + \frac{y}{p^2} e^{-px} \sin xy   \bigg|_0^{+\infty} - \int_0^{+\infty} \frac{y^2}{p^2} e^{-px} \cos xy\mathrm{d} x 
+  \end{equation*}
+  因此得到$\frac{y^2 + p^2}{p^2} \int _0^{+\infty} \cos xy\mathrm{d} y = \frac{1}{p}$
+  \begin{equation*}
+    I = \int_a^b \frac{p}{p^2 + y^2}\mathrm{d} y = \arctan \frac{b}{p} - \arctan \frac{a}{p}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Dirichlet积分]
+  积分$\int _0^{+\infty} \frac{\sin x}{x} \mathrm{d} x = \frac{\pi}{2}$，
+  进一步地，$\int_0^{+\infty} \frac{\sin px}{x}\mathrm{d} x = \frac{\pi}{2} \text{sgn}(p)$
+\end{theorem}
+
+\begin{proof}
+  令引理中$a = 0$，将$p$看成参数，$G(p)= \int_0^{+\infty} e^{-px} \frac{\sin bx}{x} \mathrm{d} x = \arctan \frac{b}{p}$，
+  由于$\int_0^{+\infty} \frac{\sin bx}{x}\mathrm{d} x$条件收敛，
+  $e^{-px}$在固定$x$时关于$p$单调，且一致有界，
+  根据Abel判别法可知$G(p)$在$[0,1]$上一致收敛，
+  从而
+  \begin{equation*}
+    G(0) = \lim \limits _{p \rightarrow 0^+} G(p) = \lim \limits _{p \rightarrow 0^+} \arctan \frac{b}{p} = \frac{\pi}{2}\text{sgn}(b)
+  \end{equation*}
+  特别地，$b = 1$得到$\int_0^{+\infty} \frac{\sin x}{x}\mathrm{d} x = \frac{\pi}{2}$
+\end{proof}
+
+~
+
+\begin{exercise}[Dirichlet积分的应用]
+  计算以下反常积分：
+  (1)重点：$\int_0^{+\infty} \frac{\sin x^2}{x}\mathrm{d} x$
+  (2)重点：$\int_0^{+\infty} \frac{\sin^2 x}{x^2}\mathrm{d} x$
+
+  (3)$\int_0^{+\infty} \frac{\sin^4 x}{x^2}\mathrm{d} x$
+  (4)$\int_0^{+\infty} \frac{\sin^4 x}{x^4}\mathrm{d} x$
+  (5)$\int_0^{+\infty} \frac{x - \sin x}{x^3}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)做$t = x^2$，得到$\frac{1}{2}\int_0^{+\infty} \frac{\sin t}{t}\mathrm{d} t = \frac{\pi}{4}$
+
+  (2)$\int_0^{+\infty} \frac{\sin^2 x}{x^2}\mathrm{d} x = - \int_0^{+\infty} \sin^2 x \mathrm{d} \left( \frac{1}{x} \right)$，
+  用分部积分得到
+  \begin{equation*}
+    I = - \frac{\sin^2 x}{x} \bigg|_0^{+\infty} + \int_0^{+\infty} \frac{\sin 2x}{2x}\mathrm{d} 2x = \frac{\pi}{2}
+  \end{equation*}
+
+  (3)先分部积分得到
+  \begin{equation*}
+    \int_0^{+\infty} \frac{\sin^4 x}{x^2}\mathrm{d} x = - \int_0^{+\infty} \sin^4 x \mathrm{d} \left( \frac{1}{x} \right) = \int_0^{+\infty} \frac{4 \sin^3 x \cos x}{x}\mathrm{d} x
+  \end{equation*}
+  根据$4\sin^3x \cos x = \sin 2x(1 - \cos 2x) = \sin 2x - \frac{1}{2} \sin 4x$得到
+  \begin{equation*}
+    I = \int_0^{+\infty} \frac{\sin 2x}{2x}\mathrm{d}(2x) - \frac{1}{2} \int_0^{+\infty} \frac{\sin 4x}{4x}\mathrm{d} (4x) = \frac{\pi}{4}
+  \end{equation*}
+\end{solution}

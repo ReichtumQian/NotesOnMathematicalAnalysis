@@ -1,0 +1,61 @@
+
+
+
+\chapter{实数完备性定理}
+
+\begin{definition}[聚点]
+  若存在各项互异的收敛数列$\{x_n\} \subseteq S$，
+  使得$\lim \limits _{n \rightarrow \infty} x_n = \xi$，
+  则$\xi$称为$S$的一个聚点。
+\end{definition}
+
+\begin{theorem}[实数七大定理]
+  七大定理如下：
+  \begin{itemize}
+  \item 确界定理：$S$是非空实数集，若$S$有上界，则$S$必有上确界
+  \item 单调有界定理
+  \item Cauchy收敛准则
+  \item 闭区间套定理
+  \item 有限开覆盖定理：$S$是实数子集，$H$为开区间族，若$\forall x \in S$都含于$H$至少一个开区间中，则称$H$是$S$开覆盖。若$H$是$[a,b]$的开覆盖，则可从$H$中选出有限个区间覆盖$[a,b]$
+  \item 聚点定理：实轴上任一有界无限点集$S$至少有一个聚点
+  \item 致密性定理：有界数列必有收敛子列
+  \end{itemize}
+\end{theorem}
+
+~
+
+下面采取确界原理-单调有界定理-闭区间套定理-有限覆盖定理-聚点定理/致密性定理-Cauchy收敛准则的形式循环证明其等价性：
+
+\begin{enumerate}
+\item 确界证明单调有界定理：设$a_n$单增有上界，根据确界原理有上确界，取$a = \sup \{a_n\}$，
+  只需证明$a$是$a_n$极限。
+  根据上确界定义有$\exists N, a- \epsilon < a_N$，
+  再由单增和极限定义显然。
+\item 单调有界证明闭区间套：$a_n,b_n$都单调有极限，所以夹住的点存在。
+  唯一性用$|\xi - \xi^{\prime}| \leq \lim \limits _{n \rightarrow \infty} (b_n - a_n) = 0$证明
+\item 闭区间套证明有限覆盖：反设不成立，则$[a,\frac{a+b}{2}],[\frac{a+b}{2},b]$中至少有一个没有有限覆盖，
+  不停分下去，根据闭区间套有$\xi \in [a_n,b_n]$。
+  当$n$足够大时，一定存在开覆盖集中的区间包含它，因此与假设矛盾。
+\item 有限覆盖证明致密性定理：设$x_n$有界，若无穷项相等，则显然。若相等的只有有限项，
+  可知$\exists x_0 \in [a,b]$使得$(x_0 - \delta, x_0 + \delta)$中有无限项，
+  否则根据有限开覆盖，总共$x_n$只有有限项，矛盾。
+  因此在$(x_0 - \frac{1}{k},x_0 + \frac{1}{k})$中取$x_k$即有$\lim \limits _{k \rightarrow \infty}x_k = x_0$
+\item 聚点定理证明Cauchy收敛准则：设$x_n$收敛，$\lim \limits _{n \rightarrow \infty} x_n = a$，
+  $\exists N, \forall n,m > N$有$|x_n - a| < \epsilon, |x_m - a| < \epsilon$，
+  因此$|a_n - a_m| \leq |a_n - a| + |a - a_m| = 2\epsilon$
+\item Cauchy收敛准则证明确界原理：$b$为上界，$a \in S$，不断二分，构造$a_n,b_n$，
+  最后$|a_{n+p} - a_n| \leq |b_n - a_n| < \epsilon$，因此有极限$a$，满足$\exists N, a_N + \epsilon > a$。
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+

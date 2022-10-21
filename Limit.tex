@@ -1,0 +1,986 @@
+
+
+
+
+\chapter{数列极限}
+
+\section{数列极限的概念与性质}
+
+\subsection{数列极限的概念}
+
+\begin{definition}[数列极限]
+  $a_n$是实数列，$A \in \mathbb{R}$，
+  若$\forall \epsilon, \exists N, \forall n > N$有$|a_n - A| < \epsilon$，
+  则称$a_n$收敛到$A$，记作$\lim \limits _{n \rightarrow \infty}  a_n = A$
+\end{definition}
+
+\begin{theorem}[极限的四则运算]
+  若$\lim \limits _{n \rightarrow \infty} a_n, \lim \limits _{n \rightarrow \infty} b_n$都存在(不存在时不能拆！)，
+  则$\lim \limits _{n \rightarrow \infty} (a_n \odot b_n) = \lim \limits _{n \rightarrow \infty} a_n \odot \lim \limits _{n \rightarrow \infty} b_n$，这里$\odot$指任意运算(除法额外要求$\lim \limits _{n \rightarrow \infty} b_n \neq 0$)。
+\end{theorem}
+
+\begin{theorem}[cauchy收敛准则]
+  数列$a_n$收敛当且仅当$\forall \epsilon, \exists N, \forall m,n > N$有$|a_n - a_m| < \epsilon$
+\end{theorem}
+
+\begin{exercise}[几个经典极限]
+  (1)证明$\sin n$发散
+
+  (2)证明$a_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n}$发散
+\end{exercise}
+
+\begin{proof}
+  (1)显然区间$[2k\pi + \frac{\pi}{4}, 2k\pi + \frac{3\pi}{4}]$长度大于$1$，一定包含一个整数，
+  可以取$n \in [2k\pi + \frac{\pi}{4}, 2k\pi + \frac{3\pi}{4}]$，
+  取$m \in [2k\pi + \pi, 2k\pi + 2\pi]$，
+  则$n,m$可取无穷大，
+  $|\sin n - \sin m| \geq \frac{\sqrt{2}}{2}$，
+  因此根据Cauchy收敛准则知道发散。
+
+  (2)$\forall N$，取$n = N, m = 2N$，则$|a_n - a_m| = \frac{1}{N+1} + \cdots + \frac{1}{2N} \geq \frac{N}{2N} = \frac{1}{2}$，
+  因此根据Cauchy收敛准则逆否命题可知发散
+\end{proof}
+
+\subsection{收敛数列的性质}
+
+\begin{theorem}[收敛数列的性质]
+  若$\lim \limits _{n \rightarrow \infty} a_n = A$，则
+  \begin{itemize}
+  \item 有界性：$a_n$有界
+  \item 保号性：若$A > a$，则$n \rightarrow \infty$时$a_n > a$
+  \item 收敛当且仅当$a_n$所有子列都收敛到$A$
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}[奇偶子列收敛]
+  $a_n$收敛到$A$当且仅当$a_{2k},a_{2k+1}$收敛到$A$
+\end{theorem}
+
+\begin{proof}
+  只右推左：根据偶数列可知$\forall \epsilon, \exists K, \forall 2k > K$满足$|a_{2k} - A| < \epsilon$，
+  而对上面的$\epsilon, \exists K^{\prime}, \forall 2k+1 > k^{\prime}$满足$|a_{2k+1} - A| < \epsilon$，
+  因此取$N = \max\{K,K^{\prime}\}$即可。
+\end{proof}
+
+\section{一些重要极限结论}
+
+\subsection{几个基本极限}
+
+\begin{theorem}[常用基本极限]
+  设$a > 0, b > 1$，则
+  基本极限的关系为：$\log n < n^a < b^n < n! < n^n$，更具体地
+  \begin{itemize}
+  \item 根式：(1)$a > 0, \lim \limits _{n \rightarrow \infty} \sqrt[n]{a} = 1$(2)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{n} = 1$(3)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{n!} = +\infty$
+  \item 比式：(1)$\lim \limits _{n \rightarrow \infty} \frac{a^n}{n!} = 0$(2)$a > 1, \lim \limits _{n \rightarrow \infty} \frac{n^k}{a^n} = 0$
+  \item 对数：(1)$\forall k, \lim \limits _{x \rightarrow \infty} \frac{\ln x}{x^k} = 0$(2)$\forall k, \lim \limits _{x \rightarrow 0^+}x^k \ln x = 0$
+  \item 指数：$\forall k, \lim \limits _{x \rightarrow +\infty}\frac{x^k}{e^x} = 0$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)根式第一个设$a_n = \sqrt[n]{a} = 1+h_n$，得到$a = (1 + h_n)^n \geq 1 + nh_n$，
+  故$h_n \leq \frac{a - 1}{n} \rightarrow 0$。
+  
+  第二个设$a_n = \sqrt[n]{n} = 1 + h_n$，则$n = (1 + h_n)^n \geq \frac{n(n-1)}{2}h_n^2$，
+  得到$0 < h_n < \frac{2}{n-1}$，夹逼准则即可。
+
+  第三个用Stirling公式，等价于$\frac{n}{e}$
+\end{proof}
+
+\begin{theorem}[重要极限]
+  $\lim \limits _{n \rightarrow \infty} (1 + \frac{1}{n})^n = e$，
+  $\lim \limits _{n \rightarrow \infty} (1 - \frac{1}{n})^n = \frac{1}{e}$。
+  $\lim \limits _{n \rightarrow \infty} (1 + \frac{1}{n})^n = e - \frac{e}{2n} + o(\frac{1}{n})$
+\end{theorem}
+
+\begin{proof}
+  $\lim \limits _{n \rightarrow \infty} \left( 1 + \frac{1}{n} \right)^n = \lim \limits _{x \rightarrow 0} (1 + x)^{\frac{1}{x}} = \lim \limits _{x \rightarrow 0} e^{\frac{\ln (1 + x)}{x}} = e^1 = e$
+\end{proof}
+
+~
+
+\begin{exercise}[相关练习]
+  (1)计算$\lim \limits _{n \rightarrow \infty} \left( 1 + \frac{1}{n} + \frac{1}{n^2} \right)^n$
+\end{exercise}
+
+\begin{solution}
+  (1)等价于$e^{\frac{\ln(1 + x + x^2)}{x}} = e^{\frac{2x + 1}{1 + x + x^{^2}}} = e$
+\end{solution}
+
+\subsection{Stirling公式与Wallis公式}
+
+\begin{theorem}[Stirling公式]
+  当$n \rightarrow \infty$时，$n! \approx \sqrt{2\pi n}(\frac{n}{e})^n$，
+  进一步地$\sqrt[n]{n!} \sim \frac{n}{e}$
+\end{theorem}
+
+\begin{theorem}[Wallis公式]
+  当$n \rightarrow \infty$时，$\frac{(2n)!!}{(2n-1)!!} \sim \sqrt{n\pi}$，
+  更具体地，$\lim \limits _{n \rightarrow \infty} \left[ \frac{(2n)!!}{(2n-1)!!} \right] \frac{1}{2n+1} = \frac{\pi}{2}$
+\end{theorem}
+
+\begin{proof}
+  根据$\sin^{2n+1}x < \sin^{2n}x < \sin^{2n-1}x$得到$\int_0^{\frac{\pi}{2}}\sin^{2n+1}x \mathrm{d}x < \int_0^{\frac{\pi}{2}} \sin^{2n}x \mathrm{d}x < \int_0^{\frac{\pi}{2}} \sin^{2n-1}x \mathrm{d} x$，
+  根据Wallis积分公式下面不等式，并构造$A_n,B_n$
+  \begin{equation*}
+    \frac{(2n)!!}{(2n+1)!!} < \frac{(2n-1)!!}{(2n)!!}\frac{\pi}{2} < \frac{(2n-2)!!}{(2n-1)!!} \Rightarrow
+    A_n := \left[ \frac{(2n)!!}{(2n-1)!!} \right]^2 \frac{1}{2n+1} < \frac{\pi}{2} < \left[ \frac{(2n)!!}{(2n-1)!!} \right]^2 \frac{1}{2n} := B_n
+  \end{equation*}
+  此时$B_n - A_n = \left[ \frac{(2n)!!}{(2n-1)!!} \right]^2 \frac{1}{2n(2n - 1)} = A_n \cdot \frac{1}{2n} < \frac{\pi}{2}\frac{1}{2n} \rightarrow 0$，
+  因此$\lim \limits _{n \rightarrow \infty} A_n = \lim \limits _{n \rightarrow \infty} B_n = \frac{\pi}{2}$
+\end{proof}
+
+\subsection{Euler常数}
+
+\begin{theorem}[Euler常数]
+  极限$\lim \limits _{n \rightarrow \infty} \left[ \left( \sum\limits_{k = 1}^n \frac{1}{k} \right) - \ln n \right]$存在且为常数$\gamma$，记作Euler常数。
+\end{theorem}
+
+\begin{corollary}[Euler常数的应用]
+  当$n \rightarrow \infty$时，
+  $\sum\limits_{k = 1}^n \frac{1}{k} = \ln n + \gamma = \ln n + o(n)$
+\end{corollary}
+
+\section{夹逼准则}
+
+\begin{theorem}[夹逼准则]
+  $a_n,b_n,c_n$为三个序列，
+  若$\exists N$使得$n \geq N$时$a_n \leq b_n \leq c_n$，
+  且$\lim \limits _{n \rightarrow \infty}  a_n = \lim \limits _{n \rightarrow \infty} c_n = A$，
+  则$\lim \limits _{n \rightarrow \infty} b_n = A$。
+\end{theorem}
+
+~
+
+\begin{exercise}[两道经典夹逼准则]
+  求极限(1)$\lim \limits _{n \rightarrow \infty} \frac{1}{2} \cdot \frac{3}{4} \cdots \frac{2n-1}{2n}$
+  (2)$\lim \limits _{n \rightarrow \infty} \sum\limits_{k = n^2}^{(n+1)^2} \frac{1}{\sqrt{k}}$
+\end{exercise}
+
+\begin{solution}
+  (1)可用Wallis公式，或者夹逼准则。
+  记$a_n = \frac{1}{2}\cdot \frac{3}{4} \cdots \frac{2n-1}{2n}, b_n = \frac{2}{3}\cdot \frac{4}{5}\cdots \frac{2n}{2n+1}$，
+  则$a_n < b_n, a_nb_n = \frac{1}{2n+1}$，
+  得到$a_n^2 < a_nb_n = \frac{1}{2n+1} \rightarrow 0$，因此$\lim \limits _{n \rightarrow \infty} a_n = 0$
+
+  (2)用$\frac{1}{n+1} \leq \frac{1}{\sqrt{k}} \leq \frac{1}{n}$，
+  从而求和后得到$\frac{2n+2}{n+1} \leq \sum\limits_{k = n^2}^{(n+1)^2} \frac{1}{\sqrt{k}} \leq \frac{2n+2}{n}$，
+  取极限得到$2$。
+\end{solution}
+
+~
+
+\begin{exercise}[整体放缩or局部放缩]
+  (1)$\lim \limits _{n \rightarrow \infty} \left( \frac{1}{\sqrt{n^2 + 1}} + \frac{1}{\sqrt{n^2 + 2}} + \cdots + \frac{1}{\sqrt{n^2 + n}} \right)$
+
+\end{exercise}
+
+\begin{solution}
+  (1)如果是$\frac{1}{\sqrt{n^2 + i^2}}$形式则是用定积分，
+  这里看上去就是$\sum\limits_{k = 1}^n \frac{1}{n} = 1$，
+  因此放缩为$\frac{n}{\sqrt{n^2 + n}} \leq I \leq \frac{n}{\sqrt{n^2}}$即可知结果为$1$。
+\end{solution}
+
+\section{平均值定理}
+
+\subsection{有限项幂次根号平均}
+
+\begin{theorem}[根号平均]
+  $a_1,a_2,\cdots,a_m$是$m$个正数，则$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_1^n + \cdots + a_m^n} = \max \{a_1,\cdots,a_m\}$(注意这里不是$\sqrt[n]{a_1^n + \cdots + a_n^n}$，与平均值定理不同)
+\end{theorem}
+
+\begin{proof}
+  设$A = \max \{a_1,a_2,\cdots,a_m\}$，
+  因此$\sqrt[n]{A^n} \leq \sqrt[n]{a_1^n + a_2^n + \cdots + a_m^n} \leq \sqrt[n]{mA^n}$，
+  两侧都趋于$A$，因此极限为$A$。
+\end{proof}
+
+~
+
+\begin{exercise}[根号平均的两个经典推广]
+  (1)正数列$a_n$收敛到$a > 0$，证明$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_n} = 1$
+
+  (2)$a_n$非负且有界(可能是可数个)，则$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_1^n + a_2^n + \cdots + a_n^n} = \sup \limits_{n \geq 1}a_n$
+\end{exercise}
+
+\begin{proof}
+  (1)根据保号性，$\exists N, n > N$时$\frac{1}{2}a \leq a_n \leq \frac{3}{2}a$，
+  因此$n > N$时$\sqrt[n]{\frac{1}{2}a} \leq \sqrt[n]{a_n} \leq \sqrt[n]{\frac{3}{2}a}$，
+  由夹逼准则得到结果为$1$。
+
+  (2)记$a = \sup \limits_{n \geq 1}a_n$，
+  则$a_n \leq a$且$\forall \epsilon, \exists k, a_k > a - \epsilon$。
+  当$n \geq k$时，$a_k^n \leq a_1^n + a_2^n + \cdots + a_n^n \leq n a^n$，
+  两侧开$n$次根号得到$a - \epsilon < \sqrt[n]{a_1^n + a_2^n + \cdots + a_n^n} \leq a \sqrt[n]{n}$，
+  由于$\lim \limits _{n \rightarrow \infty} a \sqrt[n]{n} = a$，对上述$\epsilon$，$\exists N, \forall n > N$有
+  $a \sqrt[n]{n} < a + \epsilon$，根据夹逼准则可证。
+\end{proof}
+
+\subsection{平均值定理：无穷项算术平均与几何平均}
+
+\begin{theorem}[平均值定理]
+  已知$\lim \limits _{n \rightarrow \infty} a_n = a$(有限数或正负无穷)，
+  则
+  \begin{enumerate}
+  \item 算术平均：$\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = a$
+  \item 几何平均：若$a_n > 0$，则$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_1a_2\cdots a_n} = a$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1)只证$a$为有限数的情况。
+  $\forall \epsilon, \exists N, n > N$时$|a_n - a| < \epsilon$，
+  因此
+  \begin{align*}
+    \left| \frac{a_1 + a_2 + \cdots + a_n}{n} - a \right| &= \left| \frac{(a_1 - a) + \cdots + (a_N - a) + (a_{N+1} - a) + \cdots + (a_n - a)}{n} \right| \\
+    &\leq \frac{|a_1 - a| + \cdots + |a_N - a|}{n} + \frac{|a_{N+1} - a| + \cdots + |a_n - a|}{n} \leq 2\epsilon
+  \end{align*}
+
+  (2)取对数则转换为(1)
+\end{proof}
+
+~
+
+\begin{exercise}[奇偶子列推广]
+  已知$\lim \limits _{n \rightarrow \infty} a_{2n+1} = a, \lim \limits _{n \rightarrow \infty} a_{2n} = b$，
+  证明$\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = \frac{a+b}{2}$
+\end{exercise}
+
+\begin{proof}
+  分为奇偶数项进行讨论：
+  \begin{align*}
+    &\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_{2n}}{2n} \\
+    &= \frac{1}{2}\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_3 + \cdots + a_{2n-1}}{n}  + \frac{1}{2} \lim \limits _{n \rightarrow \infty} \frac{a_2 + a_4 + \cdots + a_{2n}}{n} = \frac{a+b}{n}
+  \end{align*}
+  另一方面
+  \begin{align*}
+    &\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_{2n+1}}{2n+1} \\
+    &= \lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_{2n+1}}{n} \cdot \frac{n}{2n-1} + \lim \limits _{n \rightarrow \infty} \frac{a_2 + a_4 + \cdots + a_{2n-2}}{n-1}\cdot \frac{n-1}{2n-1} = \frac{a+b}{2}
+  \end{align*}
+  因此得到结论成立。
+\end{proof}
+
+~
+
+\begin{exercise}[倒乘推广]
+  $\lim \limits _{n \rightarrow \infty} a_n = a, \lim \limits _{n \rightarrow \infty} b_n = b$，证明：
+  $\lim \limits _{n \rightarrow \infty} \frac{a_1b_n + a_2b_{n-1} + \cdots + a_nb_1}{n} = ab$
+\end{exercise}
+
+\begin{proof}
+  由于$\lim \limits _{n \rightarrow \infty} a_n = a$，因此$a_n$有界，即$\exists M$使得$|a_n| < M$，
+  故：
+  \begin{equation*}
+    |a_kb_{n-k+1} - ab| < |a_k|\cdot |b_{n-k+1} - b| + |b|\cdot |a_k - a| \leq M|b_{n-k+1} - b| + |b|\cdot |a_k - a|
+  \end{equation*}
+  因此得到：
+  \begin{align*}
+    & \left|\frac{a_1b_n + \cdots + a_nb_1}{n} - ab\right|\\
+    & \leq \frac{|a_1b_n - ab| + \cdots + |a_nb_1 - ab|}{n}\\
+    & \leq M \cdot \frac{|b_n - b| + \cdot + |b_1 - b|}{n} + |b| \cdot \frac{|a_1 - a| + \cdots + |a_n - a|}{n}
+  \end{align*}
+  有平均值定理可知右侧极限为$0$，因此$\left| \frac{a_1b_n + \cdots + a_nb_1}{n} - ab \right| \leq 0$，
+  得到目标极限为$0$。
+\end{proof}
+
+\subsection{技巧：一招解决n次根号与除以n}
+
+\begin{theorem}[n次根号与除以n]
+  $a_n$为数列，则
+  \begin{itemize}
+  \item 若$\lim \limits _{n \rightarrow \infty} (a_n - a_{n-1}) = a$，则$\lim \limits _{n \rightarrow \infty} \frac{a_n}{n} = a$
+  \item 若$\lim \limits _{n \rightarrow \infty} \frac{a_n}{a_{n-1}} = a$，则$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_n} = a$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)由于$a_n = a_1 + (a_2 - a_1) + \cdots + (a_n - a_{n-1})$，
+  因此$\lim \limits _{n \rightarrow \infty} \frac{a_n}{n} = \lim \limits _{n \rightarrow \infty} \frac{a_1 + (a_2 - a_1) + \cdots + (a_n - a_{n-1})}{n}$，
+  根据平均值定理即$a$
+
+  (2)根据$a_n = a_1 \cdot \frac{a_2}{a_1} \cdots \frac{a_n}{a_{n-1}}$，
+  $\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_n} = \lim \limits _{n \rightarrow \infty} \sqrt[n]{a_1\cdot \frac{a_2}{a_1}\cdots \frac{a_n}{a_{n-1}}}$，
+  根据平均值定理即$a$
+\end{proof}
+
+~
+
+\begin{exercise}[n次根号]
+  计算极限(1)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a}$
+  (2)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{n}$
+  (3)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{n!}$
+\end{exercise}
+
+\begin{solution}
+  (1)$\frac{a_n}{a_{n-1}} = 1$，因此极限为$1$。
+
+  (2)$\frac{a_n}{a_{n-1}} = \frac{n}{n-1} \rightarrow 1$，极限为$1$
+
+  (3)$\frac{a_n}{a_{n-1}} = n \rightarrow \infty$，因此不收敛
+\end{solution}
+
+~
+
+\begin{exercise}[除以n]
+  重点：计算极限(1)$\lim \limits _{n \rightarrow \infty} \frac{\sqrt[n]{n!}}{n}$
+  (2)$\lim \limits _{n \rightarrow \infty} \frac{\sqrt[n]{n(n+1)\cdots (2n-1)}}{n}$
+\end{exercise}
+
+\begin{solution}
+  (1)$a_n = \frac{n!}{n^n}$，
+  $\lim \limits _{n \rightarrow \infty} \frac{a_n}{a_{n-1}} = \frac{\frac{n!}{n^n}}{\frac{(n-1)!}{(n-1)^{n-1}}} = \frac{1}{(1 - \frac{1}{n})^{n-1}} = \frac{1}{\left[(1 - \frac{1}{n})^n\right]^{\frac{n-1}{n}}} = \frac{1}{e}$，
+  因此极限为$\frac{1}{e}$
+
+  (2)$a_n = \frac{n(n+1)\cdots (2n-1)}{n^n}$，
+  因此
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \frac{a_n}{a_{n-1}} = \lim \limits _{n \rightarrow \infty} \frac{2(2n-1)(n-1)^{n-1}}{n^n} = (4 - \frac{2}{n}) \left( (1 - \frac{1}{n})^n \right)^{\frac{n-1}{n} } = \frac{4}{e}
+  \end{equation*}
+  因此极限为$\frac{4}{e}$
+\end{solution}
+
+
+\section{使用定积分定义}
+
+\subsection{使用定积分计算极限}
+
+\begin{theorem}[用定积分定义计算极限]
+  若$f(x)$在$[a,b]$连续，则
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \frac{b - a}{n} \left[ f \left( a + \frac{b-a}{n} \right) + f \left( a + \frac{2(b-a)}{n} \right) + \cdots + f \left( a + \frac{n(b-a)}{n} \right) \right] = \int_a^b f(x) \mathrm{d} x
+  \end{equation*}
+\end{theorem}
+
+\begin{note}
+  如果是$\lim \limits _{n \rightarrow \infty} \frac{1}{n+a}\sum\limits_{k = 1}^n f \left( \frac{k}{n} \right)$，则可以加一项
+  得到$\lim \limits _{n \rightarrow \infty} \frac{n}{n+a} \cdot \frac{1}{n} \sum\limits_{k = 1}^n f \left( \frac{k}{n} \right)$再转换为定积分。
+\end{note}
+
+~
+
+\begin{exercise}[直接判断积分]
+  (1)$\lim \limits _{n \rightarrow \infty} n \left( \frac{1}{n^2 + 1} + \frac{1}{n^2 + 2} + \cdots + \frac{1}{n^2 + n^2} \right)$
+
+  (2)$\lim \limits _{n \rightarrow \infty} n \left[ \frac{1}{(n+1)^2} + \frac{1}{(n+2)^2} + \cdots + \frac{1}{(n+n)^2} \right]$
+
+  (3)$\lim \limits _{n \rightarrow \infty}  \left( \frac{1}{\sqrt{n^2 + 1^2}} + \frac{1}{\sqrt{n^2 + 2^2}} + \cdots + \frac{1}{\sqrt{n^2 + n^2}} \right)$
+  
+  (4)$\lim \limits _{n \rightarrow \infty} \sum\limits_{k = 1}^n \frac{1}{\sqrt{nk}}$
+\end{exercise}
+
+\begin{solution}
+  (1)等价于$\int_0^1 \frac{1}{1 + x^2}\mathrm{d} x = \frac{\pi}{4}$
+
+  (2)等价于$\int_0^1 \frac{1}{(1 + x)^2}\mathrm{d} x = \frac{1}{2}$
+
+  (3)等价于$\int_0^1 \frac{1}{\sqrt{1 + x^2}}\mathrm{d} x = \ln(1 + \sqrt{2})$
+  
+  (4)转换为$\frac{1}{n}\sum\limits_{k = 1}^n \frac{1}{\sqrt{\frac{k}{n}}}$，
+  即$\int_0^1 \frac{1}{\sqrt{x}}\mathrm{d} x$，极限为$2$
+\end{solution}
+
+~
+
+\begin{exercise}[对数+积分]
+  重点：取对数$\lim \limits _{n \rightarrow \infty} \frac{\sqrt[n]{n(n+1)\cdots(2n-1)}}{n}$
+\end{exercise}
+
+\begin{solution}
+  等价于$\text{exp} \left[ \frac{1}{n} \ln \left( \frac{n(n+1)\cdots(2n-1)}{n^n} \right) \right]$，
+  指数积分即$\int_0^1 \ln(1+x)\mathrm{d} x = \left[ (1+x)\ln(1+x) - x \right] \bigg|_0^1 = \ln 4 - 1$，
+  因此极限为$\frac{4}{e}$
+
+  或者本题也在$n$次根号部分出现了(更推荐$n$次根号的做法)
+\end{solution}
+
+~
+
+\begin{exercise}[改变有限项]
+  (1)重点：$\lim \limits _{n \rightarrow \infty} \left( \frac{1}{n} + \frac{1}{n+1} + \cdots + \frac{1}{n+ (n-1)} \right)$
+\end{exercise}
+
+\begin{solution}
+  (1)可改变有限项不影响极限，变为$\lim \limits _{n \rightarrow \infty} \frac{1}{n+1} + \cdots + \frac{1}{n+n}$，
+  因此极限为$\int_0^1 \frac{1}{1+x}\mathrm{d} x = \ln 2$
+\end{solution}
+
+
+~
+
+\begin{exercise}[经典夹逼+积分]
+ (1)重点：$I = \lim \limits _{n \rightarrow \infty} \left( \frac{\sin \frac{\pi}{n}}{n + \frac{1}{n}} + \frac{\sin \frac{2}{n}\pi}{n + \frac{2}{n}} + \cdots + \frac{\sin \pi}{n + 1} \right)$
+
+ (2)重点：
+ $\lim \limits _{n \rightarrow \infty} \left( \frac{1}{n^2 + n + 1} + \frac{2}{n^2 + n + 2} + \cdots + \frac{n}{n^2 + n + n} \right)$
+
+ (3)重点：
+ $\lim \limits _{n \rightarrow \infty} \left( \frac{1}{n^2 + n + 1^2} + \frac{2}{n^2 + n + 2^2} + \cdots + \frac{n}{n^2 + n + n^2}\right)$
+
+ (4)$\lim \limits _{n \rightarrow \infty} \left( \frac{\sin \frac{x}{n}}{n+1} + \frac{2 \sin \frac{2}{n}x}{2n + 1} + \cdots + \frac{n\sin \frac{n}{n}x}{n^2 + 1} \right), x \in (0,\pi)$
+\end{exercise}
+
+\begin{solution}
+  (1)$I = \lim \limits _{n \rightarrow \infty} \frac{1}{n} \left( \frac{\sin \frac{\pi}{n}}{1 + \frac{1}{n^2}} + \frac{\sin \frac{2}{n}\pi}{1 + \frac{2}{n^2}} + \cdots + \frac{\sin \pi}{1 + \frac{n}{n^2}} \right)$，
+  进行$\frac{ \sin \frac{i}{n}\pi}{n+1} \leq \frac{\sin \frac{i}{n}\pi}{n + \frac{i}{n}} \leq \frac{\sin \frac{i}{n}\pi}{n}$放缩：
+  \begin{equation*}
+    \begin{cases}
+      \lim \limits _{n \rightarrow \infty} \frac{1}{n} \sum\limits_{i = 1}^n \sin \frac{i}{n}\pi = \int_0^1 \sin \pi x \mathrm{d} x = \frac{2}{\pi}\\
+     \lim \limits _{n \rightarrow \infty} \frac{1}{n+1} \sum\limits_{n = 1}^{\infty} \sin \frac{i}{n}\pi = \lim \limits _{n \rightarrow \infty}  \frac{n}{n+1} \cdot \frac{1}{n} \sum\limits_{i = 1}^n \sin \frac{i}{n}\pi = \frac{2}{\pi}
+    \end{cases}
+  \end{equation*}
+  因此根据夹逼可知极限为$\frac{2}{\pi}$
+
+  (2)
+  进行放缩：$\frac{1+2+\cdots+n}{n^2 + n + n} \leq I \leq \frac{1 + 2 + \cdots + n}{n^2 + n}$(或者$\frac{i}{n^2 + n + n} \leq \frac{i}{n^2 + n + i} \leq \frac{i}{n^2}$也行)。
+  左右侧分别写为
+  \begin{equation*}
+    \begin{cases}
+      \sum\limits_{k = 1}^n \frac{k}{n^2 + 2n} = \frac{1}{n+2} \sum\limits_{k = 1}^n \frac{k}{n} = \frac{n}{n+2} \cdot \frac{1}{n} \sum\limits_{k = 1}^n \frac{k}{n}\\
+      \sum\limits_{k = 1}^n \frac{k}{n^2 + n} = \frac{n}{n+1}\cdot \frac{1}{n} \sum\limits_{k = 1}^n \frac{k}{n}
+    \end{cases}
+  \end{equation*}
+  因此两侧均等于积分$\int_0^1 x\mathrm{d} x = \frac{1}{2}$
+
+  (3)一方面$\frac{i}{n^2 + n + i^2} \leq \frac{i}{n^2 + i^2} = \frac{1}{n}\cdot \frac{\frac{i}{n}}{1 + (\frac{i}{n})^2}$，
+  另一方面$\frac{i}{n^2 + n + i} \geq \frac{i}{(n+1)^2 + i^2} = \frac{1}{n+1} \cdot \frac{\frac{i}{n+1}}{1 + \left( \frac{i}{n+1} \right)^2}$，
+  结果等价于$\int_0^1 \frac{x}{1 + x^2}\mathrm{d} x = \frac{1}{2} \ln 2$
+
+  (4)看上去等价于$\lim \limits _{n \rightarrow \infty} \sum\limits_{k = 1}^n \frac{k\sin \frac{x}{n}}{kn} = \int_0^1 \sin tx \mathrm{d}t = \frac{1 - \cos x}{x}$，
+  放缩为$\frac{k \sin \frac{k}{n}x}{kn + k} \leq \frac{k \sin \frac{k}{n}x}{kn + 1} \leq \frac{k \sin \frac{k}{n}x}{kn}$再求和即可。
+\end{solution}
+
+\begin{note}
+  一般不能直接写成积分形式的都需要进行放缩。
+\end{note}
+
+\subsection{利用定积分定义构造等价无穷小}
+
+\begin{theorem}[利用积分构造等价无穷小]
+  对于正整数$k$，
+  $1^k + 2^k + \cdots + n^k \sim \frac{1}{k+1} n^{k+1}$
+\end{theorem}
+
+\begin{proof}
+  考虑$\lim \limits _{n \rightarrow \infty} \frac{1}{n^{k+1}} \left( 1^k + \cdots + n^k \right) = \int_0^1 x^k \mathrm{d}x = \frac{1}{k+1}$即可。
+\end{proof}
+
+~
+
+\begin{exercise}[利用积分构造等价无穷小]
+  计算$\lim \limits _{n \rightarrow \infty} \frac{\ln n}{\ln(1^{2022} + 2^{2022} + \cdots + n^{2022})}$
+\end{exercise}
+
+\begin{solution}
+  $\lim \limits _{n \rightarrow \infty} \frac{1}{n^{2023}} \left(  1^{2022} + 2^{2022} + \cdots + n^{2022} \right) = \int_0^1 x^{2022} \mathrm{d} x  = \frac{1}{2023}$，
+  因此
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \frac{\ln n}{\ln(1^{2022} + 2^{2022} + \cdots + n^{2022})} =
+    \lim \limits _{n \rightarrow \infty} \frac{\ln n}{2023 \ln n + \ln \frac{1}{n^{2023}}(1^{2022}+2^{2022} + \cdots + n^{2022})} = \frac{1}{2023}
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{theorem}[已知极限计算求和极限]
+  若$\lim \limits _{n \rightarrow \infty} a_n = A$，则$\lim \limits _{n \rightarrow \infty} \sum\limits_{k = 1}^n \frac{a_{n+k}}{n+k} = A \ln 2$
+\end{theorem}
+
+\begin{proof}
+  首先显然$\lim \limits _{n \rightarrow \infty} \sum\limits_{k = 1}^n \frac{A}{n+k} = A \ln 2$，
+  根据$\lim \limits _{n \rightarrow \infty} a_n = A$，
+  $\forall \epsilon, \exists N, \forall n > N, |a_n - A| < \epsilon$，
+  因此$n > N$时：
+  \begin{equation*}
+    \left| \sum\limits_{k = 1}^n \frac{a_{n+k}}{n+k} - \sum\limits_{k = 1}^n \frac{A}{n+k} \right| \leq \sum\limits_{k = 1}^n \frac{|a_{n+k} - A|}{n+k} < \sum\limits_{k = 1}^n \frac{\epsilon}{n} = \epsilon
+  \end{equation*}
+\end{proof}
+
+
+
+\section{单调有界定理}
+
+\subsection{单调有界定理及其推广}
+
+\begin{theorem}[单调有界定理]
+  若数列$a_n$单调且有界，则其必收敛。
+\end{theorem}
+
+~
+
+\begin{exercise}[单调有界定理理论推广]
+  (1)$a_n$单增，$b_n$单减，$\lim \limits _{n \rightarrow \infty} (b_n - a_n) = 0$，
+  证明$\lim \limits _{n \rightarrow \infty} a_n, \lim \limits _{n \rightarrow \infty} b_n$存在且相等
+
+  (2)$a_n$为有界数列，记$\overline{a} = \sup\{a_n,a_{n+1},\cdots\}, \underline{a}_n = \inf\{a_n,a_{n+1},\cdots\}$，
+  证明$\lim \limits _{n \rightarrow \infty} \overline{a}_n, \lim \limits _{n \rightarrow \infty} \underline{a}_n$存在，且$\lim \limits _{n \rightarrow \infty} a_n$存在的充要条件为$\lim \limits _{n \rightarrow \infty} \overline{a}_n = \lim \limits _{n \rightarrow \infty} \underline{a}_n$
+\end{exercise}
+
+\begin{proof}
+  (1)由于$\lim \limits _{n \rightarrow \infty} (b_n - a_n) = 0$，
+  $\exists N, \forall n > N$使得$|b_n - a_n| < 1$，
+  即$a_n < b_n + 1$，
+  于是$a_1 \leq a_2 \leq \cdots \leq a_n < b_n+1 \leq b_{n-1} + 1 \leq \cdots \leq b_1 + 1$，
+  根据单调有界定理可知均收敛，根据极限四则运算可知极限相等。
+
+  (2)显然$\overline{a}_n$单减，$\underline{a}_n$单增，
+  且$\overline{a}_1 \geq \overline{a}_n \geq a_n \geq \underline{a}_n \geq \underline{a}_1$，
+  因此均单调有界，收敛。
+  记$\lim \limits _{n \rightarrow \infty} \overline{a}_n = \overline{a}, \lim \limits _{n \rightarrow \infty} \underline{a}_n = \underline{a}$，
+  根据夹逼准则$\underline{a}_n \leq a_n \leq \overline{a}_n$可知$\lim \limits _{n \rightarrow \infty} a_n$存在。
+  若$\lim \limits _{n \rightarrow \infty} a_n = a$，
+  则$\forall \epsilon, \exists N, \forall n > N$有
+  \begin{equation*}
+    a - \epsilon < \underline{a}_n \leq \overline{a}_n < a + \epsilon
+  \end{equation*}
+  取极限可知极限均为$a$.
+\end{proof}
+
+~
+
+\begin{exercise}[两道经典循环根式]
+  (1)重点：$a_1 = \sqrt{c}$，$a_{n+1} = \sqrt{a_n + c}$，求$\lim \limits _{n \rightarrow \infty} a_n$
+
+  (2)重点：$a_n = \sqrt{1 + \sqrt{2 + \cdots + \sqrt{n}}}$，证明$a_n$收敛
+\end{exercise}
+
+\begin{solution}
+  (1)由于$a_n = \sqrt{c + \sqrt{c + \cdots + \sqrt{c}}}$，
+  根据该通项的形式，每次$a_{n+1}$在$a_n$基础上往最里层加入一个$\sqrt{c}$，因此整体单增。
+  若极限存在，则显然极限为$a = \frac{1 + \sqrt{1 + 4c}}{2}$，
+  由于$a = \sqrt{a + c}$，
+  因此若$a_n < a$，则$a_{n+1} < a$，而根据$a_1 < a$得到$a_n < a$，因此有界，根据单调有界定理可知收敛。
+
+  (2)显然$a_n$单增，下证其有界。
+  由于$n < 2^{2^n}$，于是
+  \begin{equation*}
+    a_n < \sqrt{2^{2^1} + \sqrt{2^{2^2} + \cdots + \sqrt{2^{2^n}}}} < 2 \sqrt{1 + \sqrt{1 + \cdots + \sqrt{1}}}
+  \end{equation*}
+  根据(1)可知$\sqrt{1 + \sqrt{1 + \cdots + \sqrt{1}}}$有界，故根据单调有界定理收敛。
+\end{solution}
+
+\begin{note}
+  不动点迭代一般有界性都和不动点本身去比。
+\end{note}
+
+\subsection{相减法}
+
+\begin{exercise}[Euler常数]
+  重点：证明$a_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n} - \ln n$收敛
+\end{exercise}
+
+\begin{proof}
+  由于$1 + \frac{1}{2} + \cdots + \frac{1}{n} - \ln n > \ln(n+1) - \ln(n) > 0$(调和级数不等式)，
+  且
+  根据$\ln(1 + x) \geq \frac{x}{1+x}$得到
+  \begin{equation*}
+    \frac{1}{n+1} < \ln (1 + \frac{1}{n})
+  \end{equation*}
+  于是$a_{n+1} - a_n = \frac{1}{n+1} - \ln(1 + \frac{1}{n} ) < 0$，
+  这说明单减有下界，故收敛。
+\end{proof}
+
+~
+
+\begin{exercise}[交替级数]
+  $S_n = 1 - \frac{1}{2} + \frac{1}{3} - \cdots + \frac{(-1)^{n+1}}{n}$，计算$\lim \limits _{n \rightarrow \infty} S_n$
+\end{exercise}
+
+\begin{solution}
+  由Leibniz定理可知收敛。
+  只需要考虑偶数项
+  \begin{equation*}
+    S_{2n} = (1 + \frac{1}{2} + \cdots + \frac{1}{2n}) - 2(\frac{1}{2} + \frac{1}{4} + \cdots + \frac{1}{2n})
+    = (1 + \frac{1}{2} + \cdots + \frac{1}{2n}) - (1 + \frac{1}{2} + \cdots + \frac{1}{n}) = (\frac{1}{n+1} + \cdots + \frac{1}{2n}) \rightarrow \ln 2
+  \end{equation*}
+  由于收敛数列的奇偶子列收敛到同一极限，因此极限为$\ln 2$
+\end{solution}
+
+~
+
+\begin{exercise}[经典相减法]
+  (1)重点：$A>0, a_1 >0$，
+  $a_{n+1} = \frac{1}{2}(a_n + \frac{A}{a_n})$，
+  证明$a_n$收敛，并求极限
+\end{exercise}
+
+\begin{solution}
+  (1)首先$a_{n+1} = \frac{1}{2}(a_n + \frac{A}{a_n}) > \sqrt{A}$，因此$n \geq 2$时，$a_n > \sqrt{A}$，
+  而前后项相减得到
+  \begin{equation*}
+    a_{n+1} - a_n = \frac{1}{2}(\frac{A}{a_n} - a_n) = \frac{1}{2} \cdot \frac{A - a_n^2}{a_n}
+  \end{equation*}
+  结合$n \geq 2$时$a_n > \sqrt{A}$得到$a_{n+1} - a_n < 0$，因此单减，显然$a_n > 0$，因此收敛。
+  两侧取极限得到$\lim \limits _{n \rightarrow \infty} a_n = \sqrt{A}$
+\end{solution}
+
+\subsection{相除法}
+
+\begin{exercise}[两道经典相除法]
+  (1)重点：$a_1 = 1, a_{n+1} = \sqrt{2a_n}$，求$\lim \limits _{n \rightarrow \infty} a_n$
+
+  (2)重点：$c > 0, 0 < x_1 < \frac{1}{c}$，$x_{n+1} = x_n(2 - cx_n)$，证明：$x_n$收敛并求其极限
+\end{exercise}
+
+\begin{solution}
+  (1)$\frac{a_{n+1}}{a_n} = \sqrt{\frac{2}{a_n}}$，
+  当$a_n < 2$时，$a_{n+1} > a_n$。
+  根据$a_{n+1} = \sqrt{2a_n}$，
+  当$a_n < 2$时，$a_{n+1} < 2$，
+  单调有界故收敛，
+  两侧同取极限得到极限为$A = 2$。
+
+  (2)$\frac{x_{n+1}}{x_n} = 2 - cx_n$，
+  当$x_n < \frac{1}{c}$时，$x_{n+1} > x_n$。
+  设$f(x) = 2x - cx^2, f^{\prime}(x) = 2 - 2cx$，$f(x)$在$x = \frac{1}{c}$取最大，
+  因此$x_n < \frac{1}{c}$时$x_{n+1} < \frac{1}{c}$有界，
+  根据单调有界收敛，
+  两侧取极限得到极限为$\frac{1}{c}$。
+\end{solution}
+
+\subsection{不等式放缩}
+
+\begin{exercise}[两道经典双数列+不等式放缩]
+  (1)重点：$a_1 > b_1 > 0$，$a_{n+1} = \frac{a_n+ b_n}{2}, b_{n+1} = \sqrt{a_nb_n}$，证明$\lim \limits _{n \rightarrow \infty} a_n, \lim \limits _{n \rightarrow \infty} b_n$存在且相等。
+
+  (2)重点：$a_1 > b_1 > 0$，$a_{n+1} = \frac{a_n + b_n}{2}, b_{n+1} = \frac{2a_nb_n}{a_n + b_n}$，证明$\lim \limits _{n \rightarrow \infty} a_n, \lim \limits _{n \rightarrow \infty} b_n$存在，并求其值
+\end{exercise}
+
+\begin{solution}
+  (1)根据均值不等式$a_{n+1} \geq b_{n+1}$，
+  根据$a_1 > b_1$可知$\forall n, a_n > b_n$，从而
+  \begin{equation*}
+    a_{n+1} = \frac{a_n + b_n}{2} \leq \frac{a_n + a_n}{2} = a_n, b_{n+1} = \sqrt{a_nb_n} \geq \sqrt{b_nb_n} = b_n
+  \end{equation*}
+  因此$a_n$单减，$b_n$单增，即$a_1 \geq a_2 \geq \cdots \geq a_n \geq b_n \geq b_{n-1} \cdots \geq b_1$，
+  这说明$a_n,b_n$均单调有界，故均收敛。
+  $a_{n+1} = \frac{a_n + b_n}{2}$两侧取极限可知极限相等。
+
+  (2)根据均值不等式可知$a_n \geq b_n$，由于$a_1 > b_1$，因此$\forall n, a_n \geq b_n$，
+  因此
+  \begin{equation*}
+    a_{n+1} = \frac{a_n + b_n}{2} \leq \frac{a_n + a_n}{2} = a_n, b_{n+1} = \frac{2}{\frac{1}{a_n} + \frac{1}{b_n}} \geq \frac{2}{\frac{1}{b_n} + \frac{1}{b_n}} = b_n
+  \end{equation*}
+  $a_n$单减，$b_n$单增，且$a_1 \geq a_2 \geq \cdots a_n \geq b_n \geq \cdots \geq b_1$，
+  单调有界故均收敛。
+  $a_{n+1} = \frac{a_n + b_n}{2}$两侧取极限可知极限满足$a = \frac{a+b}{2}$，故相等。
+  而
+  \begin{equation*}
+    a_{n+1}b_{n+1} = \frac{a_n + b_n}{2} \cdot \frac{2a_nb_n}{a_n + b_n} = a_nb_n
+  \end{equation*}
+  因此$ab = a_1b_1$，即极限为$a = b = \sqrt{a_1b_1}$
+\end{solution}
+
+~
+
+\begin{exercise}[前后项不等式放缩]
+  (1)重点：$0 < a_n < 2$，$(2 - a_n)a_{n+1} \geq 1$，证明$a_n$收敛，并求其极限
+
+  (2)重点：$x_n > 0$，$x_{n+1} + \frac{4}{x_n} < 4$，证明$x_n$收敛并求$\lim \limits _{n \rightarrow \infty} x_n$
+\end{exercise}
+
+\begin{solution}
+  (1)显然$a_n(2 - a_n) \leq \left[ \frac{a_n + (2 - a_n)}{2} \right]^2 = 1 \leq a_{n+1}(2 - a_n)$，
+  因此$a_n \leq a_{n+1}$，根据单调有界定理可知收敛，两侧取极限得到极限为$1$
+
+  (2)显然$x_n + \frac{4}{x_n} \geq 2 \sqrt{x_n \cdot \frac{4}{x_n}} = 4 > x_{n+1} + \frac{4}{x_n}$，
+  因此$x_n > x_{n+1}$，单减。
+  另外有$0 < x_{n+1} < x_{n+1} + \frac{4}{x_n} < 4$可知$x_n$有界，故收敛，
+  两侧取极限得到极限为$2$。
+\end{solution}
+
+\begin{note}
+  前后项不等式先用同项进行放缩，可得出单调性结论
+\end{note}
+
+\section{递推问题}
+
+
+\subsection{极限压缩定理}
+
+\begin{theorem}[极限压缩定理]
+  $A \in \mathbb{R}$，若$\exists r \in (0,1)$使得
+  $|a_n - A| < r|a_{n-1} - A|$，则数列$a_n $收敛到$A$。
+\end{theorem}
+
+~
+
+\begin{exercise}[经典极限压缩定理题]
+  (1)设$x_{n+1} = \cos x_n, x_1 \in [0, \frac{\pi}{3}]$，证明$\lim \limits _{n \rightarrow \infty} x_n$存在且极限为$\cos x - x = 0$的根
+\end{exercise}
+
+\begin{solution}
+  (1)考虑$f(x) = \cos x - x$，$f^{\prime}(x) = \sin x - 1 \leq 0$单减，
+  因此有唯一解，设$\cos a = a$。
+  由于
+  \begin{equation*}
+    |x_{n+1} - a| = |\cos x_n - a| = |\cos x_n - \cos a| = |\sin \xi| \cdot |x_n - a|
+  \end{equation*}
+  而由于$\xi \in [0,\frac{\pi}{3}]$，$|\sin \xi| < \frac{\sqrt{3}}{2}$，因此$|x_n - a| \rightarrow 0$
+\end{solution}
+
+
+
+\subsection{压缩映射定理}
+
+\begin{theorem}[压缩映射定理]
+  若存在$r \in (0,1)$使得$|a_n - a_{n-1}| \leq r|a_n - a_{n-1}|$，则数列$a_n$收敛。
+\end{theorem}
+
+\begin{corollary}[导数判断压缩映射]
+  若$a_{n+1} = f(a_n)$，$f$可导，且$\exists r \in (0,1)$使得$|f^{\prime}(x)| \leq r < 1$，则$a_n$收敛。
+\end{corollary}
+
+~
+
+\begin{exercise}[两个经典循环式]
+  证明收敛并求极限：
+
+  (1)$x_1 = 2, x_2 = 2 + \frac{1}{2},\cdots, x_{n+1} = 2 + \frac{1}{a_n}$
+
+  (2)$x_1 = 1, x_2 = \sqrt{2}, \cdots, x_{n+1} = \sqrt{2 \sqrt{x_n}}$
+\end{exercise}
+
+\begin{solution}
+  (1)$|x_{n+1} - x_n| = |\frac{1}{x_n} - \frac{1}{x_{n-1}}| = \frac{|x_{n-1} - x_n|}{|x_nx_{n-1}|} \leq \frac{1}{4}|x_n - x_{n-1}|$，因此收敛，
+  取极限得到极限为$1 + \sqrt{2}$
+
+  (2)设$f(x) = \sqrt{2x}$，$|f^{\prime}(x)| = \frac{\sqrt{2}}{2 \sqrt{x}} \leq \frac{\sqrt{2}}{2} < 1$。
+\end{solution}
+
+
+\section{Stolz定理}
+
+
+\begin{theorem}[Stolz定理]
+  Stolz定理分为以下两种，下面的$A$可以为无穷。
+  \begin{itemize}
+  \item $\frac{\infty}{\infty}$型：$b_n$严格单增趋于$\infty$，且$\lim \limits _{n \rightarrow \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A$，则$\lim \limits _{n \rightarrow \infty} \frac{a_n}{b_n} = A$
+  \item $\frac{0}{0}$型：$b_n$严格单减趋于$0$，$a_n$也收敛到$0$，且$\lim \limits _{n \rightarrow \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A$，
+    则$\lim \limits _{n \rightarrow \infty} \frac{a_n}{b_n} = A$
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}[直接使用]
+  用Stolz定理证明平均值定理
+\end{exercise}
+
+\begin{proof}
+  设$a_n = x_1 + x_2 + \cdots + x_n, b_n = n$，则$\lim \limits _{n \rightarrow \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = x_n \rightarrow a$，
+  则$\frac{a_n}{b_n} = \frac{x_1 + x_2 + \cdots + x_n}{n} \rightarrow a$
+\end{proof}
+
+\begin{note}
+  由于Stolz定理可以证出平均值定理，在使用平均值定理时就不需要使用放缩法了。
+\end{note}
+
+\begin{exercise}[几道经典题目]
+  (1)ZJU2022.2：$x_0 > 0, x_n= \arctan x_{n-1}$，证明：
+
+  (a)$\lim \limits _{n \rightarrow \infty} x_n = 0$
+
+  (b)$\sqrt{n}x_n$收敛，并求极限
+\end{exercise}
+
+\begin{solution}
+  (1)(a)由于$x_n = \arctan x_{n-1} < x_{n-1}$因此单减，
+  根据单调有界定理则极限存在，且两侧取极限得到零
+
+  (b)考虑$\lim \limits _{n \rightarrow \infty} nx_n^2$，
+  由于$nx_n^2 = \frac{n}{\frac{1}{x_n^2}}$，根据Stolz定理即
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \frac{1}{\frac{1}{x_n^2} - \frac{1}{x_{n-1}^2}} = \lim \limits _{n \rightarrow \infty} \frac{x_{n-1}^2 x_n^2}{x_{n-1}^2 - x_n^2} = \lim \limits _{n \rightarrow \infty} \frac{x_{n-1}^2 \arctan^2 x_{n-1}}{x_{n-1}^2 - \arctan^2 x_{n-1}} = \frac{x_{n-1}^2(x_{n-1}^2 + \frac{2}{3}x_{n-1}^4 + \frac{1}{9}x_{n-1}^6)}{- \frac{2}{3} x_{n-1}^4 - \frac{1}{9}x_{n-1}^6} \frac{3}{2}
+  \end{equation*}
+  因此$\lim \limits _{n \rightarrow \infty} \sqrt{n}x_n = \frac{\sqrt{6}}{2}$
+\end{solution}
+
+
+
+% \begin{exercise}[几道经典题目]
+%   (1)已知$a_n$满足$0 < a_n < 1$，$a_{n+1} = a_n(1 - a_n)$，证明：
+%   $\lim \limits _{n \rightarrow \infty} na_n = 1$与$\lim \limits _{n \rightarrow \infty} \frac{n(1 - na_n)}{\ln n} = 1$
+
+%   (2)$a_1 > 1$，$a_{n+1} = a_n + \frac{1}{a_n}$，证明：$\lim \limits _{n \rightarrow \infty} \frac{a_n}{\sqrt{2n}} = 1$
+
+%   (3)$0 < a_1 < \frac{\pi}{2}$，$a_{n+1} = \sin a_n$，证明：$\lim \limits _{n \rightarrow \infty} \sqrt{\frac{n}{3}}a_n = 1$
+% \end{exercise}
+
+% \begin{proof}
+%   (1)由于$\frac{a_{n+1}}{a_n} = 1 - a_n < 1$，
+%   因此单减且有下界。
+%   两侧取极限得到极限为$0$。
+%   因此$\frac{1}{a_n}$单增，根据Stolz定理：
+%   \begin{equation*}
+%     \lim \limits _{n \rightarrow \infty} na_n = \lim \limits _{n \rightarrow \infty} \frac{n}{\frac{1}{a_n}} = \lim \limits _{n \rightarrow \infty} \frac{(n+1) - n}{\frac{1}{a_{n+1}} - \frac{1}{a_n}} = \lim \limits _{n \rightarrow \infty} \frac{1}{\frac{1}{a_n(1-a_n)} - \frac{1}{a_n}} = \lim \limits _{n \rightarrow \infty} (1 - a_n) = 1
+%   \end{equation*}
+%   由于$a_n \sim \frac{1}{n}$，因此
+%   $\lim \limits _{n \rightarrow \infty} \frac{n(1 - na_n)}{\ln n} = \lim \limits _{n \rightarrow \infty} \frac{\frac{1 - na_n}{a_n}}{\ln n} = \lim \limits _{n \rightarrow \infty} \frac{\frac{1}{a_n} - n}{\ln n}$，
+%   根据$a_{n+1} = a_n(1 - a_n)$可知
+%   \begin{equation*}
+%     \frac{1}{a_{n+1}} = \frac{1}{a_n(1 - a_n)} = \frac{1}{a_n} + \frac{1}{1 - a_n}
+%   \end{equation*}
+%   根据Stolz定理可得：
+%   \begin{equation*}
+%     \lim \limits _{n \rightarrow \infty} \frac{n(1 - na_n)}{\ln n} = ... = 1(\text{有点复杂，暂略})
+%   \end{equation*}
+% \end{proof}
+
+% \subsection{阿贝尔变换}
+
+% \begin{theorem}[Abel变换]
+%   $a_n,b_n$为两个数列，$A_n = \sum\limits_{k = 1}^n a_k$，
+%   则
+%   \begin{equation*}
+%     \sum\limits_{k = 1}^n a_kb_k = \sum\limits_{k = 1}^{n - 1}A_k(b_k - b_{k+1}) + A_nb_n
+%   \end{equation*}
+% \end{theorem}
+
+% \begin{exercise}[Abel变换的应用]
+%   (1)$p_n$是单增趋于$+\infty$的正数列，
+%   证明：$\lim \limits _{n \rightarrow \infty} \frac{a_1p_1 + a_2p_2 + \cdots + a_np_n}{p_n }= 0$
+
+%   (2)已知$\lim \limits _{n \rightarrow \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = a$，
+%   且$\lim \limits _{n \rightarrow \infty} n(a_n - a_{n-1}) = 0$，证明$\lim \limits _{n \rightarrow \infty} a_n = a$
+% \end{exercise}
+
+
+\section{积分形式极限：分段法}
+
+\subsection{定积分形极限}
+
+\begin{exercise}[基础拆分法]
+  求下列极限：
+  \begin{equation*}
+    (1)\lim \limits _{n \rightarrow \infty} \int_0^{\frac{\pi}{2}} \sin^n x\mathrm{d} x \quad
+    (2)\lim \limits _{n \rightarrow \infty} \int_0^{\frac{\pi}{2}} (1 - \sin x)^n \mathrm{d} x\quad
+    (3)\lim \limits _{n \rightarrow \infty} \int_0^1 \frac{x^n}{1 + \sqrt{x}}\mathrm{d} x\quad
+    (4)\lim \limits _{n \rightarrow \infty} \int_0^1 e^{x^n} \mathrm{d} x
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  (1)显然$x \in [0, \frac{\pi}{2})$时，$\lim \limits _{n \rightarrow \infty} \sin^n x = 0$，
+  但$x = \frac{\pi}{2}$时，$\sin x = 1$，
+  因此做以下拆分：
+  \begin{equation*}
+    \int_0^{\frac{\pi}{2}} \sin^n x\mathrm{d} x = \int_0^{\frac{\pi}{2} - \delta} \sin^n x\mathrm{d} x + \int_{\frac{\pi}{2} - \delta}^{\frac{\pi}{2}} \sin^n x\mathrm{d} x
+  \end{equation*}
+  前者$\int_0^{\frac{\pi}{2} - \delta} \sin^n x \mathrm{d} x \leq \frac{\pi}{2} \sin^n (\frac{\pi}{2} - \delta) \rightarrow 0$，
+  后者$\int_{\frac{\pi}{2} - \delta}^{\frac{\pi}{2}} \sin^n x\mathrm{d} x \leq \int_{\frac{\pi}{2} - \delta}^{\frac{\pi}{2}} 1 \mathrm{d} x = \delta$，
+  因此积分极限等于$0$。
+
+  (2)(3)同理都是$0$
+
+  (4)可以考虑$\int_0^1 e^{x^n} - 1 \mathrm{d} x$，
+  结果为$1$.
+\end{solution}
+
+~
+
+\begin{exercise}[用分段法证明命题]
+  (1)$f(x)$在$[0,1]$连续，证明$\lim \limits _{n \rightarrow \infty} \int_0^1 f(\sqrt[n]{x})\mathrm{d} x = f(1)$
+\end{exercise}
+
+\subsection{反常积分形极限}
+
+\begin{theorem}[函数形式平均值定理]
+  $f(x)$在$[a,+\infty)$有定义且在任意有限区间可积，$\lim \limits _{x \rightarrow +\infty}f(x) = A$，
+  则
+  \begin{equation*}
+    \lim \limits _{x \rightarrow +\infty}\frac{1}{x} \int_0^x f(t)\mathrm{d} t = A
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  先斩后奏，已知$A = \lim \limits _{x \rightarrow +\infty} \frac{1}{x} \int_a^x A \mathrm{d} t $，
+  因此只需证
+  \begin{equation*}
+    \lim \limits _{x \rightarrow +\infty} \left( \frac{1}{x} \int_a^x f(t)\mathrm{d} t - \frac{1}{x} \int_a^x A \mathrm{d} t \right) =  \lim \limits _{x \rightarrow +\infty} \frac{1}{x}\int_a^x \left( f(t) - A \right) \mathrm{d} t = 0
+  \end{equation*}
+  $\forall \epsilon, \exists M, x \geq M$时$|f(x) - A| < \epsilon$，
+  因此可有$N, x > N$时$\frac{1}{x} \int_a^M |f(t) - A|\mathrm{d} t < \epsilon$，
+  得到
+  \begin{equation*}
+    \left| \frac{1}{x} \int_a^x(f(t) - A)\mathrm{d} t\right| \leq \frac{1}{x} \int_a^M |f(t) - A| \mathrm{d} t + \frac{1}{x} \int_M^x |f(t) - A|\mathrm{d} t < \epsilon + \frac{x - M}{x}\cdot \epsilon < 2\epsilon
+  \end{equation*}
+  因此结论成立
+\end{proof}
+
+\begin{note}
+  如果有说明$f(x)$连续，则$\int_a^x f(t)\mathrm{d} t$可导，可用洛必达法则证明。
+\end{note}
+
+~
+
+\begin{exercise}[相关练习]
+  已知$f(x)$在$[0,+\infty)$非负，
+  对$\forall A > 0$，$xf(x)$在$[0,A]$可积，且$\int_0^{+\infty}f(x)\mathrm{d} x$可积，
+  证明：$\lim \limits _{A \rightarrow +\infty} \frac{1}{A} \int_0^A xf(x)\mathrm{d} x = 0$
+\end{exercise}
+
+\begin{proof}
+  由于$\int_0^{+\infty}f(x)\mathrm{d} x $收敛，
+  因此$\forall \epsilon, \exists M, \forall A^{\prime\prime} \geq A^{\prime} \geq M$都有
+  $0 \leq \int_{A^{\prime}}^{A^{\prime\prime}} f(x)\mathrm{d} x < \epsilon$，
+  固定上面的$M$，$\exists N, \forall A > N$有$0 < \frac{1}{A} \int_0^M xf(x)\mathrm{d} x < \epsilon$，
+  进而$A > N$时
+  \begin{equation*}
+    0 < \frac{1}{A} \int_0^A xf(x)\mathrm{d} x = \frac{1}{A} \int_0^M xf(x)\mathrm{d} x + \frac{1}{A} \int_M^A xf(x)\mathrm{d} x < \epsilon + \frac{1}{A} \int_M^A Af(x)\mathrm{d} x < 2\epsilon
+  \end{equation*}
+\end{proof}
+
+
+
+\subsection{周期函数积分极限}
+
+\begin{exercise}
+  $f(x)$是$\mathbb{R}$上周期为$T$的可积函数，证明：$\forall a \in \mathbb{R}, \int_0^T f(x) \mathrm{d} x = \int_a^{a+T} f(x) \mathrm{d} x$
+\end{exercise}
+
+\begin{proof}
+  令$x = T + u$，
+  则$\int_T^{a+T}f(x)\mathrm{d} x = \int_0^a f(T + u)\mathrm{d} (T + u) = \int_0^a f(x)\mathrm{d} x$，因此
+  \begin{align*}
+    \int_a^{a+T}f(x)\mathrm{d} x = \int_a^0 f(x) \mathrm{d} x + \int_0^T f(x) \mathrm{d} x + \int_T^{T+a} f(x)\mathrm{d} x = \int_0^T f(x)\mathrm{d} x
+  \end{align*}
+\end{proof}
+
+~
+
+\begin{exercise}
+  $f(x)$是周期为$T$的连续函数，证明：$\lim \limits _{x \rightarrow +\infty}\frac{1}{x}\int_0^x f(t)\mathrm{d}t = \frac{1}{T} \int_0^T f(t)\mathrm{d} t$
+\end{exercise}
+
+\begin{proof}
+  对$\forall x > 0$，都$\exists n_x \in \mathbb{N}$使得$x - n_xT \in [0,T)$，
+  此时$\lim \limits _{x \rightarrow \infty} \frac{n_x}{x} = \frac{1}{T}$。
+  根据周期性可知
+  \begin{equation*}
+    \lim \limits _{x \rightarrow +\infty} \frac{1}{x} \int_0^{n_xT} f(t)\mathrm{d} t = \frac{n_x}{x} \int_0^T f(t)\mathrm{d} t = \frac{1}{T} \int_0^T f(t)\mathrm{d} t
+  \end{equation*}
+
+  由于$\left| |f(x)| - |f(y)| \right| \leq |f(x) - f(y)|$，
+  从振幅角度来看，若$f(x)$可积，则$|f(x)|$也可积，
+  且显然$|f(x)|$也是周期函数。
+  因此$\int_0^T |f(x)|\mathrm{d} x$有界，
+  此时：
+  \begin{equation*}
+   \int_{n_x T}^x f(t)\mathrm{d} t \leq  \int_{n_x T}^{(n_x+1)T}f(x)\mathrm{d} x \leq \int_0^T |f(x)|\mathrm{d} x \leq M
+  \end{equation*}
+  因此$\lim \limits _{x \rightarrow \infty}\frac{1}{x} \int_{n_x T}^x f(x)\mathrm{d} x = 0$。
+\end{proof}
+
+~
+
+\begin{exercise}[进阶难度]
+  $f(x) \geq 0$，周期为$T$，且连续，证明：
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} n \int_n^{+\infty} \frac{f(x)}{x^2}\mathrm{d} x = \frac{1}{T} \int_0^T f(x)\mathrm{d} x
+  \end{equation*}
+\end{exercise}
+
+\begin{proof}
+  
+\end{proof}
+

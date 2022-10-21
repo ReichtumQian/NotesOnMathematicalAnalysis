@@ -1,0 +1,241 @@
+
+
+
+\chapter{数学基础}
+
+
+\section{三角函数}
+
+\subsection{和差公式、万能公式、倍角公式、半角公式}
+
+\noindent 一、$\sin x, \cos x$和差公式
+
+\begin{gather*}
+  \sin (\alpha+\beta)=\sin \alpha \cos \beta+\cos \alpha \sin \beta \\
+  \sin (\alpha-\beta)=\sin \alpha \cos \beta-\cos \alpha \sin \beta \\
+  \cos (\alpha+\beta)=\cos \alpha \cos \beta-\sin \alpha \sin \beta \\
+  \cos (\alpha-\beta)=\cos \alpha \cos \beta+\sin \alpha \sin \beta \\
+\end{gather*}
+
+\noindent 二、$\tan x, \cot x$和差公式
+
+\begin{gather*}
+  \tan (\alpha+\beta)=\frac{\tan \alpha+\tan \beta}{1-\tan \alpha \tan \beta} \\
+  \tan (\alpha-\beta)=\frac{\tan \alpha-\tan \beta}{1+\tan \alpha \tan \beta} \\
+  \cot (\alpha+\beta)=\frac{\cot \alpha \cot \beta-1}{\cot \beta+\cot \alpha} \\
+  \cot (\alpha-\beta)=\frac{\cot \alpha \cot \beta+1}{\cot \beta-\cot \alpha}
+\end{gather*}
+
+\noindent 三、万能公式
+
+\begin{align*}
+  &\sin \alpha=\frac{2 \tan \frac{\alpha}{2}}{1+\tan ^{2} \frac{\alpha}{2}} \\
+  &\cos \alpha=\frac{1-\tan ^{2} \frac{\alpha}{2}}{1+\tan ^{2} \frac{\alpha}{2}} \\
+  &\tan \alpha=\frac{2 \tan \frac{\alpha}{2}}{1-\tan ^{2} \frac{\alpha}{2}}
+\end{align*}
+
+\noindent 四、倍角公式
+
+\begin{gather*}
+  \sin 2\alpha = 2 \sin \alpha \cos \alpha\\
+  \cos 2\alpha = \cos^2 \alpha - \sin^2 \alpha = 2 \cos ^2\alpha - 1 = 1 - 2\sin^2 \alpha\\
+  \tan 2\alpha = \frac{2 \tan \alpha}{1 - \tan^2 \alpha}
+\end{gather*}
+
+
+\noindent 五、半角公式
+
+\begin{align*}
+  \sin \frac{\alpha}{2} &=\pm \sqrt{\frac{1-\cos \alpha}{2}} \\
+  \cos \frac{\alpha}{2} &=\pm \sqrt{\frac{1+\cos \alpha}{2}} \\
+  \tan \frac{\alpha}{2} &=\frac{\sin \alpha}{1+\cos \alpha}=\frac{1-\cos \alpha}{\sin \alpha}=\pm \sqrt{\frac{1-\cos \alpha}{1+\cos \alpha}} \\
+  \cot \frac{\alpha}{2} &=\frac{1+\cos \alpha}{\sin \alpha}=\frac{\sin \alpha}{1-\cos \alpha}=\pm \sqrt{\frac{1+\cos \alpha}{1-\cos \alpha}}
+\end{align*}
+
+
+
+
+\subsection{和差化积与积化和差}
+
+\noindent 一、和差化积
+
+\begin{align*}
+  &\cos \alpha+\cos \beta=2 \cos \frac{\alpha+\beta}{2} \cos \frac{\alpha-\beta}{2} \\
+  &\cos \alpha-\cos \beta=-2 \sin \frac{\alpha+\beta}{2} \sin \frac{\alpha-\beta}{2} \\
+  &\sin \alpha+\sin \beta=2 \sin \frac{\alpha+\beta}{2} \cos \frac{\alpha-\beta}{2} \\
+  &\sin \alpha-\sin \beta=2 \cos \frac{\alpha+\beta}{2} \sin \frac{\alpha-\beta}{2} \\
+  &\tan \alpha+\tan \beta=\frac{\sin (\alpha+\beta)}{\cos \alpha \cos \beta}
+\end{align*}
+
+\noindent 二、积化和差：异$\sin$同$\cos$
+
+\begin{align*}
+  &\cos \alpha \cos \beta=\frac{1}{2}[\cos (\alpha+\beta)+\cos (\alpha-\beta)] \\
+  &\sin \alpha \sin \beta=-\frac{1}{2}[\cos (\alpha+\beta)-\cos (\alpha-\beta)]\\
+  &\sin \alpha \cos \beta=\frac{1}{2}[\sin (\alpha+\beta)+\sin (\alpha-\beta)] \\
+  &\cos \alpha \sin \beta=\frac{1}{2}[\sin (\alpha+\beta)-\sin (\alpha-\beta)] 
+\end{align*}
+
+\subsection{交替三角函数}
+
+\begin{enumerate}
+\item $(-1)^n \sin nx = \sin (x + \pi)n$
+\item $(-1)^n \cos nx = \cos (x + \pi)n$
+\end{enumerate}
+
+
+\subsection{重要的三角恒等式}
+
+\begin{enumerate}
+\item $\cos \frac{x}{2^n} \cdot \cos \frac{x}{2^{n-1}} \cdots \cos \frac{x}{2}    = \frac{\sin x}{2^n \sin \frac{x}{2^n}}$
+\item $\sin x + \sin 2x + \cdots + \sin nx = \frac{\cos \frac{x}{2} - \cos(n + \frac{1}{2})x}{2 \sin \frac{x}{2}}$
+\item $\cos x + \cos 2x + \cdots + \cos nx = \frac{\sin (n+\frac{1}{2})x - \sin \frac{x}{2}}{2\sin \frac{x}{2}} = \frac{\sin(n+\frac{1}{2})x}{2 \sin \frac{x}{2}} - \frac{1}{2}$
+\item $\arctan \frac{1}{2k^2} = \arctan \frac{k}{k+1} - \arctan \frac{k-1}{k}$
+\end{enumerate}
+
+\begin{proof}
+  (1)将右侧分母乘到左侧去，用二倍角即可。
+
+  (2)左边乘$\sin \frac{x}{2}$，得到
+  \begin{equation*}
+    \sin \frac{x}{2} I = \sum\limits_{k = 1}^n  \sin kx \sin \frac{x}{2} = - \frac{1}{2}\sum\limits_{k = 1}^n [\cos (k + \frac{1}{2})x - \cos(k - \frac{1}{2})x] = \frac{1}{2}\left[  \cos \frac{x}{2} - \cos(n + \frac{1}{2})x\right]
+  \end{equation*}
+
+  (3)和(2)类似
+\end{proof}
+
+
+\subsection{反三角函数}
+
+\begin{theorem}[反三角函数倒数关系]
+  \begin{gather*}
+    \arctan x + \arctan \frac{1}{x} = \frac{\pi}{2}\\
+    \text{arccot}x + \text{arccot}\frac{1}{x} = \frac{\pi}{2}
+  \end{gather*}
+\end{theorem}
+
+\begin{proof}
+  画一个直角三角形，角$\theta_1$对着边长$1$，
+  $\theta_2 = \frac{\pi}{2} - \theta_1$对着边长$x$，
+  $\tan \theta_1 = \frac{1}{x}, \tan \theta_2 = x$，而两角互补。
+\end{proof}
+
+\subsection{三角不等式}
+
+\begin{theorem}[$\sin x$不等式]
+  $x \in (0, \frac{\pi}{2})$时，$\frac{2x}{\pi} < \sin x < x < \tan x$
+\end{theorem}
+
+\begin{theorem}[反三角不等式]
+  $\arcsin x > x > \arctan x$，
+  当$x$为小正数时。
+\end{theorem}
+
+\section{恒等式}
+
+\subsection{立方和、四次方和}
+
+\begin{theorem}[立方和公式]
+  $a^3 + b^3 = (a+b)(a^2 - ab + b^2), a^3 - b^3 = (a-b)(a^2 + ab + b^2)$
+\end{theorem}
+
+\begin{theorem}[四次方和差公式]
+  $a^4 + b^4 = (a^2 + b^2)^2 - 2a^2b^2 = (a^2 + b^2 - \sqrt{2}ab)(a^2 + b^2 - \sqrt{2}ab)$
+\end{theorem}
+
+\subsection{最大值、最小值}
+
+\begin{equation*}
+  \min\{a,b\} = \frac{1}{2}(a+b - |a-b|), \max \{a,b\} = \frac{1}{2}(a + b + |a-b|)
+\end{equation*}
+
+\subsection{次方和}
+
+\begin{equation*}
+  \begin{cases}
+    1 + 2 + \cdots + n = \frac{n(n-1)}{2}\\
+    1^2 + 2^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}
+  \end{cases}
+\end{equation*}
+
+
+\section{不等式}
+
+\subsection{基本不等式}
+
+\noindent 一、均值不等式：
+
+\begin{equation*}
+  \frac{n}{\frac{1}{x_1} + \cdots + \frac{1}{x_n}} \leq \sqrt[n]{x_1x_2\cdots x_n} \leq \frac{x_1 + \cdots + x_n}{n} \leq \sqrt{\frac{x_1^2 + \cdots + x_n^2}{n}}
+\end{equation*}
+
+\noindent 二、对数不等式
+
+\begin{equation*}
+  \frac{x}{1+x} \leq \ln(1 + x) \leq x
+\end{equation*}
+
+
+\subsection{Jensen不等式}
+
+\begin{theorem}[Jensen不等式]
+  若$\sum\limits_{i = 1}^n t_i = 1$，$f$是(下)凸函数，
+  则
+  \begin{equation*}
+    \sum\limits_{i = 1}^n t_if(x_i) \geq f(\sum\limits_{i = 1}^n t_ix_i)
+  \end{equation*}
+\end{theorem}
+
+\begin{exercise}[Jensen不等式的应用]
+  (1)ZJU2021：若$\sum\limits_{i = 1}^n p_i = 1$，$p_i \in (0,1)$，$x_1,\cdots,x_n \in \mathbb{R}$，
+  证明$\sum\limits_{i = 1}^n p_i(x_i - \ln p_i) \leq \ln (\sum\limits_{i = 1}^n e^{x_i})$
+\end{exercise}
+
+\begin{proof}
+  (1)根据$x_i = \ln(e^{x_i})$，
+  因此即证明$\sum\limits_{i = 1}^n p_i(\ln \frac{e^{x_i}}{p_i}) \leq \ln(\sum\limits_{i = 1}^n e^{x_i})$，
+  设$t_i = \frac{e^{x_i}}{p_i}$，
+  不等式变为$\sum\limits_{i = 1}^n p_i \ln(t_i) \leq \ln(\sum\limits_{i = 1}^n t_ip_i)$，
+  由于$\ln x$是凹函数，因此得证。
+\end{proof}
+
+\subsection{调和级数不等式}
+
+\begin{theorem}[调和级数不等式]
+  $\ln(n+1) < 1 + \frac{1}{2} + \cdots + \frac{1}{n} < 1 + \ln n$，
+  进一步地，$\lim \limits _{n \rightarrow \infty} \frac{1 + \frac{1}{2} + \cdots + \frac{1}{n}}{\ln n} = 1$(即Euler常数)
+\end{theorem}
+
+\begin{proof}
+  由于$\frac{x}{1+x} \leq \ln(1 + x) \leq x$，
+  因此$\frac{\frac{1}{n}}{1 + \frac{1}{n}} < \ln(1 + \frac{1}{n}) < \frac{1}{n}$，
+  即$\frac{1}{n+1} < \ln \frac{n+1}{n} < \frac{1}{n}$，
+  求和得到：
+  \begin{equation*}
+    1 + \frac{1}{2} + \cdots + \frac{1}{n} < 1 + \ln \frac{2}{1} + \cdots + \ln \frac{n}{n-1} = 1 + \ln n
+  \end{equation*}
+  另一侧同理
+\end{proof}
+
+
+
+\section{几何学基础}
+
+
+
+
+\subsection{常见立体几何体积}
+
+\begin{theorem}[椭球面积]
+  $ax^2 + by^2 + cz^2 \leq r^2$的体积为$\frac{4\pi r^3}{3 \sqrt{abc}}$
+\end{theorem}
+
+\begin{proof}
+  做仿射变换$x^{\prime} = \sqrt{a}x, y^{\prime} = \sqrt{b}y, z^{\prime} = \sqrt{c}z$，
+  而$S^{\prime} = \frac{4}{3}\pi r^3$，
+  因此
+  \begin{equation*}
+    S = \frac{S^{\prime}}{\sqrt{abc}} = \frac{4\pi r^3}{3 \sqrt{abc}}
+  \end{equation*}
+\end{proof}
+

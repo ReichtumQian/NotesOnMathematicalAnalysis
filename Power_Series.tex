@@ -1,0 +1,544 @@
+
+
+
+
+
+\chapter{幂级数}
+
+\section{幂级数概念及其收敛区间}
+
+\begin{definition}[幂级数]
+  $\sum\limits_{n = 0}^{\infty}a_n(x - x_0)^n$称为幂级数，
+  但一般只研究$\sum\limits_{n = 0}^{\infty}a_nx^n$
+\end{definition}
+
+\subsection{收敛区间与收敛半径}
+
+\begin{theorem}[Abel定理]
+  若幂级数$\sum\limits_{n = 1}^{\infty}a_nx^n$在$x_0 \neq 0$收敛，
+  则对$\forall x, |x| < |x_0|$，
+  $\sum\limits_{n = 1}^{\infty}a_nx^n$绝对收敛；
+  若$x_0$处发散，则$\forall x, |x| > |x_0|$均发散。
+\end{theorem}
+
+\begin{proof}
+  若$\sum\limits_{n = 0}^{\infty}a_nx_0^n$收敛，
+  则$|a_nx^n| = |a_nx_0^n| \cdot |\frac{x}{x_0}|^n \leq Mr^n$，
+  这里$r = |\frac{x}{x_0}| \in [0,1)$。
+  另一侧同理
+\end{proof}
+
+
+\begin{definition}[收敛半径]
+  根据Abel定理可知$\exists R \in \mathbb{R}$，使得$|x| < R$时幂级数绝对收敛(若$R = 0$则仅在$x = 0$处收敛)，
+  对一切$|x| > R$均发散，
+  称$R$为幂级数收敛半径，$(-R,R)$为收敛区间。
+\end{definition}
+
+\begin{theorem}[收敛半径的计算]
+  幂级数收敛半径$R$(可以为$0, \infty$)的计算有以下几种方式：
+  \begin{itemize}
+  \item 根式(柯西-阿达马)：$\varlimsup \limits _{n \rightarrow \infty}  \sqrt[n]{|a_n|} = \frac{1}{R}$(可以为$0,\infty$)
+  \item 比式(一般用得少)：若$\lim \limits _{n \rightarrow \infty} \frac{|a_{n+1}|}{|a_n|} = \frac{1}{R}$，也能推出$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a_n} = \frac{1}{R}$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)根式：只需要考虑$\sum\limits_{n = 0}^{\infty}|a_nx^n|$，
+  用数项级数的根式判别法为$\varlimsup \limits_{n \rightarrow \infty} \sqrt[n]{|a_nx^n|} = \varlimsup \limits_{n \rightarrow \infty} \sqrt[n]{|a_n|} \cdot |x|$，
+  因此若记$\varlimsup \limits_{n \rightarrow \infty} \sqrt[n]{|a_n|} = \rho$，
+  则$|x| < \frac{1}{\rho}$则收敛，$\frac{1}{\rho}$为收敛半径。
+\end{proof}
+
+~
+
+\begin{exercise}[计算收敛半径]
+  计算收敛半径与收敛域
+  (1)$\sum\limits_{n = 1}^{\infty}\frac{x^n}{n^2}$
+  (2)$\sum\limits_{n = 1}^{\infty}\frac{x^n}{n}$
+  (3)$\sum\limits_{n = 1}^{\infty}\frac{(2n-1)!!}{(2n)!!}x^n$
+\end{exercise}
+
+\begin{solution}
+  (1)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{1}{n^2}} = 1$，
+  收敛半径$1$，收敛域$[-1,1]$
+
+  (2)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{1}{n}} = 1$，
+  收敛半径$1$，收敛域$[-1,1)$
+
+  (3)$a_n = \frac{(2n-1)!!}{(2n)!!}$，
+  用Wallis+根式或者比式$\lim \limits _{n \rightarrow \infty} \frac{a_{n+1}}{a_n} = \lim \limits _{n \rightarrow \infty} \frac{2n+1}{2n+2} = 1$得到收敛半径为$1$。
+  而$\frac{(2n-1)!!}{(2n)!!} \sim \frac{1}{\sqrt{n\pi}}$，因此发散。
+  $\sum\limits_{n = 1}^{\infty}\frac{(2n-1)!!}{(2n)!!}(-1)^n$根据Leibniz可知收敛。
+  故收敛域为$[-1,1)$
+\end{solution}
+
+\begin{note}
+  上述题目也说明在逐项求导后，端点处收敛域可能发生变换
+\end{note}
+
+~
+
+\begin{exercise}[常规格式幂级数]
+  (1)求收敛域：$\sum\limits_{n = 1}^{\infty}(1 + \frac{1}{2} + \cdots + \frac{1}{n})x^n$
+  $\sum\limits_{n = 1}^{\infty}\frac{x^n}{1 + \frac{1}{2} + \cdots + \frac{1}{n}}$
+
+  (2)$0 < a < b$，求$\sum\limits_{n = 1}^{\infty}\frac{x^n}{a^n + b^n}, \sum\limits_{n = 1}^{\infty}(a^n + b^n)x^n$收敛域
+
+  (3)$\sum\limits_{n = 1}^{\infty}\frac{x^{2n}}{n - 3^{2n}}, \sum\limits_{n = 1}^{\infty}\frac{x^{n^2}}{2^n}$收敛域
+
+  (4)$\sum\limits_{n = 1}^{\infty}\frac{3^n + (-2)^n}{n}(x + 1)^n$
+\end{exercise}
+
+\begin{solution}
+  (1)要么根据Euler常数得到$\sqrt[n]{1 + \frac{1}{2} + \cdots + \frac{1}{n}} \sim \sqrt[n]{\ln n} = 1$，
+  要么用$1 \leq 1 + \frac{1}{2} + \cdots + \frac{1}{n} \leq n$得到收敛半径为$R = 1$，
+  显然收敛域为$(-1,1)$
+  第二个同理得到收敛域为$[-1,1]$
+
+  (2)第一个$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{1}{a^n + b^n}} = \frac{1}{b}$，
+  收敛半径为$b$，$x = \pm b$都震荡发散。
+  第二个$\lim \limits _{n \rightarrow \infty} \sqrt[n]{a^n + b^n} = b$，收敛半径$b$，
+  $x = \pm b$震荡发散
+
+  (3)由于不是$x^n$因此开$2n$次根号，
+  $\lim \limits _{n \rightarrow \infty} \sqrt[2n]{|\frac{1}{n - 3^{2n}}|} = \frac{1}{3}$，
+  半径为$3$，$x = \pm 3$时通项不趋于$0$，因此发散。
+  $\lim \limits _{n \rightarrow \infty} \sqrt[n^2]{\frac{1}{2^n}} = 1$，
+  而$x = \pm 1$均收敛
+
+  (4)将$x+1$视为$y$即可，
+  $\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{3^n + (-2)^n}{n}} = 3$，
+  收敛半径为$\frac{1}{3}$，$y = \frac{1}{3}$时为$\sum\limits_{n = 1}^{\infty}(\frac{1}{n} + \frac{1}{n}(-\frac{2}{3})^n)$前者发散，后者收敛，因此整体发散。
+  $y = -\frac{1}{3}$时为$\sum\limits_{n = 1}^{\infty}(\frac{(-1)^n}{n} + \frac{1}{n}(\frac{2}{3})^n)$收敛，
+  因此收敛域为$[-\frac{1}{3} - 1, \frac{1}{3} - 1)$即$x \in [- \frac{4}{3}, - \frac{2}{3})$
+\end{solution}
+
+~
+
+\begin{exercise}[非常规格式幂级数]
+  (1)$\sum\limits_{n = 1}^{\infty}\frac{(x^2 + x + 1)^n}{3n}$的收敛域
+  (2)$\sum\limits_{n = 1}^{\infty}\frac{1}{2^n}\left( \frac{x - 1}{2x + 1} \right)^{n^2}$
+  (3)$\sum\limits_{n = 1}^{\infty}\frac{1^n + 2^n + \cdots + 2022^n}{n^{2022}}\left( \frac{1 - x}{1 + x} \right)^n$
+\end{exercise}
+
+\begin{solution}
+  (1)设$y = x^2 + x + 1$，
+  考虑$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{1}{3n}} = 1$，$R = 1$，
+  而$y = 1$发散，$y = -1$收敛，
+  计算$x^2 + x + 1 \in [-1,1)$，
+  即$x^2 + x \in [-2,0)$，
+  注意最终得到$x \in (-1,0)$两侧都是开的！
+
+  (2)考虑$y = \frac{x - 1}{2x + 1}$，
+  计算得到$y$的收敛域为$[-1,1]$，
+  计算$-1 \leq \frac{x - 1}{2x + 1} \leq 1$，
+  直接讨论分母容易出错，因此这里看成两个不等式。
+  $\frac{x - 1}{2x + 1} + 1 = \frac{3x}{2x + 1} \geq 0$以及$\frac{x - 1}{2x + 1} - 1 = \frac{-x - 2}{2x + 1} \leq 0$，
+  第一个要求$x \geq 0$或者$x < - \frac{1}{2}$，
+  第二个要求$x \leq -2$或者$x \geq - \frac{1}{2}$，
+  求交得到$x \in (-\infty,-2] \cup [0,+\infty)$
+
+  (3)$y = \frac{1-x}{1+x}$得到收敛半径为$\frac{1}{2022}$且端点收敛，
+  考虑$- \frac{1}{2022} \leq \frac{1-x}{1+x} \leq \frac{1}{2022}$，
+  分为两部分，
+  得到$\frac{2023 - 2021x}{1 + x} \geq 0$以及$\frac{2021 - 2023x}{1 + x} \leq 0$，
+  前者解出$-1 < x \leq \frac{2023}{2021}$，后者解出$x < -1$或者$x \geq \frac{2021}{2023}$，
+  得出结果为$x \in [\frac{2021}{2023}, \frac{2023}{2021}]$
+\end{solution}
+
+\subsection{幂级数的一致收敛性}
+
+下面考虑幂级数$\sum\limits_{n = 1}^{\infty}a_nx^n$的一致收敛性，
+假设其收敛半径为$R$，收敛域在端点处需要讨论，
+下面开始分析。
+
+\begin{theorem}[Abel第二定理]
+  若幂级数收敛半径为$R$，
+ $\sum\limits_{n = 1}^{\infty}a_nx^n$在$\langle - R, R \rangle $内闭一致收敛(端点未确定)
+\end{theorem}
+
+\begin{proof}
+  设$\sum\limits_{n = 0}^{\infty}a_nx^n_0$收敛，
+  (1)若$x_0 > 0$，则$\forall x \in [0,x_0]$有$\sum\limits_{n = 0}^{\infty}a_nx^n = \sum\limits_{n = 0}^{\infty}a_nx_0^n \left( \frac{x}{x_0} \right)^n$，根据Abel判别法可证。
+  (2)若$x_0 < 0$，则$\forall x \in [x_0,0]$有$\sum\limits_{n = 0}^{\infty}a_nx^n = \sum\limits_{n = 0}^{\infty}a_nx_0^n \left( \frac{x}{x_0} \right)^n$，根据Abel可证。
+  进而任选闭区间都一致收敛。
+\end{proof}
+
+
+\begin{theorem}[连续性]
+  幂级数的和函数$\sum\limits_{n = 0}^{\infty}a_nx^n$在收敛域$\langle -R, R\rangle$是连续的。
+\end{theorem}
+
+
+\begin{theorem}[区间不变性]
+  幂级数$\sum\limits_{n = 0}^{\infty}a_nx^n$的收敛半径为$R$，
+  则其逐项求导和逐项积分后得到的幂级数的收敛半径仍为$R$，
+  不过端点处的一致收敛情况可能改变！
+\end{theorem}
+
+\begin{proof}
+  考虑$\sum\limits_{n = 0}^{\infty}a_nx^n$的逐项求导与逐项积分，
+  得到$\sum\limits_{n = 1}^{\infty}na_n$和$\sum\limits_{n = 0}^{\infty}\frac{a_n}{n+1}x^{n+1}$，
+  根据$\varlimsup \limits _{n \rightarrow \infty} \sqrt[n]{|a_n|} = \varlimsup \limits_{n \rightarrow \infty}\sqrt[n-1]{|na_n|} = \varlimsup \limits_{n \rightarrow \infty}\sqrt[n-1]{|\frac{a_n}{n+1}|}$可知收敛半径相同
+\end{proof}
+
+\begin{note}
+  端点处一致收敛性不保证，例如$\sum\limits_{n = 1}^{\infty}\frac{x^n}{n}$收敛域为$[-1,1)$，
+  而$\sum\limits_{n = 1}^{\infty}x^{n-1}$收敛域为$(-1,1)$
+\end{note}
+
+\begin{theorem}[求导与求积]
+  设$(-R,R)$上$f(x) = \sum\limits_{n = 0}^{\infty}a_nx^n$，则对$\forall x \in (-R, R)$有：
+  \begin{equation*}
+    f^{\prime}(x) = \sum\limits_{n = 1}^{\infty}na_nx^{n-1}, \int_0^x f(t) \mathrm{d} t = \sum\limits_{n = 0}^{\infty}\frac{a_n}{n+1}x^{n+1}
+  \end{equation*}
+\end{theorem}
+
+\begin{note}
+  幂级数的逐项求导和逐项积分要注意其只能保证在收敛区间成立，但不保证在收敛域上成立！
+\end{note}
+
+\subsection{缺项幂级数的收敛区域}
+
+\begin{exercise}[缺项幂级数的收敛范围]
+  (1)求$\sum\limits_{n = 1}^{\infty}n^{n^2}x^{n^3}$的收敛范围
+\end{exercise}
+
+\begin{solution}
+  令$a_k =
+  \begin{cases}
+    n^{n^2}, & k = n^3\\
+    0, & k \neq n^3
+  \end{cases}
+  $，
+  则$\sum\limits_{n = 1}^{\infty}n^{n^2}x^{n^3} = \sum\limits_{k = 1}^{\infty}a_kx^k$，
+  此时
+  \begin{equation*}
+    \frac{1}{R} =\varlimsup \limits_{k \rightarrow \infty}\sqrt[k]{|a_k|} =  \lim \limits _{n \rightarrow \infty} \sqrt[n^3]{n^{n^2}} = \lim \limits _{n \rightarrow \infty} (n^{n^2})^{\frac{1}{n^3}} = 1
+  \end{equation*}
+\end{solution}
+
+
+
+\section{幂级数展开式求和}
+
+
+\begin{theorem}[必备幂级数展开]
+  以下的幂级数展开会经常使用，基本上是分母较为简单的Taylor展开式
+  \begin{enumerate}
+  \item $\frac{1}{1-x} = \sum\limits_{n = 0}^{\infty} x^n$
+  \item $e^x = \sum\limits_{n = 0}^{\infty} \frac{x^n}{n!}$
+  \item $\ln (1 + x) = \sum\limits_{n = 1}^{\infty} (-1)^{n-1} \frac{x^n}{n}$
+  \item $\arctan x = \sum\limits_{n = 0}^{\infty} \frac{(-1)^n x^{2n+1}}{2n+1}$
+  \end{enumerate}
+\end{theorem}
+
+\begin{note}
+  具体用哪个主要看$(-1)$的指数次和分母的关系。
+\end{note}
+
+\subsection{等比级数}
+
+\begin{theorem}[等比级数]
+  根据$f(x) = \sum\limits_{n = 0}^{\infty} x^n = \frac{1}{1-x}$可以推出：
+  \begin{enumerate}
+  \item $\sum\limits_{n = 1}^{\infty} nx^n = \frac{x}{(1 - x)^2}$，方法为对$\sum\limits_{n = 0}^{\infty}x^n$求导，再同乘$x$
+  \item $\sum\limits_{n = 1}^{\infty} n^2x^n = \frac{x(1+x)}{(1-x)^3}$，方法为对$\sum\limits_{n = 1}^{\infty}nx^n$求导，再乘$x$
+  \end{enumerate}
+\end{theorem}
+
+
+\begin{exercise}[等比级数]
+  (1)$\sum\limits_{n = 1}^{\infty} \frac{n^2 + 3n}{2^n}$
+  (2)$\sum\limits_{n = 1}^{\infty} \frac{x^n}{n(n+1)}$
+\end{exercise}
+
+\begin{solution}
+  (1)这里展示正推，进行公式推导：
+  \begin{equation*}
+    \begin{cases}
+      f_1(x) = \sum\limits_{n = 0}^{\infty} x^n = \frac{1}{1-x} \Rightarrow f^{\prime}_1(x) = \sum\limits_{n = 1}^{\infty} nx^{n-1} = \frac{1}{(1-x)^2}\\
+      f_2(x) = \sum\limits_{n = 1}^{\infty} nx^n = \frac{x}{(1-x)^2} \Rightarrow f_2^{\prime}(x) = \sum\limits_{n = 1}^{\infty} n^2x^{n-1} = \frac{1+x}{(1 - x)^3}\\
+      f_3(x) = \sum\limits_{n = 1}^{\infty} n^2x^n = \frac{x(1 + x)}{(1 - x)^3}
+    \end{cases}
+  \end{equation*}
+  因此$I = f_3(\frac{1}{2}) + 3 f_2(\frac{1}{2}) = 6 + 6 = 12$
+
+  (2)这里展示反推：
+  \begin{equation*}
+    \begin{cases}
+      f_1(x) = \sum\limits_{n = 1}^{\infty} \frac{x^n}{n(n+1)}\\
+      f_2(x) = \sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n(n+1)} \Rightarrow f^{\prime}_2(x) = \sum\limits_{n = 1}^{\infty} \frac{x^n}{n} \Rightarrow f_2^{\prime\prime}(x) = \sum\limits_{n = 1}^{\infty}x^{n-1} = \sum\limits_{n = 0}^{\infty} x^n = \frac{1}{1-x}
+    \end{cases}
+  \end{equation*}
+  因此推出$f_2^{\prime}(x) = - \ln(1 - x), f_2(x) = (1-x)\ln(1-x) + x$，
+  因此$f_1(x) = \frac{1-x}{x}\ln(1-x) + 1$
+\end{solution}
+
+
+\subsection{$\arctan x$级数}
+
+\begin{exercise}[$\arctan x$]
+  (1)重点：求$\sum\limits_{n = 1}^{\infty} \frac{(-1)^{n-1}}{n(2n+1)}$
+\end{exercise}
+
+\begin{solution}
+  (1)相差较大，选择裂项：
+  $\sum\limits_{n = 1}^{\infty}\frac{(-1)^{n-1}}{n(2n+1)} = 2 \sum\limits_{n = 1}^{\infty} \left( \frac{(-1)^{n-1}}{2n} - \frac{(-1)^{n-1}}{2n+1} \right)$，
+  两者均收敛，且
+  \begin{equation*}
+    \begin{cases}
+      \ln(1 + x) = \sum\limits_{n = 1}^{\infty} \frac{(-1)^{n-1}x^n}{n}\\
+      \arctan x = \sum\limits_{n = 0}^{\infty} \frac{(-1)^nx^{2n+1}}{2n+1}
+    \end{cases}
+  \end{equation*}
+  因此结果为$\ln 2 + \frac{\pi}{2} - 2$
+\end{solution}
+
+\subsection{$e^x$级数}
+
+\begin{exercise}[$e^x$]
+  (1)计算$\lim \limits _{n \rightarrow \infty} \left[ 1 + \frac{1}{2!} + \frac{1}{4!} + \cdots + \frac{1}{(2n)!} \right]$
+\end{exercise}
+
+\begin{solution}
+  (1)由于$e^x = \sum\limits_{n = 0}^{\infty}\frac{x^n}{n!}$，
+  因此$e^{-x} = \sum\limits_{n = 0}^{\infty} \frac{(-1)^n x^n}{n!}$，
+  故
+  \begin{equation*}
+    \frac{e^x + e^{-x}}{2} = \sum\limits_{n = 0}^{\infty}\frac{x^{2n}}{(2n)!}
+  \end{equation*}
+  取$x = 1$，得到$\sum\limits_{n = 0}^{\infty} \frac{1}{(2n)!} = \frac{e + e^{-1}}{2}$
+\end{solution}
+
+% \subsection{简单的幂级数求和：等比数列积分与求导}
+
+% \begin{theorem}[求导基本结论]
+%   常用$\sum\limits_{n = 1}^{\infty}n^ax^n$型幂级数：
+%   (1)$\sum\limits_{n = 0}^{\infty}x^n = \frac{1}{1-x}$
+%   (2)$\sum\limits_{n = 1}^{\infty}nx^n = \frac{x}{(1 - x)^2}$
+%   (3)$\sum\limits_{n = 1}^{\infty}n^2x^n = \frac{x(1+x)}{(1 - x)^3}$
+% \end{theorem}
+
+% \begin{proof}
+%   如果可以直接看出的话，可以不要根据题目反推，而是根据已知结论推导，更方便。还有尽量凑下标去分解。
+
+%   (2)$\sum\limits_{n = 1}^{\infty}nx^n$，不是积分，
+%   而是用$\sum\limits_{n = 0}^{\infty}x^n = \frac{1}{1-x}$求导得到$\sum\limits_{n = 1}^{\infty}nx^{n-1} = \frac{1}{(1-x)^2}$，
+%   再乘上$x$，即$\frac{x}{(1-x)^2}$
+
+%   (3)尽量凑分解，而不是去凑$x$次数：
+%   $\sum\limits_{n = 1}^{\infty}n^2x^n  = \sum\limits_{n = 1}^{\infty}(n+1)(n+2)x^n - \sum\limits_{n = 1}^{\infty}(3n+2)x^n$，
+%   因此结果为$\frac{x(1+x)}{(1-x)^3}$
+% \end{proof}
+
+% ~
+
+% \begin{exercise}[$\sum n^ax^n$型]
+%   (1)$\sum\limits_{n = 0}^{\infty}(3n + 5)x^n$
+%   (2)$\sum\limits_{n = 1}^{\infty} n x^{3n-1}$
+%   (3)$\sum\limits_{n = 1}^{\infty} \frac{2n+1}{2^n}x^{2n+1}$
+%   (4)$\sum\limits_{n = 1}^{\infty}n(n+2)x^n$
+%   (5)$\sum\limits_{n = 1}^{\infty}(-1)^{n-1}n^2x^n$
+% \end{exercise}
+
+% \begin{solution}
+%   (1)$3 \sum\limits_{n = 0}^{\infty} nx^n + 5 \sum\limits_{n = 0}^{\infty}x^n = \frac{3x}{(1-x)^2} + \frac{5}{1-x}$
+
+%   (2)即$\frac{1}{x}\sum\limits_{n = 1}^{\infty} n x^{3n} = \frac{1}{x} \cdot \frac{x^{3n}}{(1 - x^{3n})^2}$
+
+%   (3)即$x \sum\limits_{n = 1}^{\infty}(2n+1)(\frac{x^2}{2})^n = 2x \sum\limits_{n = 1}^{\infty} n \left( \frac{x^2}{2} \right)^n + x \sum\limits_{n = 1}^{\infty} \left( \frac{x^2}{2} \right)^n$，
+%   前者用结论，后者用等比数列求和即可，
+%   结果为$\frac{6x^3 - x^5}{(2 - x^2)^2}$
+
+%   (4)分解为$\sum\limits_{n = 1}^{\infty}n^2x^n + \sum\limits_{n = 1}^{\infty}2n x^n$，
+%   结果为$\frac{3x - x^2}{(1-x)^3}$
+
+%   (5)即$- \sum\limits_{n = 1}^{\infty}n^2(-x)^n = - \frac{(-x)(1 - x)}{(1 + x)^3} = \frac{x(1-x)}{(1+x)^3}$
+% \end{solution}
+
+% ~
+
+% \begin{theorem}[积分基本结论]
+%   (1)$\sum\limits_{n = 1}^{\infty}\frac{x^n}{n} = - \ln(1-x), x \in [-1,1)$(注意负号！)
+%   (2)$\sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n(n+1)} = x + (1-x)\ln (1 - x), x \in [-1,1]$
+% \end{theorem}
+
+% \begin{proof}
+%   (1)直接用$\sum\limits_{n = 0}^{\infty}x^n = \frac{1}{1-x}$两边积分就行
+
+%   (2)$\sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n(n+1)}$用$\sum\limits_{n = 1}^{\infty}\frac{x^n}{n}$两边积分，
+%   得到$\sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n(n+1)} = x \ln(1 - x) + \int \frac{x}{1-x}\mathrm{d} x$，
+%   而$\int \frac{x}{1-x}\mathrm{d} x = \int \frac{x - 1}{1 - x}\mathrm{d} x + \int \frac{1}{1-x}\mathrm{d} x$，
+%   全部算出来得到$x + (1 - x)\ln (1 - x)$
+% \end{proof}
+
+% ~
+
+% \begin{exercise}[分母带$n$型]
+%   (1)$\sum\limits_{n = 1}^{\infty}\frac{(-1)^n}{2n}x^{2n} $
+%   (2)$\sum\limits_{n = 1}^{\infty}(-1)^{n-1} \frac{2n+1}{n}x^{2n}$
+%   (3)注意：$\sum\limits_{n = 1}^{\infty} \frac{x^n}{n+1}$
+%   (4)$\sum\limits_{n = 1}^{\infty}(-1)^n \frac{x^{n+1}}{n(n+1)}$
+%   (5)$\sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n(n+2)}$
+% \end{exercise}
+
+% \begin{proof}
+%   (1)结果为$- \frac{1}{2} \ln(1 + x^2)$
+
+%   (2)分成$2\sum\limits_{n = 1}^{\infty}(-1)^{n-1}x^{2n} + \sum\limits_{n = 1}^{\infty}(-1)^{n-1}\frac{x^{2n}}{n}$，
+%   即$-2 \sum\limits_{n = 1}^{\infty} (-x^2)^n - \sum\limits_{n = 1}^{\infty} \frac{(-x^2)^n}{n}$，
+%   前者等于$\frac{2x^2}{1 + x^2}$，
+%   后者等于$\ln(1 + x^2)$
+
+%   (3)$\sum\limits_{n = 1}^{\infty} \frac{x^n}{n+1} = x^{-1} \sum\limits_{n = 1}^{\infty} \frac{x^{n+1}}{n+1} = x^{-1} \sum\limits_{n = 1}^{\infty} \frac{x^n}{n} - 1 = - \frac{\ln(1-x)}{x}+1$
+
+%   (4)直接套结论方便：$- \sum\limits_{n = 1}^{\infty} \frac{(-x)^{n+1}}{n(n+1)} = x - (1+x)\ln(1-x)$
+
+%   (5)考虑裂项$\frac{1}{n(n+2)} = \frac{1}{2}\left( \frac{1}{n} - \frac{1}{n+2} \right)$，
+%   因此$\sum\limits_{n = 1}^{\infty}\frac{x^{n+1}}{n(n+2)} = \frac{x}{2} \sum\limits_{n = 1}^{\infty} \frac{x^n}{n} - \frac{1}{2x}\sum\limits_{n = 1}^{\infty} \frac{x^{n+2}}{n + 2}$
+% \end{proof}
+
+
+% \subsection{其他幂级数求和：$\arctan x, e^x, (1 + x)^{\alpha}$}
+
+% \begin{theorem}[$\arctan x$展开]
+%   $\arctan x = \sum\limits_{n = 0}^{\infty} \frac{(-1)^n}{2n + 1}x^{2n+1}, x \in [-1,1]$
+% \end{theorem}
+
+% \begin{proof}
+  
+% \end{proof}
+
+
+% \begin{exercise}[计算数项级数]
+%   (1)ZJU2020：计算$\sum\limits_{n = 0}^{\infty} \frac{(-1)^n}{3n+1}$
+%   (2)计算$\sum\limits_{n = 1}^{\infty}\frac{(-1)^{n+1}}{3n+1}$
+%   (3)计算$\sum\limits_{n = 0}^{\infty} \frac{(-1)^n}{3n+2}$
+%   (4)计算$\sum\limits_{n = 0}^{\infty} \frac{(-1)^{n+1}}{3n+2}$
+% \end{exercise}
+
+% \begin{solution}
+%   (1)考虑$f(x) = \sum\limits_{n = 1}^{\infty}\frac{(-1)^n}{3n + 1}x^{3n+1}$，
+%   则$f^{\prime}(x) = \sum\limits_{n = 0}^{\infty}(-1)^n x^{3n} = \frac{1}{1+x^3}$，
+%   因此
+%   \begin{equation*}
+%     f(x) = f(0) + \int_0^x f^{\prime}(t)\mathrm{d} t = \frac{1}{3} \ln (x + 1) - \frac{1}{6} \ln (x^2 - x + 1) + \frac{1}{\sqrt{3}} \arctan \frac{2x - 1}{\sqrt{3}} + \frac{\pi}{6 \sqrt{3}}
+%   \end{equation*}
+%   其中$\frac{1}{1+x^3}$的积分用有理分解算，代入$x = 1$可得到结果为$\frac{1}{3}\ln 2 + \frac{\pi}{3 \sqrt{3}}$
+% \end{solution}
+
+% ~
+
+% \begin{theorem}[$(1+x)^{\alpha}$展开]
+%   $(1+x)^{\alpha} = 1 + \alpha x + \frac{\alpha(\alpha - 1)}{2!}x^2 + \cdots + \frac{(\alpha)(\alpha - 1)\cdots (\alpha - n + 1)}{n!}x^n + \cdots$
+% \end{theorem}
+
+
+
+
+
+
+
+\section{幂级数求和式展开}
+
+\subsection{基本理论与直接展开}
+
+\begin{theorem}[幂级数展开]
+  若$f(x)$在$(x_0 - R, x_0 + R)$上存在任意阶导数，
+  且$\exists M, N > 0$，当$n > N$时，$\forall x \in (x_0 - R, x_0 + R)$，
+  均有$|f^{(n)}(x_0)| \leq M$，
+  则
+  \begin{equation*}
+    f(x) = \sum\limits_{n = 0}^{\infty} \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n, \forall x \in (x_0 - R, x_0 + R)
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{exercise}[幂级数直接展开]
+  (1)$\frac{ax + b}{cx + d}$型：$f(x) = \frac{x-3}{x+1}$在$x = 1$处的幂级数展开
+
+  (2)$f(x) = \frac{1}{x(x+1)}$在$x = 1$处幂级数展开
+
+  (3)$f(x) = \frac{1}{1 - 3x + 2x^2}$在$x = 0$处展开
+
+  (4)$f(x) = \frac{x}{1 + x - 2x^2}$在$x = 0$处展开
+\end{exercise}
+
+\begin{solution}
+  (1)首先$f(x) = 1 - \frac{4}{1+x}$，
+  设$t = x - 1$，则$f(x) = g(t) = 1 - \frac{4}{2 + t}$，
+  因此$f(x) = 1 - 2 \cdot \frac{1}{1 + \frac{t}{2}} = 1 - 2 \sum\limits_{n = 0}^{\infty}(\frac{-t}{2})^n$，
+  因此得到
+  \begin{equation*}
+    f(x) = 1 - \sum\limits_{n = 0}^{\infty} \left( \frac{-t}{2} \right)^n
+  \end{equation*}
+
+  (2)设$t = x- 1$，
+  可以得到$f(x) = \sum\limits_{n = 0}^{\infty} (-1)^n \left( 1 - \frac{1}{2^{n+1}} \right)(x-1)^n$
+\end{solution}
+
+
+\subsection{求导与求积}
+
+
+\begin{exercise}[几个经典的积分与求导法]
+  (1)计算$f(x) = \frac{1}{(1+x)^2}$在$x = 0$处的幂级数展开
+
+  (2)计算$f(x) = \arcsin x$在$x = 0$处的幂级数展开
+
+  (3)计算$f(x) = \int_0^x \frac{\sin t}{t}\mathbb{d} t$在$x = 0$处的幂级数展开
+\end{exercise}
+
+\begin{solution}
+  (1)积分得到$\int_0^x f(t)\mathrm{d} t = - \frac{1}{1+t}\bigg|^x_0 =1 - \frac{1}{1+x} = 1 - \sum\limits_{n = 0}^{\infty}(-x)^n$，
+  因此$f(x) = \left( \int_0^x f(t)\mathrm{d}t \right)^{\prime} = \sum\limits_{n = 1}^{\infty}(-1)^{n+1}nx^{n-1}$
+
+  (2)$f^{\prime}(x) = \frac{1}{\sqrt{1 - x^2}}$，
+  而
+  \begin{equation*}
+    (1 - x^2)^{-\frac{1}{2}} = 1 + \sum\limits_{n = 1}^{\infty} \frac{(-\frac{1}{2})(- \frac{3}{2})\cdots (- \frac{1}{2} - n + 1)}{n!}(-x^2)^n = 1+ \sum\limits_{n = 1}^{\infty} \frac{(2n-1)!!}{(2n)!!}x^{2n}
+  \end{equation*}
+  因此$f(x) = f(0) + \int_0^x f^{\prime}(t)\mathrm{d} t = x + \sum\limits_{n = 1}^{\infty} \frac{(2n-1)!!}{(2n+1)(2n)!!}x^{2n+1}$
+\end{solution}
+
+~
+
+\begin{exercise}[$\arctan$经典题目]
+  求幂级数展开：
+
+  (1)$f(x) = \arctan x$
+
+  (2)重点(ZJU2021)：$g(x) = \arctan \frac{1 - kx}{1 + kx}$
+
+  (3)重点：$h(x) = \arctan \frac{2x}{1 - x^2}$，求导结果很简单
+\end{exercise}
+
+\begin{solution}
+  (1)$f^{\prime}(x) = \frac{1}{1+x^2} = \sum\limits_{n = 0}^{\infty}(-x^2)^n$，
+  因此
+  \begin{equation*}
+    f(x) = f(0) + \sum\limits_{n = 0}^{\infty} \int_0^x (-1)^n t^{2n}\mathrm{d} t = \sum\limits_{n = 0}^{\infty} (-1)^n \frac{x^{2n+1}}{2n+1}
+  \end{equation*}
+
+  (2)$\arctan \frac{1-kx}{1+kx} = \arctan 1 - \arctan kx$，
+  因此
+  \begin{equation*}
+    g(x) = \frac{\pi}{4} - \sum\limits_{n = 0}^{\infty} \frac{(-1)^n k^{2n+1}}{2n+1}x^{2n+1}
+  \end{equation*}
+
+  (3)$h^{\prime}(x) = \frac{2}{1+x^2}$(别怕求导！)，
+  因此$h^{\prime}(x) = 2 \sum\limits_{n = 0}^{\infty} (-x^2)^n$，
+  积分得到
+  \begin{equation*}
+    h(x) = 2 \sum\limits_{n = 0}^{\infty} \frac{(-1)^n}{2n+1}x^{2n+1}
+  \end{equation*}
+\end{solution}
+
+
+
+
+
+

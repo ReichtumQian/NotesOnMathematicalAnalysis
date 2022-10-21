@@ -1,0 +1,692 @@
+
+\chapter{不定积分}
+
+
+\section{常用不定积分公式}
+
+必背部分：
+
+\begin{equation*}
+  \begin{array}{lll}
+    \text{普通三角：}& \int \sin x \mathrm{d}x = - \cos x + c& \int \cos x \mathrm{d}x = \sin x + c\\
+    \text{sec、csc：}                   & \int \sec^2 x \mathrm{d}x = \tan x + c& \int \csc^2 x \mathrm{d}x = - \cot x + c\\
+    & \int \sec x \mathrm{d} x = \ln|\sec x + \tan x| & \int \sec^3 x \mathrm{d} x = \frac{1}{2}\tan x \sec x + \frac{1}{2}\ln |\tan x + \sec x|\\
+    \text{乘积三角：} & \int \sec x \tan x \mathrm{d}x = \sec x + c& \int \csc x\cot x \mathrm{d}x = - \csc x + c\\
+    \text{分式：}& \int \frac{1}{x^2 + a^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + c & \int \frac{1}{x^2 - a^2}\mathrm{d}x = \frac{1}{2a} \ln |\frac{x-a}{x+a}| + c\\
+   & \int \frac{1}{\sqrt{x^2 + a^2}} \mathrm{d}x = \ln |x + \sqrt{x^2 + a^2}|+c& \int \frac{1}{\sqrt{x^2 - a^2}} \mathrm{d}x = \ln |x + \sqrt{x^2 - a^2}| + c \\
+   & \int \frac{1}{\sqrt{a^2 - x^2}}\mathrm{d}x = \arcsin \frac{x}{a} + c& \\
+    \text{对数：}&\int \ln x \mathrm{d} x = x \ln x - x + c&\int \ln(1 + x)\mathrm{d} x = (1+x) \ln(1+x) - x + c \\
+  \end{array}
+\end{equation*}
+
+会算部分：
+
+\begin{equation*}
+  \begin{array}{lll}
+    \text{三角：}& \int \tan x \mathrm{d}x = -\ln |\cos x| + c & \int \cot x \mathrm{d}x = \ln |\sin x| + c\\
+    \text{平方三角：}& \int \sin^2 x \mathrm{d}x = \frac{x}{2} - \frac{\sin 2x}{4} + c& \int \cos^2 x \mathrm{d}x = \frac{x}{2} + \frac{\sin 2x}{4} + c\\
+                 & \int \tan^2 x \mathrm{d}x = \tan x - x + c & \int \cot^2 x \mathrm{d}x = -\cot x - x + c\\
+    \text{复合三角：}& \int e^{ax} \cos bx \mathrm{d} x = \frac{e^{ax}}{a^2 + b^2}(a \cos bx + b \sin bx) + c&\\
+                 & \int e^{ax} \sin bx \mathrm{d} x = \frac{e^{ax}}{a^2 + b^2} (a \sin bx - b \cos bx) + c&\\
+                 & \int x \cos nx \mathrm{d} x = \frac{1}{n^2} \cos nx + \frac{x}{n} \sin nx + c&\\
+                 & \int x \sin nx \mathrm{d} x = \frac{1}{n^2} \sin nx - \frac{x}{n} \cos nx + c&\\
+    \text{根式：}&\int \sqrt{x^2 \pm a^2}\mathrm{d} x = \frac{1}{2} \left[ x \sqrt{x^2 \pm a^2} \pm a^2 \ln|x + \sqrt{x^2 \pm a^2}| \right] + c&\\
+                 &\int \sqrt{a^2 - x^2}\mathrm{d} x = \frac{1}{2} \left[ x \sqrt{a^2 - x^2} + a^2 \arcsin \frac{x}{a}  \right] + c&
+  \end{array}
+\end{equation*}
+
+
+
+\section{不定积分基本方法}
+
+\begin{theorem}[分部积分公式]
+  函数$u,v$的积分满足：
+  \begin{equation*}
+    \int u \mathrm{d} v = uv - \int v \mathrm{d} u
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[表格法]
+  函数$u,v$的积分$\int uv^{(n+1)} \mathrm{d} x = uv^{(n)} - u^{\prime}v^{(n-1)} + u^{\prime\prime}v^{(n-2)}- \cdots + (-1)^n u^{(n)}v +(-1)^{n+1}\int u^{(n+1)} v\mathrm{d}x$，具体操作时可列以下表格：
+  \begin{center}
+    \begin{tabular}[htp]{|c|c|c|c|c|c|c|}
+      \hline
+      $u$的各阶导数&$u$&$u^{\prime}$&$u^{\prime\prime}$&$u^{\prime\prime\prime}$&$\cdots$&$u^{(n+1)}$\\
+      \hline
+      $v^{(n+1)}$的各阶原函数&$v^{(n+1)}$&$v^{(n)}$&$v^{(n-1)}$&$v^{(n-2)}$&$\cdots$&$v$\\
+      \hline
+    \end{tabular}
+  \end{center}
+  计算方法：以$u$为起点，左上右下相乘，符号先正后负交替，最后一项为最后一列两个的积分$(-1)^{n+1}\int u^{(n+1)}v \mathrm{d} x$
+\end{theorem}
+
+\begin{note}
+  $\int P_n(x) e^{kx}\mathrm{d} x, \int P_n(x) \sin ax \mathrm{d} x, \int P_n(x) \cos ax \mathrm{d} x$都可以使用表格法快速算出
+\end{note}
+
+~
+
+\begin{exercise}[$P_n(x)e^{kx}$型]
+  计算$\int(x^3 + 2x + 6)e^{2x}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  先列表格：
+  \begin{center}
+    \begin{tabular}[htp]{|c|c|c|c|c|}
+      \hline
+      $x^3+2x+6$& $3x^2 + 2$& $6x$&$6$&$0$\\
+      \hline
+      $e^{2x}$&$\frac{1}{2}e^{2x}$&$\frac{1}{4}e^{2x}$&$\frac{1}{8}e^{2x}$&$\frac{1}{16}e^{2x}$\\
+      \hline
+    \end{tabular}
+  \end{center}
+  得到结果为$(x^3 + 2x + 6)\frac{1}{2}e^{2x} - (3x^2 + 2)\frac{1}{4}e^{2x} + 6x(\frac{1}{8}e^{2x}) - 6 (\frac{1}{16}e^{2x}) + \int 0 \cdot (\frac{1}{16}e^{2x}) \mathrm{d} x$
+\end{solution}
+
+
+\begin{theorem}[积分有理分解]
+  若被积函数为$R(x) = \frac{P(x)}{Q(x)}$，且$Q(x)$的次数大于等于$3$，
+  若$Q(x) = (x - a_1)^{\lambda_1}\cdots (x - a_k)^{\lambda_k}(x^2 + p_1x + q_1)^{\mu_1}\cdots (x^2 + p_lx + q_l)^{\mu_l}$，
+  对于$(x - a_1)^{\lambda_1}$和$(x^2 + p_1x + q_1)^{\mu_1}$项，对应展开式为：
+  \begin{equation*}
+    \begin{cases}
+      \frac{A_1}{x - a_1} + \frac{A_2}{(x - a_1)^2} + \cdots + \frac{A_{\lambda_1}}{(x - a)^{\lambda_1}}\\
+      \frac{B_1x + C_1}{x^2 + p_1x + q_1} + \cdots + \frac{B_{\mu_1}x + C_{\mu_1}}{(x^2 + p_1x + q_1)^{\mu_1}}
+    \end{cases}
+  \end{equation*}
+  其中$\frac{A_{\lambda_l}}{(x - a)^{\lambda_l}}$的积分好算，
+  而$\frac{B_{\mu_l}x + C_{\mu_l}}{(x^2 + p_1x + q_1)^{\mu_l}}$可配方化为$\int \frac{Lu + N}{(u^2 + r^2)^j}\mathrm{d} u$(因为判别式一定小于$0$)，
+  第一部分$L \int \frac{u}{(u^2 + r^2)^j}\mathrm{d} u$好算，
+  第二部分$N \int \frac{1}{(u^2 + r^2)^j}\mathrm{d} u$用$u = r \tan v$替换，
+  变为形如$\int \cos^k v \mathrm{d} v$的不定积分，有递推公式辅助求解。
+\end{theorem}
+
+~
+
+\begin{theorem}[三角有理式转化为有理式]
+  若$R(\sin x, \cos x)$为关于$\sin x, \cos x$的有理式，
+  记$t = \tan \frac{x}{2}$，
+  则$x = 2 \arctan t, \mathrm{d} x = \frac{2}{1+t^2}\mathrm{d} t$，
+  以及万能公式
+  \begin{equation*}
+    \sin x = \frac{2t}{1 + t^2}, \cos x = \frac{1 - t^2}{1+t^2}, \tan x = \frac{2t}{1 - t^2}
+  \end{equation*}
+  因此
+  \begin{equation*}
+    \int R(\sin x, \cos x )\mathrm{d} x = \int R \left( \frac{2t}{1+t^2}, \frac{1 - t^2}{1 + t^2} \right) \frac{2}{1+t^2} \mathrm{d} t
+  \end{equation*}
+\end{theorem}
+
+~
+
+\begin{theorem}[两类无理根式的不定积分]
+  对于$\int R \left( x, \sqrt[n]{\frac{ax + b}{cx + d}} \right) \mathrm{d} x$，只需要令$t = \sqrt[n]{\frac{ax + b}{cx + d}}$即可化为有理函数。
+  对于$\int R(x, \sqrt{ax^2 + bx + c})$，要么进行配方，要么用Euler变换。
+\end{theorem}
+
+\section{不定积分表选例}
+
+下面假设必背部分都会背，且不做计算证明
+
+\subsection{三角函数：重点}
+
+\begin{exercise}[核心会算]
+  \begin{equation*}
+    \begin{array}{ll}
+      \int \tan x \mathrm{d} x = - \ln |\cos x| + c&\int \cot x \mathrm{d} x =  \ln |\sin x| + c\\
+      \int \sec x\mathrm{d} x = \ln |\sec x + \tan x| + c & \int \csc x \mathrm{d} x = - \ln |\csc x + \cot x| + c
+    \end{array}
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  $\int \tan x \mathrm{d} x = - \int \frac{\mathrm{d} \cos x}{\cos x}$，$\int \cot x \mathrm{d} x$同理。
+  另外两个要记住
+  \begin{equation*}
+    \int \sec x \mathrm{d} x = \int \frac{\sec x ( \sec x + \tan x)}{\sec x + \tan x}\mathrm{d} x  = \int \frac{\mathrm{d}(\sec x + \tan x)}{\sec x + \tan x}= \ln |\sec x + \tan x|+c
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{exercise}[简单平方]
+  (1)$\int \sin^2 x \mathrm{d} x$(2)重点：$\int \tan^2 x\mathrm{d} x$
+  (3)超重点：$\int \sec^3 x \mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)直接用半角公式
+
+  (2)这个要记住，$\int \tan^2 x \mathrm{d} x = \int \sec^2 x - 1 \mathrm{d} x = \tan x - x + c$
+
+  (3)这个经常会用到！
+  \begin{align*}
+    \int \sec^3x \mathrm{d} x &= \int \sec x \mathrm{d} \tan x = \sec x \tan x - \int \tan^2 x \sec x \mathrm{d} x\\
+    &= \sec x \tan x - \int \sec^3 x \mathrm{d} x + \int \sec x \mathrm{d} x
+  \end{align*}
+  因此$I = \frac{1}{2} \sec x \tan x + \ln |\sec x + \tan x| + c$
+\end{solution}
+
+~
+
+
+\begin{exercise}[$\sin x, \cos x$加常数分式积分]
+  (1)重点：$\int \frac{\mathrm{d} x}{1 \pm \cos x}$(2)重点：$\int \frac{\mathrm{d} x}{1 \pm \sin x}$
+
+  (3)极度重点，含参积分大量用到：$\int \frac{\mathrm{d} x}{1 + a\cos x}, |a| \leq 1$
+\end{exercise}
+
+\begin{solution}
+  (1)根据$1 + \cos x = 2 \cos^2 \frac{x}{2}, 1 - \cos x = 2 \sin^2 \frac{x}{2}$，因此
+  \begin{equation*}
+    \begin{cases}
+      \int \frac{\mathrm{d} x}{1 + \cos x} = \frac{1}{2}\int \sec^2 \frac{x}{2}\mathrm{d} x = \tan \frac{x}{2} + c\\
+      \int \frac{\mathrm{d} x }{1 - \cos x} = \frac{1}{2} \int \csc^2 \frac{x}{2} \mathrm{d} x = -\cot \frac{x}{2} + c
+    \end{cases}
+  \end{equation*}
+
+  (2)根据诱导公式$\sin x = \cos \left( \frac{\pi}{2} - x \right)$
+  \begin{equation*}
+    \begin{cases}
+      \int \frac{\mathrm{d} x }{1 + \sin x} = \int \frac{\mathrm{d} x }{1 + \cos \left( \frac{\pi}{2} - x \right)} = -\tan \left( \frac{\pi}{4} - \frac{x}{2} \right)+c\\
+      \int \frac{\mathrm{d} x}{1 - \sin x} = \int \frac{\mathrm{d} x}{1 - \cos \left( \frac{\pi}{2} - x \right)} = \cot \left( \frac{\pi}{4} - \frac{x}{2} \right) + c
+    \end{cases}
+  \end{equation*}
+
+  (3)$a = \pm 1$时即(1)。
+  用万能公式，令$t = \tan \frac{x}{2}$，
+  则$\mathrm{d} x = \frac{2}{1+t^2}\mathrm{d} t$，
+  因此
+  \begin{equation*}
+    I = \int \frac{1}{1 + a \frac{1 - t^2}{1+t^2}} \cdot \frac{2}{1+t^2}\mathrm{d} t = \int \frac{2}{(1 + t^2) + a(1 - t^2)}\mathrm{d} t = \int \frac{2}{(1-a)t^2 + (1 + a)}\mathrm{d} t = \frac{2}{1-a} \sqrt{\frac{1-a}{1+a}} \arctan \left( \sqrt{\frac{1-a}{1+a}}t \right)+ c
+  \end{equation*}
+  得到结果为$I = \frac{2}{\sqrt{1 - a^2}} \arctan \left( \sqrt{\frac{1-a}{1+a}} \tan \frac{x}{2} \right) + c$
+\end{solution}
+
+~
+
+
+~
+
+\begin{theorem}[$\frac{1}{a\sin^2x + b \cos^2 x}$积分]
+  形如$\int \frac{\mathrm{d} x}{a \sin^2 x + b \cos^2 x}$的积分都采用上下同除以$\cos^2 x$，
+  转换为
+  \begin{equation*}
+    \int \frac{\sec^2 x \mathrm{d} x}{a \tan^2 x + b}
+  \end{equation*}
+  直接用$\mathrm{d}(\tan x )= \sec^2 x \mathrm{d}x$即可。
+\end{theorem}
+
+\begin{theorem}[$\frac{1}{a\sin^2x + b\sin x \cos x+ c \cos^2 x + d}$积分]
+  形如$\int \frac{\mathrm{d} x}{a \sin^2 x + b \sin x\cos x + c \cos^2 x + d}$的积分首先上下同除以$\cos^2 x$，
+  得到
+  \begin{equation*}
+    \int \frac{\sec^2 x \mathrm{d} x}{a \tan^2 x + b\tan x + c + d \sec^2 x}
+  \end{equation*}
+  再利用$\sec^2 x = \tan^2 x + 1$，全部转换为$\tan x$，再分母配方即可
+\end{theorem}
+
+~
+
+
+\begin{exercise}[$\sin x, \cos x$无常数、无分子分式]
+  (1)重点：$\int \frac{\mathrm{d} x}{\sin^2 x + 2 \cos ^2 x}$
+  (2)$\int \frac{1}{\sin^2 x \cos x}\mathrm{d} x$
+  (3)$\int \frac{\mathrm{d} x}{\sin x \cos^2 x}$
+\end{exercise}
+
+\begin{solution}
+  (1)同除以$\cos^2 x$，得到$\int \frac{\sec^2 x \mathrm{d} x}{2 + \tan^2 x}$，易算
+
+  (2)同乘$\cos x$，得到$I = \int \frac{\mathrm{d}(\sin x)}{\sin^2x (1 - \sin^2 x)}$，
+  即$\int \frac{1}{\sin^2 x}\mathrm{d} (\sin x) + \int \frac{1}{1 - \sin^2 x}\mathrm{d} x$，
+  前者直接算，后者用$\int \frac{1}{x^2 - a}\mathrm{d} x = \frac{1}{2a} \ln \left| \frac{x-a}{x+a} \right|$。
+
+  (3)与(2)同理
+\end{solution}
+~
+
+
+\begin{exercise}[$\sin x, \cos x$的高次]
+  (1)$\int (\sin^4 x  + \cos^4 x)\mathrm{d} x$
+  (2)重点：$\int \frac{\sin x \cos x}{\sin^4 x + \cos^4 x}\mathrm{d} x$
+  (3)重点：$\int \frac{\mathrm{d} x}{\sin^4x + \cos^4 x}$
+
+  (4)$\int \sin^6 x + \cos^6 x \mathrm{d} x$
+  (5)$\int \frac{\mathrm{d} x}{\sin^6 x + \cos^6 x}$
+\end{exercise}
+
+\begin{solution}
+  (1)降到一次：$\sin^4 x + \cos^4 x = (\sin^2 x + \cos^2 x)^2 - 2 \sin^2 x \cos^2 x = 1 - \frac{1}{2}\sin^2 2x = 1 - \frac{1}{4}(1 - \cos 4x)$
+
+  (2)降到二次，并切换$\sin x, \cos x$：$\int \frac{\frac{1}{2}\sin 2x}{1 - \frac{1}{2} \sin^2 2x}$，
+  要善于切换正余弦：
+  \begin{equation*}
+    \int \frac{\sin 2x}{2 - \sin^2 2x} \mathrm{d} x = -\frac{1}{2}\int \frac{\mathrm{d}(\cos 2x)}{1 + \cos^2 2x} = - \frac{1}{2}\arctan (\cos 2x) + c
+  \end{equation*}
+
+  (3)直接降到二次，并转换为$\tan x, \sec x$：使用$\sec^2 x = 1 + \tan ^2 x$
+  \begin{equation*}
+    I = \int \frac{\mathrm{d} x}{1 - \frac{1}{2}\sin^22x} = \int \frac{\sec^2 2x}{\sec^2 2x - \frac{1}{2} \tan^2 2x} = \frac{1}{2} \int \frac{\mathrm{d}(\tan 2x)}{1 + \frac{1}{2} \tan^2 2x} = \frac{1}{\sqrt{2}} \arctan \frac{\tan 2x}{\sqrt{2}} + c
+  \end{equation*}
+
+  (4)$\sin^6 x + \cos^6 x = (\sin^2 x + \cos^2 x)(\sin^4 - \sin^2 \cos^2 x + \cos^4 x)$转化为四次，
+  再配方：
+  \begin{equation*}
+    (\sin^2 x + \cos^2 x)^2 - 3 \sin^2 x \cos^2 x = 1 - \frac{3}{4} \sin^2 2x = 1 - \frac{3}{8} \left( 1 - \cos 4x \right)
+  \end{equation*}
+  结果为$\frac{5}{8}x + \frac{3}{32} \sin 4x + c$
+
+  (5)$I = \int \frac{1}{1 - \frac{3}{4} \sin^2 2x}\mathrm{d} x = \int \frac{\sec^2 x}{\sec^2 2x - \frac{3}{4}\tan^2 2x}\mathrm{d} x = 2 \int \frac{\mathrm{d}(\tan 2x)}{\tan^2 2x + 4}$
+\end{solution}
+
+
+\begin{note}
+  高次问题，如果分母为$1$则降到一次直接积分，
+  分子为$1$则降到二次转换为$\sec, \tan$，均不为$1$则降到齐次转化为有理式。
+  降次要么用立方和公式，要么用配方。
+\end{note}
+
+~
+
+
+\begin{theorem}[$\frac{a\sin x + b\cos x}{c \sin x + d\cos x}$型计算技巧]
+  $\frac{a\sin x + b\cos x}{c \sin x + d\cos x}$型
+  的积分把分子写为$A$倍分母加上$B$倍分母导数的形式，用待定系数法进行计算
+\end{theorem}
+
+\begin{corollary}[$\tan x, \cot x$分式型]
+  类似于$\int \frac{a\mathrm{d} x}{b + c\tan x}, \int \frac{a \mathrm{d} x}{b + c \cot x}$都可以转换回
+  $\frac{a \sin x + b \cos x }{c \sin x + d \cos x}$型积分进行计算
+\end{corollary}
+
+~
+
+\begin{exercise}[$\frac{a\sin x + b\cos x}{c \sin x + d\cos x}$型计算]
+  (1)重点：$\int \frac{\sin x}{\sin x + \cos x}\mathrm{d} x$
+  (2)重点：$\int \frac{\mathrm{d} x}{3 + 5\tan x}$
+\end{exercise}
+
+\begin{solution}
+  (1)设$\sin x = A(\sin x + \cos x )+ B(\cos x - \sin x)$，得到$A = \frac{1}{2}, B = - \frac{1}{2}$，
+  因此
+  \begin{equation*}
+    I = \int \frac{\frac{1}{2}(\sin x + \cos x) - \frac{1}{2} \mathrm{d}(\sin x + \cos x)}{\sin x + \cos x}\mathrm{d} x = \frac{1}{2}x - \frac{1}{2}\ln \left| \sin x + \cos x \right| + c
+  \end{equation*}
+
+  (2)由于$\frac{1}{3 + 5\tan x} = \frac{\cos x}{5 \sin x + 3 \cos x}$，
+  设$\cos x = A(5 \sin x + 3 \cos x) + B(5 \cos x - 3 \sin x)$，
+  则$5A = 3B, 3A + 5B = 1$，得到$A = \frac{3}{34}, B = \frac{5}{34}$，
+  得到
+  \begin{equation*}
+    I = \frac{3}{34} x + \frac{5}{34} \ln \left| 5 \sin x + 3 \cos x \right| + c
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{theorem}[$\frac{1}{a \sin x + b \cos x + c}$积分]
+  类似于$\int \frac{\mathrm{d} x}{a \sin x + b \cos x + c}$的积分采用二倍角公式转换为二次，
+  得到
+  \begin{equation*}
+    \int \frac{1}{2a \sin \frac{x}{2} \cos \frac{x}{2} + b(2 \cos^2 \frac{x}{2} - 1) + c} \mathrm{d} x
+  \end{equation*}
+  使用前面的积分方法，上下同时除以$\cos^2 \frac{x}{2}$，
+  再根据$\sec^2 x = \tan^2 x + 1$进行配方即可。
+\end{theorem}
+
+
+~
+
+\begin{exercise}[相关训练]
+  (1)$\int \frac{\mathrm{d} x}{\sin x + 2 \cos x + 3}$
+\end{exercise}
+
+\begin{solution}
+  (1)$\sin x + 2 \cos x + 3 = 1 + 2 \sin \frac{x}{2} \cos \frac{x}{2} + 4 \cos^2 \frac{x}{2}$，
+  因此
+  \begin{equation*}
+    I = \int \frac{\sec^2 \frac{x}{2}}{4 + 2 \tan \frac{x}{2} + \sec^2 x} = 2 \int \frac{d(\tan \frac{x}{2} + 1)}{(\tan \frac{x}{2} + 1)^2 + 4} = \arctan \frac{\tan \frac{x}{2} + 1}{2} + c
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{corollary}[$\frac{p \sin x + q \cos x + s}{a \sin x + b \cos x + c}\mathrm{d} x$]
+  这类积分可以将分子写为$A$倍分母加$B$倍分母导数加$C$常数，
+  其中常数项用前一个定理进行计算。
+\end{corollary}
+
+~
+
+\begin{exercise}[三角根号]
+  (1)$\int \sin x \cos x \sqrt{a^2 \sin^2 x + b^2 \cos ^2 x}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)写为$\frac{1}{2}\int \sqrt{(a^2 - b^2)\sin^2 x + b^2}\mathrm{d}(\sin^2 x)$即可
+\end{solution}
+
+\subsection{对数与指数}
+
+\begin{exercise}[几道经典指数积分]
+  (1)$\int \frac{\mathrm{d}x}{e^x + e^{-x}}$
+  (2)$\int \frac{\mathrm{d} x}{\sqrt{1 + e^{2x}}}$
+  (3)$\int e^x \left( \frac{1-x}{1+x^2} \right)^2 \mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)本质是$e^x$的有理函数，故$I = \int \frac{\mathrm{d}(e^x)}{e^{2x} + 1} = \arctan (e^x) + c$
+
+  (2)同乘$e^{-x}$，故$I = -\int \frac{\mathrm{d}(e^{-x})}{\sqrt{e^{-2x} + 1}} = - \ln |e^{-x} + \sqrt{e^{-2x} + 1}| + c$
+
+  (3)$I = \int \frac{e^x}{1+x^2}\mathrm{d} x - \int \frac{e^x}{(1 + x^2)^2}\mathrm{d} (x^2 + 1)$，
+  第一项实在是没法处理，
+  只能期待第二项，第二项等于$\int e^x \mathrm{d}(\frac{1}{1+x^2})$，
+  因此用分部积分得到
+  \begin{equation*}
+    \int \frac{e^x}{1 + x^2}\mathrm{d} x + \int e^x \mathrm{d}(\frac{1}{1+x^2}) = \frac{e^x}{1 + x^2} + c
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{exercise}[几道经典对数积分]
+  (1)$\int x^n \ln x \mathrm{d} x$
+  (2)$\int \left( \frac{\ln x}{x} \right)^2 \mathrm{d} x$
+  (3)$\int \sqrt{x} \ln^2 x \mathrm{d} x$
+  (4)特殊：$\int \frac{1}{1-x^2} \ln \frac{1+x}{1-x}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)列表法得到：$I = \frac{x^{n+1}\ln x}{n+1} - \int \frac{x^n}{n+1}\mathrm{d} x = \frac{x^{n+1}}{1+n}(\ln x - \frac{1}{n+1})+ c$
+  \begin{center}
+    \begin{tabular}[htp]{|c|c|}
+      \hline
+      $\ln x$& $\frac{1}{x}$\\
+      \hline
+      $x^n$&$\frac{1}{n+1} x^{n+1}$\\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  (2)无法直接列表，因为中间项会交叉，因此可以用表格法一步一步列，
+  \begin{equation*}
+    I = - \frac{\ln^2 x}{x} + \int \frac{2\ln x}{x^2}\mathrm{d} x = - \frac{\ln^2 x}{x} - \frac{2\ln x}{x} + \int \frac{2}{x^2} \mathrm{d} x = - \frac{1}{x} (\ln^2 x + 2 \ln x + 2)+c
+  \end{equation*}
+
+  (3)同理用表格法一步一步列，
+  \begin{equation*}
+    I = \frac{2}{3}x^{\frac{3}{2}}\ln^2 x  - \frac{4}{3} \int x^{\frac{1}{2}} \ln x \mathrm{d} x = \frac{2}{3}x^{\frac{3}{2}}\ln^2 x  - \frac{4}{3} \left( \frac{2}{3} \ln x x^{\frac{3}{2}} - \frac{2}{3}\int x^{\frac{1}{2}} \mathrm{d} x\right)
+  \end{equation*}
+
+  (4)一看就是特殊配凑的，要注意到$\frac{1}{1-x^2}\mathrm{d} x = \frac{1}{2} \mathrm{d} \left( \ln \frac{1+x}{1-x} \right)$
+\end{solution}
+
+\subsection{分式问题}
+
+\begin{exercise}[几个基础型]
+  (1)$\int \frac{\mathrm{d}x}{ax^2 + b}(a > 0)$
+  (2)重点：$\int \frac{\mathrm{d}x}{(ax^2 + b)^2}$
+  (3)$\int \frac{\mathrm{d}x}{(ax^2 + b)^n}$
+
+  (4)重点：$\int \frac{\mathrm{d}x}{ax^2 + bx + c}$
+  (5)重点：$\int \frac{x}{ax^2 + bx + c}\mathrm{d}x$
+
+  % (6)
+  % $\int \frac{x^2}{ax^4 + bx^2 + c} dx$
+\end{exercise}
+
+\begin{solution}
+  (1)原式$= \frac{1}{a} \int \frac{\mathrm{d}x}{x^2 + \frac{b}{a}}$，
+  需要分类讨论：
+  $b > 0$时变为$\frac{1}{a} \int \frac{\mathrm{d}x}{x^2 + (\sqrt{\frac{b}{a}})^2} = \frac{1}{a} \cdot \sqrt{\frac{a}{b}} \arctan (\sqrt{\frac{a}{b}}x)$。
+  $b < 0$时变为$\frac{1}{a} \int \frac{\mathrm{d}x}{x^2 + (\sqrt{ - \frac{b}{a}})^2}$，后面同理
+
+  (2)原式$= - \int \frac{1}{2ax} \mathrm{d} \frac{1}{ax^2 + b}
+  = - \frac{1}{2ax} \cdot \frac{1}{ax^2 + b} + \int \frac{1}{ax^2 + b} \mathrm{d} \frac{1}{2ax}
+  = - \frac{1}{2ax} \cdot \frac{1}{ax^2 + b} - \int \frac{1}{ax^2 + b} \cdot \frac{1}{2ax^2}\mathrm{d}x$，
+  再对$\frac{1}{2ax^2 (ax^2 + b)} = \frac{\frac{1}{b}}{2ax^2} + \frac{- \frac{1}{2b}}{ax^2 + b}$有理分解，
+  代入后全变为基础型1。
+
+  (3)
+  同理转化为$\int \frac{1}{2ax(1 - n)} \mathrm{d}(\frac{1}{(ax^2 + b)^{n-1}})$，
+  再用分部积分去做。
+
+  (4)
+  原式$= \frac{1}{a} \int \frac{\mathrm{d}x}{x^2 + \frac{b}{a} x + \frac{c}{a}} =
+  \frac{1}{a} \int \frac{\mathrm{d}x}{(x + \frac{b}{2a})^2+ \frac{c}{a} - \frac{b^2}{4a^2}} $，
+  将$\frac{c}{a} - \frac{b^2}{4a^2}$看作整体，变为(1)
+
+  (5)原式$= \frac{1}{2a} \int \frac{2ax}{ax^2 + bx + c}
+  = \frac{1}{2a} \int \frac{2ax + b}{ax^2 + bx + c} - \frac{b}{ax^2 + bx + c}\mathrm{d}x
+  = \frac{1}{2a}(\int \frac{\mathrm{d}(ax^2 + bx + c)}{ax^2 + bx + c} - \int \frac{b}{ax^2 + bx + c}\mathrm{d}x)$，
+  变为(4).
+
+  % (6)
+  % 一般这种形式令$x = \frac{1}{t}$，
+  % 可以把分子消去，化为技巧型2.
+\end{solution}
+
+~
+
+\begin{exercise}[次方和差]
+  尽量记住下面的分解方法：
+
+  (1)$\int \frac{\mathrm{d} x}{x^3 + 1}$
+  (2)$\int \frac{\mathrm{d} x}{x^3 - 1}$
+  
+  (3)$\int \frac{\mathrm{d} x}{x^4 - 1}$
+  (4)重点：$\int \frac{\mathrm{d} x}{x^4 + 1}$(一定要记住！)
+
+  (5)$\int \frac{\mathrm{d} x}{x^6 - 1}$
+  (6)$\int \frac{\mathrm{d} x}{x^6 + 1}$
+\end{exercise}
+
+\begin{solution}
+  (1)写为$\frac{1}{x^3 + 1} = \frac{1}{3(x+1)} + \frac{-x + 2}{3(x^2 - x + 1)}$，后者给分母配方即可
+
+  (2)用立方差即可
+
+  (3)用$\frac{1}{x^4 - 1} = \frac{1}{2} \left( \frac{1}{x^2 - 1} - \frac{1}{x^2 + 1} \right)$
+
+  (4)构造$M = \int \frac{x^2 - 1}{x^4 + 1}\mathrm{d} x, N =\int \frac{x^2 + 1}{x^4 + 1}$，得到
+  \begin{equation*}
+    \begin{cases}
+      M = \int \frac{1 - \frac{1}{x^2}}{x^2 + \frac{1}{x^2}} =  \int \frac{\mathrm{d}(x + \frac{1}{x})}{(x + \frac{1}{x})^2 - 2}\\ 
+      N = \int \frac{x^2 + 1}{x^4 + 1} \mathrm{d} x= \int \frac{1 + \frac{1}{x^2}}{x^2 + \frac{1}{x^2}}\mathrm{d} x = \int \frac{\mathrm{d}(x - \frac{1}{x})}{(x-\frac{1}{x})^2 + 2}
+    \end{cases}
+  \end{equation*}
+  因此所求即$\frac{1}{2}(N - M)$
+
+  (5)用平方差(不要用立方差)：$\frac{1}{x^6 - 1} = \frac{1}{2}(\frac{1}{x^3 - 1} + \frac{1}{x^3 + 1})$，
+  转换为(1)(2)
+
+  (6)类似四次方的讨论+立方和
+  \begin{align*}
+    I &= \frac{1}{2}\int \frac{x^4 + 1}{x^6 + 1}\mathrm{d} x - \frac{1}{2} \int \frac{x^4 - 1}{x^6 + 1}\mathrm{d} x\\
+    &= \frac{1}{2} \int \frac{x^2 + (x^4 - x^2 + 1)}{x^6 + 1}\mathrm{d} x - \frac{1}{2} \int \frac{(x^2 - 1)(x^2 + 1)}{(x^2 + 1)(x^4 - x^2 + 1)}\mathrm{d} x\\
+    &= \frac{1}{2} \int \frac{x^2}{x^6 + 1}\mathrm{d} x + \frac{1}{2}\int \frac{\mathrm{d} x}{x^2 + 1} - \frac{1}{2} \int \frac{x^2 - 1}{x^{4 }- x^2 + 1}\mathrm{d} x\\
+    &= \frac{1}{6}\int \frac{\mathrm{d}(x^3)}{(x^3)^2 + 1} + \frac{1}{2} \arctan x - \frac{1}{2} \int \frac{\mathrm{d}(x + \frac{1}{x})}{(x + \frac{1}{x})^2 + 3}\mathrm{d} x
+  \end{align*}
+\end{solution}
+
+~
+
+\begin{exercise}[几个经典题]
+  (1)$\int \frac{x^2}{(1 - x)^{100}}\mathrm{d} x$
+  (2)$\int \frac{\mathrm{d} x}{(x+a)^2 (x + b)^2}$
+\end{exercise}
+
+\begin{solution}
+  (1)显然待定系数法有理分解不可行，因此用技巧$x^2 = [(1-x) - 1]^2$得到$\frac{x^2}{(1-x)^{100}} = \frac{(1-x)^2 - 2(1-x) + 1}{(1-x)^{100}}$，做换元即可
+
+  (2)这种有理分解比较常见，最好记下来，
+  \begin{equation*}
+    \frac{1}{(x+a)^2(x+b)^2} = \frac{1}{(b-a)^2} \left( \frac{1}{x+a} - \frac{1}{x+b} \right)^2 = \frac{1}{(b-a)^2} \left[ \frac{1}{(x+a)^2} + \frac{1}{(x+b)^2} - \frac{2}{(x+a)(x+b)} \right]
+  \end{equation*}
+\end{solution}
+
+\subsection{根式问题}
+
+\begin{exercise}[三个基础公式的证明]
+  (1)$\int \sqrt{a^2 - x^2}\mathrm{d} x$
+  (2)重点：$\int \sqrt{x^2 + a^2}\mathrm{d} x$
+  (3)重点：$\int \sqrt{x^2 - a^2}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)设$x = a \sin t$，
+  则$I = \int a \cos t \cdot a\cos t\mathrm{d} t = \frac{a^2}{2} \int (1 + \cos 2t)\mathrm{d} t = \frac{a^2}{2}(t + \sin t \cos t)+ C$。
+  画一个三角形做辅助，角$t$对着$x$，斜边为$a$，
+  因此$\sin t = \frac{x}{a}, \cos t = \frac{\sqrt{a^2 - x^2}}{a}$，
+  带回得到：
+  \begin{equation*}
+    I = \frac{1}{2}(x \sqrt{a^2 - x^2} + a^2 \arcsin \frac{x}{a}) + C
+  \end{equation*}
+
+  (2)$x = a \tan t$，$I = \int a^2 \sec^3 x \mathrm{d} t =  \frac{a^2}{2} (\sec x \tan x ) + \frac{a^2}{2} \ln |\tan x + \sec x|$(一定要记住$\sec x, \sec^3 x$的积分，如果一次方都没记住，就死翘翘了。。)，
+  因此得到结果为
+  \begin{equation*}
+    \frac{1}{2} (x \sqrt{x^2 + a^2} + a^2 \ln |x + \sqrt{x^2 + a^2}|) + C
+  \end{equation*}
+
+  (3)设$x = a \sec t$，得到$I = a^2\int \tan^2 t \sec t \mathrm{d}t = a^2 \int \sec^3 t - \sec t \mathrm{d} t$，
+  背公式以及画三角形得到：
+  \begin{equation*}
+    I = \frac{a^2}{2}(\sec t \tan t - \ln |\tan t + \sec t|) + C = \frac{1}{2}(x \sqrt{x^2 - a^2} - a^2 \ln |x + \sqrt{x^2 - a^2}|) + C
+  \end{equation*}
+\end{solution}
+
+~
+
+\begin{exercise}[$(x-a)(b-x)$型]
+  (1)$\int \frac{\mathrm{d} x}{\sqrt{x(1-x)}}$
+  (2)$\int \frac{\mathrm{d} x}{\sqrt{(x -a)(b - x)}}$
+  (3)$\int \sqrt{(x-a)(b-x)}\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)设$x = \sin^2 t$，则$I = \int \frac{2\sin t \cos t}{\sin t \cos t}\mathrm{d} t = 2t + C$，
+  直接带回得到$I = 2 \arcsin \sqrt{x} + C$
+
+  (2)令$t = x-a$，则变为$\int \frac{\mathrm{d} t}{\sqrt{t(b - a - t)}}$，
+  令$t = (b - a) \sin^2 s$即可，
+  故
+  \begin{equation*}
+    I = \int \frac{2(b-a)\sin s \cos s \mathrm{d} s}{(b-a) \sin s \cos s} = 2s = 2 \arcsin \sqrt{\frac{t}{(b-a)}} = 2 \arcsin  \sqrt{\frac{x-a}{b-a}}+C
+  \end{equation*}
+
+  (3)同理得到$I = \int 2(b-a)^2 \sin^2 s \cos^2 s\mathrm{d} s = \frac{(b-a)^2}{4} \int (1 - \cos 4t )\mathrm{d} t$，
+  后续略
+\end{solution}
+
+~
+
+\begin{exercise}[其他特别经典的根式积分问题]
+  (1)$\int \left( \sqrt{\frac{1+x}{1-x}} + \sqrt{\frac{1-x}{1+x}} \right)\mathrm{d}x $
+
+  (2)$\int \frac{\mathrm{d} x}{(\sqrt{x} + 1)(x + 3)}$
+
+  (3)$\int \frac{\mathrm{d} x}{x \sqrt{x^2 - 2x - 3}}$
+
+  (4)$I = \frac{\mathrm{d} x}{x + \sqrt{x^2 - x + 1}}$
+\end{exercise}
+
+\begin{solution}
+  (1)让分母一样：$\frac{1+x}{\sqrt{1-x^2}} + \frac{1-x}{\sqrt{1-x^2}} = \frac{2}{\sqrt{1-x^2}}$，
+  直接转换为了$\arcsin x$的积分
+
+  (2)令$t = \sqrt{x}$，
+  则$I = \int \frac{2t}{(t+1)(t^2 + 3)}\mathrm{d} t = \int \frac{A}{t+1}\mathrm{d} t + \int \frac{Bt + C}{t^2 + 3}\mathrm{d}t$，
+  解出$A = - \frac{1}{2}, B = \frac{1}{2}, C = \frac{3}{2}$，
+  从而
+  \begin{equation*}
+    I = - \frac{1}{2} \ln |t+1| + \int \frac{1}{4} \ln|t^2 + 3| + \frac{\sqrt{3}}{2} \arctan \frac{t}{\sqrt{3}} + C
+  \end{equation*}
+
+  (3.1)方法1：使用Euler变换。
+  设$\sqrt{x^2 - 2x + 3} = x - t$，则得到$x = \frac{t^2 + 3}{2(t-1)}$，
+  进而$\mathrm{d} x = \frac{t^2 - 2t + 3}{2(t-1)^2}\mathrm{d}t$，
+  此时积分变为
+  \begin{equation*}
+    I = - \int \frac{2}{t^2 + 3} \mathrm{d} t  = - \frac{2}{\sqrt{3}} \arctan \frac{t}{\sqrt{3}} + C
+  \end{equation*}
+
+  (3.2)方法2：配方+三角函数(一般还是推荐三角函数)。
+  $I = \int \frac{\mathrm{d} x}{x \left[ (x-1)^2 - 4 \right]^{\frac{1}{2}}}$，
+  做换元$x - 1 = 2 \sec t$，
+  因此
+  \begin{equation*}
+    I = \int \frac{2 \sec t \tan t}{(2 \sec t + 1) 2 \tan t}\mathrm{d} t = \int \frac{\mathrm{d} t}{2 + \cos t}
+  \end{equation*}
+  背公式即$\frac{2}{\sqrt{1-a^2}} \arctan \left( \sqrt{\frac{1-a}{1+a}}\tan \frac{x}{2} \right) + C$，
+  代入$a = \frac{1}{2}$。
+  注意带回时需要用半角公式，$\tan \frac{t}{2} = \frac{\sin t}{1 + \cos t}$，再画个三角形进行辅助。
+
+  (4)可以用Euler变换或者配方三角替换。
+\end{solution}
+
+\subsection{配对积分法}
+
+\begin{exercise}[经典配对积分法]
+  (1)计算$I_1 = \int e^{ax } \cos b x \mathrm{d} x, I_2 = \int e^{ax} \sin bx \mathrm{d} x$
+  (2)计算$I_1 = \sin (\ln x)\mathrm{d} x , I_{2 }= \int \cos(\ln x)\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)用分部积分得到$I_1 = \frac{1}{a}(e^{ax} \cos bx + bI_2)$，
+  同理$I_2 = \frac{1}{a}(e^{ax} \sin x - bI_1)$，
+  列出线性方程组：
+  \begin{equation*}
+    \begin{cases}
+      aI_1 - bI_2 = e^{ax} \cos bx\\
+      bI_1 + aI_2 = e^{ax} \sin bx
+    \end{cases}
+    \Rightarrow
+    \begin{cases}
+      I_1 = \frac{e^{ax}}{a^2 + b^2} (a \cos bx + b \sin bx) + C\\
+      I_2 = \frac{e^{ax}}{a^2 + b^2}(a \sin bx - b \cos bx) + C
+    \end{cases}
+  \end{equation*}
+
+  (2)直接用分部积分：$\int \sin(\ln x)\mathrm{d} x = x \sin(\ln x) - \int \cos(\ln x)\mathrm{d} x$，
+  同理$\int \cos(\ln x)\mathrm{d} x = x \cos(\ln x) + \int \sin(\ln x)\mathrm{d} x$
+\end{solution}
+
+\subsection{递推问题}
+
+\begin{exercise}[几个最常见递推]
+  (1)$I_n = \int \frac{\sin nx}{\sin x}\mathrm{d} x$
+  (2)$I_n = \int \sec^n x\mathrm{d} x$
+  (3)$I_n = \int e^{ax} \sin ^n x\mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  (1)
+  首先根据和差公式和积化和差：
+  \begin{equation*}
+    \sin nx = \sin[(n-1)x + x] = \sin (n-1)x \cos x + \cos(n-1) x \sin x = \frac{1}{2}[\sin nx + \sin (n-2)x] + \cos (n-1)x \sin x
+  \end{equation*}
+  因此
+  \begin{equation*}
+    I_n = \frac{1}{2}(I_n + I_{n-2}) + \frac{1}{n-1} \sin(n-1)x \Rightarrow I_n = \frac{2}{n-1}\sin(n-1)x + I_{n-2}
+  \end{equation*}
+
+  (2)先凑出$\mathrm{d}\tan x$并使用分部积分：
+  \begin{equation*}
+    \int \sec^n x\mathrm{d} x = \int \sec^{n-2}x \mathrm{d}(\tan x) = \tan x \sec^{n-2}x - (n-2) \int \tan^2 x \sec^{n-2}x \mathrm{d} x
+  \end{equation*}
+  再代入$\tan^2 x = \sec^2 x - 1$：
+  \begin{equation*}
+    I_n = \tan x \sec^{n-2} x - (n-2)(I_n - I_{n-2}) \Rightarrow I_n = \frac{\tan x \sec^{n-2}x}{n - 1}+\frac{n-2}{n-1} I_{n-2}
+  \end{equation*}
+
+  (3)
+\end{solution}
+
+\begin{note}
+  $\int \sec x \mathrm{d} x = \ln |\tan x + \sec x|$和
+  $\int \sec^3 x\mathrm{d} x = \frac{1}{2} \tan x \sec x + \frac{1}{2} \ln|\tan x + \sec x|$在根式中经常用到，要记住，具体证明过程见前面部分。
+\end{note}

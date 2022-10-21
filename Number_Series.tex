@@ -1,0 +1,712 @@
+
+\chapter{数项级数}
+
+\section{数项级数基本理论}
+
+\begin{definition}[数项级数收敛]
+  给定数项级数$\sum\limits_{n = 1}^{\infty}u_n$，
+  定义$S_n = \sum\limits_{k= 1}^n u_n$为部分和函数，
+  若$\lim \limits _{n \rightarrow \infty} S_n = S$收敛，则称$\sum\limits_{n = 1}^{\infty}u_n$收敛，
+  否则称数项级数发散。
+\end{definition}
+
+\begin{theorem}[数项级数收敛的各种条件]
+  给定数项级数$\sum\limits_{n = 1}^{\infty}u_n$，其收敛的条件：
+  \begin{itemize}
+  \item 必要条件(一定能推出)：$\lim \limits _{n \rightarrow \infty} u_n = 0$
+  \item 充要条件(Cauchy准则)：$\forall \epsilon, \exists N, \forall m, m+p> N$有$|u_{m+1} + \cdots + u_{m+p}| < \epsilon$
+  \end{itemize}
+\end{theorem}
+
+\begin{note}
+  一般证明发散要么不满足必要条件，要么用Cauchy准则逆否命题
+\end{note}
+
+~
+
+\begin{exercise}[Cauchy收敛准则]
+  (1)证明$\sum\limits_{n = 1}^{\infty} \frac{1}{n}$发散
+  (2)用Cauchy收敛准则证明$\sum\limits_{n = 1}^{\infty}\frac{1}{n^2}$收敛
+\end{exercise}
+
+\begin{proof}
+  (1)$\exists \epsilon_0 = 0, \forall N, m = N+1, m+p = 2N$，
+  则$\frac{1}{m+1} + \frac{1}{m+2} + \cdots + \frac{1}{2m} \geq \frac{1}{2} = \epsilon_0$，
+  根据Cauchy逆否命题可证(也可以用积分判别法证明)
+
+  (2)用$\frac{1}{n^2} < \frac{1}{n(n-1)}$，
+  直接求和或者用Cauchy收敛准则都行
+\end{proof}
+
+~
+
+\begin{theorem}[子列问题]
+  对于数项级数$\sum\limits_{n = 1}^{\infty}u_n$，若$\lim \limits _{n \rightarrow \infty}u_n = 0$，
+  $S_n = \sum\limits_{k = 1}^n u_k$有一个子列$S_{np}$($p$为固定整数)收敛，
+  则$\sum\limits_{n = 1}^{\infty}u_n$收敛
+\end{theorem}
+
+~
+
+\begin{exercise}[交错子列]
+  证明$1 + \frac{1}{2} + (\frac{1}{3} - 1) + \frac{1}{4} + \frac{1}{5} + (\frac{1}{6} - \frac{1}{2}) + \cdots = \ln 3$
+\end{exercise}
+
+\begin{proof}
+  $S_{3n} = \sum\limits_{k = 1}^{3n}u_{k} = (1 + \frac{1}{2} + \cdots + \frac{1}{3n}) - (1 + \frac{1}{2} + \cdots + \frac{1}{n})$，
+  配合 Euler 常数可知$S_{3n} = \ln 3n + \gamma - \ln n - \gamma = \ln 3$
+\end{proof}
+
+~
+
+\begin{theorem}[去除有限项]
+  去掉、增加、改变级数的有限项并不改变数项级数的收敛性。
+\end{theorem}
+
+\section{正项级数}
+
+\subsection{比较原则}
+
+\begin{theorem}[比较原则]
+  $\sum\limits_{n = 1}^{\infty}u_n, \sum\limits_{n = 1}^{\infty}v_n$是两个正项级数，
+  \begin{itemize}
+  \item 非极限形式：
+    若$\exists N > 0$使得$\forall n > N$满足$u_n \leq v_n$，则
+    根据$\sum\limits_{n = 1}^{\infty}v_n$收敛推出$\sum\limits_{n = 1}^{\infty}u_n$收敛；
+    根据$\sum\limits_{n = 1}^{\infty}u_n$发散，则$\sum\limits_{n = 1}^{\infty}v_n$也发散
+  \item 极限形式：$\lim \limits _{n \rightarrow \infty} \frac{u_n}{v_n} = \lambda$。
+    当$0 < \lambda < \infty$，同敛散。$\lambda = 0$则$\sum\limits_{n = 1}^{\infty}v_n$敛推$\sum\limits_{n = 1}^{\infty}u_n$敛。
+    $\lambda = \infty$时$\sum\limits_{n = 1}^{\infty}v_n$发散推$\sum\limits_{n = 1}^{\infty}v_n$发散
+  \end{itemize}
+\end{theorem}
+
+\begin{note}
+  比较原则极限形式的$0 < \lambda < \infty$情况即可以使用等价无穷小。
+  但在一些特殊情况下也需要用$\lambda = 0, \lambda = \infty$的形式。
+\end{note}
+
+~
+
+\begin{example}[常用比较对象]
+  $\sum\limits_{n = 0}^{\infty}\frac{1}{n^p}$在$p > 1$时收敛，在$p \leq 1$时发散
+\end{example}
+
+\begin{proof}
+  用积分判别法
+\end{proof}
+
+~
+
+\begin{exercise}[使用等价无穷小]
+  判断敛散性：(1)$\sum\limits_{n = 1}^{\infty} \frac{1}{\sqrt{n^2 + 1}}$
+  (2)$\sum\limits_{n = 1}^{\infty} 2^n \sin \frac{\pi}{3^n}$
+
+  (3)重点：$\sum\limits_{n = 1}^{\infty} (\sqrt[n]{2} - 1)$
+  (4)重点：$\sum\limits_{n = 1}^{\infty} (a^{\frac{1}{n} } + a^{- \frac{1}{n}} - 2)(a > 1)$
+\end{exercise}
+
+\begin{solution}
+  (1)$\frac{1}{\sqrt{n^2 + 1}} \sim \frac{1}{n}$，发散
+
+  (2)和等比级数比，等价于$(\frac{2}{3})^n \pi$，收敛
+
+  (3)根据$2^{\frac{1}{n}} - 1 \sim \frac{1}{n} \ln 2$，发散(注意这里用的是$a^x \sim x \ln a - 1$)
+
+  (4)根据$a^{\frac{1}{n}} + a^{- \frac{1}{n}} - 2 = (a^{\frac{1}{2n}} - a^{-\frac{1}{2n}})^2 = a^{-\frac{1}{n}}(a^{\frac{1}{n}} - 1)^2 \sim \frac{\ln^2 a}{n^2}$收敛
+\end{solution}
+
+~
+
+\begin{exercise}[含对数与指数]
+  (1)重点：$\sum\limits_{n = 1}^{\infty} \frac{1}{3^{\ln n}}$
+  (2)重点：$\sum\limits_{n = 2}^{\infty}\frac{1}{(\ln n)^{\ln n}}$
+  (3)$\sum\limits_{n = 3}^{\infty} \frac{1}{(\ln \ln n)^{\ln n}}$
+  (4)特殊：$\sum\limits_{n = 2}^{\infty}\frac{1}{(\ln n)^n}$
+
+  (5)重点：$\sum\limits_{n = 1}^{\infty}\frac{1}{n^{2n \sin \frac{1}{n}}}$
+  (6)重点：$\sum\limits_{n=1}^{\infty}\frac{\ln (n+1)}{e^n}$
+  (7)$\sum\limits_{n = 1}^{\infty}(e^{\frac{1}{n^2}} - \cos \frac{\pi}{n})$
+\end{exercise}
+
+\begin{solution}
+  对数需要用到恒等式$a^{\ln b} = b^{\ln a}$(两侧取对数即可证明)
+  
+  (1)$\frac{1}{3^{\ln n}} = \frac{1}{n^{\ln 3}}$收敛
+
+  (2)$\frac{1}{(\ln n)^{\ln n }} = \frac{1}{n^{\ln( \ln n)}} < \frac{1}{n^2}$收敛
+
+  (3)$\frac{1}{(\ln \ln n)^{\ln n}} = \frac{1}{n^{\ln \ln \ln n}} < \frac{1}{n^2}$，收敛
+
+  (4)$\frac{1}{(\ln n)^n} < \frac{1}{2^n}$，收敛
+
+  (5)$\frac{1}{n^{2n \sin \frac{1}{n}}} < \frac{1}{n^{\frac{3}{2}}}$，因此收敛。
+
+  (6)$\lim \limits _{n \rightarrow \infty} n^2 \frac{\ln (n+1)}{e^n} \rightarrow 0$
+
+  (7)Taylor展开：$e^{\frac{1}{n^2}} - \cos \frac{\pi}{n} = 1 + \frac{1}{n^2} - 1 + \frac{\pi^2}{2n^2} + o(\frac{1}{n^2}) = (1 + \frac{\pi^2}{2})\frac{1}{n^2}$收敛
+\end{solution}
+
+\begin{note}
+  要灵活使用比较判别法。
+  有时用等价无穷小，有时直接放缩，有时乘上$n^2$(一般在分母极大)，有时Taylor展开
+\end{note}
+
+~
+
+\begin{exercise}[等价无穷小的进一步应用]
+  (1)$a_n > 0$，证明$(1 + a_1)(1 + a_2)\cdots (1 + a_n)$与$\sum\limits_{n = 1}^{\infty}a_n$敛散性相同
+
+  (2)$a_n = (1 - \frac{p \ln n}{n} )^n$，讨论$\sum\limits_{n = 1}^{\infty}b_n$的敛散性
+
+  (3)$f(x)$在$[-1,1]$二阶连续可微，且$\lim \limits _{x \rightarrow 0}\frac{f(x)}{x} = 0$，
+  证明$\sum\limits_{n = 1}^{\infty}f(\frac{1}{n})$绝对收敛
+\end{exercise}
+
+\begin{proof}
+  (1)取对数即$\sum\limits_{n = 1}^{\infty} \ln(1 + a_n)$，
+  $\lim \limits _{n \rightarrow \infty} a_n = 0$时，$\lim \limits _{n \rightarrow \infty} \frac{\ln(1 + a_n)}{a_n} = 1$，故同敛散。
+  若$\lim \limits _{n \rightarrow \infty} a_n \neq 0$时，$\sum\limits_{n = 1}^{\infty}a_n$发散，
+  显然$\lim \limits _{n \rightarrow \infty} \ln(1 + a_n) \neq 0$，故也发散。
+
+  (2)$a_n = e^{n \ln(1 - \frac{p \ln n}{n})} = e^{n[-\frac{p \ln n}{n} + o(\frac{1}{n})]} = e^{-p \ln n} \sim \frac{1}{n^p}$，
+  当$p > 1$时收敛，
+  $p \leq 1$时发散。
+
+  (3)根据$\lim \limits _{x \rightarrow 0}\frac{f(x)}{x} = 0$得到$f^{\prime}(0) = 0$，
+  根据Lagrange余项得到$f(\frac{1}{n}) = f^{\prime}(\xi) \frac{1}{n^2}$，因此收敛
+\end{proof}
+
+~
+
+\begin{theorem}[比式比较判别法]
+  $\sum\limits_{n = 1}^{\infty}u_n , \sum\limits_{n = 1}^{\infty}v_n$为正项级数，
+  $\exists N, \forall n \geq N$有$\frac{u_{n+1}}{u_n} \leq \frac{v_{n+1}}{v_n}$，
+  则$\sum\limits_{n = 1}^{\infty}v_n$收敛可推出$\sum\limits_{n = 1}^{\infty}u_n$收敛，
+  $\sum\limits_{n = 1}^{\infty}u_n$发散可推出$\sum\limits_{n = 1}^{\infty}v_n$发散
+\end{theorem}
+
+\begin{proof}
+  根据$\frac{u_n}{u_N} = \frac{u_{N+1}}{u_N} \frac{u_{N+2}}{u_{N+1}}\cdots \frac{u_n}{u_{n-1}} \leq \frac{v_{N+1}}{v_N} \frac{v_{N+2}}{v_{N+1}} \cdots \frac{v_n}{v_{n+1}} = \frac{v_n}{v_N}$，
+  由此推出$u_n \leq \frac{u_N}{v_N}v_n$只相差一个常数，
+  因此根据一般的比较判别法可得到结论。
+\end{proof}
+
+~
+
+\begin{exercise}[比式比较判别法基本应用]
+  $a_n > 0, 0 < \alpha \leq 1, \beta > 1$，证明：
+  (1)若$\frac{a_{n+1}}{a_n} \geq (1 - \frac{1}{n})^{\alpha}$，则$\sum\limits_{n= 1}^{\infty}a_n$发散
+  (2)若$\frac{a_{n+1}}{a_n} \leq (1 - \frac{1}{n})^{\beta}$，则$\sum\limits_{n = 1}^{\infty}a_n$收敛
+\end{exercise}
+
+\begin{proof}
+  (1)根据$\frac{a_{n+1}}{a_n} \geq (\frac{n-1}{n})^{\alpha} = \frac{\frac{1}{n^{\alpha}}}{\frac{1}{(n-1)^{\alpha}}}$，
+  因此根据结论发散
+  (2)同理
+\end{proof}
+
+
+\subsection{比式判别法与根式判别法}
+
+前面比较判别法常用的比较对象是$\frac{1}{n^p}$，而根式判别法与比式判别法的比较对象是等比级数。
+
+\begin{theorem}[比式判别法与根式判别法]
+  $\sum\limits_{n = 1}^{\infty}u_n$是正项级数，则
+  \begin{itemize}
+  \item 比式判别法：若$\varlimsup \limits _{n \rightarrow \infty} \frac{u_{n+1}}{u_n} = q < 1$，则$\sum\limits_{n = 1}^{\infty}u_n$收敛，若$\varliminf \limits _{n \rightarrow \infty} \frac{u_{n+1}}{u_n} > 1$则发散。
+  \item 根式判别法：若$\varlimsup \limits _{n \rightarrow \infty} \sqrt[n]{u_n} = l < 1$
+    则$\sum\limits_{n = 1}^{\infty}u_n$收敛，$\varlimsup \limits_{n \rightarrow \infty} \sqrt[n]{u_n} > 1$则发散。(双上极限)
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)若$\varlimsup \limits_{n \rightarrow \infty}\frac{u_{n+1}}{u_n} = q < 1$，
+  则对$\forall r \in (q,1)$，$\exists N, \forall n > N$有$\frac{u_{n+1}}{u_n} < r = \frac{r^{n+1}}{r^n}$，
+  而$\sum\limits_{n = 1}^{\infty}r^n$收敛，
+  根据比式比较判别法可知。另一侧同理。
+
+  (2.1)若$\varlimsup \limits _{n \rightarrow \infty}\sqrt[n]{u_n} = l < 1$，
+  则$\forall r \in (l,1)$，$\exists N, \forall n > N$有$\sqrt[n]{u_n} < r$，
+  即$u_n < r^n$，由于$\sum\limits_{n = 1}^{\infty}r^n$收敛，因此$\sum\limits_{n = 1}^{\infty}u_n$收敛。
+
+  (2.2)另一侧
+  若$\varlimsup \limits _{n \rightarrow \infty}\sqrt[n]{u_n} = l > 1$，
+  则$\forall r \in (1,l)$，存在子列$\sqrt[n_k]{u_{n_k}} \geq r$，
+  $u_{n_k} \geq r^{n_k} \rightarrow \infty$，因此$\sum\limits_{n = 1}^{\infty}u_n$发散。
+\end{proof}
+
+\begin{note}
+  理论上根式判别法证明发散只需要证上极限，比比式条件更弱，因此更好用。
+  而且由于$\varliminf \limits_{n \rightarrow \infty}\frac{u_{n+1}}{u_n} \leq \varliminf\limits_{n \rightarrow \infty}\sqrt[n]{u_n} \leq \varlimsup \limits_{n \rightarrow \infty}\sqrt[n]{u_n} \leq \varlimsup\limits_{n \rightarrow \infty}\frac{u_{n+1}}{u_n}$可知能用比式的一定能用根式，
+  一定要记住$\sqrt[n]{n!} \sim \frac{n}{e}$
+\end{note}
+
+~
+
+\begin{exercise}[使用根式判别法]
+  用根式判别法法证明
+  (1)$\sum\limits_{n = 1}^{\infty}\frac{n^2}{(2 + \frac{1}{n})^n}$
+  (2)$\sum\limits_{n = 1}^{\infty}\frac{n!}{n^n}$
+  (3)$\sum\limits_{n = 1}^{\infty}\frac{n! 3^n}{n^n}$
+
+  (4)重点：$\sum\limits_{n = 1}^{\infty}\frac{(n!)^2}{(2n)!}$
+  (5)重点：$\sum\limits_{n = 1}^{\infty}\frac{(2n-1)!!}{n!}$
+  (6)讨论$\sum\limits_{n = 1}^{\infty}\frac{x^n n!}{n^n}$的收敛性，$x \geq 0$
+\end{exercise}
+
+\begin{solution}
+  (1)极限为$\frac{1}{2}$，收敛
+
+  (2)极限为$\frac{n/e}{n} = \frac{1}{e}$，收敛
+
+  (3)极限为$\frac{3}{e} > 1$，发散
+
+  (4)极限为$\sqrt[n]{\frac{(n!)^2}{(2n)!}}  = \frac{(\frac{n}{e})^2}{\sqrt[2n]{(\frac{2n}{e}})^2} \sim \frac{1}{4}$
+
+  (5)$\sum\limits_{n = 1}^{\infty}\frac{(2n - 1)!!}{n!} = \sum\limits_{n = 1}^{\infty}\frac{(2n)!}{n!(2n)!!} = \sum\limits_{n = 1}^{\infty}\frac{(2n)!}{n!2^n n!}$，
+  因此根据根式判别法等价于$2 > 1$。
+
+  (7)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{x^nn!}{n^n}} = \frac{x}{e}$，
+  $x \in (0,e)$收敛，$x \in (e,+\infty)$发散。
+  当$x = e$则$\frac{a_{n+1}}{a_n} = \frac{e}{(1 + \frac{1}{n})^n} > 1$，极限不趋于$0$。
+\end{solution}
+
+~
+
+\begin{exercise}[仅能用根式判别法]
+  (1)证明$\sum\limits_{n = 1}^{\infty}\frac{1}{2^{n + (-1)^n}}$收敛
+
+  (2)讨论$\sum\limits_{n = 1}^{\infty} \frac{x^n}{1 + x^{2n}}$的敛散性
+\end{exercise}
+
+\begin{proof}
+  (1)$\lim \limits _{n \rightarrow \infty} \sqrt[n]{\frac{1}{2^{n+(-1)^n}}} = \frac{1}{2} < 1$因此收敛
+
+  (2)分母$\lim \limits _{n \rightarrow \infty} \sqrt[n]{1 + x^{2n}} = \max \{1,x^2\}$，
+  因此
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \sqrt[n]{u_n} = \frac{x}{\max \{1,x^2\}} =
+    \begin{cases}
+      < 1, & x \neq 1\\
+      =1, & x = 1
+    \end{cases}
+  \end{equation*}
+  因此$x \neq 1$时收敛，$x = 1$时发散。
+\end{proof}
+
+
+~
+
+\begin{exercise}[根式判别法上下极限]
+  (1)判断$b + c + b^2 + c^2 + \cdots + b^n + c^n + \cdots$的敛散性，这里$0 < b < c < 1$
+\end{exercise}
+
+\begin{solution}
+  (1)$\sqrt[n]{u_n}$在偶数项为$\sqrt{c}$，奇数项为$\sqrt{b}$，
+  因此上极限为$\sqrt{c}$，故收敛
+\end{solution}
+
+\subsection{积分判别法和拉贝判别法}
+
+\begin{theorem}[积分判别法与拉贝判别法]
+  $\sum\limits_{n = 1}^{\infty}u_n$收敛最本质的充要条件为部分和函数$S_n$有界，其推论为
+  \begin{itemize}
+  \item 拉贝判别法(常用于$\frac{a_{n+1}}{a_n}\rightarrow 1$)：$\lim \limits _{n \rightarrow \infty} n(1 - \frac{u_{n+1}}{u_n}) = r > 1$，则$\sum\limits_{n = 1}^{\infty} u_n$收敛。若$r < 1$则发散，$r = 1$需要具体判定
+  \item 积分判别法：$f$是$[1,+\infty)$上非负减函数，则$\sum\limits_{n = 1}^{\infty}f(n)$与$\int_1^{+\infty}f(x)\mathrm{d}x$同时收敛与发散
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)拉贝判别法：
+
+  收敛情况：
+  根据条件，$\exists N, \forall n > N$使得
+  $n \left( 1- \frac{u_{n+1}}{u_n} \right) > r$得到$\frac{u_{n+1}}{u_n} < 1 - \frac{r}{n}$，
+  根据伯努利不等式：
+  \begin{equation*}
+    (1 + x)^r \geq 1 + rx, x > -1, r > 1 \Rightarrow \left( 1 - \frac{1}{n} \right)^r \geq 1 - \frac{r}{n}
+  \end{equation*}
+  因此$\frac{u_{n+1}}{u_n} \leq \left( 1 - \frac{1}{n} \right)^r = \left( \frac{n-1}{n} \right)^r = \frac{\frac{1}{n^r}}{\frac{1}{(n-1)^r}}$，
+  显然$\sum\limits_{n = 1}^{\infty}\frac{1}{n^r}$收敛，因此$\sum\limits_{n = 1}^{\infty}u_n$收敛
+
+  发散情况：$\frac{u_{n+1}}{u_n} \geq 1 - \frac{1}{n} = \frac{n-1}{n} = \frac{\frac{1}{n}}{\frac{1}{n-1}}$，
+  而$\sum\limits_{n = 1}^{\infty} \frac{1}{n}$发散，因此发散。
+\end{proof}
+
+
+\begin{note}
+  拉贝判别法更多地用于比式和根式判别法都失效的情况下。
+\end{note}
+
+~
+
+\begin{exercise}[拉贝判别法]
+  判断敛散性(1)$\sum\limits_{n = 1}^{\infty} \frac{n^n}{e^nn!}$
+\end{exercise}
+
+\begin{solution}
+  (1)显然根式判别法失效。
+  因此设$u_n = \frac{n^n}{e^nn!}$，使用拉贝判别法以及$(1 + \frac{1}{n})^n = e - \frac{e}{2n}$(用$(1+x)^{\frac{1}{x}}$在$0$处Taylor展开)得到
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} n \left( 1 - \frac{u_{n+1}}{u_n} \right) = \lim \limits _{n \rightarrow \infty}  n \left[ 1 - \frac{(1 + \frac{1}{n})^n}{e} \right] = \lim \limits _{n \rightarrow \infty} n \left[ \frac{1}{2n} + o(\frac{1}{n}) \right] = \frac{1}{2} < 1 
+  \end{equation*}
+  根据拉贝判别法可知发散。
+\end{solution}
+
+\subsection{放缩证明敛散性}
+
+\begin{exercise}[两个简单放缩]
+  (1)$a_n \geq 0$，讨论$\sum\limits_{n = 1}^{\infty}a_n$与$\sum\limits_{n = 1}^{\infty}\sqrt{a_n a_{n+1}}$收敛性的关系
+
+  (2)设$\sum\limits_{n = 1}^{\infty}a_n^2, \sum\limits_{n = 1}^{\infty}b_n^2$收敛，
+  证明$\sum\limits_{n = 1}^{\infty}a_nb_n, \sum\limits_{n = 1}^{\infty}(a_n + b_n)^2$均收敛
+\end{exercise}
+
+\begin{proof}
+  (1)$\sqrt{a_n + b_n} \leq \frac{1}{2}(a_n + b_n)$，根据比较定理可知
+
+  (2)根据Cauchy不等式，$\sum\limits_{n = 1}^{N} a_nb_n \leq \left( \sum\limits_{n = 1}^Na_n^2 \right) \left( \sum\limits_{n = 1}^N b_n^2 \right)$，
+  因此收敛。
+  $\sum\limits_{n = 1}^N (a_n+b_n)^2 = \sum\limits_{n = 1}^N a_n^2 + 2a_nb_n + b_n^2$即可
+\end{proof}
+
+\section{任意项级数}
+
+\subsection{交错项级数}
+
+\begin{theorem}[Leibniz判别法]
+  若$a_n$单减趋于$0$，
+  那么交替项级数$\sum\limits_{n= 1}^{\infty}(-1)^{n-1}a_n$收敛
+\end{theorem}
+
+\begin{proof}
+  设$a_n$单减趋于$0$，$S_n = \sum\limits_{k = 1}^n (-1)^{k-1}a_k$，
+  下面考虑奇偶部分和：
+  \begin{equation*}
+    \begin{cases}
+      S_{2n} = (a_1 - a_2) + (a_3 - a_4) + \cdots + (a_{2n-1} - a_{2n})\\
+      S_{2n+1} = (a_1) - (a_2 - a_3) - (a_4 - a_5) - \cdots - (a_{2n} - a_{2n+1})
+    \end{cases}
+  \end{equation*}
+  显然$S_{2n}$单增，$S_{2n+1}$单减，
+  $a_1 - a_2 \leq S_{2n} \leq S_{2n} + a_{2n+1} = S_{2n+1} \leq a_1$，
+  因此$S_{2n},S_{2n+1}$均有界，根据单调有界定理可知收敛，
+  而奇偶子列均收敛说明$S_n$收敛。
+\end{proof}
+
+~
+
+\begin{exercise}
+  讨论下面级数的条件收敛与绝对收敛性：
+
+  (1)重点：$\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{n^{p + \frac{1}{n}}}$
+  (2)$\sum\limits_{n = 2}^{\infty}\frac{(-1)^n}{n^p \ln^q n}$
+  (3)$\sum\limits_{n = 1}^{\infty}(-1)^n \sin \frac{x}{n}$
+
+  (4)$\sum\limits_{n =1 }^{\infty}(-1)^n \frac{\arctan n}{n^x}$
+  (5)重点：$\sum\limits_{n = 1}^{\infty} \sin (n \pi + \frac{1}{n^p})$
+  (6)重点：$\sum\limits_{n = 1}^{\infty} \sin (\pi \sqrt{n^2 + p^2})$
+\end{exercise}
+
+\begin{solution}
+  (1)$\frac{1}{n^{p + \frac{1}{n}}} \sim \frac{1}{n^p}$因此$p > 1$时绝对收敛。
+  条件收敛性只需要看是否单调，
+  考虑$1 \geq p > 0$，$f(x) = x^{p + \frac{1}{x}}$，
+  $f^{\prime}(x) = p x^{p-1}x^{\frac{1}{x}} + x^p x^{\frac{1}{x}} \frac{1 - \ln x}{x^2} = x^{p-1}x^{\frac{1}{x}}(p + \frac{1 - \ln x}{x}) > 0$($x$足够大时)，
+  因此整体单减趋于$0$。
+  $p \leq 0$时$\lim \limits _{n \rightarrow \infty} \frac{(-1)^n}{n^{p + \frac{1}{n}}} \neq 0$，因此发散。
+
+  (2)加绝对值后可以用积分判别法，在$p > 1$时绝对收敛，$p = 1, q > 1$绝对收敛。
+  $p > 0$，构造$g(x) = x^p \ln^q x$，得到$g^{\prime}(x) = x^{p-1}\ln^{q-1} x(p \ln x + q) > 0$($x$足够大)，
+  从而$p = 1, q \leq 1$时，$0 < p < 1$条件收敛
+  $p = 0$时$q > 0$条件收敛，$q \leq 0$发散。
+  $p < 0$发散。
+
+  (3)$x = 0$则绝对收敛。
+  $x \neq 0$时$|(-1)^n \sin \frac{x}{n}| \sim \frac{|x|}{n}$发散。
+  而$\sin \frac{x}{n}$在$n$足够大时单调，因此条件收敛
+
+  (4)加绝对值时等价于$\frac{1}{n^x}$，因此$x > 1$时绝对收敛。
+  不加绝对值时，$x < 0$一定发散，
+  $x > 0$时，取$g(y) = \frac{\arctan y}{y^x}$，求导发现小于$0$，因此收敛
+
+  (5)等于$\sum\limits_{n = 1}^{\infty}(-1)^n \sin \frac{1}{n^p}$，
+  $p > 1$绝对收敛，$0 < p \leq 1$条件收敛，
+  $ p \leq 0$发散。
+
+  (6)等于$\sum\limits_{n = 1}^{\infty}(-1)^n \sin(\pi \sqrt{n^2 + p^2} - n\pi) = \sum\limits_{n = 1}^{\infty}(-1)^n \sin \frac{p^2 \pi}{\sqrt{n^2 + p^2} + n}$，
+  因此$p = 0$时绝对收敛，
+  $p \neq 0$条件收敛。
+\end{solution}
+
+\begin{note}
+  单调性常常使用求导辅助。
+\end{note}
+
+\subsection{Dirichlet与Abel判别法}
+
+\begin{theorem}[Dirichlet判别法]
+  $a_k,b_k$为两个数列，
+  且满足(1)$\sum\limits_{i = 1}^k a_i$有界(2)$b_k$单调趋于$0$，
+  则$\sum\limits_{k = 1}^{\infty}a_kb_k$收敛
+\end{theorem}
+
+\begin{theorem}[Abel判别法]
+  $a_k,b_k$满足(1)$\sum\limits_{i = 1}^{\infty}a_i$收敛(2)$b_k$单调有界，
+  则$\sum\limits_{k=1}^{\infty}a_kb_k$收敛
+\end{theorem}
+
+\begin{note}
+  Leibniz判别法本质只是Dirichlet和Abel判别法的一个特例
+\end{note}
+
+\begin{exercise}[常用三角结论]
+  (1)重点：$a_n$单减趋于$0$，$x \neq 2k\pi$，证明：$\sum\limits_{n = 1}^{\infty}a_n \cos nx, \sum\limits_{n = 1}^{\infty}a_n \sin nx$收敛
+
+  (2)重点：$x \neq k\pi$，讨论$\sum\limits_{n = 1}^{\infty}\frac{\cos nx}{n^p}, \sum\limits_{n = 1}^{\infty}\frac{\sin nx}{n^p}$的条件收敛和绝对收敛性
+
+  (3)重点：讨论$\sum\limits_{n = 1}^{\infty}(-1)^n \frac{\sin n}{n}$与$\sum\limits_{n= 1}^{\infty}(-1)^n \frac{\sin^2 n}{n}$的条件收敛与绝对收敛性
+\end{exercise}
+
+\begin{proof}
+  (1)根据$|\sum\limits_{k = 1}^n \cos kx| = |\frac{\sin(n + \frac{1}{2})x - \sin \frac{x}{2}}{2 \sin \frac{x}{2}}| \leq \frac{1}{|\sin \frac{x}{2}|}$，
+  同理$|\sum\limits_{k = 1}^{\infty}\sin kx| = |\frac{\cos \frac{x}{2} - \cos(n + \frac{1}{2})x}{2\sin \frac{x}{2}}| \leq \frac{1}{|\sin \frac{x}{2}|}$，
+  根据Dirichlet判别法可知。
+
+  (2)$p > 1$时$|\frac{\cos nx}{n^p}| \leq \frac{1}{n^p}$，因此绝对收敛。
+  $p > 0$时根据Dirichlet可知条件收敛，
+  $p \leq 0$时$\lim \limits _{n \rightarrow \infty} \frac{\cos nx}{n^p} \neq 0$发散。
+
+  下面证明$0 < p \leq 1$时不绝对收敛：
+  \begin{equation*}
+    \left| \frac{\cos nx}{n^p} \right| \geq
+    \left| \frac{\cos ^2 nx}{n^p} \right| \geq
+    \left| \frac{1 - \sin^2 x}{n^p} \right|
+  \end{equation*}
+  而$\sum\limits_{n = 1}^{\infty} \frac{1}{n^p}$发散，因此发散。
+
+  (3)这种双交错要把$(-1)^n$吸收进三角。
+  $\sin(x + n\pi) = (-1)^n \sin x, \cos(n + n\pi) = (-1)^n \cos x$，
+  因此$\sum\limits_{n = 1}^{\infty}(-1)^n \frac{\sin n}{n} = \sum\limits_{n = 1}^{\infty}\frac{\sin(1 + \pi)n}{n}$条件收敛(根据(1)结论)。
+  第二个转换为$\frac{1}{2} \sum\limits_{n = 1}^{\infty}\frac{(-1)^n}{n} - \frac{1}{2}\sum\limits_{n = 1}^{\infty}\frac{\cos(2+\pi)n}{n}$条件收敛。
+  绝对值发散的原因是$\sum\limits_{n = 1}^{\infty}\frac{\sin^2 n}{n} = \frac{1}{2}\sum\limits_{n = 1}^{\infty}\frac{1}{n} - \frac{1}{2} \sum\limits_{n = 1}^{\infty}\frac{\cos 2n}{n}$
+\end{proof}
+
+~
+
+\begin{exercise}[具体例子]
+  讨论$\sum\limits_{n = 1}^{\infty} \frac{\cos 3n}{n} (1 + \frac{1}{n})^n$的收敛性
+\end{exercise}
+
+\begin{solution}
+  $\sum\limits_{n = 1}^{\infty} \frac{\cos 3n}{n}$根据前面结论收敛，
+  $(1 + \frac{1}{n})^n \rightarrow e$单调有界，因此由Abel可知收敛
+\end{solution}
+
+\section{数项级数理论}
+
+
+\subsection{级数的加括号}
+
+级数的加括号本质是数列收敛及其子列收敛的关系
+
+\begin{theorem}[加括号收敛]
+  $\sum\limits_{n = 1}^{\infty}u_n$收敛，
+  则$\sum\limits_{n = 1}^{\infty}u_n$中任意加括号得到级数$\sum\limits_{n = 1}^{\infty} v_n$也收敛，
+  且$\sum\limits_{n = 1}^{\infty}u_n = \sum\limits_{n = 1}^{\infty}v_n$(即加括号既不改变收敛性，又不改变和)
+\end{theorem}
+
+\begin{proof}
+  显然$S_n = \sum\limits_{k = 1}^n u_k$收敛，
+  从而$S_k^{\prime} = \sum\limits_{k = 1}^mv_k$是$S_n$子列，
+  从而收敛且极限相同。
+\end{proof}
+
+\begin{note}
+  若级数发散，则加括号得到的新级数可能收敛，例如$\sum\limits_{n = 1}^{\infty}(-1)^n$。
+  若级数加括号以后发散，则原级数一定收敛。
+\end{note}
+
+\begin{theorem}[加括号收敛反推级数收敛]
+  若$\sum\limits_{n = 1}^{\infty}u_n$加括号后$\sum\limits_{n = 1}^{\infty}v_n$收敛，
+  \begin{itemize}
+  \item 若$\lim \limits _{n \rightarrow \infty} u_n = 0$且每个括号里项个数小于固定值$L$，则$\sum\limits_{n = 1}^{\infty}u_n$收敛
+  \item 若每个括号里符号相同，则$\sum\limits_{n = 1}^{\infty}u_n$收敛
+  \end{itemize}
+\end{theorem}
+
+
+\subsection{级数的重排}
+
+\begin{definition}[重排]
+  考虑级数$\sum\limits_{n = 1}^{\infty}u_n$，
+  $f$是$[n] \rightarrow [n]$的映射，
+  则称
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty}v_n = \sum\limits_{n = 1}^{\infty} u_{f(n)}
+  \end{equation*}
+  为$\sum\limits_{n = 1}^{\infty}u_n$的一个重排
+\end{definition}
+
+\begin{theorem}[正项级数的重排]
+  正项级数$\sum\limits_{n = 1}^{\infty}u_n$收敛，
+  则其任意重排$\sum\limits_{n = 1}^{\infty}u_{f(n)}$也收敛，
+  且
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty}u_n = \sum\limits_{n = 1}^{\infty}u_{f(n)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  记$S_n = \sum\limits_{k = 1}^n u_k, S^{\prime}_n = \sum\limits_{k = 1}^n u_{f(k)}$，
+  记$M = \max \{f(1),\cdots, f(n)\}$，
+  则显然$S_n^{\prime} \leq S_{M}$，
+  根据$\lim \limits _{n \rightarrow \infty} S_n$存在可知$\lim \limits _{n \rightarrow \infty}S_n^{\prime}$存在，
+  且
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} S_n^{\prime} \leq \lim \limits _{n \rightarrow \infty} S_n^{\prime}
+  \end{equation*}
+
+  反之也可以将$S_n$看作$S_n^{\prime}$的重排，因此也满足$\lim \limits _{n \rightarrow \infty}S_n \leq \lim \limits _{n \rightarrow \infty} S_n^{\prime}$
+\end{proof}
+
+\begin{theorem}[一般项级数的重排]
+  $f$是重排映射，
+  若$\exists M \in \mathbb{Z}^+$使得$|f(n) - n| \leq M$，
+  则$\sum\limits_{n = 1}^{\infty} u_n$收敛当且仅当$\sum\limits_{n = 1}^{\infty} u_{f(n)}$收敛，
+  且
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty }u_n = \sum\limits_{n = 1}^{\infty} u_{f(n)}
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[绝对收敛级数的重排]
+  设$\sum\limits_{n = 1}^{\infty}u_n$绝对收敛，
+  则其任意重排$\sum\limits_{n = 1}^{\infty}u_{f(n)}$绝对收敛，
+  且
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty}u_n = \sum\limits_{n = 1}^{\infty}u_{f(n)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  正负部分开即可
+\end{proof}
+
+\begin{theorem}[Riemann定理：条件收敛级数的重排]
+  设数项级数$\sum\limits_{n = 1}^{\infty}u_n$条件收敛，
+  则对$\forall S \in \mathbb{R} \cup \{\pm \infty\}$，
+  存在重排$\sum\limits_{n = 1}^{\infty}v_n$收敛到$S$
+\end{theorem}
+
+
+\subsection{正部与负部}
+
+对于任意数列$u_n$，考虑非负数列$p_n = \frac{|u_n| + u_n}{2}, q_n = \frac{|u_n| - u_n}{2}$，
+分别为$u_n$的正部与负部，下面研究它们之间的关系。
+
+\begin{theorem}[正负部]
+  若$\sum\limits_{n = 1}^{\infty}u_n$绝对收敛，则$\sum\limits_{n = 1}^{\infty}p_n, \sum\limits_{n = 1}^{\infty}q_n$均收敛。
+  若$\sum\limits_{n = 1}^{\infty}u_n$条件收敛，则$\sum\limits_{k = 1}^np_k, \sum\limits_{k = 1}^nq_k$发散到正无穷，且$\lim \limits _{n \rightarrow \infty} \frac{\sum\limits_{k = 1}^n p_k}{\sum\limits_{k = 1}^n q_k} = 1$
+\end{theorem}
+
+\begin{proof}
+  (1)$0 \leq p_n, q_n \leq |u_n|$，因此根据比较原则可发现$\sum\limits_{n = 1}^{\infty}p_n,q_n$都收敛，
+  且极限可拆开
+
+  (2)$\sum\limits_{n = 1}^{\infty}u_n$条件收敛，则$\sum\limits_{n = 1}^{\infty}(p_n - q_n)$收敛，
+  但$\sum\limits_{n = 1}^{\infty}(p_n + q_n) = +\infty$，
+  假设$\sum\limits_{n = 1}^{\infty}p_n$收敛，则$\sum\limits_{n = 1}^{\infty}q_n$收敛，这与$\sum\limits_{n = 1}^{\infty}(p_n + q_n)$发散矛盾。
+\end{proof}
+
+\begin{exercise}
+  $a_n$单减，$a_n \geq 0$，$\sum\limits_{n = 1}^{\infty}a_n$发散，
+  证明$\lim \limits _{n \rightarrow \infty} \frac{a_2 + a_4 + \cdots + a_{2n}}{a_1 + a_3 + \cdots + a_{2n-1}} = 1$
+\end{exercise}
+
+\begin{proof}
+  极限小于等于$1$显然。
+  而$\frac{a_2 + \cdots + a_{2n}}{a_1 + \cdots + a_{2n-1}} \geq \frac{a_3 + a_5 + \cdots + a_{2n-1}}{a_1 + a_3 + \cdots + a_{2n-1}} = 1 - \frac{a_1}{a_1 + \cdots + a_{2n-1}}$，
+  根据单减以及发散可知$2(a_1 + a_3 + \cdots + a_{2n-1}) \geq a_1 + a_2 + \cdots + a_{2n} \rightarrow \infty$，
+  因此大于等于$1$。
+\end{proof}
+
+
+
+
+
+\subsection{级数的乘积}
+
+
+\subsection{级数的相互控制}
+
+\begin{theorem}[级数相互控制]
+  设$a_n \leq c_n \leq b_n$则
+  \begin{itemize}
+  \item 数列$a_n,b_n$收敛不能得出$c_n$收敛
+  \item 级数$\sum\limits_{n = 1}^{\infty}a_n, \sum\limits_{n = 1}^{\infty}b_n$收敛可得出$\sum\limits_{n = 1}^{\infty}c_n$收敛
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1)例如：$a_n = -2 - \frac{1}{n}, b_n = 2 + \frac{1}{n}, c_n = (-1)^n$
+
+  (2)此时$0 \leq c_n - a_n \leq b_n - a_n$，
+  显然$\sum\limits_{n = 1}^{\infty}b_n - a_n$收敛，
+  根据比较原则得到$\sum\limits_{n = 1}^{\infty}c_n - a_n$收敛，因此得到$\sum\limits_{n = 1}^{\infty} c_n$收敛。
+\end{proof}
+
+\begin{corollary}[控制是相互的]
+  若$a_n \leq b_n \leq a_{n+1}$，则显然推出$b_{n-1} \leq a_n \leq b_n$，
+  因此$\sum\limits_{n = 1}^{\infty}a_n, \sum\limits_{n = 1}^{\infty}b_n$同敛散。
+\end{corollary}
+
+~
+
+\begin{exercise}[相互控制练习]
+  (1)重点：$a_n$每一项都非零，$\lim \limits _{n \rightarrow \infty} a_n = a \neq 0$，证明$\sum\limits_{n = 1}^{\infty}|a_{n+1} - a_n|, \sum\limits_{n = 1}^{\infty} \left| \frac{1}{a_{n+1}} - \frac{1}{a_n} \right|$敛散性相同
+
+  (2)$a_n$是单调减的正数列，证明$\sum\limits_{n = 1}^{\infty}a_n$与$\sum\limits_{m = 1}^{\infty}2^m a_{2^m}$同敛散
+\end{exercise}
+
+\begin{proof}
+  (1)根据极限保号性，$\exists N, \forall n > N$有$\frac{1}{2}a \leq a_n \leq \frac{3}{2}a$，
+  而$\left| \frac{1}{a_{n+1}} - \frac{1}{a_n} \right| = \left| \frac{a_n - a_{n+1}}{a_na_{n+1}} \right|$
+  因此
+  \begin{equation*}
+    \frac{4}{9a^2} |a_{n+1} - a_n| \leq \frac{|a_{n+1} - a_n|}{|a_na_{n+1}|} \leq \frac{4}{a^2}|a_{n+1} - a_n|
+  \end{equation*}
+  从而相互控制，同敛散
+
+  (2)根据$a_n$单调减可得
+  \begin{equation*}
+    2^{k-1}a_{2^k} \leq a_{2^{k-1}+1} + a_{2^{k-1}+2} + \cdots + a_{2^k} \leq 2^{k-1}a_{2^{k-1}}
+  \end{equation*}
+  对$k$求和得到
+  \begin{equation*}
+    \frac{1}{2} \sum\limits_{k = 1}^n 2^k a_{2^k} \leq a_1 + a_2 + \cdots + a_{2^n} \leq a_1 + \sum\limits_{k = 0}^{n-1}2^k a_{2^k}
+  \end{equation*}
+  这说明两者部分和等价，因此同敛散。
+\end{proof}
+
+~
+
+\begin{exercise}[比较原则对于一般项级数不成立的反例]
+  (1)$a_n,b_n$满足$\lim \limits _{n \rightarrow \infty} \frac{a_n}{b_n} = l > 0$，
+  此时显然$\sum\limits_{n = 1}^{\infty}|a_n|, \sum\limits_{n = 1}^{\infty}|b_n|$敛散性相同，
+  但举例说明$\sum\limits_{n = 1}^{\infty}a_n, \sum\limits_{n = 1}^{\infty}b_n$敛散性可以不同。
+
+  (2)$\lim \limits _{n \rightarrow \infty} \frac{a_n}{b_n} = 0$，根据$\sum\limits_{n = 1}^{\infty}b_n$绝对收敛可推出$\sum\limits_{n = 1}^{\infty}a_n$绝对收敛，
+  举例$\sum\limits_{n = 1}^{\infty}b_n$收敛推不出$\sum\limits_{n = 1}^{\infty}a_n$收敛
+
+  (3)举例说明$\sum\limits_{n = 1}^{\infty}a_n$收敛，$\sum\limits_{n = 1}^{\infty}a_n^2$不一定收敛
+\end{exercise}
+
+\begin{solution}
+  (1)例如$a_n = \frac{(-1)^n}{\sqrt{n}}, b_n = \frac{(-1)^n}{\sqrt{n} } + \frac{1}{n}$，
+  显然$\lim \limits _{n \rightarrow \infty} \frac{a_n}{b_n} = 1$，但$a_n$收敛，$b_n$发散
+
+  (2)比如$a_n = \frac{1}{n}, b_n = \frac{(-1)^n}{\sqrt{n}}$
+
+  (3)例如$a_n = \frac{(-1)^n}{\sqrt{n}}$
+\end{solution}

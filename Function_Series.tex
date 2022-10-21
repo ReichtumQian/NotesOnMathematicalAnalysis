@@ -1,0 +1,755 @@
+
+\chapter{函数列与函数项级数}
+
+\section{函数列的一致收敛}
+
+\subsection{一致收敛的概念}
+
+\begin{definition}[一致收敛]
+  $f_n$是$I$上的函数列，若对$\forall \epsilon, \exists N,\forall x, \forall n > N$有$|f_n(x) - f(x)| < \epsilon$，
+  则称$f_n$一致收敛至$f$
+\end{definition}
+
+\begin{note}
+  一致收敛与点态收敛的区别：一致收敛的$N$不受$x$影响，
+  因此当$n > N$时，所有$x$都会在$f(x) \pm \epsilon$带中。
+\end{note}
+
+~
+
+\begin{exercise}[定义说明不一致收敛]
+  (1)$\frac{x}{n}$在$(0,a]$一致收敛到$0$，但在$(0,+\infty)$不一致收敛
+  (2)说明$x^n$在$(0,1)$上收敛但不一致收敛
+\end{exercise}
+
+\begin{proof}
+  (1)$\exists \epsilon_0 = \frac{1}{2}, \forall N, \exists n_0 = N+1, \exists x_0 = n_0$使得
+  $|\frac{x_0}{n_0} - 0| = 1 > \epsilon_0$，
+  因此不一致收敛
+
+  (2)点态收敛显然。不一致收敛的原因在$1$处，
+  因此考虑$x_n = 1 - \frac{1}{n}$，则$\lim \limits _{n \rightarrow \infty} |x_n^n - 0| = \lim \limits _{n \rightarrow \infty} (1 - \frac{1}{n})^n = e^{-1} \neq 0$
+\end{proof}
+
+\begin{note}
+  $\frac{x}{n}, x^n$是极度重要的不一致收敛反例，在很多反例里都会用到它
+\end{note}
+
+~
+
+\begin{theorem}[Cauchy收敛准则]
+  $f_n$是$I$上的函数列，
+  $f_n$在$I$上一致收敛于$f$的充要条件为
+    $\forall \epsilon, \exists N, \forall n,m > N$
+    满足$\sup \limits _{x \in I}|f_m(x) - f_n(x)| < \epsilon$
+\end{theorem}
+
+\begin{note}
+  Cauchy判别法一般用于证明其他判别法，本身对于证明具体一致收敛用处较少(因为具体函数列的极限一般容易算出)
+\end{note}
+
+\begin{definition}[内闭一致收敛]
+  若函数列$f_n(x)$在区间$D$任意一个闭区间都一致收敛，
+  则称$f_n(x)$在$D$上内闭一致收敛。
+\end{definition}
+
+\begin{note}
+  内闭一致收敛的意义在于大部分不一致收敛都是在区间端点出现了问题，因此内闭一致收敛反应了区间整体的性质，
+  不受个别端点影响。
+\end{note}
+
+
+\subsection{一致收敛的基本判别法}
+
+\begin{theorem}[Weiestrass判别法]
+  若存在$\lim \limits _{n \rightarrow \infty} a_n = 0$的正项数列$a_n$，
+  使得$I$上有$|f(x) - f_n(x)| \leq a_n$，
+  则$f_n(x)$一致收敛到$f(x)$
+\end{theorem}
+
+\begin{proof}
+  根本原因是$a_n$收敛的$N$与$x$无关，
+  用Cauchy收敛准则易证。
+\end{proof}
+
+~
+
+\begin{exercise}[M判别法的使用]
+  (1)重点：证明$\sqrt{x^2 + \frac{1}{n^2}}$在任意区间$I$上一致收敛
+
+  (2)重点：$f(x)$为$[a,b]$上的连续函数，$f_0(x) = f(x)$，$f_{n+1}(x) = \int_a^x f_n(t)\mathrm{d} t$，
+  证明$f_n(x)$在$[a,b]$一致收敛
+\end{exercise}
+
+\begin{proof}
+  (1)$\left|\sqrt{x^2 + \frac{1}{n^2}} - |x|\right| = \frac{\frac{1}{n^2}}{\sqrt{x^2 + \frac{1}{n^2}} + |x|} \leq \frac{1}{n} \rightarrow 0$
+
+  (2)由于连续，因此$|f(x)| \leq M$，因此$|f_1(x)| \leq \int_0^x |f_1(t)| \mathrm{d} t \leq M(x - a)$(暂时不要进一步放缩)，
+  同理得到$|f_2(x)| \leq \int_a^x M(t - a)\mathrm{d} t = \frac{(x - a)^2}{2!}M$，
+  因此$|f_n(x)| \leq \frac{(x-a)^n}{n!}M \leq \frac{(b - a)^n }{n!}M \rightarrow 0$(最后再放缩)
+\end{proof}
+
+~
+
+\begin{theorem}[确界判别法]
+  $f_n$为$I$上函数列，
+  则
+  \begin{itemize}
+  \item 
+    $f_n(x)$一致收敛到$f(x)$的充要条件为
+    $\lim \limits _{n \rightarrow \infty} \sup \limits_{x \in I}|f_n(x) - f(x)| = 0$。
+  \item 
+    $f_n(x)$不一致收敛于$f(x)$的充要条件是存在$x_n$，使得$f_n(x_n) - f(x_n)$不收敛到$0$(极度重要)
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  左推右：对$\forall \epsilon, \exists N, \forall x, \forall n > N$有$|f_n(x) - f(x)| < \epsilon$，
+  根据上确界定义可知$\sup \limits_{x \in I}|f_n(x) - f(x)| \leq \epsilon$
+
+  右推左：$\forall \epsilon, \exists N, \forall n > N$有$\sup \limits_{x \in I}|f_n(x) - f(x)| < \epsilon$，
+  而对$\forall x \in I$有$|f_n(x) - f(x)| \leq \sup \limits_{x \in I}|f_n(x) - f(x)|$，
+  因此$\forall x , |f_n(x) - f(x)| < \epsilon$，即一致收敛。
+\end{proof}
+
+\begin{note}
+  一般一致收敛用Weiestrass判别法判定，不一致收敛用确界判别法第二条判定
+\end{note}
+
+\subsection{一致收敛判别练习}
+
+\begin{exercise}[三角相关]
+  求下列函数列的收敛区间、极限函数与一致收敛区间：
+
+  (1)$f_n(x) = \frac{\sin x}{n}$
+  (2)$f_n(x) = \sin \frac{x}{n}$
+  (3)$f_n(x) = \frac{x}{n} \sin \frac{x}{n}$
+  (4)$f_n(x) = n \sin \frac{x}{n}$
+\end{exercise}
+
+\begin{solution}
+  (1)根据$|f_n(x)| \leq \frac{1}{n} \rightarrow 0$，显然
+
+  (2)先求极限函数，$\forall x \in (-\infty, +\infty)$，$\lim \limits _{n \rightarrow \infty} f_n(x) = 0$，因此点态收敛到$0$。
+  取$x_n = n$，则$\sin \frac{x_n}{n} = \sin 1$不趋于$0$，因此在$(-\infty,+\infty)$不一致收敛。
+  但是任意$[a,b] \subseteq (-\infty,+\infty)$，
+  显然$|x| \leq M$，$|\sin \frac{x}{n}| \leq |\frac{x}{n}| \leq \frac{M}{n} \rightarrow 0$，
+  因此内闭一致收敛
+
+  (3)点态收敛到$f(x) = 0$，
+  取$x_n = n$，则$\lim \limits _{n \rightarrow \infty} f_n(x_n) = \sin 1 \neq 0$。
+  取$[a,b] \subseteq (-\infty,+\infty)$，则$|f_n(x) - 0| \leq |\frac{x}{n}| \rightarrow 0$因此内闭一致收敛。
+
+  (4)极限函数为$1$，
+  考虑$x_n = n$，则$\lim \limits _{n \rightarrow \infty} |f_n(x_n) - x_n| = |n \sin 1 - n| \neq 0$，
+  因此在$(-\infty,+\infty)$不一致收敛。
+  取$[a,b] \subseteq (-\infty, +\infty)$，则$|f_n(x) - x| \leq |n (\sin \frac{x}{n} - \frac{x}{n})| \leq n(\frac{x}{n})^2 \leq \frac{M^2}{n} \rightarrow 0$，
+  中间的不等式使用了Taylor展开，因此内闭一致收敛。
+\end{solution}
+
+~
+
+\begin{exercise}[分式相关]
+  判断在$[0,+\infty)$的一致收敛性
+
+  (1)$f_n(x) = \frac{x}{1 + n^2 x^2}$
+  (2)$f_n(x) = \frac{x}{1 + nx}$
+  (3)$f_n(x) = \frac{1}{1 + nx}$
+  (4)$f_n(x) = \frac{nx}{1 + n^2x^2}$
+\end{exercise}
+
+\begin{solution}
+  (1)$f_n(x) \leq \frac{x}{2nx} = \frac{1}{2n}(x \neq 0) \rightarrow 0$，
+  而$x = 0$时$f_n(0) = 0$，因此一致收敛
+
+  (2)$x = 0$显然，$x \neq 0$时$f_n(x) \leq \frac{1}{n} \rightarrow 0$，一致收敛
+
+  (3)先考虑极限函数$x = 0$时，极限函数为$1$，$x \neq 0$时，极限函数为$0$。
+  考虑$(0,+\infty)$，取$x_n = \frac{1}{n}$，$f_n(x) - f(x) = \frac{1}{2} \neq 0$，
+  因此不一致收敛。
+  在$[a,+\infty)$有$f_n(x) - 0 = \frac{1}{1 + nx} \leq \frac{1}{1 + na} \rightarrow 0$一致。
+
+  (4)极限函数为$0$。
+  取$x_n = \frac{1}{n}$，显然$f_n(x) - 0 = \frac{1}{2}$不趋于$0$，因此不一致收敛。
+  在$[a,+\infty)$时$f_n(x) \leq \frac{nx}{n^2x^2} \leq \frac{1}{nx} \leq \frac{1}{na} \rightarrow 0$
+\end{solution}
+
+~
+
+\begin{exercise}[导数与积分一致收敛]
+  (1)$f(x)$在$\mathbb{R}$上有连续导函数，
+  $a_n$为单调趋于$+\infty$的正数列，
+  证明$f_n(x) = a_n \left[ f \left( x + \frac{1}{a_n} \right) - f(x) \right]$在任意有限闭区间$[a,b]$上一致收敛到$f^{\prime}(x)$
+
+  (2)特例：证明$f_n(x) = n \left( \sqrt{x + \frac{1}{n}} - \sqrt{x} \right)$在任意有限闭区间$[a,b]$上一致收敛到$\frac{1}{2 \sqrt{x}}$
+
+  (3)$f(x)$为$\mathbb{R}$上连续函数，记$f_n(x) = \frac{1}{n} \sum\limits_{k = 1}^n f \left( x + \frac{k}{n} \right)$，
+  证明$f_n(x)$在任意有限区间$[a,b]$上一致收敛于$F(x) = \int_0^1 f(x+t)\mathrm{d} t$
+
+  (4)特例：证明$f_n(x) = \sum\limits_{k = 1}^n \frac{1}{n}\cos \left( x + \frac{k}{n} \right)$在任意有限区域$[a,b]$上一致收敛到$\sin(x+1) - \sin x$
+\end{exercise}
+
+\begin{proof}
+  (1)给定$n$，根据Lagrange中值定理，$f_n(x) = f^{\prime}(x + \xi_n)$，
+  这里$\xi_n < \frac{1}{a_n}$。
+  由于$f^{\prime}(x)$在$[a,b+1]$连续，因此一致连续，
+  $\forall \epsilon, \exists \delta \in (0,1)$当$|x_1 - x_2|< \delta$，$|f^{\prime}(x_1) - f^{\prime}(x_2)| < \epsilon$，
+  而$\exists N, \forall n > N, \xi_n < \frac{1}{a_n} < \delta$，
+  此时
+  \begin{equation*}
+    |f_n(x) - f^{\prime}(x)| = |f^{\prime}(x_n + \xi_n) - f^{\prime}(x)| < \epsilon
+  \end{equation*}
+  因此一致收敛
+
+  (2)即(1)的特例
+
+  (3)$F(x) = \sum\limits_{k = 1}^n \int _{\frac{k-1}{n}}^{\frac{k}{n}}f(x+t)\mathrm{d} t$，因此
+  \begin{equation*}
+    |f_n(x) - F(x)| = \left| \sum\limits_{k = 1}^n \int_{\frac{k-1}{n}}^{\frac{k}{n}} f \left( x + \frac{k}{n} \right) - \sum\limits_{k = 1}^n \int_{\frac{k-1}{n}}^{\frac{k}{n}}f (x+t)\mathrm{d} t \right| \leq \sum\limits_{k = 1}^n \int_{\frac{k-1}{n}}^{\frac{k}{n}} \left| f \left( x + \frac{k}{n} \right) - f(x+t) \right|\mathrm{d} t
+  \end{equation*}
+  显然$f(x)$在$[a,b+1]$一致连续，$\forall \epsilon, \exists \delta, |x_1 - x_2|<\delta$时$|f(x^{\prime}) - f(x^{\prime\prime})| < \epsilon$。
+  而$\exists N, \forall n > N, \frac{1}{n} < \delta$，
+  对于$\forall x \in [a,b], t \in \left[ \frac{k-1}{n}, \frac{k}{n} \right]$，有
+  \begin{equation*}
+    \left| \left( x + \frac{k}{n} \right) - (x+t) \right| = \left| \frac{k}{n} - t \right| \leq \frac{1}{n}< \delta
+  \end{equation*}
+  综上得到
+  \begin{equation*}
+   \forall x \in [a,b], |f_n(x) - F(x)| < \sum\limits_{k = 1}^n \int_{\frac{k-1}{n}}^{\frac{k}{n}} \epsilon \mathrm{d} t = \epsilon
+  \end{equation*}
+\end{proof}
+
+
+\subsection{四则运算、复合极限的一致收敛性}
+
+\begin{definition}[一致有界]
+  $\exists M, \forall n, \forall x \in I$有$|f_n(x)| \leq M$
+\end{definition}
+
+\begin{lemma}[极限的有界性]
+  设$f_n(x)$在区间$I$上点态收敛到$f(x)$，则
+  \begin{itemize}
+  \item 若一致收敛，且每个$f_n(x)$有界，则$f(x)$有界，$f_n(x)$一致有界
+  \item 若一致收敛，且$f(x)$有界，则$f_n(x)$除去至多有限项外一致有界
+  \item 若$f_n(x)$一致有界，则$f(x)$有界
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  (1)设$|f_n(x)| \leq M_n$。
+  根据一致收敛，
+  取$\epsilon = 1, \exists N, \forall n > N, \forall x \in I$有$|f_n(x) - f(x)| \leq 1$。
+  因此得到$|f(x)| \leq M_N + 1 := M$。
+  而$n \geq N$时，$\forall x \in I$有$|f_n(x)| \leq |f(x)| + 1 = M + 1$，
+  前面有限项取最大即可，因此一致有界
+
+  (2)包含于(1)的推导过程中
+
+  (3)若$\exists M, \forall n, |f_n(x)| \leq M$，
+  根据$\lim \limits _{n \rightarrow \infty} f_n(x) = f(x)$，
+  则$\forall x \in I, \exists \epsilon_0 = 1, \exists N, n \geq N$有$|f(x) - f_n(x)| \leq 1$，
+  因此$|f(x)| \leq |f_n(x)| + 1 \leq M+1$，因此有界。
+\end{proof}
+
+% ~
+
+% \begin{exercise}[确界与极限]
+%   $f_n(x)$在区间$I$上一致收敛到$f(x)$，且每个$f_n(x)$有界，证明$f(x)$有界且
+%   \begin{equation*}
+%     \lim \limits _{n \rightarrow \infty} \sup \limits _{x \in I}f_n(x) = \sup \limits_{x \in I}f(x) = \sup \limits_{x \in I}\lim \limits _{n \rightarrow \infty} f_n(x)
+%   \end{equation*}
+% \end{exercise}
+
+% \begin{proof}
+%   右边两项天然相等，只需证左边两项。
+%   $|\sup \limits_{x \in I}f_n(x) - \sup \limits_{x \in I}f(x)| \leq \sup \limits_{x \in I}|f_n(x) - f(x)| \leq \epsilon$
+% \end{proof}
+
+~
+
+\begin{theorem}[四则运算]
+  $f_n,g_n$在$I$上分别一致收敛到$f(x),g(x)$，
+  则
+  \begin{itemize}
+  \item 数乘：$kf_n(x)$一致收敛到$kf(x)$
+  \item 加法：$f_n(x) + g_n(x)$一致收敛到$f(x) + g(x)$
+  \item 乘法：若每个$f_n(x),g_n(x)$均有界，则$f_n(x)g_n(x)$一致收敛到$f(x)g(x)$
+  \item 乘法推论：若$f_n(x),g_n(x)$为连续函数列且$I$为闭区间，则$f_n(x)g_n(x)$一致收敛到$f(x)g(x)$
+  \item 除法：若$\exists M$使得$|f(x)| \geq M$，则$\exists N, n > N$时$f_n(x)$在$I$上无零点，且$\frac{1}{f_n(x)}$一致收敛到$\frac{1}{f(x)}$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  (1,2)显然
+
+  (3)用$|f_n(x)g_n(x) - f(x)g(x)| \leq |f_n(x)||g_n(x) - g(x)| + |g(x)| |f_n(x) - f(x)|$
+
+  (4)取$\epsilon = \frac{M}{2}, \exists N, \forall n > N, \forall x$有$|f_n(x) - f(x)| \leq \frac{M}{2}$，
+  因此$|f_n(x)| \geq |f(x)| - \frac{M}{2} \geq \frac{M}{2}$，
+  因此无零点。
+  第二个结论用$|\frac{1}{f_n(x)} - \frac{1}{f(x)}| = |\frac{f_n(x) - f(x)}{f_n(x) f(x)}| \leq \frac{|f_n(x) - f(x)|}{M \cdot \frac{M}{2}} < \epsilon$
+\end{proof}
+
+~
+
+\begin{exercise}[反例]
+  (1)举例说明$f_n(x),g_n(x)$分别一致收敛到$f(x),g(x)$，但$f_n(x)g_n(x)$不一致收敛到$f(x)g(x)$
+\end{exercise}
+
+\begin{solution}
+  (1)根据定理函数列要无界，
+  取$f_n(x) = \frac{1}{n}, g_n(x) = \frac{1}{x}$，
+  显然$f_n(x)$一致收敛到$0$，
+  $g_n(x)$一致收敛到$\frac{1}{x}$，
+  但$f_n(x)g_n(x) = \frac{1}{nx}$不一致收敛到$0$，
+  因为取$x_n = \frac{1}{n}$即可。
+\end{solution}
+
+~
+
+\begin{theorem}[复合]
+  $f_n(x)$在$I$上一致收敛到$f(x)$，且每个$f_n(x)$均有界，
+  $g(x)$为$\mathbb{R}$上连续函数，
+  则$g(f_n(x))$一致收敛到$g(f(x))$
+\end{theorem}
+
+\begin{proof}
+  根据一致收敛以及个个有界得到$f_n(x)$一致有界，
+  不妨设对$\forall n, \forall x \in I$有
+  \begin{equation*}
+    |f_n(x)| \leq M
+  \end{equation*}
+  由于$g(x)$在$[-M,M]$上一致连续，$\forall \epsilon, \exists \delta, |x_1 - x_2| < \delta$时，$|g(x_1) - g(x_2)| < \epsilon$，
+  对上述$\delta$，由于$f_n(x)$一致收敛，$\exists N, \forall n > N$有
+  \begin{equation*}
+    |f_n(x) - f(x)| < \delta, \forall x \in I
+  \end{equation*}
+  从而$n > N$时，$\forall x \in I$满足$|g(f_n(x)) - g(f(x))| < \epsilon$
+\end{proof}
+
+\section{函数列极限的性质}
+
+
+\subsection{极限函数的连续性}
+
+\begin{theorem}[极限顺序交换]
+  $f_n(x)$在$(a,x_0) \cup (x_0,b)$上一致收敛于$f(x)$，且$\forall n$，极限$\lim \limits _{x \rightarrow x_0}f_n(x) = a_n$存在，
+  则
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \lim \limits _{x \rightarrow x_0}f_n(x) = \lim \limits _{x \rightarrow x_0} \lim \limits _{n \rightarrow \infty} f_n(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  由于$f_n(x)$一致收敛到$f(x)$，
+  则对$\forall \epsilon, \exists N, \forall m,n > N, \forall x \in (a,b)$有$|f_n(x) - f_m(x)| < \epsilon$，
+  让$x \rightarrow x_0$，则$|a_n - a_m| < \epsilon$，
+  因此$a_n$收敛，设$\lim \limits _{n \rightarrow \infty} a_n = A$。
+  下证右侧$\lim \limits _{x \rightarrow x_0}f(x) = A$，
+  根据
+  \begin{equation*}
+    |f(x) - A| \leq |f(x) - f_n(x)| + |f_n(x) - a_n| + |a_n - A| < 3\epsilon
+  \end{equation*}
+  第一个要求$N$足够大，第二个要求$\delta$足够小，第三个要求$N$足够大。
+\end{proof}
+
+\begin{corollary}[局部连续性]
+  若$f_n(x)$在$x_0$邻域$U(x_0,\delta)$内一致收敛，
+  $f_n(x)$在$x_0$处连续，则极限函数$f(x)$也在$x_0$处连续
+\end{corollary}
+
+\begin{proof}
+  根据$\lim \limits _{x \rightarrow x_0}f(x) = \lim \limits _{x \rightarrow x_0}\lim \limits _{n \rightarrow \infty} f_n(x) = \lim \limits _{n \rightarrow \infty} \lim \limits _{x \rightarrow x_0}f_n(x) = \lim \limits _{n \rightarrow \infty} f_n(x_0) = f(x_0)$
+\end{proof}
+
+\begin{corollary}[整体连续性]
+  若连续函数列在$I$上内闭一致收敛于$f$，则$f$在$I$上连续
+\end{corollary}
+
+\begin{proof}
+  原因在于单点的连续性仅与小邻域有关(甚至可以只有半边)，
+  因此内闭的一致收敛即可推出极限函数的连续
+\end{proof}
+
+\begin{example}
+  例如$x^n$在$(0,1)$内闭一致收敛，因此极限函数$0$在$(0,1)$连续。
+\end{example}
+
+~
+
+
+\begin{theorem}[一致连续性]
+  若$f_n(x)$在$I$中一致收敛，每一项都一致连续，则极限函数$f(x)$在$I$上也一致连续
+\end{theorem}
+
+\begin{proof}
+  思路：$|f(x_1) - f(x_2)| \leq |f(x_1) - f_n(x_1)| + |f_n(x_1) - f_n(x_2)| + |f_n(x_2) - f(x_2)| < 3\epsilon$，
+  中间一项用$f_n(x)$的一致连续性，左右两项用一致收敛性。
+\end{proof}
+
+~
+
+\begin{exercise}[函数列连续性练习]
+  (1)$f_n(x)$在$[a,b]$一致收敛到$f(x)$，数列$x_n \in [a,b]$，$\lim \limits _{n \rightarrow \infty} x_n = x_0$，
+  若$f(x)$在$x_0$处连续，证明$\lim \limits _{n \rightarrow \infty} f_n(x_n) = f(x_0)$
+
+  (2)$f_n(x)$在$[a,b]$收敛到连续$f(x)$，
+  证明$f_n(x)$在$[a,b]$一致收敛到$f(x)$的充要条件为
+  任意满足$\lim \limits _{n \rightarrow \infty} x_n = x_0$的数列，
+  都有$\lim \limits _{n \rightarrow \infty} f_n(x_n) = f(x_0)$
+\end{exercise}
+
+\begin{proof}
+  (1)注意与定理的区别，这里有双重$n$。
+  思路为$|f_n(x_n) - f(x_0)| \leq |f_n(x_n) - f(x_n)| + |f(x_n) - f(x_0)|$，
+  前者用一致收敛，后者用连续性。
+
+  根据一致收敛性，
+  $\forall \epsilon, \exists N_1, \forall n > N_1, \forall x \in [a,b]$有$|f_n(x) - f(x)| < \epsilon$，
+  根据$f(x)$在$x_0$连续以及$\lim \limits _{n \rightarrow \infty} x_n = x_0$可知
+  $\exists N_2, \forall n > N_2, |f(x_n) - f(x)|< \epsilon$，
+  取$N = \max \{N_1, N_2\}$，
+  $\forall n > N$有
+  \begin{equation*}
+    |f_n(x_n) - f(x_0)| \leq |f_n(x_n) - f(x_n)| + |f(x_n) - f(x_0)| < 2\epsilon
+  \end{equation*}
+
+  
+  (2)左推右：思路：$|f_n(x_n) - f(x_0)| \leq |f_n(x_n) - f(x_n)| + |f(x_n) - f(x_0)|$，
+  注意不要写成$|f_n(x_n) - f_n(x_0)| + |f_n(x_0) - f(x_0)|$！
+  原因在于$f_n(x)$不一定连续。
+
+  右推左：反设不一致收敛，
+  则$\exists \epsilon_0, \forall N, \exists n > N, \exists x_n \in [a,b]$满足$|f_n(x_n) - f(x_n)| \geq \epsilon_0$，
+  由于$x_n$有界，因此存在收敛子列，不妨就设$x_n \rightarrow x_0 \in [a,b]$，
+  则$\lim \limits _{n \rightarrow \infty} |f_n(x_n) - f(x_n)| = \lim \limits _{n \rightarrow \infty} |f_n(x_n) - f(x_0)| \geq \epsilon_0$，与所给条件矛盾。
+\end{proof}
+
+\begin{note}
+  反设法下不一致收敛常用的讨论即存在$x_n$，使得$|f_n(x_n) - f(x_n)| \geq \epsilon_0$
+\end{note}
+
+
+\subsection{极限函数的可积性}
+
+\begin{theorem}[可积性]
+  $f_n(x)$在$[a,b]$上一致收敛到$f(x)$，$f_n(x)$均在$[a,b]$上可积，
+  则$f(x)$在$[a,b]$可积，且
+  \begin{equation*}
+    \lim \limits _{n \rightarrow \infty} \int_a^b f_n(x)\mathrm{d}x = \int_a^b f(x)\mathrm{d}x = \int_a^b \lim \limits _{n \rightarrow \infty} f_n(x)\mathrm{d}x
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  (1)先说明可积：$\forall \epsilon, \exists N$使得$\forall x, |f(x) - f_N(x)| < \frac{\epsilon}{b - a}$，做划分$T$，取$x_1,x_2$于同一区间，考虑振幅：
+  \begin{equation*}
+    |f(x_1) - f(x_2)| \leq |f(x_1) - f_N(x_1)| + |f_N(x_1) - f_N(x_2)| + |f_N(x_2) - f(x_2)| \leq \frac{\epsilon}{b - a} + \omega_i^{f_N} + \frac{\epsilon}{b-a}
+  \end{equation*}
+  得到$f(x)$的振幅$\omega_i^f \leq \frac{2\epsilon}{b - a} + \omega_i^{f_N}$，
+  因此
+  \begin{equation*}
+    \sum \limits_T \omega_i^f \Delta x_i \leq \sum \limits_T \frac{2\epsilon}{b - a}\Delta x_i + \sum\limits_T \omega_i^{f_N} \Delta x_i < 3\epsilon
+  \end{equation*}
+
+  (2)求积分值：考虑$|\int_a^b f_n(x)\mathrm{d}x - \int_a^b f(x) \mathrm{d} x| \leq \int_a^b |f_n(x) - f(x)| \mathrm{d} x < \int_a^b \frac{\epsilon}{b - a}\mathrm{d} x = \epsilon$
+\end{proof}
+
+\begin{note}
+  该定理在ZJU2020中出现过。
+\end{note}
+
+~
+
+\begin{exercise}[不可积反例]
+  举例连续函数列$f_n(x)$在$[a,b]$收敛到连续函数$f(x)$，但无$\lim \limits _{n \rightarrow \infty} \int_a^b f_n(x)\mathrm{d} x = \int_a^b f(x) \mathrm{d} x$
+\end{exercise}
+
+\begin{solution}
+  $f_n(x) = nx^n (1 - x^n), x \in [0,1]$，
+  极限函数为$f(x) = 0$，此时$\int_0^1 f(x) \mathrm{d} x = 0$，
+  但是$\int_0^1 f_n(x) \mathrm{d} x = \frac{n}{n+1} - \frac{n}{2n+1} = \frac{1}{2}$。
+\end{solution}
+
+~
+
+\begin{exercise}[可积性的应用]
+  $f_n(x)$每项都在$[a,b]$连续可微，$g(x)$为$[a,b]$连续函数，若存在$M > 0$，使得$\forall n \in \mathbb{N}^+$，
+  $x^{\prime},x^{\prime\prime} \in [a,b]$有$|f_n(x^{\prime}) - f_n(x^{\prime\prime})| \leq \frac{M}{n}|x^{\prime} - x^{\prime\prime}|$，
+  证明：$\lim \limits _{n \rightarrow \infty} \int_a^b f_n^{\prime}(x)g(x) \mathrm{d} x = 0$
+\end{exercise}
+
+\begin{proof}
+  根据条件得到$|\frac{f_n(x) - f_n(y)}{x - y}| \leq \frac{M}{n}$，
+  令$y \rightarrow x$得到$|f_n^{\prime}(x)| \leq \frac{M}{n} \rightarrow 0$。
+  由于$g(x)$有界，因此$f_n^{\prime}(x)g(x)$一致收敛到$0$，
+  根据一致收敛性质可将极限和积分互换位置，从而结论成立。
+\end{proof}
+
+~
+
+\begin{corollary}[可积性推广]
+  $f_n(x)$在$[a,b]$一致收敛到$f(x)$，且$f_n(x)$均可积，
+  则$f(x)$在$[a,b]$可积，且对任意可积$g(x)$和$x_0 \in [a,b]$，
+  $\int_{x_0}^x f_n(t)g(t)\mathrm{d} t$在$[a,b]$上一致收敛到$\int_{x_0}^x f(t)g(t) \mathrm{d} t$
+\end{corollary}
+
+\begin{proof}
+  考虑$\left|\int_{x_0}^xf_n(t) g(t) \mathrm{d} t - \int_{x_0}^x f(t)g(t)\mathrm{d} t \right| \leq \left|\int_{x_0}^x |f_n(t) - f(t)||g(t)|\mathrm{d} t \right| \leq M \int_a^b |f_n(x) - f(x)|\mathrm{d} x < \epsilon$
+\end{proof}
+
+\begin{note}
+  上述推论常用的特例：$\int_{x_0}^xf_n(t)\mathrm{d} t$在$[a,b]$上一致收敛到$\int_{x_0}^xf(t)\mathrm{d} t$
+\end{note}
+
+\subsection{极限函数的可微性}
+
+\begin{theorem}[可微性]
+  $f_n(x)$的每项在$[a,b]$有连续导函数，
+  $f_n^{\prime}(x)$在$[a,b]$一致收敛到$g(x)$，
+  若$\exists x_0 \in [a,b]$使得$f_n(x_0)$收敛，
+  则$f_n(x)$在$[a,b]$一致收敛于一个连续可微函数$f(x)$，
+  且$f^{\prime}(x) = g(x)$，即
+  \begin{equation*}
+    (\lim \limits _{n \rightarrow \infty} f_n(x))^{\prime} = \lim \limits _{n \rightarrow \infty} f_n^{\prime}(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  (1)极限函数存在：根据Newton-Leibniz公式可知$f_n(x) = f_n(x_0) + \int_{x_0}^xf_n^{\prime}(t)\mathrm{d} t$，
+  根据条件$f_n(x_0)$收敛且与$x$无关。
+  根据前面可积性推论可知$\int_{x_0}^xf_n^{\prime}(t)\mathrm{d} t$一致收敛到$\int_{x_0}^xg(t)\mathrm{d} t$，
+  根据一致收敛的四则运算可知$f_n(x)$本身也一致收敛至$f(x) = \lim \limits _{n \rightarrow \infty} f_n(x_0) + \int_{x_0}^x g(t) \mathrm{d} t$
+
+  (2)导数：由于$f_n^{\prime}(x)$在$[a,b]$连续，$g(x)$连续，从而$f(x)$可导且$f^{\prime}(x) = g(x)$。
+\end{proof}
+
+\begin{note}
+  定理中$f_n(x)$存在$x_0$这个收敛点的条件必不可少，
+  这为使用Leibniz公式奠定了基础。
+  在实际使用中，往往可以直接看出$f_n(x),f^{\prime}_n(x)$都一致收敛，
+  则可直接得出$(\lim \limits _{n \rightarrow \infty} f_n(x))^{\prime} = \lim \limits _{n \rightarrow \infty} f_n^{\prime}(x)$的结论，不用管$x_0$。
+\end{note}
+
+~
+
+\begin{exercise}[具体计算]
+  (1)已知$u_n(x) = \frac{\cos nx}{n \sqrt{n}}$，判定其在$(0,2\pi)$上是否逐项可导，
+  若可导则求出$S^{\prime}(x)$
+\end{exercise}
+
+\begin{solution}
+  (1)考虑$u_n^{\prime}(x) = - \frac{\sin nx}{\sqrt{n}}$，
+  根据Dirichlet判别法可知一致收敛，
+  因此逐项可导，
+  $S^{\prime}(x) = -\sum\limits_{n = 1}^{\infty} \frac{\sin nx}{\sqrt{n}}$
+\end{solution}
+
+
+
+\subsection{连续+单调：推出一致收敛}
+
+\begin{theorem}[关于$x$单调]
+  函数列$f_n(x)$在$[a,b]$收敛到连续函数$f(x)$，且每个$f_n(x)$在$[a,b]$上关于$x$单调增，
+  则$f_n(x)$一致收敛到$f(x)$
+\end{theorem}
+
+\begin{proof}
+  
+\end{proof}
+
+
+~
+
+\begin{theorem}[Dini定理：关于$n$单调]
+  连续函数列$f_n(x)$在$[a,b]$收敛于连续函数$f(x)$，若固定$x$，
+  每个$f_n(x)$关于$n$单调，则$f_n(x)$在$[a,b]$上一致收敛到$f(x)$
+\end{theorem}
+
+\begin{proof}
+  (1)先证明在小区间成立：固定$x_0 \in [a,b]$，$f_n(x_0) - f(x_0)$单调趋于$0$，
+  $\forall \epsilon, \exists N$有$|f_N(x_0) - f(x_0)| < \epsilon$。
+  固定$N$，由于$f_N(x) - f(x)$连续，
+  因此根据保号性$\exists \delta, \forall x \in U(x_0,\delta)$有$|f_N(x) - f(x)| < \epsilon$。
+  重新根据单调性得到$\forall n > N, \forall x \in U(x_0,\delta)$有
+  \begin{equation*}
+    |f_n(x) - f(x)| \leq |f_N(x) - f(x)| < \epsilon
+  \end{equation*}
+
+  (2)再证明在整个区间成立：显然区间集$\{U(x_0,\delta): x_0 \in [a,b]\}$是$[a,b]$的开覆盖，
+  根据有限覆盖定理得到存在有限个点$x_1,\cdots,x_k$的邻域覆盖$[a,b]$，
+  每个对应着$N_i, \delta_i$使得
+  \begin{equation*}
+    \forall n > N_i, \forall x \in U(x_i,\delta_i), |f_n(x) - f(x)| < \epsilon
+  \end{equation*}
+  因此取$N = \max\{N_1,\cdots,N_k\}$，$\forall n > N$时，
+  对$\forall x \in [a,b]$，总能找到$x_i$使得$x \in U(x_i,\delta_i)$，
+  且$|f_n(x) - f(x)|<\epsilon$
+\end{proof}
+
+\begin{note}
+  ZJU2020默写了Dini定理的证明
+\end{note}
+
+\section{函数项级数的一致收敛性}
+
+\subsection{一致收敛的基本性质与判别}
+
+\begin{theorem}[一致收敛性质]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$在$D$上一致收敛，
+  则$u_n(x)$在$D$上一致收敛到$0$。
+\end{theorem}
+
+~
+
+\begin{exercise}[收敛但不一致收敛的级数]
+  说明$\sum\limits_{n = 1}^{\infty}\frac{n}{1 + n^3x}$在$(0,1)$收敛但不一致收敛
+\end{exercise}
+
+\begin{proof}
+  (1)收敛：根据$\frac{n}{1 + n^3 x} \sim \frac{1}{n^2x}$，
+  若$x$固定，则作为数项级数收敛，因此函数项级数收敛
+
+  (2)不一致收敛：$x_n = \frac{1}{n^3}$，则$\frac{n}{1 + n^3x_n} = \frac{n}{2}$不趋于$0$，
+  因此不一致收敛
+\end{proof}
+
+~
+
+\begin{theorem}[一致收敛充要条件]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$在$D$上一致收敛到$S(x)$的充要条件为：
+  \begin{itemize}
+  \item Cauchy收敛准则：$\forall \epsilon, \exists N, \forall n>m>N, \forall x \in D$有$|\sum\limits_{k = m+1}^nu_k(x)| < \epsilon$
+  \item 确界：$\lim \limits _{n \rightarrow \infty} \sup \limits_{x \in D}|\sum\limits_{k = n+1}^{\infty}u_k(x)| = 0$
+  \end{itemize}
+\end{theorem}
+
+~
+
+\begin{exercise}
+  $I$上函数列$u_n(x)$满足$u_i(x)u_j(x) = 0, i \neq j, \forall x \in I$，
+  若存在正数列$a_n$满足$|u_n(x)| \leq a_n$，$\lim \limits _{n \rightarrow \infty} a_n = 0$，
+  证明：$\sum\limits_{n = 1}^{\infty} u_n(x)$在$I$一致收敛
+\end{exercise}
+
+\begin{proof}
+  根据条件$\forall x \in I$，$u_1(x),\cdots,u_n(x),\cdots$中至多只有一个非零，
+  因此根据确界条件$\sup \limits_{x \in I}|\sum\limits_{k = n+1}^{\infty}u_k(x)| \leq \sup\limits_n \{a_{n+1},a_{n+2},\cdots\} \rightarrow 0$。
+\end{proof}
+
+~
+
+\begin{theorem}[M判别法]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$为$D$上的函数项级数，
+  若存在收敛的数项级数$\sum\limits_{n = 1}^{\infty}M_n$满足$\forall x \in D$，$|u_n(x)| \leq M_n$，
+  则得到$\sum\limits_{n = 1}^{\infty}u_n(x)$在$D$上一致收敛
+\end{theorem}
+
+~
+
+\begin{exercise}
+  讨论一致收敛性：(1)$\sum\limits_{n = 1}^{\infty}\arctan \frac{2x}{x^2 + n^3}$在$(-\infty,+\infty)$
+  (2)$\sum\limits_{n = 1}^{\infty}\frac{x^{2n}}{1 + x^{2n+1}}$在$x \geq 0$
+\end{exercise}
+
+\begin{solution}
+  (1)$|\arctan \frac{2x}{x^2 + n^3}| \leq |\frac{2x}{x^2 + n^3}| \leq \frac{|2x|}{2|x| n^{3/2}} = \frac{1}{n^{3/2}}$，因此一致收敛
+
+  (2)$x \geq 1$时，$\lim \limits _{n \rightarrow \infty} \frac{x^{2n}}{1 + x^{2n+1}} = \frac{1}{x}$，发散。
+  $0 \leq 1 < 1$时根据$\frac{x^{2n}}{1 + x^{2n+1}} \leq x^{2n}$点态收敛，
+  但是感觉出$1$处会导致一致收敛出问题，
+  因此取$x_n = 1 - \frac{1}{n}$，$\frac{x_n^{2n}}{1 + x_n^{2n+1}} \rightarrow \frac{e^{-2}}{1 + e^{-2}} \neq 0$，
+  因此不一致收敛。
+\end{solution}
+
+~
+
+\begin{exercise}[积分格式]
+  $f(x)$在$[a,b]$上连续函数，$f_0(x) = f(x)$，
+  $f_{n+1}(x) = \int_a^x f_n(t)\mathrm{d} t$，证明$\sum\limits_{n = 1}^{\infty}f_n(x)$在$[a,b]$一致收敛。
+\end{exercise}
+
+\begin{proof}
+  同前面，$|f_n(x)| \leq \frac{(b - a)^n}{n!}M$，
+  根据根式或者比式判别法易知。
+\end{proof}
+
+
+
+\subsection{Dirichlet与Abel判别法}
+
+\begin{theorem}[Dirichlet与Abel判别法]
+  对于$I$上的函数项级数$\sum\limits_{n = 1}^{\infty}u_n(x)v_n(x)$，若满足下面任意一条，则一致收敛
+  \begin{itemize}
+  \item Dirichlet：(1)$\sum\limits_{k = 1}^nu_k(x)$在$I$上一致有界(2)$v_n(x)$固定$x \in I$关于$n$单调，且在$I$上一致收敛到$0$
+  \item Abel：(1)$\sum\limits_{n = 1}^{\infty}u_n(x)$一致收敛(2)$v_n(x)$固定$x \in I$关于$n$单调，且在$I$上一致有界
+  \end{itemize}
+\end{theorem}
+
+\begin{note}
+  单调都是关于$n$，一致都是关于$x$
+\end{note}
+
+~
+
+\begin{exercise}[经典一致收敛题]
+  (1)$a_n$单调收敛于$0$，
+  证明：$\sum\limits_{n = 1}^{\infty}a_n \cos nx$在$[\alpha, 2\pi - \alpha]$上一致收敛
+\end{exercise}
+
+\begin{proof}
+  (1)首先判断一致有界性：
+  \begin{equation*}
+    \left| \sum\limits_{k = 1}^n \cos kx \right| = \left| \frac{\sin \left( n + \frac{1}{2} \right)x}{2 \sin \frac{x}{2}} - \frac{1}{2} \right| \leq \frac{1}{2 \left| \sin \frac{x}{2} \right|} + \frac{1}{2} \leq \frac{1}{2 \sin \frac{\alpha}{2}} + 1
+  \end{equation*}
+  因此$\sum \cos nx$一致有界，
+  而$a_n$固定$x$时单调趋于$0$，
+  因此根据Dirichlet判别法可知一致收敛。
+\end{proof}
+
+
+\section{函数项级数极限函数的性质}
+
+\begin{theorem}[端点法]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$在$(a,b)$一致收敛，
+  且每个$u_n(x)$在$[a,b)$连续，
+  则$\sum\limits_{n = 1}^{\infty}u_n(x)$在$[a,b)$一致收敛，
+  特别的，$\sum\limits_{n = 1}^{\infty}u_n(a)$收敛
+\end{theorem}
+
+\begin{note}
+  开区间一致收敛的函数列往往能延拓到闭区间，因此题目中开区间的函数列往往是不一致收敛的(除非无定义)。
+\end{note}
+
+\begin{theorem}[逐项单向极限]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$在$(a,b)$一致收敛，
+  $\lim \limits _{x \rightarrow a^+}u_n(x) = a_n, \sum\limits_{n = 1}^{\infty}a_n$收敛，则
+  \begin{equation*}
+    \lim \limits _{x \rightarrow a^+} \sum\limits_{n = 1}^{\infty}u_n(x) = \sum\limits_{n = 1}^{\infty}\lim \limits _{x \rightarrow a^+}u_n(x) = \sum\limits_{n = 1}^{\infty}a_n
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[连续性]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$在$U(x_0,\delta)$内一致收敛到$S(x)$，
+  且每个$u_n(x)$均在$x_0$处连续，则$S(x)$也在$x_0$处连续，
+  即
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty}(\lim \limits _{x \rightarrow x_0}u_n(x)) = \lim \limits _{x \rightarrow x_0} \sum\limits_{n = 1}^{\infty}u_n(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[逐项积分]
+  若$\sum\limits_{n = 1}^{\infty}u_n(x)$在$[a,b]$一致收敛到$S(x)$，
+  且每个$u_n(x)$在$[a,b]$可积，则$S(x)$也在$[a,b]$可积，且
+  \begin{equation*}
+    \sum\limits_{n = 1}^{\infty}\int_a^b u_n(x)\mathrm{d} x = \int_a^b \sum\limits_{n = 1}^{\infty}u_n(x) \mathrm{d} x
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[逐项可微]
+  $\sum\limits_{n = 1}^{\infty}u_n(x)$的每个$u_n(x)$在$[a,b]$有连续偏导数，
+  $\sum\limits_{n = 1}^{\infty}u_n^{\prime}(x)$在$[a,b]$一致收敛到$g(x)$，
+  若存在$x_0 \in [a,b]$使得$\sum\limits_{n = 1}^{\infty}u_n(x_0)$收敛，则$\sum\limits_{n = 1}^{\infty}u_n(x)$在$[a,b]$上一致收敛，和函数$S(x)$可导，$S^{\prime}(x) = g(x)$，即
+  \begin{equation*}
+    (\sum\limits_{n = 1}^{\infty}u_n(x))^{\prime} = \sum\limits_{n = 1}^{\infty}u_n^{\prime}
+  \end{equation*}
+\end{theorem}

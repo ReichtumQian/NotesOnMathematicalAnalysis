@@ -1,0 +1,315 @@
+
+
+\chapter{多元极限与连续}
+
+\section{累次极限与重极限}
+
+\subsection{基本概念}
+
+\begin{definition}[重极限]
+  $a \in \mathbb{R}^n$，$f: \mathbb{R}^n \rightarrow \mathbb{R}$在$a$的去心邻域中有定义，
+  若$\exists A, \forall \epsilon, \exists \delta$当$\mathbf{x} \in \mathbb{R}^n$满足$|\mathbf{x} - a| < \delta$时，
+  有$|f(\mathbf{x}) - A| < \epsilon$，
+  则称$\lim \limits _{\mathbf{x} \rightarrow a}f(\mathbf{x}) = A$
+\end{definition}
+
+\begin{note}
+  计算重极限的方法：
+  \begin{itemize}
+  \item 放缩+迫敛：例如$\left| (x+y) \sin \frac{1}{x } \sin \frac{1}{y} \right| \leq |x+y| = 0$
+  \item 极坐标变换：例如$\left| \frac{x^3 + y^3}{x^2 + y^2} \right| = \left| \frac{r^3\cos^3\theta + r^3 \sin^3 \theta}{r^2} \right| = r|\cos^3 \theta + \sin^3 \theta| \leq 2r \rightarrow 0$
+  \end{itemize}
+\end{note}
+
+\begin{note}
+  证明重极限不存在的常用方法：
+  \begin{itemize}
+  \item 两个累次极限存在但不相等
+  \item 找特殊的趋近方式，如$y = kx$，使得获得的重极限不同
+  \end{itemize}
+\end{note}
+
+~
+
+\begin{exercise}[重极限的计算]
+  (1)已知$f(x,y)$如下，计算$\lim \limits _{(x,y) \rightarrow (0,0)}f(x,y)$
+  \begin{equation*}
+    f(x,y) =
+    \begin{cases}
+      xy \frac{x^2 - y^2}{x^2 + y^2}, &(x,y) \neq 0\\
+      0, &(x,y) = 0
+    \end{cases}
+  \end{equation*}
+\end{exercise}
+
+\begin{solution}
+  (1)设$x = r \cos \theta, y = r \sin \theta$，
+  则
+  \begin{equation*}
+   |f(x,y)| = \left|\frac{r^2 \sin \theta \cos \theta (r^2\cos ^2\theta - r^2\sin^2 \theta)}{r^2}\right| =  \frac{1}{4}r^2 \left| \sin 4\theta \right| \leq \frac{1}{4}r^2\rightarrow 0
+  \end{equation*}
+  因此极限为$0$
+\end{solution}
+
+
+~
+
+
+\begin{definition}[累次极限]
+  设$f(x,y)$在$x_0,y_0$的某去心邻域中有定义，
+  则称$\lim \limits _{y \rightarrow y_0}\lim \limits _{x \rightarrow x_0} f(x,y), \lim \limits _{x \rightarrow x_0} \lim \limits _{y \rightarrow y_0}f(x,y)$称为累次极限。
+\end{definition}
+
+\begin{note}
+  重极限是多个分量同时趋近于$\mathbf{x}_0$，
+  而累次极限相当于依次取极限的极限。
+\end{note}
+
+\begin{theorem}[重极限与累次极限的关系]
+  若重极限$\lim \limits _{(x,y) \rightarrow (x_0,y_0)}f(x,y) = A$存在，且累次极限存在(累次极限可能不存在)，
+  则累次极限的值为$A$
+\end{theorem}
+
+\begin{proof}
+  $\forall \epsilon, \exists \delta, |\mathbf{x} - \mathbf{x}_0| < \delta$时，
+  $|f(x,y) - A| < \epsilon$，
+  两侧取极限$x \rightarrow x_0$，
+  得到$|\lim \limits _{x \rightarrow x_0}f(x,y) - A| < \epsilon$，
+  当$|y - y_0| < \delta$时显然结论成立。
+\end{proof}
+
+\begin{theorem}[重极限的任意性]
+  设$(x,y)$沿着任意路径趋于$(x_0,y_0)$时，$f(x,y) \rightarrow A$，则
+  \begin{equation*}
+    \lim \limits _{(x,y) \rightarrow (x_0,y_0)} f(x,y) = A
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  反设$\lim \limits _{(x,y) \rightarrow (x_0,y_0)}f(x,y) \neq A$，
+  则$\exists \epsilon_0$和$\{\mathbf{x}_n\}$使得$\lim \limits _{n \rightarrow \infty} \mathbf{x}_n = (x_0,y_0)$，
+  但$|f(\mathbf{x}_n) - A| \geq \epsilon_0$，
+  将$\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_n,\cdots$连接成折线，
+  折线趋近于$(x_0,y_0)$，但$f(x,y)$不趋于$A$，这与已知矛盾。
+\end{proof}
+
+
+~
+
+\begin{exercise}[常用反例]
+  讨论$(0,0)$处的重极限与累次极限
+
+  (1)重点：$f(x,y) = \frac{xy}{x^2 + y^2}$
+
+  (2)$f(x,y) = \frac{x-y}{x+y}$
+
+  (3)$f(x,y) = x \sin \frac{1}{y}$
+
+  (4)$f(x,y) = x \sin \frac{1}{y} + y \sin \frac{1}{x}$
+
+  (5)重点：$f(x,y) =
+  \begin{cases}
+    1, &0 < y<x^2 , -\infty < x <+\infty\\
+    0, &\text{其他}
+  \end{cases}
+  $
+\end{exercise}
+
+
+\begin{solution}
+  (1)累次都是$0$。
+  重极限若选择$y = kx$，
+  则得到$f(x,y) = \frac{kx^2}{(k^2 + 1)x^2} = \frac{k}{k^2 + 1}$，
+  重极限不存在。
+
+  (2)累次为$\pm 1$。
+  重极限考虑$y = kx$，则$f(x,y) = \frac{x - kx}{x + kx} = \frac{1 - k}{1 + k}$，
+  不存在
+
+  (3)先$x$后$y$极限为$0$，
+  先$y$后$x$不存在。
+  重极限$x \sin \frac{1}{y} < |x| \rightarrow 0$，
+  因此重极限为$0$
+
+  (4)累次极限不存在。
+  而$|f(x,y)| \leq |x| + |y| \rightarrow 0$，
+  重极限为$0$。
+
+  (5)画出图像，发现沿着直线逼近都是$0$，沿着抛物线$y = kx^2(0 < k < 1)$时趋于$1$，因此极限不存在。
+\end{solution}
+
+
+~
+
+\begin{exercise}[反例应用]
+  上述反例可作为以下问题的解答：
+  \begin{enumerate}
+  \item 累次极限存在但不相等：$\frac{x-y}{x+y}$
+  \item 累次极限存在且相等，但重极限不存在：$\frac{xy}{x^2 + y^2}$
+  \item 累次极限不存在，但重极限存在：$x \sin \frac{1}{y} + y \sin \frac{1}{x}$
+  \item 重极限与双累次极限都不存在：$\frac{1}{x} + \frac{1}{y}$
+  \end{enumerate}
+\end{exercise}
+
+~
+
+
+\subsection{重极限的计算}
+
+
+
+
+~
+
+\begin{exercise}[多元分式]
+  讨论$(0,0)$处的重极限：
+  (1)$f(x,y) = \frac{xy}{x+y}$
+  (2)$f(x,y) = \frac{xy}{x^2 + y^2}$
+  (3)$f(x,y) = \frac{x^2y^2}{(x^2 + y^2)^2}$
+  (4)$f(x,y) = \frac{x^6y^8}{(x^2 + y^4)^5}$
+  (5)$f(x,y) = \frac{x^2y^2}{x^2y^2 + (x-y)^2}$
+  (6)$f(x,y) = \frac{x^2y^2}{x^3 + y^3}$
+\end{exercise}
+
+\begin{solution}
+  (1)不齐次，一方面将分子次数升高，$y = x$得到极限为$0$。
+  另一方面常数消去公因式，将分母变简单，例如$y = x^2 - x$化简为$x - 1 \rightarrow -1$，因此重极限不存在
+
+  (2)齐次，$y = kx$，不存在
+
+  (3)齐次，$y = kx$，不存在
+
+  (4)尝试将分母变齐次，
+  $x = ky^2$，得到$\frac{k^6y^{20}}{(k^2+1)^5y^{20}}$，不存在
+
+  (5)尝试化简$x = y$得到$1$，
+  其他想不到办法，尝试取零，$x = 0$得到极限为$0$。不存在
+
+  (6)分子次数高：$y = x$显然极限为$0$。
+  另一方面化简分母，设$y^3 = x^4 - x^3$，
+  得到$\frac{x^2(x^4x^3)^{\frac{2}{3}}}{x^4}$，
+  极限不是$0$。
+\end{solution}
+
+~
+
+\begin{exercise}[指数形式]
+  (1)$\lim \limits _{(x,y) \rightarrow (0^+,0^+)}x^y$
+\end{exercise}
+
+\begin{solution}
+  (1)用累次极限看出一个$0$，一个$1$，显然重极限不存在
+\end{solution}
+
+\section{多元函数连续性}
+
+\subsection{多元函数连续性}
+
+\begin{definition}[多元函数连续]
+  若$f(x,y)$在$(x_0,y_0)$处满足$\lim \limits _{(x,y) \rightarrow (x_0,y_0)} f(x,y) = f(x_0,y_0)$，
+  则称$f(x,y)$在$(x_0,y_0)$处连续。
+\end{definition}
+
+\begin{example}[关于$x,y$连续，不多元连续]
+  举例说明$f(x,y)$关于$x,y$均连续，
+  但不多元连续。
+\end{example}
+
+\begin{solution}
+  不一定，例如：
+  \begin{equation*}
+    f(x,y) =
+    \begin{cases}
+      \frac{xy}{x^2 + y^2}, & (x,y) \neq (0,0)\\
+      0, & (x,y) = (0,0)
+    \end{cases}
+  \end{equation*}
+  $f(x,y)$关于$x,y$均连续，
+  但是$\lim \limits _{(x,y) \rightarrow (0,0)}f(x,y)$不存在。
+\end{solution}
+
+~
+
+\begin{exercise}[加强条件]
+  若$f(x,y)$在$D$中关于$x,y$连续，且增加任意条件可证明$f(x,y)$连续：
+  \begin{enumerate}
+  \item 一致连续条件：$y$的连续是关于$x$一致的
+  \item Lip条件：$f(x,y)$关于$x$满足Lip条件，则$f(x,y)$连续
+  \item 单调条件：关于$x$或$y$单调
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  (1)(2)用$|f(x,y) - f(x_0,y_0)| \leq |f(x,y) - f(x,y_0)| + |f(x,y_0) - f(x_0,y_0)| < 2\epsilon$即可，
+  注意第一个绝对值放缩要求$y$的连续关于$x$一致！
+
+  (3)设关于$y$单调增。
+  考虑一点$(x_0,y_0)$，
+  用$(x,y)$逼近，
+  设$y_0 - \delta_1 < y < y_0 + \delta_1$，
+  首先根据$y$的单调性可知$f(x,y) \leq f(x,y_0 + \delta_1)$
+  根据$y$的连续性可知$f(x,y_0 + \delta_1) \leq f(x, y_0) + \epsilon$。
+  进一步地根据$x$的连续性可知
+  \begin{equation*}
+    f(x,y) \leq f(x,y_0) + \epsilon \leq  f(x_0,y_0) + 2\epsilon
+  \end{equation*}
+  同理可证得$f(x,y) \geq f(x_0,y_0) - 2\epsilon$，
+  综上可证$|f(x,y) - f(x_0,y_0)| \leq 2\epsilon$。
+\end{proof}
+
+
+\subsection{多元函数的一致连续性}
+
+\begin{lemma}[多元三角不等式]
+  对$\forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n$，
+  有$\left| |\mathbf{x}| - |\mathbf{y}| \right| \leq |\mathbf{x} - \mathbf{y}|$
+\end{lemma}
+
+\begin{proof}
+  $|\mathbf{x}| = |(\mathbf{x}-\mathbf{y}) + \mathbf{y}| \leq |\mathbf{x} - \mathbf{y}| + |\mathbf{y}|$，
+  因此移项得到$|\mathbf{x}| - |\mathbf{y}| \leq |\mathbf{x} - \mathbf{y}|$。
+  同理可得$|\mathbf{y}| - |\mathbf{x}| \leq |\mathbf{x} - \mathbf{y}|$
+\end{proof}
+
+~
+
+\begin{exercise}[多元一致连续]
+  (1)$f(\mathbf{x}) = |\mathbf{x}|$，证明$f(\mathbf{x})$在$\mathbb{R}^n$上一致连续
+  (2)$f(x,y) = \sin(xy)$在$\mathbb{R}^2$的一致连续性
+  (3)$f(x,y) = \frac{1}{1 - xy}$在$(0,1) \times (0,1)$的一致连续性
+\end{exercise}
+
+\begin{proof}
+  (1)$\forall \epsilon, \forall \mathbf{x},\mathbf{y} \in \mathbb{R}^n$，
+  若$|\mathbf{x} - \mathbf{y}| < \epsilon$，
+  则根据三角不等式可知$|f(\mathbf{x}) - f(\mathbf{y})| = ||\mathbf{x}| - |\mathbf{y}|| \leq |\mathbf{x} - \mathbf{y}| < \epsilon$，
+  因此取$\delta = \epsilon$即可。
+
+  (2)选$a_n = (\sqrt{2n\pi}, \sqrt{2n\pi}), b_n = (\sqrt{2n\pi + \frac{\pi}{2}}, \sqrt{2n\pi + \frac{\pi}{2}})$，
+  得到$|b_n - a_n| \rightarrow 0$，
+  但$|f(b_n) - f(a_n)| \not \rightarrow 0$，因此不一致连续
+
+  (3)由于是在$(1,1)$处出问题，
+  可以考虑$a_n = (1 - \frac{1}{n}, 1 - \frac{1}{n}), b_n = (1 - \frac{1}{n+1}, 1 - \frac{1}{n+1})$，
+  显然$|a_n - b_n| \rightarrow 0$，
+  $|f(a_n) - f(b_n)| = \left| \frac{n^2 - 3n^2 + o(n^2)}{4n^2 - 1} \right| \rightarrow \frac{1}{2}$，
+  因此不一致连续。
+\end{proof}
+
+~
+
+\begin{theorem}[多元Lip连续与一致连续]
+  $f(x,y)$是二元函数，若对$\forall (x_1,y),(x_2,y),(x,y_1),(x,y_2) \in \mathbb{R}^2$有
+  \begin{equation*}
+    |f(x_1,y) - f(x_2,y)| \leq L|x_1 - x_2|, \quad |f(x,y_1) - f(x,y_2)| \leq L|y_1 - y_2|
+  \end{equation*}
+  则$f(x,y)$在$\mathbb{R}^2$上一致连续
+\end{theorem}
+
+\begin{proof}
+  考虑$|f(x^{\prime},y^{\prime}) - f(x^{\prime\prime},y^{\prime\prime})| \leq |f(x^{\prime},y^{\prime}) - f(x^{\prime},y^{\prime\prime})| + |f(x^{\prime},y^{\prime\prime}) - f(x^{\prime\prime},y^{\prime\prime})|$，
+  用Lip条件放缩即可。
+\end{proof}
+
+
+
